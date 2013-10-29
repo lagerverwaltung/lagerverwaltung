@@ -1,3 +1,5 @@
+package view;
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -7,12 +9,12 @@
  *
  * @author simon
  */
-public class MainFrame extends javax.swing.JFrame {
+public class WarenbewegungPanel extends javax.swing.JPanel {
 
     /**
-     * Creates new form MainFrame
+     * Creates new form WarenbewegungPanel
      */
-    public MainFrame() {
+    public WarenbewegungPanel() {
         initComponents();
     }
 
@@ -27,33 +29,25 @@ public class MainFrame extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jLabel1.setText("Warenbewegung");
 
-        jLabel1.setText("Hi Dudes");
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addComponent(jLabel1)
-                .addContainerGap(301, Short.MAX_VALUE))
+                .addGap(29, 29, 29)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(820, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(jLabel1)
-                .addContainerGap(258, Short.MAX_VALUE))
+                .addGap(37, 37, 37)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(618, Short.MAX_VALUE))
         );
-
-        pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    /**
-     * @param args the command line arguments
-     */
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables

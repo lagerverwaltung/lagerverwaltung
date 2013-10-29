@@ -1,3 +1,8 @@
+package controller;
+
+
+import view.MainFrame;
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -29,7 +34,11 @@ public class IndexController {
             java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         try{
-            new MainFrame().setVisible(true);
+            MainFrame mainFrame = new MainFrame();
+            NavigationController navigationController = new NavigationController(mainFrame.getStartPanel());
+            mainFrame.addNaviController(navigationController);
+            mainFrame.setVisible(true);
+            
         } catch(Exception e1){
             e1.printStackTrace();
         }
