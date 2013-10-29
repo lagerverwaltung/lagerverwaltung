@@ -57,6 +57,8 @@ public class MainFrame extends javax.swing.JFrame {
         startPanel.add(loginPanel, "login");
 
         loginPanel.setMainFrame(this);
+        mainPanel.setMinimumSize(new java.awt.Dimension(1000, 844));
+        mainPanel.setPreferredSize(new java.awt.Dimension(1000, 844));
         startPanel.add(mainPanel, "mainCard");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -71,7 +73,7 @@ public class MainFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(startPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 618, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 19, Short.MAX_VALUE))
+                .addGap(0, 124, Short.MAX_VALUE))
         );
 
         getAccessibleContext().setAccessibleName("StartPanel");

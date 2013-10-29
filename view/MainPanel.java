@@ -43,7 +43,7 @@ public class MainPanel extends javax.swing.JPanel {
 
         setMinimumSize(new java.awt.Dimension(1000, 744));
         setOpaque(false);
-        setPreferredSize(new java.awt.Dimension(1000, 744));
+        setPreferredSize(new java.awt.Dimension(1000, 844));
         setLayout(new java.awt.BorderLayout());
 
         btnTeilebestand.setBackground(new java.awt.Color(255, 255, 51));
