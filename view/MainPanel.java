@@ -1,6 +1,7 @@
 package view;
 
 import controller.NavigationController;
+import java.awt.Color;
 
 /*
  * To change this template, choose Tools | Templates
@@ -106,16 +107,36 @@ public class MainPanel extends javax.swing.JPanel {
 
     private void btnLagerbestandActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLagerbestandActionPerformed
        navigationController.showCard("lagerbestand");
+       highlightButton("lagerbestand");
     }//GEN-LAST:event_btnLagerbestandActionPerformed
 
     private void btnTeilebestandActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTeilebestandActionPerformed
        navigationController.showCard("teilebestand");
+       highlightButton("teilebestand");
     }//GEN-LAST:event_btnTeilebestandActionPerformed
 
     private void btnWarenbewegungActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnWarenbewegungActionPerformed
        navigationController.showCard("warenbewegung");
+       highlightButton("warenbewegung");
     }//GEN-LAST:event_btnWarenbewegungActionPerformed
-
+    
+    private void highlightButton(String name){
+        btnLagerbestand.setBackground(Color.white);
+        btnTeilebestand.setBackground(Color.white);
+        btnWarenbewegung.setBackground(Color.white);
+        Color color = Color.yellow;
+        switch(name){
+            case "lagerbestand":
+                btnLagerbestand.setBackground(color);
+                break;
+            case "teilebestand":
+                btnTeilebestand.setBackground(color);
+                break;
+            case "warenbewegung":
+                btnWarenbewegung.setBackground(color);
+                break;
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLagerbestand;
     private javax.swing.JButton btnTeilebestand;
