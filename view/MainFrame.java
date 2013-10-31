@@ -30,6 +30,15 @@ public class MainFrame extends javax.swing.JFrame {
         this.navigationController = navigationController;
     }
     
+    public JPanel getInitPanel()
+    {
+        return initPanel;
+    }
+    
+    public JPanel getInitFaecherPanel()
+    {
+        return initFaecherPanel;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -40,9 +49,10 @@ public class MainFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         startPanel = new javax.swing.JPanel();
-        initPanel = new view.InitPanel();
-        loginPanel = new view.LoginPanel();
         mainPanel = new view.MainPanel();
+        initPanel = new view.InitPanel();
+        initFaecherPanel = new view.InitFaecherPanel();
+        loginPanel = new view.LoginPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(800, 768));
@@ -52,17 +62,20 @@ public class MainFrame extends javax.swing.JFrame {
         startPanel.setPreferredSize(new java.awt.Dimension(800, 600));
         startPanel.setLayout(new java.awt.CardLayout());
 
+        loginPanel.setMainFrame(this);
+        mainPanel.setMinimumSize(new java.awt.Dimension(1000, 844));
+        startPanel.add(mainPanel, "main");
+
         initPanel.setMainFrame(this);
         startPanel.add(initPanel, "init");
+
+        initFaecherPanel.setMainFrame(this);
+        startPanel.add(initFaecherPanel, "init2");
 
         loginPanel.setMainFrame(this);
         loginPanel.setMinimumSize(new java.awt.Dimension(1024, 768));
         loginPanel.setPreferredSize(new java.awt.Dimension(1024, 768));
         startPanel.add(loginPanel, "login");
-
-        loginPanel.setMainFrame(this);
-        mainPanel.setMinimumSize(new java.awt.Dimension(1000, 844));
-        startPanel.add(mainPanel, "main");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -72,7 +85,7 @@ public class MainFrame extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(startPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 768, Short.MAX_VALUE)
+            .addComponent(startPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 830, Short.MAX_VALUE)
         );
 
         getAccessibleContext().setAccessibleName("StartPanel");
@@ -84,6 +97,7 @@ public class MainFrame extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private view.InitFaecherPanel initFaecherPanel;
     private view.InitPanel initPanel;
     private view.LoginPanel loginPanel;
     private view.MainPanel mainPanel;

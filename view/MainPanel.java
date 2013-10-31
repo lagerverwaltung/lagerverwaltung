@@ -38,9 +38,9 @@ public class MainPanel extends javax.swing.JPanel {
         btnLagerbestand = new javax.swing.JButton();
         btnWarenbewegung = new javax.swing.JButton();
         cardPanel = new javax.swing.JPanel();
+        teilebestandPanel = new view.TeilebestandPanel();
         lagerbestandPanel = new view.LagerbestandPanel();
         warenbewegungPanel = new view.WarenbewegungPanel();
-        teilebestandPanel = new view.TeilebestandPanel();
 
         setMinimumSize(new java.awt.Dimension(1000, 744));
         setOpaque(false);
@@ -85,9 +85,9 @@ public class MainPanel extends javax.swing.JPanel {
         add(navigationBar, java.awt.BorderLayout.NORTH);
 
         cardPanel.setLayout(new java.awt.CardLayout());
+        cardPanel.add(teilebestandPanel, "teilebestand");
         cardPanel.add(lagerbestandPanel, "lagerbestand");
         cardPanel.add(warenbewegungPanel, "warenbewegung");
-        cardPanel.add(teilebestandPanel, "teilebestand");
 
         add(cardPanel, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
