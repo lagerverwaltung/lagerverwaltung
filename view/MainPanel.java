@@ -24,6 +24,14 @@ public class MainPanel extends javax.swing.JPanel {
         navigationController = new NavigationController(cardPanel);
     }
     
+    public void setMainFrame(MainFrame mainFrame)
+    {
+        this.mainFrame = mainFrame;
+        teilebestandPanel.setMainFrame(mainFrame);
+        lagerbestandPanel.setMainFrame(mainFrame);
+        warenbewegungPanel.setMainFrame(mainFrame);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

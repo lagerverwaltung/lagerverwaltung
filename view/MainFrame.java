@@ -20,6 +20,8 @@ public class MainFrame extends javax.swing.JFrame {
      */
     public MainFrame() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        this.setSize( 800 , 600 );
     }
     
     public JPanel getStartPanel() {
@@ -49,28 +51,29 @@ public class MainFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         startPanel = new javax.swing.JPanel();
-        mainPanel = new view.MainPanel();
         initPanel = new view.InitPanel();
         initFaecherPanel = new view.InitFaecherPanel();
+        mainPanel = new view.MainPanel();
         loginPanel = new view.LoginPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(800, 768));
         setName("StartPanel"); // NOI18N
+        setPreferredSize(new java.awt.Dimension(1010, 830));
 
         startPanel.setMinimumSize(new java.awt.Dimension(800, 600));
         startPanel.setPreferredSize(new java.awt.Dimension(800, 600));
         startPanel.setLayout(new java.awt.CardLayout());
-
-        loginPanel.setMainFrame(this);
-        mainPanel.setMinimumSize(new java.awt.Dimension(1000, 844));
-        startPanel.add(mainPanel, "main");
 
         initPanel.setMainFrame(this);
         startPanel.add(initPanel, "init");
 
         initFaecherPanel.setMainFrame(this);
         startPanel.add(initFaecherPanel, "init2");
+
+        mainPanel.setMainFrame(this);
+        mainPanel.setMinimumSize(new java.awt.Dimension(1000, 844));
+        startPanel.add(mainPanel, "main");
 
         loginPanel.setMainFrame(this);
         loginPanel.setMinimumSize(new java.awt.Dimension(1024, 768));

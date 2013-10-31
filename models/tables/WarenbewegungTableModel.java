@@ -72,7 +72,7 @@ public class WarenbewegungTableModel extends AbstractTableModel {
                 name = "Datum";
                 break;
             case 8:
-                name = "Haltbarkeitsdatum";
+                name = "Haltbar bis";
                 break;
             case 9:
                 name = "Typ";
