@@ -38,69 +38,56 @@ public class MainPanel extends javax.swing.JPanel {
         btnLagerbestand = new javax.swing.JButton();
         btnWarenbewegung = new javax.swing.JButton();
         cardPanel = new javax.swing.JPanel();
-        teilebestandPanel = new view.TeilebestandPanel();
         lagerbestandPanel = new view.LagerbestandPanel();
         warenbewegungPanel = new view.WarenbewegungPanel();
+        teilebestandPanel = new view.TeilebestandPanel();
 
         setMinimumSize(new java.awt.Dimension(1000, 744));
         setOpaque(false);
         setPreferredSize(new java.awt.Dimension(1000, 844));
         setLayout(new java.awt.BorderLayout());
 
+        navigationBar.setLayout(new java.awt.GridLayout(1, 3));
+
         btnTeilebestand.setBackground(new java.awt.Color(255, 255, 51));
-        btnTeilebestand.setText("Teilebestand");
+        btnTeilebestand.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/schrauben.png"))); // NOI18N
+        btnTeilebestand.setText("    Teilebestand");
+        btnTeilebestand.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnTeilebestand.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTeilebestandActionPerformed(evt);
             }
         });
+        navigationBar.add(btnTeilebestand);
 
         btnLagerbestand.setBackground(new java.awt.Color(255, 255, 255));
-        btnLagerbestand.setText("Lagerbestand");
+        btnLagerbestand.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/lagerBestand.gif"))); // NOI18N
+        btnLagerbestand.setText("  Lagerbestand");
+        btnLagerbestand.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnLagerbestand.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLagerbestandActionPerformed(evt);
             }
         });
+        navigationBar.add(btnLagerbestand);
 
         btnWarenbewegung.setBackground(new java.awt.Color(255, 255, 255));
-        btnWarenbewegung.setText("Warenbewegung");
+        btnWarenbewegung.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/lagerBewegung.gif"))); // NOI18N
+        btnWarenbewegung.setText("  Warenbewegung");
+        btnWarenbewegung.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnWarenbewegung.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnWarenbewegungActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout navigationBarLayout = new javax.swing.GroupLayout(navigationBar);
-        navigationBar.setLayout(navigationBarLayout);
-        navigationBarLayout.setHorizontalGroup(
-            navigationBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(navigationBarLayout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(btnTeilebestand, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnLagerbestand, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
-                .addComponent(btnWarenbewegung, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(44, Short.MAX_VALUE))
-        );
-        navigationBarLayout.setVerticalGroup(
-            navigationBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(navigationBarLayout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addGroup(navigationBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnTeilebestand, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnLagerbestand, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnWarenbewegung, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        navigationBar.add(btnWarenbewegung);
 
         add(navigationBar, java.awt.BorderLayout.NORTH);
 
         cardPanel.setLayout(new java.awt.CardLayout());
-        cardPanel.add(teilebestandPanel, "teilebestand");
         cardPanel.add(lagerbestandPanel, "lagerbestand");
         cardPanel.add(warenbewegungPanel, "warenbewegung");
+        cardPanel.add(teilebestandPanel, "teilebestand");
 
         add(cardPanel, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents

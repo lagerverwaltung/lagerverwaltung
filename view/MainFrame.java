@@ -40,16 +40,20 @@ public class MainFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         startPanel = new javax.swing.JPanel();
+        initPanel = new view.InitPanel();
         loginPanel = new view.LoginPanel();
         mainPanel = new view.MainPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(1024, 768));
+        setMinimumSize(new java.awt.Dimension(800, 768));
         setName("StartPanel"); // NOI18N
-        setPreferredSize(new java.awt.Dimension(1024, 768));
 
-        startPanel.setPreferredSize(new java.awt.Dimension(1024, 768));
+        startPanel.setMinimumSize(new java.awt.Dimension(800, 600));
+        startPanel.setPreferredSize(new java.awt.Dimension(800, 600));
         startPanel.setLayout(new java.awt.CardLayout());
+
+        initPanel.setMainFrame(this);
+        startPanel.add(initPanel, "init");
 
         loginPanel.setMainFrame(this);
         loginPanel.setMinimumSize(new java.awt.Dimension(1024, 768));
@@ -58,19 +62,17 @@ public class MainFrame extends javax.swing.JFrame {
 
         loginPanel.setMainFrame(this);
         mainPanel.setMinimumSize(new java.awt.Dimension(1000, 844));
-        startPanel.add(mainPanel, "mainCard");
+        startPanel.add(mainPanel, "main");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(startPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 1035, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(startPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 1077, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(startPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(startPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 768, Short.MAX_VALUE)
         );
 
         getAccessibleContext().setAccessibleName("StartPanel");
@@ -82,6 +84,7 @@ public class MainFrame extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private view.InitPanel initPanel;
     private view.LoginPanel loginPanel;
     private view.MainPanel mainPanel;
     private javax.swing.JPanel startPanel;
