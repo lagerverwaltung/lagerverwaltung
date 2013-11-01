@@ -1,0 +1,123 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+package model;
+
+/**
+ *
+ * @author ssinger
+ */
+public class Warenbewegung {
+
+	private int positionsNummer;
+	private ZielPosition arrZielPosition;
+	private String verantwortlicher;
+	private int warenBewegungsID;
+	private Lagerbestand lagerbestand;
+	private java.util.Date datum;
+	private java.util.Date haltbarkeitsDatum;
+
+    /**
+     * @return the positionsNummer
+     */
+    public int getPositionsNummer() {
+        return positionsNummer;
+    }
+
+    /**
+     * @param positionsNummer the positionsNummer to set
+     */
+    public void setPositionsNummer(int positionsNummer) {
+        this.positionsNummer = positionsNummer;
+    }
+
+    /**
+     * @return the arrZielPosition
+     */
+    public ZielPosition getArrZielPosition() {
+        return arrZielPosition;
+    }
+
+    /**
+     * @param arrZielPosition the arrZielPosition to set
+     */
+    public void setArrZielPosition(ZielPosition arrZielPosition) {
+        this.arrZielPosition = arrZielPosition;
+    }
+
+    /**
+     * @return the verantwortlicher
+     */
+    public String getVerantwortlicher() {
+        return verantwortlicher;
+    }
+
+    /**
+     * @param verantwortlicher the verantwortlicher to set
+     */
+    public void setVerantwortlicher(String verantwortlicher) {
+        this.verantwortlicher = verantwortlicher;
+    }
+
+    /**
+     * @return the warenBewegungsID
+     */
+    public int getWarenBewegungsID() {
+        return warenBewegungsID;
+    }
+
+    /**
+     * @param warenBewegungsID the warenBewegungsID to set
+     */
+    public void setWarenBewegungsID(int warenBewegungsID) {
+        this.warenBewegungsID = warenBewegungsID;
+    }
+
+    /**
+     * @return the lagerbestand
+     */
+    public Lagerbestand getLagerbestand() {
+        return lagerbestand;
+    }
+
+    /**
+     * @param lagerbestand the lagerbestand to set
+     */
+    public void setLagerbestand(Lagerbestand lagerbestand) {
+        this.lagerbestand = lagerbestand;
+    }
+
+    /**
+     * @return the datum
+     */
+    public java.util.Date getDatum() {
+        return datum;
+    }
+
+    /**
+     * @param datum the datum to set
+     */
+    public void setDatum(java.util.Date datum) {
+        this.datum = datum;
+    }
+
+    /**
+     * @return the haltbarkeitsDatum
+     */
+    public java.util.Date getHaltbarkeitsDatum() {
+        return haltbarkeitsDatum;
+    }
+
+    /**
+     * @param haltbarkeitsDatum the haltbarkeitsDatum to set
+     */
+    public void setHaltbarkeitsDatum(java.util.Date haltbarkeitsDatum) {
+        this.haltbarkeitsDatum = haltbarkeitsDatum;
+    }
+	
+	
+
+}
