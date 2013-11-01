@@ -24,16 +24,16 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblEinrichtungsassi" min="-2" max="-2" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="lblSchritt" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbl1Schritt" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="lblTyp" min="-2" pref="208" max="-2" attributes="0"/>
+                      <Component id="lblHochregallager" min="-2" pref="208" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="67" max="-2" attributes="0"/>
-                      <Component id="jLabel7" min="-2" pref="287" max="-2" attributes="0"/>
+                      <Component id="lblCube" min="-2" pref="287" max="-2" attributes="0"/>
                   </Group>
                   <Component id="jPanel1" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
@@ -45,11 +45,11 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+              <Component id="lblEinrichtungsassi" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lblSchritt" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblTyp" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lbl1Schritt" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblHochregallager" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
@@ -58,7 +58,7 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="92" max="-2" attributes="0"/>
-                      <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblCube" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
@@ -69,7 +69,7 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JLabel" name="jLabel1">
+    <Component class="javax.swing.JLabel" name="lblEinrichtungsassi">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Dialog" size="14" style="1"/>
@@ -77,7 +77,7 @@
         <Property name="text" type="java.lang.String" value="Ersteinrichtungsassistent"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel7">
+    <Component class="javax.swing.JLabel" name="lblCube">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/view/lagerDimensions.gif"/>
@@ -85,7 +85,7 @@
         <Property name="text" type="java.lang.String" value="jLabel7"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="lblTyp">
+    <Component class="javax.swing.JLabel" name="lblHochregallager">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Dialog" size="18" style="1"/>
@@ -106,13 +106,13 @@
                           <EmptySpace min="-2" pref="427" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
-                          <Component id="jLabel15" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblFachgröße" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jLabel9" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel10" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblHinweisMenge" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblHinweisFachgröße" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="jLabel13" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -121,12 +121,12 @@
                                   </Group>
                                   <EmptySpace min="-2" pref="125" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="1" attributes="0">
-                                      <Component id="jTextField3" min="-2" pref="52" max="-2" attributes="0"/>
+                                      <Component id="txfKlein" min="-2" pref="52" max="-2" attributes="0"/>
                                       <Component id="jTextField6" min="-2" pref="52" max="-2" attributes="0"/>
                                       <Component id="jTextField2" alignment="0" min="-2" pref="53" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <Component id="jLabel14" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblHinweisMetrik" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace pref="28" max="32767" attributes="0"/>
                       </Group>
@@ -141,19 +141,19 @@
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
-                  <Component id="jLabel15" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblFachgröße" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                   <Component id="jSeparator2" min="-2" pref="10" max="-2" attributes="0"/>
                   <EmptySpace min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblHinweisMenge" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblHinweisFachgröße" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="jLabel14" min="-2" pref="13" max="-2" attributes="0"/>
+                  <Component id="lblHinweisMetrik" min="-2" pref="13" max="-2" attributes="0"/>
                   <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel11" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTextField3" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txfKlein" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -175,19 +175,19 @@
       <SubComponents>
         <Component class="javax.swing.JTextField" name="jTextField6">
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel10">
+        <Component class="javax.swing.JLabel" name="lblHinweisFachgr&#xf6;&#xdf;e">
           <Properties>
             <Property name="text" type="java.lang.String" value="Bitte geben Sie jetzt an wieviel Volumeneinheiten (VE) in die jeweilige Lagerachgr&#xf6;&#xdf;e hineinpassen."/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel14">
+        <Component class="javax.swing.JLabel" name="lblHinweisMetrik">
           <Properties>
             <Property name="text" type="java.lang.String" value="Dies k&#xf6;nnen auch Meter oder Zoll sein. Je nachdem welche relative Metrik Sie verwenden m&#xf6;chten. "/>
           </Properties>
         </Component>
         <Component class="javax.swing.JSeparator" name="jSeparator2">
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel15">
+        <Component class="javax.swing.JLabel" name="lblFachgr&#xf6;&#xdf;e">
           <Properties>
             <Property name="text" type="java.lang.String" value="Fachgr&#xf6;&#xdf;en"/>
           </Properties>
@@ -202,11 +202,11 @@
             <Property name="text" type="java.lang.String" value="Mittel:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField3">
+        <Component class="javax.swing.JTextField" name="txfKlein">
         </Component>
         <Component class="javax.swing.JTextField" name="jTextField2">
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel9">
+        <Component class="javax.swing.JLabel" name="lblHinweisMenge">
           <Properties>
             <Property name="text" type="java.lang.String" value="Es gibt 3 Fachgr&#xf6;&#xdf;en um die zul&#xe4;ssige Menge in einem Fach zu beschr&#xe4;nken. "/>
           </Properties>
@@ -236,20 +236,20 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblLagergrößen" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblFachanzahlTiefe" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblFachanzahlHöhe" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblFachanzahlBreite" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jTextField1" min="-2" pref="49" max="-2" attributes="0"/>
-                              <Component id="jTextField5" min="-2" pref="49" max="-2" attributes="0"/>
-                              <Component id="jTextField4" min="-2" pref="49" max="-2" attributes="0"/>
+                              <Component id="txfFachanzahlBreite" min="-2" pref="49" max="-2" attributes="0"/>
+                              <Component id="txfFachanzahlHöhe" min="-2" pref="49" max="-2" attributes="0"/>
+                              <Component id="txfFachanzahlTiefe" min="-2" pref="49" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <Component id="jSeparator1" alignment="0" min="-2" pref="286" max="-2" attributes="0"/>
-                      <Component id="jLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblwählenSie" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -259,25 +259,25 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblwählenSie" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblLagergrößen" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jSeparator1" min="-2" pref="15" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblFachanzahlBreite" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txfFachanzahlBreite" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTextField4" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblFachanzahlTiefe" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txfFachanzahlTiefe" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTextField5" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblFachanzahlHöhe" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txfFachanzahlHöhe" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -285,45 +285,45 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JLabel" name="jLabel2">
+        <Component class="javax.swing.JLabel" name="lblLagergr&#xf6;&#xdf;en">
           <Properties>
             <Property name="text" type="java.lang.String" value="Lagergr&#xf6;&#xdf;en"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel6">
+        <Component class="javax.swing.JLabel" name="lblFachanzahlH&#xf6;he">
           <Properties>
             <Property name="text" type="java.lang.String" value="Fachanzahl H&#xf6;he:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField4">
+        <Component class="javax.swing.JTextField" name="txfFachanzahlTiefe">
         </Component>
         <Component class="javax.swing.JSeparator" name="jSeparator1">
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField1">
+        <Component class="javax.swing.JTextField" name="txfFachanzahlBreite">
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txfFachanzahlBreiteActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel5">
+        <Component class="javax.swing.JLabel" name="lblFachanzahlTiefe">
           <Properties>
             <Property name="text" type="java.lang.String" value="Fachanzahl Tiefe:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField5">
+        <Component class="javax.swing.JTextField" name="txfFachanzahlH&#xf6;he">
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel4">
+        <Component class="javax.swing.JLabel" name="lblFachanzahlBreite">
           <Properties>
             <Property name="text" type="java.lang.String" value="Fachanzahl Breite:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel8">
+        <Component class="javax.swing.JLabel" name="lblw&#xe4;hlenSie">
           <Properties>
             <Property name="text" type="java.lang.String" value="W&#xe4;hlen Sie die F&#xe4;chereinteilung in Ihrem Lager."/>
           </Properties>
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JLabel" name="lblSchritt">
+    <Component class="javax.swing.JLabel" name="lbl1Schritt">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Dialog" size="18" style="1"/>
