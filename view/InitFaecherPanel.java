@@ -27,8 +27,8 @@ public class InitFaecherPanel extends javax.swing.JPanel {
     {
         freilager = true;
         lblTyp.setText("Freilager");
-        weiterButton.setText("Installation fertigstellen");
-        lblSchritt.setText("2. Schritt");
+        btnWeiter.setText("Installation fertigstellen");
+        lbl1Schritt.setText("2. Schritt");
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -39,11 +39,11 @@ public class InitFaecherPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        lblAuswahl = new javax.swing.JLabel();
+        lblFach1 = new javax.swing.JLabel();
+        lblX = new javax.swing.JLabel();
+        lblY = new javax.swing.JLabel();
+        lblZ = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox();
@@ -75,23 +75,23 @@ public class InitFaecherPanel extends javax.swing.JPanel {
         jSeparator1 = new javax.swing.JSeparator();
         jLabel30 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        weiterButton = new javax.swing.JButton();
+        btnWeiter = new javax.swing.JButton();
         lblTyp = new javax.swing.JLabel();
-        lblSchritt = new javax.swing.JLabel();
-        jLabel31 = new javax.swing.JLabel();
+        lbl1Schritt = new javax.swing.JLabel();
+        lblEinrichtungsassi = new javax.swing.JLabel();
 
-        jLabel1.setText("Wählen Sie nun die Fachgrößen für die einzelnen Fächer:");
+        lblAuswahl.setText("Wählen Sie nun die Fachgrößen für die einzelnen Fächer:");
 
-        jLabel3.setText("Fach 1 ");
+        lblFach1.setText("Fach 1");
 
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("x");
+        lblX.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblX.setText("x");
 
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("y");
+        lblY.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblY.setText("y");
 
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("z");
+        lblZ.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblZ.setText("z");
 
         jLabel8.setText("1");
 
@@ -154,21 +154,21 @@ public class InitFaecherPanel extends javax.swing.JPanel {
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/lagerDimensions2.gif"))); // NOI18N
         jLabel7.setText("jLabel7");
 
-        weiterButton.setText("weiter zum Freilager");
-        weiterButton.addActionListener(new java.awt.event.ActionListener() {
+        btnWeiter.setText("weiter zum Freilager");
+        btnWeiter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                weiterButtonActionPerformed(evt);
+                btnWeiterActionPerformed(evt);
             }
         });
 
         lblTyp.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         lblTyp.setText("Hochregallager");
 
-        lblSchritt.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        lblSchritt.setText("1. Schritt");
+        lbl1Schritt.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        lbl1Schritt.setText("1. Schritt");
 
-        jLabel31.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel31.setText("Ersteinrichtungsassistent");
+        lblEinrichtungsassi.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        lblEinrichtungsassi.setText("Ersteinrichtungsassistent");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -177,18 +177,16 @@ public class InitFaecherPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel31)
+                    .addComponent(lblEinrichtungsassi)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblSchritt)
+                        .addComponent(lbl1Schritt)
                         .addGap(18, 18, 18)
                         .addComponent(lblTyp, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                             .addGap(0, 0, Short.MAX_VALUE)
-                            .addComponent(weiterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel1)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(btnWeiter, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(lblAuswahl)
                         .addGroup(layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel13)
@@ -196,15 +194,15 @@ public class InitFaecherPanel extends javax.swing.JPanel {
                                 .addComponent(jLabel19)
                                 .addComponent(jLabel20)
                                 .addComponent(jLabel18)
-                                .addComponent(jLabel3))
+                                .addComponent(lblFach1))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblX, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(18, 18, 18)
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblY, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(18, 18, 18)
-                                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(lblZ, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(layout.createSequentialGroup()
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -269,25 +267,25 @@ public class InitFaecherPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(27, 27, 27)
-                .addComponent(jLabel31)
+                .addComponent(lblEinrichtungsassi)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblSchritt)
+                    .addComponent(lbl1Schritt)
                     .addComponent(lblTyp))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel1)
+                .addComponent(lblAuswahl)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel6))
+                    .addComponent(lblX)
+                    .addComponent(lblY)
+                    .addComponent(lblZ))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
+                            .addComponent(lblFach1)
                             .addComponent(jLabel8)
                             .addComponent(jLabel9)
                             .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -328,13 +326,13 @@ public class InitFaecherPanel extends javax.swing.JPanel {
                             .addComponent(jLabel29)
                             .addComponent(jLabel19))
                         .addGap(126, 126, 126)
-                        .addComponent(weiterButton))
+                        .addComponent(btnWeiter))
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void weiterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_weiterButtonActionPerformed
+    private void btnWeiterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnWeiterActionPerformed
        if(freilager){
             mainFrame.navigationController.showCard("login");
         }   
@@ -343,16 +341,16 @@ public class InitFaecherPanel extends javax.swing.JPanel {
             initPanel.prepareFreilager();
             mainFrame.navigationController.showCard("init");
         }
-    }//GEN-LAST:event_weiterButtonActionPerformed
+    }//GEN-LAST:event_btnWeiterActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnWeiter;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JComboBox jComboBox2;
     private javax.swing.JComboBox jComboBox3;
     private javax.swing.JComboBox jComboBox4;
     private javax.swing.JComboBox jComboBox5;
     private javax.swing.JComboBox jComboBox6;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -373,18 +371,18 @@ public class InitFaecherPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
-    private javax.swing.JLabel jLabel31;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JLabel lblSchritt;
+    private javax.swing.JLabel lbl1Schritt;
+    private javax.swing.JLabel lblAuswahl;
+    private javax.swing.JLabel lblEinrichtungsassi;
+    private javax.swing.JLabel lblFach1;
     private javax.swing.JLabel lblTyp;
-    private javax.swing.JButton weiterButton;
+    private javax.swing.JLabel lblX;
+    private javax.swing.JLabel lblY;
+    private javax.swing.JLabel lblZ;
     // End of variables declaration//GEN-END:variables
 }

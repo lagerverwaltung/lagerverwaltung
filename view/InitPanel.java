@@ -21,8 +21,8 @@ public class InitPanel extends javax.swing.JPanel {
     public void prepareFreilager()
     {
         freilager = true;
-        lblTyp.setText("Freilager");
-        lblSchritt.setText("2. Schritt");
+        lblHochregallager.setText("Freilager");
+        lbl1Schritt.setText("2. Schritt");
     }
     
     public void setMainFrame(MainFrame mainFrame)
@@ -38,56 +38,56 @@ public class InitPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        lblTyp = new javax.swing.JLabel();
+        lblEinrichtungsassi = new javax.swing.JLabel();
+        lblCube = new javax.swing.JLabel();
+        lblHochregallager = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jTextField6 = new javax.swing.JTextField();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
+        lblHinweisFachgröße = new javax.swing.JLabel();
+        lblHinweisMetrik = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
-        jLabel15 = new javax.swing.JLabel();
+        lblFachgröße = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        txfKlein = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
+        lblHinweisMenge = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         weiterButton = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        lblLagergrößen = new javax.swing.JLabel();
+        lblFachanzahlHöhe = new javax.swing.JLabel();
+        txfFachanzahlTiefe = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        lblSchritt = new javax.swing.JLabel();
+        txfFachanzahlBreite = new javax.swing.JTextField();
+        lblFachanzahlTiefe = new javax.swing.JLabel();
+        txfFachanzahlHöhe = new javax.swing.JTextField();
+        lblFachanzahlBreite = new javax.swing.JLabel();
+        lblwählenSie = new javax.swing.JLabel();
+        lbl1Schritt = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(800, 600));
 
-        jLabel1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel1.setText("Ersteinrichtungsassistent");
+        lblEinrichtungsassi.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        lblEinrichtungsassi.setText("Ersteinrichtungsassistent");
 
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/lagerDimensions.gif"))); // NOI18N
-        jLabel7.setText("jLabel7");
+        lblCube.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/lagerDimensions.gif"))); // NOI18N
+        lblCube.setText("jLabel7");
 
-        lblTyp.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        lblTyp.setText("Hochregallager");
+        lblHochregallager.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        lblHochregallager.setText("Hochregallager");
 
-        jLabel10.setText("Bitte geben Sie jetzt an wieviel Volumeneinheiten (VE) in die jeweilige Lagerachgröße hineinpassen.");
+        lblHinweisFachgröße.setText("Bitte geben Sie jetzt an wieviel Volumeneinheiten (VE) in die jeweilige Lagerachgröße hineinpassen.");
 
-        jLabel14.setText("Dies können auch Meter oder Zoll sein. Je nachdem welche relative Metrik Sie verwenden möchten. ");
+        lblHinweisMetrik.setText("Dies können auch Meter oder Zoll sein. Je nachdem welche relative Metrik Sie verwenden möchten. ");
 
-        jLabel15.setText("Fachgrößen");
+        lblFachgröße.setText("Fachgrößen");
 
         jLabel13.setText("Groß:");
 
         jLabel12.setText("Mittel:");
 
-        jLabel9.setText("Es gibt 3 Fachgrößen um die zulässige Menge in einem Fach zu beschränken. ");
+        lblHinweisMenge.setText("Es gibt 3 Fachgrößen um die zulässige Menge in einem Fach zu beschränken. ");
 
         jLabel11.setText("Klein:");
 
@@ -109,12 +109,12 @@ public class InitPanel extends javax.swing.JPanel {
                         .addComponent(jSeparator2)
                         .addGap(427, 427, 427))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel15)
+                        .addComponent(lblFachgröße)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel10)
+                            .addComponent(lblHinweisMenge)
+                            .addComponent(lblHinweisFachgröße)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel13)
@@ -122,10 +122,10 @@ public class InitPanel extends javax.swing.JPanel {
                                     .addComponent(jLabel12))
                                 .addGap(125, 125, 125)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txfKlein, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jLabel14))
+                            .addComponent(lblHinweisMetrik))
                         .addContainerGap(28, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -134,19 +134,19 @@ public class InitPanel extends javax.swing.JPanel {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jLabel15)
+                .addComponent(lblFachgröße)
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel9)
+                .addComponent(lblHinweisMenge)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel10)
+                .addComponent(lblHinweisFachgröße)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblHinweisMetrik, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txfKlein, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -160,21 +160,21 @@ public class InitPanel extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jLabel2.setText("Lagergrößen");
+        lblLagergrößen.setText("Lagergrößen");
 
-        jLabel6.setText("Fachanzahl Höhe:");
+        lblFachanzahlHöhe.setText("Fachanzahl Höhe:");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        txfFachanzahlBreite.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                txfFachanzahlBreiteActionPerformed(evt);
             }
         });
 
-        jLabel5.setText("Fachanzahl Tiefe:");
+        lblFachanzahlTiefe.setText("Fachanzahl Tiefe:");
 
-        jLabel4.setText("Fachanzahl Breite:");
+        lblFachanzahlBreite.setText("Fachanzahl Breite:");
 
-        jLabel8.setText("Wählen Sie die Fächereinteilung in Ihrem Lager.");
+        lblwählenSie.setText("Wählen Sie die Fächereinteilung in Ihrem Lager.");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -185,45 +185,45 @@ public class InitPanel extends javax.swing.JPanel {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel4))
+                            .addComponent(lblLagergrößen)
+                            .addComponent(lblFachanzahlTiefe)
+                            .addComponent(lblFachanzahlHöhe)
+                            .addComponent(lblFachanzahlBreite))
                         .addGap(44, 44, 44)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txfFachanzahlBreite, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txfFachanzahlHöhe, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txfFachanzahlTiefe, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8))
+                    .addComponent(lblwählenSie))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel8)
+                .addComponent(lblwählenSie)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel2)
+                .addComponent(lblLagergrößen)
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblFachanzahlBreite)
+                    .addComponent(txfFachanzahlBreite, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(35, 35, 35)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblFachanzahlTiefe)
+                    .addComponent(txfFachanzahlTiefe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(35, 35, 35)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblFachanzahlHöhe)
+                    .addComponent(txfFachanzahlHöhe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
-        lblSchritt.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        lblSchritt.setText("1. Schritt");
+        lbl1Schritt.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        lbl1Schritt.setText("1. Schritt");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -232,15 +232,15 @@ public class InitPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
+                    .addComponent(lblEinrichtungsassi)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblSchritt)
+                        .addComponent(lbl1Schritt)
                         .addGap(18, 18, 18)
-                        .addComponent(lblTyp, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(lblHochregallager, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(67, 67, 67)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(lblCube, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 8, Short.MAX_VALUE))
         );
@@ -248,27 +248,27 @@ public class InitPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(27, 27, 27)
-                .addComponent(jLabel1)
+                .addComponent(lblEinrichtungsassi)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblSchritt)
-                    .addComponent(lblTyp))
+                    .addComponent(lbl1Schritt)
+                    .addComponent(lblHochregallager))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(92, 92, 92)
-                        .addComponent(jLabel7)))
+                        .addComponent(lblCube)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(76, 76, 76))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void txfFachanzahlBreiteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfFachanzahlBreiteActionPerformed
         
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_txfFachanzahlBreiteActionPerformed
 
     private void weiterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_weiterButtonActionPerformed
         mainFrame.navigationController.showCard("init2");
@@ -280,32 +280,32 @@ public class InitPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_weiterButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
-    private javax.swing.JLabel lblSchritt;
-    private javax.swing.JLabel lblTyp;
+    private javax.swing.JLabel lbl1Schritt;
+    private javax.swing.JLabel lblCube;
+    private javax.swing.JLabel lblEinrichtungsassi;
+    private javax.swing.JLabel lblFachanzahlBreite;
+    private javax.swing.JLabel lblFachanzahlHöhe;
+    private javax.swing.JLabel lblFachanzahlTiefe;
+    private javax.swing.JLabel lblFachgröße;
+    private javax.swing.JLabel lblHinweisFachgröße;
+    private javax.swing.JLabel lblHinweisMenge;
+    private javax.swing.JLabel lblHinweisMetrik;
+    private javax.swing.JLabel lblHochregallager;
+    private javax.swing.JLabel lblLagergrößen;
+    private javax.swing.JLabel lblwählenSie;
+    private javax.swing.JTextField txfFachanzahlBreite;
+    private javax.swing.JTextField txfFachanzahlHöhe;
+    private javax.swing.JTextField txfFachanzahlTiefe;
+    private javax.swing.JTextField txfKlein;
     private javax.swing.JButton weiterButton;
     // End of variables declaration//GEN-END:variables
 }
