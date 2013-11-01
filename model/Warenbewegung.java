@@ -6,45 +6,48 @@
 
 package model;
 
+import com.j256.ormlite.dao.ForeignCollection;
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.field.ForeignCollectionField;
+import com.j256.ormlite.table.DatabaseTable;
+
 /**
  *
  * @author ssinger
  */
+@DatabaseTable(tableName = "warenbewegung")
 public class Warenbewegung {
+    
+    @DatabaseField(columnName = "warenbID", generatedId = true)
+    private int warenBewegungsID;
+      
+    @ForeignCollectionField(columnName = "zielPositionID",eager = true)
+    ForeignCollection<ZielPosition> arrZielPosition;
+    
+    @DatabaseField()
+    private String verantwortlicher;
+    
+    @DatabaseField(columnName = "lagerbestandID", foreign = true)
+    private Lagerbestand lagerbestand;
+    
+    @DatabaseField()
+    private java.util.Date datum;
+     
+    @DatabaseField()
+    private java.util.Date haltbarkeitsDatum;
 
-	private int positionsNummer;
-	private ZielPosition arrZielPosition;
-	private String verantwortlicher;
-	private int warenBewegungsID;
-	private Lagerbestand lagerbestand;
-	private java.util.Date datum;
-	private java.util.Date haltbarkeitsDatum;
-
-    /**
-     * @return the positionsNummer
-     */
-    public int getPositionsNummer() {
-        return positionsNummer;
-    }
-
-    /**
-     * @param positionsNummer the positionsNummer to set
-     */
-    public void setPositionsNummer(int positionsNummer) {
-        this.positionsNummer = positionsNummer;
-    }
 
     /**
      * @return the arrZielPosition
      */
-    public ZielPosition getArrZielPosition() {
+    public ForeignCollection<ZielPosition> getArrZielPosition() {
         return arrZielPosition;
     }
 
     /**
      * @param arrZielPosition the arrZielPosition to set
      */
-    public void setArrZielPosition(ZielPosition arrZielPosition) {
+    public void setArrZielPosition(ForeignCollection<ZielPosition> arrZielPosition) {
         this.arrZielPosition = arrZielPosition;
     }
 

@@ -6,22 +6,39 @@
 
 package model;
 
-/**
- *
- * @author ssinger
- */
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
 
+@DatabaseTable(tableName = "lager")
 public class Lager {
+    
+    @DatabaseField(generatedId = true)
+    private int lagerID;
+    
+    @DatabaseField(columnName = "hoehe", canBeNull = false)
+    private int hoehe;
+    
+    @DatabaseField(columnName = "breite", canBeNull = false)
+    private int breite;
+    
+    @DatabaseField(columnName = "tiefe", canBeNull = false)
+    private int tiefe;
+    
+    @DatabaseField(columnName = "lagerort", canBeNull = false)
+    private Lager.Lagerort lagerort;
+    
+    @DatabaseField(columnName = "kleinVE", canBeNull = false)
+    private int kleinVE;
+    
+    @DatabaseField(columnName = "mittelVE", canBeNull = false)
+    private int mittelVE;
+    
+    @DatabaseField(columnName = "grossVE", canBeNull = false)
+    private int grossVE;
 
-	private int hoehe;
-	private int breite;
-	private int tiefe;
-	private Lagerfach.Lagerort lagerort;
-	private int lagerID;
-	private int kleinVE;
-	private int mittelVE;
-	private int grossVE;
-
+    public Lager () {
+    
+    }
     /**
      * @return the hoehe
      */
@@ -67,14 +84,14 @@ public class Lager {
     /**
      * @return the lagerort
      */
-    public Lagerfach.Lagerort getLagerort() {
+    public Lager.Lagerort getLagerort() {
         return lagerort;
     }
 
     /**
      * @param lagerort the lagerort to set
      */
-    public void setLagerort(Lagerfach.Lagerort lagerort) {
+    public void setLagerort(Lager.Lagerort lagerort) {
         this.lagerort = lagerort;
     }
 
@@ -134,6 +151,11 @@ public class Lager {
         this.grossVE = grossVE;
     }
 	
+    public enum Lagerort {
+            freilager (),
+            hochregal (),
+            ;	
+    }
 	
 
 }

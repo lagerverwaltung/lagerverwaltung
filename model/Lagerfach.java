@@ -6,14 +6,31 @@
 
 package model;
 
-/**
- *
- * @author ssinger
- */
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
+
+@DatabaseTable(tableName = "lagerfach")
 public class Lagerfach {
+    @DatabaseField(columnName = "fachID", generatedId = true)
+    private int fachnummer;
 
-	private int fachnummer;
-
+    @DatabaseField()
+    private String bemerkung;
+    
+    @DatabaseField(columnName = "x")
+    private int x;
+    
+    @DatabaseField(columnName = "y")
+    private int y;
+    
+    @DatabaseField(columnName = "z")
+    private int z;
+    
+    @DatabaseField()
+    private Groesse groesse;
+    
+    @DatabaseField(columnName = "lagerID", canBeNull = false, foreign = true)
+    private Lager lager;
     /**
      * @return the fachnummer
      */
@@ -42,21 +59,7 @@ public class Lagerfach {
         this.bemerkung = bemerkung;
     }
 
-    /**
-     * @return the positionVector
-     */
-    public PositionVector getPositionVector() {
-        return positionVector;
-    }
-
-    /**
-     * @param positionVector the positionVector to set
-     */
-    public void setPositionVector(PositionVector positionVector) {
-        this.positionVector = positionVector;
-    }
-
-    /**
+     /**
      * @return the groesse
      */
     public Groesse getGroesse() {
@@ -91,19 +94,36 @@ public class Lagerfach {
 		;	
 	
 	}
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public int getZ() {
+        return z;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
+    public void setZ(int z) {
+        this.z = z;
+    }
+        
+    
 	
-	public enum Lagerort {
 	
-		freilager (),
-		hochregal (),
-		;	
 	
-	}
 	
-	private String bemerkung;
-	private PositionVector positionVector;
-	private Groesse groesse;
-	private Lager lager;
 	
 }
 

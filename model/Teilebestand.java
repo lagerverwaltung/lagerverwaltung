@@ -6,28 +6,44 @@
 
 package model;
 
-/**
- *
- * @author ssinger
- */
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
+
+@DatabaseTable(tableName = "teilebestand")
 public class Teilebestand {
 
-	private String identnummer;
-	private String bezeichnung;
-	private String materialgruppe;
-	private int zeichnungsnummer;
+    @DatabaseField(columnName = "teilID", generatedId = true)
+    private int identnummer;
+    
+    @DatabaseField()
+    private String bezeichnung;
+    
+    @DatabaseField()
+    private String materialgruppe;
+    
+    @DatabaseField()
+    private int zeichnungsnummer;
+    
+    @DatabaseField()
+    private float preis;
+    
+    @DatabaseField()
+    private Typ typ;
+    
+    @DatabaseField()
+    private int ve;
 
     /**
      * @return the identnummer
      */
-    public String getIdentnummer() {
+    public int getIdentnummer() {
         return identnummer;
     }
 
     /**
      * @param identnummer the identnummer to set
      */
-    public void setIdentnummer(String identnummer) {
+    public void setIdentnummer(int identnummer) {
         this.identnummer = identnummer;
     }
 
@@ -126,8 +142,6 @@ public class Teilebestand {
 		
 	}
 	
-	private float preis;
-	private Typ typ;
-	private int ve;
+	
 
 }

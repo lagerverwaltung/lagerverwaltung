@@ -6,15 +6,23 @@
 
 package model;
 
-/**
- *
- * @author ssinger
- */
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
+
+@DatabaseTable(tableName = "zielposition")
 public class ZielPosition {
 
-	private int menge;
-	private int bewegungsPositionID;
-	private Lagerfach lagerfach;
+    @DatabaseField(generatedId = true)
+    private int zielPositionID;
+    
+    @DatabaseField()
+    private int menge;
+    
+    @DatabaseField(columnName = "warenbID", foreign = true)
+    private Warenbewegung warenbewegung;
+    
+    @DatabaseField(columnName = "fachID", foreign = true)
+    private Lagerfach lagerfach;
 
     /**
      * @return the menge
@@ -30,18 +38,20 @@ public class ZielPosition {
         this.menge = menge;
     }
 
-    /**
-     * @return the bewegungsPositionID
-     */
-    public int getBewegungsPositionID() {
-        return bewegungsPositionID;
+    public int getZielPositionID() {
+        return zielPositionID;
     }
 
-    /**
-     * @param bewegungsPositionID the bewegungsPositionID to set
-     */
-    public void setBewegungsPositionID(int bewegungsPositionID) {
-        this.bewegungsPositionID = bewegungsPositionID;
+    public void setZielPositionID(int zielPositionID) {
+        this.zielPositionID = zielPositionID;
+    }
+
+    public Warenbewegung getWarenbewegung() {
+        return warenbewegung;
+    }
+
+    public void setWarenbewegung(Warenbewegung warenbewegung) {
+        this.warenbewegung = warenbewegung;
     }
 
     /**

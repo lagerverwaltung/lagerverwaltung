@@ -6,18 +6,26 @@
 
 package model;
 
-/**
- *
- * @author ssinger
- */
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
 
+@DatabaseTable(tableName = "lagerbestand")
 public class Lagerbestand {
 
-	private int lagerbestandsnummer;
-	private Teilebestand teil;
-	private Lagerfach lagerfach;
-	private int menge;
-	private String anschaffungsgrund;
+    @DatabaseField(columnName = "lagerbestandID", generatedId = true)
+    private int lagerbestandsnummer;
+    
+    @DatabaseField(columnName = "teilID", foreign = true)
+    private Teilebestand teil;
+    
+    @DatabaseField(columnName = "fachID", foreign = true)
+    private Lagerfach lagerfach;
+    
+    @DatabaseField()
+    private int anzahl;
+    
+    @DatabaseField(columnName = "anschaffg")
+    private String anschaffungsgrund;
 
     /**
      * @return the lagerbestandsnummer
@@ -65,14 +73,14 @@ public class Lagerbestand {
      * @return the menge
      */
     public int getMenge() {
-        return menge;
+        return anzahl;
     }
 
     /**
      * @param menge the menge to set
      */
     public void setMenge(int menge) {
-        this.menge = menge;
+        this.anzahl = menge;
     }
 
     /**
