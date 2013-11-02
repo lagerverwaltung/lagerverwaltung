@@ -58,7 +58,7 @@ public class MainPanel extends javax.swing.JPanel {
         navigationBar.setLayout(new java.awt.GridLayout(1, 3));
 
         btnTeilebestand.setBackground(new java.awt.Color(255, 255, 51));
-        btnTeilebestand.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/schrauben.png"))); // NOI18N
+        btnTeilebestand.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/schrauben.png"))); // NOI18N
         btnTeilebestand.setText("    Teilebestand");
         btnTeilebestand.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnTeilebestand.addActionListener(new java.awt.event.ActionListener() {
@@ -69,7 +69,7 @@ public class MainPanel extends javax.swing.JPanel {
         navigationBar.add(btnTeilebestand);
 
         btnLagerbestand.setBackground(new java.awt.Color(255, 255, 255));
-        btnLagerbestand.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/lagerBestand.gif"))); // NOI18N
+        btnLagerbestand.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/lagerBestand.gif"))); // NOI18N
         btnLagerbestand.setText("  Lagerbestand");
         btnLagerbestand.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnLagerbestand.addActionListener(new java.awt.event.ActionListener() {
@@ -80,7 +80,7 @@ public class MainPanel extends javax.swing.JPanel {
         navigationBar.add(btnLagerbestand);
 
         btnWarenbewegung.setBackground(new java.awt.Color(255, 255, 255));
-        btnWarenbewegung.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/lagerBewegung.gif"))); // NOI18N
+        btnWarenbewegung.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/lagerBewegung.gif"))); // NOI18N
         btnWarenbewegung.setText("  Warenbewegung");
         btnWarenbewegung.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnWarenbewegung.addActionListener(new java.awt.event.ActionListener() {

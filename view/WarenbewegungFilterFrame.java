@@ -11,7 +11,16 @@ import java.awt.Component;
  * @author simon
  */
 public class WarenbewegungFilterFrame extends javax.swing.JFrame {
-
+    private static WarenbewegungFilterFrame singleton;
+    
+    public static WarenbewegungFilterFrame getInstance(Component mainFrame)
+    {
+        if (WarenbewegungFilterFrame.singleton == null){
+            singleton = new WarenbewegungFilterFrame(mainFrame);
+        }
+        singleton.setVisible(true);
+        return singleton;
+    }
     /**
      * Creates new form WarenbewegungFilterFrame
      */

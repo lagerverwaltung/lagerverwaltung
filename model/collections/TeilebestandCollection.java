@@ -13,7 +13,16 @@ import model.Teilebestand;
  * @author simon
  */
 public class TeilebestandCollection<Teilebestand> extends ArrayList {
-
+    private static TeilebestandCollection singleton;
+    
+    public static TeilebestandCollection getInstance()
+    {
+        if (TeilebestandCollection.singleton == null){
+            singleton = new TeilebestandCollection();
+        }
+        return singleton;
+    }
+    
     public TeilebestandCollection() {
         loadCollection();
     }

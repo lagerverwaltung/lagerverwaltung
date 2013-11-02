@@ -13,7 +13,16 @@ import java.awt.Toolkit;
  * @author simon
  */
 public class TeileFilterFrame extends javax.swing.JFrame {
-
+    private static TeileFilterFrame singleton;
+    
+    public static TeileFilterFrame getInstance(Component mainFrame)
+    {
+        if (TeileFilterFrame.singleton == null){
+            singleton = new TeileFilterFrame(mainFrame);
+        }
+        singleton.setVisible(true);
+        return singleton;
+    }
     /**
      * Creates new form TeileFilter
      */

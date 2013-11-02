@@ -11,7 +11,16 @@ import java.awt.Component;
  * @author simon
  */
 public class LagerbestandFilterFrame extends javax.swing.JFrame {
-
+    private static LagerbestandFilterFrame singleton;
+    
+    public static LagerbestandFilterFrame getInstance(Component mainFrame)
+    {
+        if (LagerbestandFilterFrame.singleton == null){
+            singleton = new LagerbestandFilterFrame(mainFrame);
+        }
+        singleton.setVisible(true);
+        return singleton;
+    }
     /**
      * Creates new form LagerBestandFilterFrame
      */

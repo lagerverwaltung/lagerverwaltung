@@ -192,7 +192,7 @@ public class TeilebestandPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_teilLoschenButtonActionPerformed
 
     private void filternButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filternButtonActionPerformed
-        new TeileFilterFrame(mainFrame).setVisible(true);
+       TeileFilterFrame.getInstance(mainFrame);
     }//GEN-LAST:event_filternButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

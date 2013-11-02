@@ -71,7 +71,7 @@ public class InitPanel extends javax.swing.JPanel {
         lblEinrichtungsassi.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         lblEinrichtungsassi.setText("Ersteinrichtungsassistent");
 
-        lblCube.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/lagerDimensions.gif"))); // NOI18N
+        lblCube.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/lagerDimensions.gif"))); // NOI18N
         lblCube.setText("jLabel7");
 
         lblHochregallager.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N

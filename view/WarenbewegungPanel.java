@@ -148,7 +148,7 @@ public class WarenbewegungPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void filternButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filternButtonActionPerformed
-        new WarenbewegungFilterFrame(mainFrame).setVisible(true);
+       WarenbewegungFilterFrame.getInstance(mainFrame);
     }//GEN-LAST:event_filternButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -13,7 +13,16 @@ import model.Teilebestand;
  * @author simon
  */
 public class WarenbewegungCollection<Warenbewegung> extends ArrayList {
-
+    private static WarenbewegungCollection singleton;
+    
+    public static WarenbewegungCollection getInstance()
+    {
+        if (WarenbewegungCollection.singleton == null){
+            singleton = new WarenbewegungCollection();
+        }
+        return singleton;
+    }
+    
     public WarenbewegungCollection() {
         loadCollection();
     }

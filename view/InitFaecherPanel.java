@@ -151,7 +151,7 @@ public class InitFaecherPanel extends javax.swing.JPanel {
 
         jLabel30.setText("1");
 
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/lagerDimensions2.gif"))); // NOI18N
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/lagerDimensions2.gif"))); // NOI18N
         jLabel7.setText("jLabel7");
 
         btnWeiter.setText("weiter zum Freilager");
