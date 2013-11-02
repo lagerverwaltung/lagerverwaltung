@@ -2,7 +2,7 @@ package view;
 
 import javax.swing.JTable;
 import javax.swing.table.TableColumn;
-import models.tables.TeileTableModel;
+import model.table.TeileTableModel;
 
 /*
  * To change this template, choose Tools | Templates

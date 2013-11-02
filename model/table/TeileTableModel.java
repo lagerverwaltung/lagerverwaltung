@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package models.tables;
+package model.table;
 
 import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
@@ -11,29 +11,28 @@ import javax.swing.table.AbstractTableModel;
  *
  * @author simon
  */
-public class LagerbestandTableModel extends AbstractTableModel {
-
-    ArrayList<Object[]> lagerbestandRows = new ArrayList();
+public class TeileTableModel extends AbstractTableModel {
+    ArrayList<Object[]> teileRows = new ArrayList();
     
     public void setData(ArrayList<Object[]> arr)
     {
-        this.lagerbestandRows = arr;
+        this.teileRows = arr;
     }
     
     public ArrayList<Object[]> dummyArrayList()
     {
         ArrayList<Object[]> arr = new ArrayList();
-        String[] row = {"9999","Hochregallager","11","12","1","Schrauben M5","001212", "1000","Bedarf Periode 1"};
+        String[] row = {"001212","Schraube M5","Betriebsstoffe","A231231f.cad","0,84 €", "Vorratsteile"};
         arr.add(row);
         return arr;
     }
     
     public int getColumnCount() {
-        return 9;
+        return 6;
     }
     
     public int getRowCount() {
-        return lagerbestandRows.size();
+        return teileRows.size();
     }
 
     public String getColumnName(int col) {
@@ -41,39 +40,30 @@ public class LagerbestandTableModel extends AbstractTableModel {
         switch (col)
         {
             case 0:
-                name = "FachID";
-                break;
-            case 1:
-                name = "Lager";
-                break;
-            case 2:
-                name = "x";
-                break;
-            case 3:
-                name = "y";
-                break;
-            case 4:
-                name = "z";
-                break;
-            case 5:
-                name = "Teilbezeichnung";
-                break;
-            case 6:
                 name = "Identnummer";
                 break;
-            case 7:
-                name = "Menge";
+            case 1:
+                name = "Bezeichnung";
                 break;
-            case 8:
-                name = "Ansch. Grund";
+            case 2:
+                name = "Materialgruppe";
+                break;
+            case 3:
+                name = "Zeichnungsnummer";
+                break;
+            case 4:
+                name = "Preis";
+                break;
+            case 5:
+                name = "Typ";
                 break;
         }
         return name;
     }
 
     public Object getValueAt(int row, int col) {
-        if(lagerbestandRows.size()>0){
-            Object[] commisionColumns = lagerbestandRows.get(row);
+        if(teileRows.size()>0){
+            Object[] commisionColumns = teileRows.get(row);
             return commisionColumns[col];
         }
         return "notfound";

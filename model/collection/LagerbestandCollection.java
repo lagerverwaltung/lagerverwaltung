@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package model.collections;
+package model.collection;
 
 import helper.DatabaseManager;
 import java.sql.SQLException;

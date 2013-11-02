@@ -2,7 +2,7 @@ package view;
 
 import javax.swing.JTable;
 import javax.swing.table.TableColumn;
-import models.tables.LagerbestandTableModel;
+import model.table.LagerbestandTableModel;
 
 /*
  * To change this template, choose Tools | Templates
