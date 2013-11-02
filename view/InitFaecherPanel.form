@@ -33,11 +33,11 @@
                       <Component id="lblAuswahl" min="-2" max="-2" attributes="0"/>
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jLabel13" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel17" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel19" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel20" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel18" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblFach2" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblFach3" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblFach6" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblFach4" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblFach5" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="lblFach1" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
@@ -54,69 +54,69 @@
                                       <Component id="jSeparator1" alignment="0" min="-2" pref="286" max="-2" attributes="0"/>
                                       <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
                                           <Group type="102" alignment="0" attributes="0">
-                                              <Component id="jLabel21" min="-2" pref="18" max="-2" attributes="0"/>
+                                              <Component id="lbl4X" min="-2" pref="18" max="-2" attributes="0"/>
                                               <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                                              <Component id="jLabel26" min="-2" pref="18" max="-2" attributes="0"/>
+                                              <Component id="lbl4Y" min="-2" pref="18" max="-2" attributes="0"/>
                                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Component id="jLabel27" min="-2" pref="18" max="-2" attributes="0"/>
+                                              <Component id="lbl4Z" min="-2" pref="18" max="-2" attributes="0"/>
                                               <EmptySpace max="32767" attributes="0"/>
-                                              <Component id="jComboBox5" min="-2" pref="111" max="-2" attributes="0"/>
+                                              <Component id="cbxGröße4" min="-2" pref="111" max="-2" attributes="0"/>
                                           </Group>
                                           <Group type="102" alignment="0" attributes="0">
                                               <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-                                              <Component id="jLabel22" min="-2" pref="18" max="-2" attributes="0"/>
+                                              <Component id="lbl5X" min="-2" pref="18" max="-2" attributes="0"/>
                                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Component id="jLabel25" min="-2" pref="18" max="-2" attributes="0"/>
+                                              <Component id="lbl5Y" min="-2" pref="18" max="-2" attributes="0"/>
                                               <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                                              <Component id="jLabel28" min="-2" pref="18" max="-2" attributes="0"/>
+                                              <Component id="lbl5Z" min="-2" pref="18" max="-2" attributes="0"/>
                                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                              <Component id="jComboBox4" min="-2" pref="111" max="-2" attributes="0"/>
+                                              <Component id="cbxGröße5" min="-2" pref="111" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
                                           <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
                                               <Group type="102" alignment="0" attributes="0">
-                                                  <Component id="jLabel11" min="-2" pref="18" max="-2" attributes="0"/>
+                                                  <Component id="lbl2X" min="-2" pref="18" max="-2" attributes="0"/>
                                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                                  <Component id="jLabel10" min="-2" pref="18" max="-2" attributes="0"/>
+                                                  <Component id="lbl2Y" min="-2" pref="18" max="-2" attributes="0"/>
                                                   <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                                                  <Component id="jLabel14" min="-2" pref="18" max="-2" attributes="0"/>
+                                                  <Component id="lbl2Z" min="-2" pref="18" max="-2" attributes="0"/>
                                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                                  <Component id="jComboBox2" min="-2" pref="111" max="-2" attributes="0"/>
+                                                  <Component id="cbxGröße2" min="-2" pref="111" max="-2" attributes="0"/>
                                               </Group>
                                               <Group type="102" alignment="0" attributes="0">
-                                                  <Component id="jLabel16" min="-2" pref="18" max="-2" attributes="0"/>
+                                                  <Component id="lbl3X" min="-2" pref="18" max="-2" attributes="0"/>
                                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                                  <Component id="jLabel12" min="-2" pref="18" max="-2" attributes="0"/>
+                                                  <Component id="lbl3Y" min="-2" pref="18" max="-2" attributes="0"/>
                                                   <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                                                  <Component id="jLabel15" min="-2" pref="18" max="-2" attributes="0"/>
+                                                  <Component id="lbl3Z" min="-2" pref="18" max="-2" attributes="0"/>
                                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                                  <Component id="jComboBox3" min="-2" pref="111" max="-2" attributes="0"/>
+                                                  <Component id="cbxGröße3" min="-2" pref="111" max="-2" attributes="0"/>
                                               </Group>
                                               <Group type="102" alignment="0" attributes="0">
-                                                  <Component id="jLabel23" min="-2" pref="18" max="-2" attributes="0"/>
+                                                  <Component id="lbl6X" min="-2" pref="18" max="-2" attributes="0"/>
                                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                                  <Component id="jLabel24" min="-2" pref="18" max="-2" attributes="0"/>
+                                                  <Component id="lbl6Y" min="-2" pref="18" max="-2" attributes="0"/>
                                                   <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                                                  <Component id="jLabel29" min="-2" pref="18" max="-2" attributes="0"/>
+                                                  <Component id="lbl6Z" min="-2" pref="18" max="-2" attributes="0"/>
                                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                                  <Component id="jComboBox6" min="-2" pref="111" max="-2" attributes="0"/>
+                                                  <Component id="cbxGröße6" min="-2" pref="111" max="-2" attributes="0"/>
                                               </Group>
                                               <Group type="102" alignment="0" attributes="0">
-                                                  <Component id="jLabel30" min="-2" pref="18" max="-2" attributes="0"/>
+                                                  <Component id="lbl1X" min="-2" pref="18" max="-2" attributes="0"/>
                                                   <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                                                  <Component id="jLabel8" min="-2" pref="18" max="-2" attributes="0"/>
+                                                  <Component id="lbl1Y" min="-2" pref="18" max="-2" attributes="0"/>
                                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                                  <Component id="jLabel9" min="-2" pref="18" max="-2" attributes="0"/>
+                                                  <Component id="lbl1Z" min="-2" pref="18" max="-2" attributes="0"/>
                                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                                  <Component id="jComboBox1" min="-2" pref="111" max="-2" attributes="0"/>
+                                                  <Component id="cbxGröße1" min="-2" pref="111" max="-2" attributes="0"/>
                                               </Group>
                                           </Group>
                                       </Group>
                                   </Group>
                                   <EmptySpace pref="35" max="32767" attributes="0"/>
-                                  <Component id="jLabel7" min="-2" pref="290" max="-2" attributes="0"/>
+                                  <Component id="lblCube2" min="-2" pref="290" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -151,55 +151,55 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="lblFach1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jComboBox1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel30" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lbl1Y" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lbl1Z" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cbxGröße1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lbl1X" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel11" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jComboBox2" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel14" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel13" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lbl2X" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lbl2Y" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cbxGröße2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lbl2Z" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblFach2" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel16" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jComboBox3" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel15" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel17" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lbl3X" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lbl3Y" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cbxGröße3" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lbl3Z" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblFach3" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel21" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel26" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel27" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jComboBox5" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel20" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lbl4X" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lbl4Y" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lbl4Z" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cbxGröße4" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblFach4" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel22" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel25" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jComboBox4" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel28" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel18" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lbl5X" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lbl5Y" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cbxGröße5" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lbl5Z" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblFach5" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel23" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel24" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jComboBox6" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel29" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel19" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lbl6X" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lbl6Y" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cbxGröße6" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lbl6Z" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblFach6" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="126" max="-2" attributes="0"/>
                       <Component id="btnWeiter" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="jLabel7" min="-2" pref="244" max="-2" attributes="0"/>
+                  <Component id="lblCube2" min="-2" pref="244" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="20" max="32767" attributes="0"/>
           </Group>
@@ -235,17 +235,17 @@
         <Property name="text" type="java.lang.String" value="z"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel8">
+    <Component class="javax.swing.JLabel" name="lbl1Y">
       <Properties>
         <Property name="text" type="java.lang.String" value="1"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel9">
+    <Component class="javax.swing.JLabel" name="lbl1Z">
       <Properties>
         <Property name="text" type="java.lang.String" value="1"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="jComboBox1">
+    <Component class="javax.swing.JComboBox" name="cbxGr&#xf6;&#xdf;e1">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="3">
@@ -256,7 +256,7 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="jComboBox2">
+    <Component class="javax.swing.JComboBox" name="cbxGr&#xf6;&#xdf;e2">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="3">
@@ -267,27 +267,27 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel10">
+    <Component class="javax.swing.JLabel" name="lbl2Y">
       <Properties>
         <Property name="text" type="java.lang.String" value="1"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel11">
+    <Component class="javax.swing.JLabel" name="lbl2X">
       <Properties>
         <Property name="text" type="java.lang.String" value="1"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel13">
+    <Component class="javax.swing.JLabel" name="lblFach2">
       <Properties>
         <Property name="text" type="java.lang.String" value="Fach 2 "/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel14">
+    <Component class="javax.swing.JLabel" name="lbl2Z">
       <Properties>
         <Property name="text" type="java.lang.String" value="2"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="jComboBox3">
+    <Component class="javax.swing.JComboBox" name="cbxGr&#xf6;&#xdf;e3">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="3">
@@ -298,87 +298,87 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel15">
+    <Component class="javax.swing.JLabel" name="lbl3Z">
       <Properties>
         <Property name="text" type="java.lang.String" value="3"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel12">
+    <Component class="javax.swing.JLabel" name="lbl3Y">
       <Properties>
         <Property name="text" type="java.lang.String" value="1"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel16">
+    <Component class="javax.swing.JLabel" name="lbl3X">
       <Properties>
         <Property name="text" type="java.lang.String" value="1"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel17">
+    <Component class="javax.swing.JLabel" name="lblFach3">
       <Properties>
         <Property name="text" type="java.lang.String" value="Fach 3 "/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel18">
+    <Component class="javax.swing.JLabel" name="lblFach5">
       <Properties>
         <Property name="text" type="java.lang.String" value="Fach 5 "/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel19">
+    <Component class="javax.swing.JLabel" name="lblFach6">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Fach 3 "/>
+        <Property name="text" type="java.lang.String" value="Fach 6 "/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel20">
+    <Component class="javax.swing.JLabel" name="lblFach4">
       <Properties>
         <Property name="text" type="java.lang.String" value="Fach 4"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel21">
+    <Component class="javax.swing.JLabel" name="lbl4X">
       <Properties>
         <Property name="text" type="java.lang.String" value=" 2"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel22">
+    <Component class="javax.swing.JLabel" name="lbl5X">
       <Properties>
         <Property name="text" type="java.lang.String" value="2"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel23">
+    <Component class="javax.swing.JLabel" name="lbl6X">
       <Properties>
         <Property name="text" type="java.lang.String" value="2"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel24">
+    <Component class="javax.swing.JLabel" name="lbl6Y">
       <Properties>
         <Property name="text" type="java.lang.String" value="1"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel25">
+    <Component class="javax.swing.JLabel" name="lbl5Y">
       <Properties>
         <Property name="text" type="java.lang.String" value="1"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel26">
+    <Component class="javax.swing.JLabel" name="lbl4Y">
       <Properties>
         <Property name="text" type="java.lang.String" value=" 1"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel27">
+    <Component class="javax.swing.JLabel" name="lbl4Z">
       <Properties>
         <Property name="text" type="java.lang.String" value=" 1"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel28">
+    <Component class="javax.swing.JLabel" name="lbl5Z">
       <Properties>
         <Property name="text" type="java.lang.String" value="2"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel29">
+    <Component class="javax.swing.JLabel" name="lbl6Z">
       <Properties>
         <Property name="text" type="java.lang.String" value="3"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="jComboBox4">
+    <Component class="javax.swing.JComboBox" name="cbxGr&#xf6;&#xdf;e5">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="3">
@@ -389,7 +389,7 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="jComboBox5">
+    <Component class="javax.swing.JComboBox" name="cbxGr&#xf6;&#xdf;e4">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="3">
@@ -400,7 +400,7 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="jComboBox6">
+    <Component class="javax.swing.JComboBox" name="cbxGr&#xf6;&#xdf;e6">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="3">
@@ -413,12 +413,12 @@
     </Component>
     <Component class="javax.swing.JSeparator" name="jSeparator1">
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel30">
+    <Component class="javax.swing.JLabel" name="lbl1X">
       <Properties>
         <Property name="text" type="java.lang.String" value="1"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel7">
+    <Component class="javax.swing.JLabel" name="lblCube2">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/view/images/lagerDimensions2.gif"/>

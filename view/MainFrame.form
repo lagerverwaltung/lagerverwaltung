@@ -16,6 +16,7 @@
   </AccessibilityProperties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
   </SyntheticProperties>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
@@ -54,9 +55,9 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignCardLayout"/>
       <SubComponents>
-        <Component class="view.InitPanel" name="initPanel">
+        <Component class="view.InitPanel" name="panInit">
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="initPanel.setMainFrame(this);"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="panInit.setMainFrame(this);"/>
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
@@ -64,9 +65,9 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="view.InitFaecherPanel" name="initFaecherPanel">
+        <Component class="view.InitFaecherPanel" name="panInitFaecher">
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="initFaecherPanel.setMainFrame(this);"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="panInitFaecher.setMainFrame(this);"/>
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
@@ -74,14 +75,14 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="view.MainPanel" name="mainPanel">
+        <Component class="view.MainPanel" name="panMain">
           <Properties>
             <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[1000, 844]"/>
             </Property>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="mainPanel.setMainFrame(this);"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="panMain.setMainFrame(this);"/>
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
@@ -89,7 +90,7 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="view.LoginPanel" name="loginPanel">
+        <Component class="view.LoginPanel" name="panLogin">
           <Properties>
             <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[1024, 768]"/>
@@ -100,7 +101,7 @@
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new view.LoginPanel()"/>
-            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="loginPanel.setMainFrame(this);"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="panLogin.setMainFrame(this);"/>
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">

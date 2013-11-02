@@ -19,28 +19,28 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="jLabel2" alignment="0" min="-2" pref="151" max="-2" attributes="0"/>
+                  <Component id="lblLagerbestand" alignment="0" min="-2" pref="151" max="-2" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="teilEinlagernButton" min="-2" pref="180" max="-2" attributes="0"/>
+                      <Component id="btnteilEinlagern" min="-2" pref="180" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="teilAuslagernButton" min="-2" pref="180" max="-2" attributes="0"/>
+                      <Component id="btnTeilAuslagern" min="-2" pref="180" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="teilUmlagernButton" min="-2" pref="180" max="-2" attributes="0"/>
+                      <Component id="btnTeilUmlagern" min="-2" pref="180" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="teilSplittenButton" min="-2" pref="180" max="-2" attributes="0"/>
+                      <Component id="btnTeilSplitten" min="-2" pref="180" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblFreitextSuche" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="jTextField1" min="-2" pref="196" max="-2" attributes="0"/>
+                      <Component id="txfFreitextSuche" min="-2" pref="196" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="jButton3" min="-2" pref="118" max="-2" attributes="0"/>
+                      <Component id="btnSuche" min="-2" pref="118" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="291" max="-2" attributes="0"/>
-                      <Component id="filternButton" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnFiltern" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnFilterZuruecksetzen" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
+                  <Component id="scpMainPane" alignment="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace pref="22" max="32767" attributes="0"/>
           </Group>
@@ -50,25 +50,25 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
-              <Component id="jLabel2" min="-2" pref="25" max="-2" attributes="0"/>
+              <Component id="lblLagerbestand" min="-2" pref="25" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jTextField1" alignment="1" min="-2" max="-2" attributes="0"/>
+                  <Component id="txfFreitextSuche" alignment="1" min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jButton3" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jButton1" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                      <Component id="filternButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnSuche" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblFreitextSuche" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnFilterZuruecksetzen" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                      <Component id="btnFiltern" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jScrollPane1" min="-2" pref="470" max="-2" attributes="0"/>
+              <Component id="scpMainPane" min="-2" pref="470" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="teilEinlagernButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="teilAuslagernButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="teilUmlagernButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="teilSplittenButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnteilEinlagern" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnTeilAuslagern" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnTeilUmlagern" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnTeilSplitten" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -76,20 +76,20 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+    <Container class="javax.swing.JScrollPane" name="scpMainPane">
       <AuxValues>
         <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
       </AuxValues>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTable" name="jTable1">
+        <Component class="javax.swing.JTable" name="tabMaintable">
           <Properties>
-            <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor" postCode="setTableWidths(jTable1);">
+            <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor" postCode="setTableWidths(tabMaintable);">
               <Connection code="tm" type="code"/>
             </Property>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Default Cursor"/>
+              <Color id="Standardcursor"/>
             </Property>
             <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
               <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
@@ -101,7 +101,7 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JLabel" name="jLabel2">
+    <Component class="javax.swing.JLabel" name="lblLagerbestand">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Dialog" size="18" style="1"/>
@@ -109,64 +109,64 @@
         <Property name="text" type="java.lang.String" value="Lagerbestand"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="teilEinlagernButton">
+    <Component class="javax.swing.JButton" name="btnteilEinlagern">
       <Properties>
         <Property name="text" type="java.lang.String" value="Teile einlagern"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="teilEinlagernButtonActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnteilEinlagernActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton3">
+    <Component class="javax.swing.JButton" name="btnSuche">
       <Properties>
         <Property name="text" type="java.lang.String" value="suchen"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton3ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSucheActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="teilUmlagernButton">
+    <Component class="javax.swing.JButton" name="btnTeilUmlagern">
       <Properties>
         <Property name="text" type="java.lang.String" value="Teile umlagern"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="teilUmlagernButtonActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTeilUmlagernActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel12">
+    <Component class="javax.swing.JLabel" name="lblFreitextSuche">
       <Properties>
         <Property name="text" type="java.lang.String" value="Freitextsuche:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField1">
+    <Component class="javax.swing.JTextField" name="txfFreitextSuche">
     </Component>
-    <Component class="javax.swing.JButton" name="jButton1">
+    <Component class="javax.swing.JButton" name="btnFilterZuruecksetzen">
       <Properties>
         <Property name="text" type="java.lang.String" value="Filter zur&#xfc;cksetzen"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="teilAuslagernButton">
+    <Component class="javax.swing.JButton" name="btnTeilAuslagern">
       <Properties>
         <Property name="text" type="java.lang.String" value="Teile auslagern"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="teilAuslagernButtonActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTeilAuslagernActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="teilSplittenButton">
+    <Component class="javax.swing.JButton" name="btnTeilSplitten">
       <Properties>
         <Property name="text" type="java.lang.String" value="Teile splitten"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="teilSplittenButtonActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTeilSplittenActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="filternButton">
+    <Component class="javax.swing.JButton" name="btnFiltern">
       <Properties>
         <Property name="text" type="java.lang.String" value="Filtern"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="filternButtonActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnFilternActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

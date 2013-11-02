@@ -21,15 +21,15 @@ public class MainPanel extends javax.swing.JPanel {
      */
     public MainPanel() {
         initComponents();
-        navigationController = new NavigationController(cardPanel);
+        navigationController = new NavigationController(panCard);
     }
     
     public void setMainFrame(MainFrame mainFrame)
     {
         this.mainFrame = mainFrame;
-        teilebestandPanel.setMainFrame(mainFrame);
-        lagerbestandPanel.setMainFrame(mainFrame);
-        warenbewegungPanel.setMainFrame(mainFrame);
+        panTeilebestand.setMainFrame(mainFrame);
+        panLagerbestand.setMainFrame(mainFrame);
+        panWarenbewegung.setMainFrame(mainFrame);
     }
     
     /**
@@ -41,63 +41,63 @@ public class MainPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        navigationBar = new javax.swing.JPanel();
+        panNavigationBar = new javax.swing.JPanel();
         btnTeilebestand = new javax.swing.JButton();
         btnLagerbestand = new javax.swing.JButton();
         btnWarenbewegung = new javax.swing.JButton();
-        cardPanel = new javax.swing.JPanel();
-        teilebestandPanel = new view.TeilebestandPanel();
-        lagerbestandPanel = new view.LagerbestandPanel();
-        warenbewegungPanel = new view.WarenbewegungPanel();
+        panCard = new javax.swing.JPanel();
+        panTeilebestand = new view.TeilebestandPanel();
+        panLagerbestand = new view.LagerbestandPanel();
+        panWarenbewegung = new view.WarenbewegungPanel();
 
         setMinimumSize(new java.awt.Dimension(1000, 744));
         setOpaque(false);
         setPreferredSize(new java.awt.Dimension(1000, 844));
         setLayout(new java.awt.BorderLayout());
 
-        navigationBar.setLayout(new java.awt.GridLayout(1, 3));
+        panNavigationBar.setLayout(new java.awt.GridLayout(1, 3));
 
         btnTeilebestand.setBackground(new java.awt.Color(255, 255, 51));
         btnTeilebestand.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/schrauben.png"))); // NOI18N
         btnTeilebestand.setText("    Teilebestand");
-        btnTeilebestand.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnTeilebestand.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnTeilebestand.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTeilebestandActionPerformed(evt);
             }
         });
-        navigationBar.add(btnTeilebestand);
+        panNavigationBar.add(btnTeilebestand);
 
         btnLagerbestand.setBackground(new java.awt.Color(255, 255, 255));
         btnLagerbestand.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/lagerBestand.gif"))); // NOI18N
         btnLagerbestand.setText("  Lagerbestand");
-        btnLagerbestand.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnLagerbestand.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnLagerbestand.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLagerbestandActionPerformed(evt);
             }
         });
-        navigationBar.add(btnLagerbestand);
+        panNavigationBar.add(btnLagerbestand);
 
         btnWarenbewegung.setBackground(new java.awt.Color(255, 255, 255));
         btnWarenbewegung.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/lagerBewegung.gif"))); // NOI18N
         btnWarenbewegung.setText("  Warenbewegung");
-        btnWarenbewegung.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnWarenbewegung.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnWarenbewegung.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnWarenbewegungActionPerformed(evt);
             }
         });
-        navigationBar.add(btnWarenbewegung);
+        panNavigationBar.add(btnWarenbewegung);
 
-        add(navigationBar, java.awt.BorderLayout.NORTH);
+        add(panNavigationBar, java.awt.BorderLayout.NORTH);
 
-        cardPanel.setLayout(new java.awt.CardLayout());
-        cardPanel.add(teilebestandPanel, "teilebestand");
-        cardPanel.add(lagerbestandPanel, "lagerbestand");
-        cardPanel.add(warenbewegungPanel, "warenbewegung");
+        panCard.setLayout(new java.awt.CardLayout());
+        panCard.add(panTeilebestand, "teilebestand");
+        panCard.add(panLagerbestand, "lagerbestand");
+        panCard.add(panWarenbewegung, "warenbewegung");
 
-        add(cardPanel, java.awt.BorderLayout.CENTER);
+        add(panCard, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLagerbestandActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLagerbestandActionPerformed
@@ -136,10 +136,10 @@ public class MainPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnLagerbestand;
     private javax.swing.JButton btnTeilebestand;
     private javax.swing.JButton btnWarenbewegung;
-    private javax.swing.JPanel cardPanel;
-    private view.LagerbestandPanel lagerbestandPanel;
-    private javax.swing.JPanel navigationBar;
-    private view.TeilebestandPanel teilebestandPanel;
-    private view.WarenbewegungPanel warenbewegungPanel;
+    private javax.swing.JPanel panCard;
+    private view.LagerbestandPanel panLagerbestand;
+    private javax.swing.JPanel panNavigationBar;
+    private view.TeilebestandPanel panTeilebestand;
+    private view.WarenbewegungPanel panWarenbewegung;
     // End of variables declaration//GEN-END:variables
 }

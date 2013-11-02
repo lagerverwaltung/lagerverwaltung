@@ -47,72 +47,72 @@ public class LagerbestandPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jLabel2 = new javax.swing.JLabel();
-        teilEinlagernButton = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        teilUmlagernButton = new javax.swing.JButton();
-        jLabel12 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        teilAuslagernButton = new javax.swing.JButton();
-        teilSplittenButton = new javax.swing.JButton();
-        filternButton = new javax.swing.JButton();
+        scpMainPane = new javax.swing.JScrollPane();
+        tabMaintable = new javax.swing.JTable();
+        lblLagerbestand = new javax.swing.JLabel();
+        btnteilEinlagern = new javax.swing.JButton();
+        btnSuche = new javax.swing.JButton();
+        btnTeilUmlagern = new javax.swing.JButton();
+        lblFreitextSuche = new javax.swing.JLabel();
+        txfFreitextSuche = new javax.swing.JTextField();
+        btnFilterZuruecksetzen = new javax.swing.JButton();
+        btnTeilAuslagern = new javax.swing.JButton();
+        btnTeilSplitten = new javax.swing.JButton();
+        btnFiltern = new javax.swing.JButton();
 
         LagerbestandTableModel tm = new LagerbestandTableModel();
         tm.setData(tm.dummyArrayList());
-        jTable1.setModel(tm);
-        setTableWidths(jTable1);
-        jTable1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jScrollPane1.setViewportView(jTable1);
+        tabMaintable.setModel(tm);
+        setTableWidths(tabMaintable);
+        tabMaintable.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        scpMainPane.setViewportView(tabMaintable);
 
-        jLabel2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel2.setText("Lagerbestand");
+        lblLagerbestand.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        lblLagerbestand.setText("Lagerbestand");
 
-        teilEinlagernButton.setText("Teile einlagern");
-        teilEinlagernButton.addActionListener(new java.awt.event.ActionListener() {
+        btnteilEinlagern.setText("Teile einlagern");
+        btnteilEinlagern.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                teilEinlagernButtonActionPerformed(evt);
+                btnteilEinlagernActionPerformed(evt);
             }
         });
 
-        jButton3.setText("suchen");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnSuche.setText("suchen");
+        btnSuche.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnSucheActionPerformed(evt);
             }
         });
 
-        teilUmlagernButton.setText("Teile umlagern");
-        teilUmlagernButton.addActionListener(new java.awt.event.ActionListener() {
+        btnTeilUmlagern.setText("Teile umlagern");
+        btnTeilUmlagern.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                teilUmlagernButtonActionPerformed(evt);
+                btnTeilUmlagernActionPerformed(evt);
             }
         });
 
-        jLabel12.setText("Freitextsuche:");
+        lblFreitextSuche.setText("Freitextsuche:");
 
-        jButton1.setText("Filter zurücksetzen");
+        btnFilterZuruecksetzen.setText("Filter zurücksetzen");
 
-        teilAuslagernButton.setText("Teile auslagern");
-        teilAuslagernButton.addActionListener(new java.awt.event.ActionListener() {
+        btnTeilAuslagern.setText("Teile auslagern");
+        btnTeilAuslagern.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                teilAuslagernButtonActionPerformed(evt);
+                btnTeilAuslagernActionPerformed(evt);
             }
         });
 
-        teilSplittenButton.setText("Teile splitten");
-        teilSplittenButton.addActionListener(new java.awt.event.ActionListener() {
+        btnTeilSplitten.setText("Teile splitten");
+        btnTeilSplitten.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                teilSplittenButtonActionPerformed(evt);
+                btnTeilSplittenActionPerformed(evt);
             }
         });
 
-        filternButton.setText("Filtern");
-        filternButton.addActionListener(new java.awt.event.ActionListener() {
+        btnFiltern.setText("Filtern");
+        btnFiltern.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                filternButtonActionPerformed(evt);
+                btnFilternActionPerformed(evt);
             }
         });
 
@@ -123,93 +123,93 @@ public class LagerbestandPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblLagerbestand, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(teilEinlagernButton, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnteilEinlagern, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(teilAuslagernButton, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnTeilAuslagern, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(teilUmlagernButton, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnTeilUmlagern, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(teilSplittenButton, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnTeilSplitten, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel12)
+                        .addComponent(lblFreitextSuche)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txfFreitextSuche, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnSuche, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(291, 291, 291)
-                        .addComponent(filternButton)
+                        .addComponent(btnFiltern)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton1))
-                    .addComponent(jScrollPane1))
+                        .addComponent(btnFilterZuruecksetzen))
+                    .addComponent(scpMainPane))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(37, 37, 37)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblLagerbestand, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txfFreitextSuche, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton3)
-                        .addComponent(jLabel12)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(filternButton)))
+                        .addComponent(btnSuche)
+                        .addComponent(lblFreitextSuche)
+                        .addComponent(btnFilterZuruecksetzen, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnFiltern)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 470, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(scpMainPane, javax.swing.GroupLayout.PREFERRED_SIZE, 470, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(teilEinlagernButton)
-                    .addComponent(teilAuslagernButton)
-                    .addComponent(teilUmlagernButton)
-                    .addComponent(teilSplittenButton))
+                    .addComponent(btnteilEinlagern)
+                    .addComponent(btnTeilAuslagern)
+                    .addComponent(btnTeilUmlagern)
+                    .addComponent(btnTeilSplitten))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void teilEinlagernButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_teilEinlagernButtonActionPerformed
+    private void btnteilEinlagernActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnteilEinlagernActionPerformed
         BestandsaenderungFrame bestandsaenderungFrame = new BestandsaenderungFrame(true);
         bestandsaenderungFrame.setVisible(true);
-    }//GEN-LAST:event_teilEinlagernButtonActionPerformed
+    }//GEN-LAST:event_btnteilEinlagernActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void btnSucheActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSucheActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_btnSucheActionPerformed
 
-    private void teilUmlagernButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_teilUmlagernButtonActionPerformed
+    private void btnTeilUmlagernActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTeilUmlagernActionPerformed
         UmlagernFrame umlagernframe = new UmlagernFrame();
         umlagernframe.setVisible(true);
-    }//GEN-LAST:event_teilUmlagernButtonActionPerformed
+    }//GEN-LAST:event_btnTeilUmlagernActionPerformed
 
-    private void teilAuslagernButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_teilAuslagernButtonActionPerformed
+    private void btnTeilAuslagernActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTeilAuslagernActionPerformed
         BestandsaenderungFrame bestandsaenderungFrame = new BestandsaenderungFrame();
         bestandsaenderungFrame.setVisible(true);
-    }//GEN-LAST:event_teilAuslagernButtonActionPerformed
+    }//GEN-LAST:event_btnTeilAuslagernActionPerformed
 
-    private void teilSplittenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_teilSplittenButtonActionPerformed
+    private void btnTeilSplittenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTeilSplittenActionPerformed
         UmlagernFrame umlagernframe = new UmlagernFrame(true);
         umlagernframe.setVisible(true);
-    }//GEN-LAST:event_teilSplittenButtonActionPerformed
+    }//GEN-LAST:event_btnTeilSplittenActionPerformed
 
-    private void filternButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filternButtonActionPerformed
+    private void btnFilternActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFilternActionPerformed
         LagerbestandFilterFrame.getInstance(mainFrame);
-    }//GEN-LAST:event_filternButtonActionPerformed
+    }//GEN-LAST:event_btnFilternActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton filternButton;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JButton teilAuslagernButton;
-    private javax.swing.JButton teilEinlagernButton;
-    private javax.swing.JButton teilSplittenButton;
-    private javax.swing.JButton teilUmlagernButton;
+    private javax.swing.JButton btnFilterZuruecksetzen;
+    private javax.swing.JButton btnFiltern;
+    private javax.swing.JButton btnSuche;
+    private javax.swing.JButton btnTeilAuslagern;
+    private javax.swing.JButton btnTeilSplitten;
+    private javax.swing.JButton btnTeilUmlagern;
+    private javax.swing.JButton btnteilEinlagern;
+    private javax.swing.JLabel lblFreitextSuche;
+    private javax.swing.JLabel lblLagerbestand;
+    private javax.swing.JScrollPane scpMainPane;
+    private javax.swing.JTable tabMaintable;
+    private javax.swing.JTextField txfFreitextSuche;
     // End of variables declaration//GEN-END:variables
 }

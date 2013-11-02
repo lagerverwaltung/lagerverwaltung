@@ -6,6 +6,7 @@
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
   </SyntheticProperties>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
@@ -27,33 +28,33 @@
                   <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lblHead" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblNeuesTeilAnlegen" min="-2" max="-2" attributes="0"/>
                           <Component id="jSeparator1" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="anlegenButton" min="-2" pref="142" max="-2" attributes="0"/>
+                          <Component id="btnanlegen" min="-2" pref="142" max="-2" attributes="0"/>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblZeichnungsnummer" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblMaterialGruppe" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblTyp" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblBezeichnung" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblIdentnummer" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblPreisInEuro" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblGrößeVE" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jTextField5" min="-2" pref="117" max="-2" attributes="0"/>
-                                  <Component id="jTextField2" min="-2" pref="229" max="-2" attributes="0"/>
-                                  <Component id="jComboBox1" min="-2" pref="213" max="-2" attributes="0"/>
-                                  <Component id="jTextField1" min="-2" pref="164" max="-2" attributes="0"/>
-                                  <Component id="jTextField3" min="-2" pref="165" max="-2" attributes="0"/>
-                                  <Component id="jTextField6" alignment="0" min="-2" pref="88" max="-2" attributes="0"/>
-                                  <Component id="jTextField4" alignment="0" min="-2" pref="88" max="-2" attributes="0"/>
+                                  <Component id="txfIdentnummer" min="-2" pref="117" max="-2" attributes="0"/>
+                                  <Component id="txfBezeichnung" min="-2" pref="229" max="-2" attributes="0"/>
+                                  <Component id="cbxTyp" min="-2" pref="213" max="-2" attributes="0"/>
+                                  <Component id="txfMaterialAnlegen" min="-2" pref="164" max="-2" attributes="0"/>
+                                  <Component id="txfZeichnungsnummer" min="-2" pref="165" max="-2" attributes="0"/>
+                                  <Component id="txfGrößeVE" alignment="0" min="-2" pref="88" max="-2" attributes="0"/>
+                                  <Component id="txfPreisInEuro" alignment="0" min="-2" pref="88" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -67,53 +68,53 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-              <Component id="lblHead" min="-2" max="-2" attributes="0"/>
+              <Component id="lblNeuesTeilAnlegen" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jSeparator1" min="-2" pref="10" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jTextField5" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txfIdentnummer" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblIdentnummer" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jTextField2" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txfBezeichnung" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblBezeichnung" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jComboBox1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="cbxTyp" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblTyp" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel4" alignment="3" max="32767" attributes="0"/>
+                  <Component id="txfMaterialAnlegen" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblMaterialGruppe" alignment="3" max="32767" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jTextField3" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txfZeichnungsnummer" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblZeichnungsnummer" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jTextField4" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txfPreisInEuro" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblPreisInEuro" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jTextField6" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblGrößeVE" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txfGrößeVE" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-              <Component id="anlegenButton" min="-2" max="-2" attributes="0"/>
+              <Component id="btnanlegen" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JLabel" name="lblHead">
+    <Component class="javax.swing.JLabel" name="lblNeuesTeilAnlegen">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Dialog" size="18" style="1"/>
@@ -121,22 +122,22 @@
         <Property name="text" type="java.lang.String" value="Neues Teil anlegen:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel2">
+    <Component class="javax.swing.JLabel" name="lblBezeichnung">
       <Properties>
         <Property name="text" type="java.lang.String" value="Bezeichnung:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField1">
+    <Component class="javax.swing.JTextField" name="txfMaterialAnlegen">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txfMaterialAnlegenActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel3">
+    <Component class="javax.swing.JLabel" name="lblTyp">
       <Properties>
         <Property name="text" type="java.lang.String" value="Typ:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="jComboBox1">
+    <Component class="javax.swing.JComboBox" name="cbxTyp">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="5">
@@ -149,65 +150,65 @@
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBox1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbxTypActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel4">
+    <Component class="javax.swing.JLabel" name="lblMaterialGruppe">
       <Properties>
         <Property name="text" type="java.lang.String" value="Materialgruppe:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField2">
+    <Component class="javax.swing.JTextField" name="txfBezeichnung">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField2ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txfBezeichnungActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JSeparator" name="jSeparator1">
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField3">
+    <Component class="javax.swing.JTextField" name="txfZeichnungsnummer">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField3ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txfZeichnungsnummerActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel5">
+    <Component class="javax.swing.JLabel" name="lblZeichnungsnummer">
       <Properties>
         <Property name="text" type="java.lang.String" value="Zeichnungsnummer:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel6">
+    <Component class="javax.swing.JLabel" name="lblPreisInEuro">
       <Properties>
         <Property name="text" type="java.lang.String" value="Preis in Euro:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField4">
+    <Component class="javax.swing.JTextField" name="txfPreisInEuro">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField4ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txfPreisInEuroActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel7">
+    <Component class="javax.swing.JLabel" name="lblIdentnummer">
       <Properties>
         <Property name="text" type="java.lang.String" value="Identnummer:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField5">
+    <Component class="javax.swing.JTextField" name="txfIdentnummer">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField5ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txfIdentnummerActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="anlegenButton">
+    <Component class="javax.swing.JButton" name="btnanlegen">
       <Properties>
         <Property name="text" type="java.lang.String" value="Anlegen"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="anlegenButtonActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnanlegenActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel1">
+    <Component class="javax.swing.JLabel" name="lblGr&#xf6;&#xdf;eVE">
       <Properties>
         <Property name="text" type="java.lang.String" value="Gr&#xf6;&#xdf;e in Volumeneinheiten:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField6">
+    <Component class="javax.swing.JTextField" name="txfGr&#xf6;&#xdf;eVE">
     </Component>
   </SubComponents>
 </Form>

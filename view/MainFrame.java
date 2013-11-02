@@ -34,12 +34,12 @@ public class MainFrame extends javax.swing.JFrame {
     
     public JPanel getInitPanel()
     {
-        return initPanel;
+        return panInit;
     }
     
     public JPanel getInitFaecherPanel()
     {
-        return initFaecherPanel;
+        return panInitFaecher;
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -51,10 +51,10 @@ public class MainFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         startPanel = new javax.swing.JPanel();
-        initPanel = new view.InitPanel();
-        initFaecherPanel = new view.InitFaecherPanel();
-        mainPanel = new view.MainPanel();
-        loginPanel = new view.LoginPanel();
+        panInit = new view.InitPanel();
+        panInitFaecher = new view.InitFaecherPanel();
+        panMain = new view.MainPanel();
+        panLogin = new view.LoginPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(800, 768));
@@ -65,20 +65,20 @@ public class MainFrame extends javax.swing.JFrame {
         startPanel.setPreferredSize(new java.awt.Dimension(800, 600));
         startPanel.setLayout(new java.awt.CardLayout());
 
-        initPanel.setMainFrame(this);
-        startPanel.add(initPanel, "init");
+        panInit.setMainFrame(this);
+        startPanel.add(panInit, "init");
 
-        initFaecherPanel.setMainFrame(this);
-        startPanel.add(initFaecherPanel, "init2");
+        panInitFaecher.setMainFrame(this);
+        startPanel.add(panInitFaecher, "init2");
 
-        mainPanel.setMainFrame(this);
-        mainPanel.setMinimumSize(new java.awt.Dimension(1000, 844));
-        startPanel.add(mainPanel, "main");
+        panMain.setMainFrame(this);
+        panMain.setMinimumSize(new java.awt.Dimension(1000, 844));
+        startPanel.add(panMain, "main");
 
-        loginPanel.setMainFrame(this);
-        loginPanel.setMinimumSize(new java.awt.Dimension(1024, 768));
-        loginPanel.setPreferredSize(new java.awt.Dimension(1024, 768));
-        startPanel.add(loginPanel, "login");
+        panLogin.setMainFrame(this);
+        panLogin.setMinimumSize(new java.awt.Dimension(1024, 768));
+        panLogin.setPreferredSize(new java.awt.Dimension(1024, 768));
+        startPanel.add(panLogin, "login");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -100,10 +100,10 @@ public class MainFrame extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private view.InitFaecherPanel initFaecherPanel;
-    private view.InitPanel initPanel;
-    private view.LoginPanel loginPanel;
-    private view.MainPanel mainPanel;
+    private view.InitPanel panInit;
+    private view.InitFaecherPanel panInitFaecher;
+    private view.LoginPanel panLogin;
+    private view.MainPanel panMain;
     private javax.swing.JPanel startPanel;
     // End of variables declaration//GEN-END:variables
 }

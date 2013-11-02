@@ -41,7 +41,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         lblTeilID = new javax.swing.JLabel();
         lblAnschaffungsgrund = new javax.swing.JLabel();
         spnAnschaffungsgrund = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        txaAnschaffungsgrund = new javax.swing.JTextArea();
         lblMenge = new javax.swing.JLabel();
         txfMenge = new javax.swing.JTextField();
         einlagernButton = new javax.swing.JButton();
@@ -65,9 +65,9 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
 
         lblAnschaffungsgrund.setText("Anschaffunsgrund:");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        spnAnschaffungsgrund.setViewportView(jTextArea1);
+        txaAnschaffungsgrund.setColumns(20);
+        txaAnschaffungsgrund.setRows(5);
+        spnAnschaffungsgrund.setViewportView(txaAnschaffungsgrund);
 
         lblMenge.setText("Menge:");
 
@@ -225,7 +225,6 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
     private javax.swing.JComboBox cbxTeilID;
     private javax.swing.JButton einlagernButton;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel lblAnschaffungsgrund;
     private javax.swing.JLabel lblEinlagern;
     private javax.swing.JLabel lblFachAdresse;
@@ -234,6 +233,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
     private javax.swing.JLabel lblMenge;
     private javax.swing.JLabel lblTeilID;
     private javax.swing.JScrollPane spnAnschaffungsgrund;
+    private javax.swing.JTextArea txaAnschaffungsgrund;
     private javax.swing.JTextField txfHaltbarkeitsdatum;
     private javax.swing.JTextField txfMenge;
     // End of variables declaration//GEN-END:variables

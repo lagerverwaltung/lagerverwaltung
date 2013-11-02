@@ -25,7 +25,7 @@
 
   <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
   <SubComponents>
-    <Container class="javax.swing.JPanel" name="navigationBar">
+    <Container class="javax.swing.JPanel" name="panNavigationBar">
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
           <BorderConstraints direction="North"/>
@@ -47,7 +47,7 @@
             </Property>
             <Property name="text" type="java.lang.String" value="    Teilebestand"/>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Hand Cursor"/>
+              <Color id="Standardcursor"/>
             </Property>
           </Properties>
           <Events>
@@ -64,7 +64,7 @@
             </Property>
             <Property name="text" type="java.lang.String" value="  Lagerbestand"/>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Hand Cursor"/>
+              <Color id="Standardcursor"/>
             </Property>
           </Properties>
           <Events>
@@ -81,7 +81,7 @@
             </Property>
             <Property name="text" type="java.lang.String" value="  Warenbewegung"/>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Hand Cursor"/>
+              <Color id="Standardcursor"/>
             </Property>
           </Properties>
           <Events>
@@ -90,7 +90,7 @@
         </Component>
       </SubComponents>
     </Container>
-    <Container class="javax.swing.JPanel" name="cardPanel">
+    <Container class="javax.swing.JPanel" name="panCard">
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
           <BorderConstraints direction="Center"/>
@@ -99,21 +99,21 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignCardLayout"/>
       <SubComponents>
-        <Component class="view.TeilebestandPanel" name="teilebestandPanel">
+        <Component class="view.TeilebestandPanel" name="panTeilebestand">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
               <CardConstraints cardName="teilebestand"/>
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="view.LagerbestandPanel" name="lagerbestandPanel">
+        <Component class="view.LagerbestandPanel" name="panLagerbestand">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
               <CardConstraints cardName="lagerbestand"/>
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="view.WarenbewegungPanel" name="warenbewegungPanel">
+        <Component class="view.WarenbewegungPanel" name="panWarenbewegung">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
               <CardConstraints cardName="warenbewegung"/>

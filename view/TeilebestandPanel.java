@@ -48,72 +48,72 @@ public class TeilebestandPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        neuesTeilButton = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        teilAendernButton = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        teilLoschenButton = new javax.swing.JButton();
-        jLabel11 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        filternButton = new javax.swing.JButton();
+        lblTeilebestand = new javax.swing.JLabel();
+        scpMain = new javax.swing.JScrollPane();
+        tblMain = new javax.swing.JTable();
+        btnNeuesTeil = new javax.swing.JButton();
+        btnSuchen = new javax.swing.JButton();
+        btnTeilAendern = new javax.swing.JButton();
+        txfFreitextsuche = new javax.swing.JTextField();
+        lblFreitextsuche = new javax.swing.JLabel();
+        lblAktionSelektiert = new javax.swing.JLabel();
+        btnTeilLoschen = new javax.swing.JButton();
+        lblTeilebestandErweitern = new javax.swing.JLabel();
+        btnFilterZurücksetzen = new javax.swing.JButton();
+        btnFiltern = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(1020, 761));
 
-        jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel1.setText("Teilebestand");
+        lblTeilebestand.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        lblTeilebestand.setText("Teilebestand");
 
         TeileTableModel tm = new TeileTableModel();
         tm.setData(tm.dummyArrayList());
-        jTable1.setModel(tm);
-        setTableWidths(jTable1);
-        jTable1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jScrollPane1.setViewportView(jTable1);
+        tblMain.setModel(tm);
+        setTableWidths(tblMain);
+        tblMain.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        scpMain.setViewportView(tblMain);
 
-        neuesTeilButton.setText("Neues Teil anlegen");
-        neuesTeilButton.addActionListener(new java.awt.event.ActionListener() {
+        btnNeuesTeil.setText("Neues Teil anlegen");
+        btnNeuesTeil.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                neuesTeilButtonActionPerformed(evt);
+                btnNeuesTeilActionPerformed(evt);
             }
         });
 
-        jButton3.setText("suchen");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnSuchen.setText("suchen");
+        btnSuchen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnSuchenActionPerformed(evt);
             }
         });
 
-        teilAendernButton.setText("Teil bearbeiten");
-        teilAendernButton.addActionListener(new java.awt.event.ActionListener() {
+        btnTeilAendern.setText("Teil bearbeiten");
+        btnTeilAendern.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                teilAendernButtonActionPerformed(evt);
+                btnTeilAendernActionPerformed(evt);
             }
         });
 
-        jLabel2.setText("Freitextsuche:");
+        lblFreitextsuche.setText("Freitextsuche:");
 
-        jLabel10.setText("Aktionen selektiert:");
+        lblAktionSelektiert.setText("Aktionen selektiert:");
 
-        teilLoschenButton.setText("Teil löschen");
-        teilLoschenButton.addActionListener(new java.awt.event.ActionListener() {
+        btnTeilLoschen.setText("Teil löschen");
+        btnTeilLoschen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                teilLoschenButtonActionPerformed(evt);
+                btnTeilLoschenActionPerformed(evt);
             }
         });
 
-        jLabel11.setText("Teilebestand erweitern:");
+        lblTeilebestandErweitern.setText("Teilebestand erweitern:");
 
-        jButton1.setText("Filter zurücksetzen");
+        btnFilterZurücksetzen.setText("Filter zurücksetzen");
 
-        filternButton.setText("Filtern");
-        filternButton.addActionListener(new java.awt.event.ActionListener() {
+        btnFiltern.setText("Filtern");
+        btnFiltern.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                filternButtonActionPerformed(evt);
+                btnFilternActionPerformed(evt);
             }
         });
 
@@ -125,89 +125,89 @@ public class TeilebestandPanel extends javax.swing.JPanel {
                 .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
+                        .addComponent(lblFreitextsuche)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txfFreitextsuche, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnSuchen, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(291, 291, 291)
-                        .addComponent(filternButton)
+                        .addComponent(btnFiltern)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton1))
+                        .addComponent(btnFilterZurücksetzen))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel10)
+                        .addComponent(lblAktionSelektiert)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(teilAendernButton, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnTeilAendern, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(teilLoschenButton, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnTeilLoschen, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(149, 149, 149)
-                        .addComponent(jLabel11)
+                        .addComponent(lblTeilebestandErweitern)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(neuesTeilButton, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1))
+                        .addComponent(btnNeuesTeil, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblTeilebestand, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(scpMain))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(37, 37, 37)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblTeilebestand, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(filternButton))
+                    .addComponent(btnSuchen)
+                    .addComponent(txfFreitextsuche, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblFreitextsuche)
+                    .addComponent(btnFilterZurücksetzen, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnFiltern))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 470, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(scpMain, javax.swing.GroupLayout.PREFERRED_SIZE, 470, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(teilAendernButton)
-                    .addComponent(teilLoschenButton)
-                    .addComponent(jLabel11)
-                    .addComponent(neuesTeilButton))
+                    .addComponent(lblAktionSelektiert)
+                    .addComponent(btnTeilAendern)
+                    .addComponent(btnTeilLoschen)
+                    .addComponent(lblTeilebestandErweitern)
+                    .addComponent(btnNeuesTeil))
                 .addGap(364, 364, 364))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void neuesTeilButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_neuesTeilButtonActionPerformed
+    private void btnNeuesTeilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNeuesTeilActionPerformed
         TeilFrame teilframe = new TeilFrame();
         teilframe.setVisible(true);
-    }//GEN-LAST:event_neuesTeilButtonActionPerformed
+    }//GEN-LAST:event_btnNeuesTeilActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void btnSuchenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuchenActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_btnSuchenActionPerformed
 
-    private void teilAendernButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_teilAendernButtonActionPerformed
+    private void btnTeilAendernActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTeilAendernActionPerformed
         TeilFrame teilframe = new TeilFrame(true);
         teilframe.setVisible(true);
-    }//GEN-LAST:event_teilAendernButtonActionPerformed
+    }//GEN-LAST:event_btnTeilAendernActionPerformed
 
-    private void teilLoschenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_teilLoschenButtonActionPerformed
+    private void btnTeilLoschenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTeilLoschenActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_teilLoschenButtonActionPerformed
+    }//GEN-LAST:event_btnTeilLoschenActionPerformed
 
-    private void filternButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filternButtonActionPerformed
+    private void btnFilternActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFilternActionPerformed
        TeileFilterFrame.getInstance(mainFrame);
-    }//GEN-LAST:event_filternButtonActionPerformed
+    }//GEN-LAST:event_btnFilternActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton filternButton;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JButton neuesTeilButton;
-    private javax.swing.JButton teilAendernButton;
-    private javax.swing.JButton teilLoschenButton;
+    private javax.swing.JButton btnFilterZurücksetzen;
+    private javax.swing.JButton btnFiltern;
+    private javax.swing.JButton btnNeuesTeil;
+    private javax.swing.JButton btnSuchen;
+    private javax.swing.JButton btnTeilAendern;
+    private javax.swing.JButton btnTeilLoschen;
+    private javax.swing.JLabel lblAktionSelektiert;
+    private javax.swing.JLabel lblFreitextsuche;
+    private javax.swing.JLabel lblTeilebestand;
+    private javax.swing.JLabel lblTeilebestandErweitern;
+    private javax.swing.JScrollPane scpMain;
+    private javax.swing.JTable tblMain;
+    private javax.swing.JTextField txfFreitextsuche;
     // End of variables declaration//GEN-END:variables
 }
