@@ -16,6 +16,7 @@ public class UmlagernFrame extends javax.swing.JFrame {
      */
     public UmlagernFrame() {
         initComponents();
+        setLocationRelativeTo(null);
         splitPanel.setVisible(false);
     }
     

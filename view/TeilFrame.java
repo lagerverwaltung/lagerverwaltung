@@ -15,6 +15,7 @@ public class TeilFrame extends javax.swing.JFrame {
      */
     public TeilFrame() {
         initComponents();
+        setLocationRelativeTo(null);
     }
     
     public TeilFrame(Boolean editMode) {

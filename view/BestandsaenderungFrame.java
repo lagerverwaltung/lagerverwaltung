@@ -15,6 +15,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
      */
     public BestandsaenderungFrame() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     BestandsaenderungFrame(boolean einlagern) {
