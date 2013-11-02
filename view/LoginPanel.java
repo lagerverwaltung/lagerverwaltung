@@ -166,7 +166,7 @@ public class LoginPanel extends javax.swing.JPanel {
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
         mainFrame.navigationController.showCard("main");   
-        mainFrame.setSize( 1000 , 810 );
+        mainFrame.setSize( 1000 , 720 );
     }//GEN-LAST:event_loginButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
