@@ -66,18 +66,13 @@
                                           <Component id="txfMengeBis" min="-2" pref="54" max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="102" attributes="0">
-                                          <Group type="103" groupAlignment="1" attributes="0">
-                                              <Group type="102" alignment="0" attributes="0">
-                                                  <Component id="cbxLagertyp" min="-2" max="-2" attributes="0"/>
-                                                  <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
-                                                  <Component id="cbxX" min="-2" max="-2" attributes="0"/>
-                                                  <EmptySpace max="-2" attributes="0"/>
-                                                  <Component id="cbxY" min="-2" max="-2" attributes="0"/>
-                                                  <EmptySpace max="-2" attributes="0"/>
-                                                  <Component id="cbxZ" min="-2" pref="46" max="-2" attributes="0"/>
-                                              </Group>
-                                              <Component id="lblTeil" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          </Group>
+                                          <Component id="cbxLagertyp" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                                          <Component id="cbxX" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="cbxY" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="cbxZ" min="-2" pref="46" max="-2" attributes="0"/>
                                           <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="102" alignment="1" attributes="0">
@@ -105,6 +100,7 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="lblTeiltyp" min="-2" max="-2" attributes="0"/>
                               <Component id="lblHaltbarkeit" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblTeil" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
@@ -141,9 +137,9 @@
                       <Component id="lblMengeBis" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txfMengeBis" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
                   <Component id="lblTeil" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="cbxTeil" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="lblTeiltyp" min="-2" max="-2" attributes="0"/>
@@ -182,7 +178,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="lblTeiltyp">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Teiltyp:"/>
+            <Property name="text" type="java.lang.String" value="Typ:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lblMengeVon">
@@ -249,7 +245,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="lblTeil">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Teil:"/>
+            <Property name="text" type="java.lang.String" value="Bezeichnung:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JComboBox" name="cbxY">

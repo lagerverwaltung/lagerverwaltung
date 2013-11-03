@@ -40,7 +40,7 @@ public class TeileTableModel extends AbstractTableModel {
         switch (col)
         {
             case 0:
-                name = "Identnummer";
+                name = "Teil ID";
                 break;
             case 1:
                 name = "Bezeichnung";

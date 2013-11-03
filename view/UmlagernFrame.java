@@ -42,7 +42,6 @@ public class UmlagernFrame extends javax.swing.JFrame {
         lblUmlagern = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         lblUmzulagerndeMenge = new javax.swing.JLabel();
-        cbxTeilId = new javax.swing.JComboBox();
         txfUmzulagerndeMenge = new javax.swing.JTextField();
         lblQuellfach = new javax.swing.JLabel();
         btnUmlagern = new javax.swing.JButton();
@@ -78,14 +77,13 @@ public class UmlagernFrame extends javax.swing.JFrame {
         lblX = new javax.swing.JLabel();
         lblY = new javax.swing.JLabel();
         lblLager = new javax.swing.JLabel();
+        txfTeilID = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         lblUmlagern.setText("Teile umlagern");
 
         lblUmzulagerndeMenge.setText("Umzulagernde Menge:");
-
-        cbxTeilId.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01011212 | Schrauben M5", "Item 2", "Item 3", "Item 4" }));
 
         lblQuellfach.setText("Quell-Lagerfachadresse:");
 
@@ -319,6 +317,8 @@ public class UmlagernFrame extends javax.swing.JFrame {
                     .addComponent(cbxQuelleY, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
+        txfTeilID.setText("01023123");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -345,10 +345,10 @@ public class UmlagernFrame extends javax.swing.JFrame {
                                             .addComponent(lblQuellfach)
                                             .addComponent(lblTeilID))
                                         .addGap(47, 47, 47)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(txfUmzulagerndeMenge, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(panQuellFach, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(cbxTeilId, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(txfTeilID, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(panQuellFach, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txfUmzulagerndeMenge, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                     .addComponent(panUmlagern, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addGap(21, 21, 21))))
@@ -366,8 +366,8 @@ public class UmlagernFrame extends javax.swing.JFrame {
                         .addComponent(lblQuellfach)
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cbxTeilId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblTeilID))
+                            .addComponent(lblTeilID)
+                            .addComponent(txfTeilID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblUmzulagerndeMenge)
@@ -446,7 +446,6 @@ public class UmlagernFrame extends javax.swing.JFrame {
     private javax.swing.JComboBox cbxQuelleX;
     private javax.swing.JComboBox cbxQuelleY;
     private javax.swing.JComboBox cbxQuelleZ;
-    private javax.swing.JComboBox cbxTeilId;
     private javax.swing.JComboBox cbxZ1Lagertyp;
     private javax.swing.JComboBox cbxZ1X;
     private javax.swing.JComboBox cbxZ1Y;
@@ -476,6 +475,7 @@ public class UmlagernFrame extends javax.swing.JFrame {
     private javax.swing.JPanel panQuellFach;
     private javax.swing.JPanel panSplitl;
     private javax.swing.JPanel panUmlagern;
+    private javax.swing.JTextField txfTeilID;
     private javax.swing.JTextField txfUmzulagerndeMenge;
     private javax.swing.JTextField txfZiel1Zielmenge;
     private javax.swing.JTextField txfZiel2Zielmenge;

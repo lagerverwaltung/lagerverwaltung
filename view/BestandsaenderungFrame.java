@@ -47,11 +47,11 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         einlagernButton = new javax.swing.JButton();
         lblHaltbarkeitsdatum = new javax.swing.JLabel();
         txfHaltbarkeitsdatum = new javax.swing.JTextField();
-        cbxTeilID = new javax.swing.JComboBox();
         cbxFachTyp = new javax.swing.JComboBox();
         cbxFachX = new javax.swing.JComboBox();
         cbxFachY = new javax.swing.JComboBox();
         cbxFachZ = new javax.swing.JComboBox();
+        txfTeilID = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -82,8 +82,6 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
 
         txfHaltbarkeitsdatum.setText("dd.mm.YYYY");
 
-        cbxTeilID.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01011212 | Schrauben M5", "Item 2", "Item 3", "Item 4" }));
-
         cbxFachTyp.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "FL", "RL" }));
 
         cbxFachX.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
@@ -96,6 +94,13 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         });
 
         cbxFachZ.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
+
+        txfTeilID.setText("01204233");
+        txfTeilID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txfTeilIDActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -118,19 +123,21 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblFachAdresse)
                             .addComponent(lblTeilID))
-                        .addGap(43, 43, 43)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
+                                .addGap(43, 43, 43)
                                 .addComponent(cbxFachTyp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(cbxFachY, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(cbxFachZ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cbxFachX, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblHinweis))
-                            .addComponent(cbxTeilID, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(cbxFachX, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(41, 41, 41)
+                                .addComponent(txfTeilID, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblHinweis))
                     .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 467, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblEinlagern, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(einlagernButton))
@@ -154,7 +161,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTeilID)
-                    .addComponent(cbxTeilID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txfTeilID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblAnschaffungsgrund)
@@ -182,6 +189,10 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
     private void cbxFachYActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxFachYActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbxFachYActionPerformed
+
+    private void txfTeilIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfTeilIDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txfTeilIDActionPerformed
 
     /**
      * @param args the command line arguments
@@ -222,7 +233,6 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
     private javax.swing.JComboBox cbxFachX;
     private javax.swing.JComboBox cbxFachY;
     private javax.swing.JComboBox cbxFachZ;
-    private javax.swing.JComboBox cbxTeilID;
     private javax.swing.JButton einlagernButton;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lblAnschaffungsgrund;
@@ -236,5 +246,6 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
     private javax.swing.JTextArea txaAnschaffungsgrund;
     private javax.swing.JTextField txfHaltbarkeitsdatum;
     private javax.swing.JTextField txfMenge;
+    private javax.swing.JTextField txfTeilID;
     // End of variables declaration//GEN-END:variables
 }

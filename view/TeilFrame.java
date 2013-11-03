@@ -98,7 +98,7 @@ public class TeilFrame extends javax.swing.JFrame {
             }
         });
 
-        lblIdentnummer.setText("Identnummer:");
+        lblIdentnummer.setText("Teil ID:");
 
         txfIdentnummer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

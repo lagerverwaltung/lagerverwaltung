@@ -85,7 +85,7 @@ public class WarenbewegungFilterFrame extends javax.swing.JFrame {
 
         lblQuellfach.setText("Quellfachadresse:");
 
-        lblTeiltyp.setText("Teiltyp:");
+        lblTeiltyp.setText("Typ:");
 
         lblDatumBis.setText("Datum bis:");
 
@@ -99,7 +99,7 @@ public class WarenbewegungFilterFrame extends javax.swing.JFrame {
 
         cbxTeil.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Schrauben", "Tofutierchen", "Item 3", "Item 4" }));
 
-        lblTeil.setText("Teil:");
+        lblTeil.setText("Bezeichnung:");
 
         cbxQuelleX.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
         cbxQuelleX.addActionListener(new java.awt.event.ActionListener() {
@@ -184,7 +184,7 @@ public class WarenbewegungFilterFrame extends javax.swing.JFrame {
                                 .addComponent(cbxZielZ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(txfVerantwrotlicher, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cbxTeil, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(0, 21, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         panMainLayout.setVerticalGroup(

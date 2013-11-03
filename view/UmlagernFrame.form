@@ -49,10 +49,10 @@
                                           <Component id="lblTeilID" alignment="0" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace min="47" pref="47" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="txfTeilID" min="-2" pref="210" max="-2" attributes="0"/>
+                                          <Component id="panQuellFach" min="-2" max="-2" attributes="0"/>
                                           <Component id="txfUmzulagerndeMenge" alignment="0" min="-2" pref="60" max="-2" attributes="0"/>
-                                          <Component id="panQuellFach" max="32767" attributes="0"/>
-                                          <Component id="cbxTeilId" alignment="0" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <Component id="panUmlagern" alignment="0" max="32767" attributes="0"/>
@@ -79,8 +79,8 @@
                       <Component id="lblQuellfach" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="cbxTeilId" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lblTeilID" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txfTeilID" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -112,18 +112,6 @@
     <Component class="javax.swing.JLabel" name="lblUmzulagerndeMenge">
       <Properties>
         <Property name="text" type="java.lang.String" value="Umzulagernde Menge:"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JComboBox" name="cbxTeilId">
-      <Properties>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
-            <StringItem index="0" value="01011212 | Schrauben M5"/>
-            <StringItem index="1" value="Item 2"/>
-            <StringItem index="2" value="Item 3"/>
-            <StringItem index="3" value="Item 4"/>
-          </StringArray>
-        </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txfUmzulagerndeMenge">
@@ -674,5 +662,10 @@
         </Component>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.JTextField" name="txfTeilID">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="01023123"/>
+      </Properties>
+    </Component>
   </SubComponents>
 </Form>

@@ -56,10 +56,10 @@ public class LagerbestandTableModel extends AbstractTableModel {
                 name = "z";
                 break;
             case 5:
-                name = "Teilbezeichnung";
+                name = "Bezeichnung";
                 break;
             case 6:
-                name = "Identnummer";
+                name = "Teil ID";
                 break;
             case 7:
                 name = "Menge";

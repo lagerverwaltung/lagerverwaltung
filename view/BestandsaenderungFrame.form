@@ -44,9 +44,9 @@
                           <Component id="lblFachAdresse" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="lblTeilID" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
+                              <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
                               <Component id="cbxFachTyp" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="cbxFachY" min="-2" max="-2" attributes="0"/>
@@ -54,11 +54,14 @@
                               <Component id="cbxFachZ" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="cbxFachX" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="lblHinweis" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="cbxTeilID" alignment="0" min="-2" pref="286" max="-2" attributes="0"/>
+                          <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
+                              <Component id="txfTeilID" min="-2" pref="168" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="lblHinweis" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Component id="jSeparator1" alignment="0" min="-2" pref="467" max="-2" attributes="0"/>
                   <Component id="lblEinlagern" alignment="0" min="-2" pref="131" max="-2" attributes="0"/>
@@ -87,7 +90,7 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lblTeilID" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="cbxTeilID" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txfTeilID" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -179,18 +182,6 @@
         <Property name="text" type="java.lang.String" value="dd.mm.YYYY"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="cbxTeilID">
-      <Properties>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
-            <StringItem index="0" value="01011212 | Schrauben M5"/>
-            <StringItem index="1" value="Item 2"/>
-            <StringItem index="2" value="Item 3"/>
-            <StringItem index="3" value="Item 4"/>
-          </StringArray>
-        </Property>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JComboBox" name="cbxFachTyp">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
@@ -257,6 +248,14 @@
           </StringArray>
         </Property>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txfTeilID">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="01204233"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txfTeilIDActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

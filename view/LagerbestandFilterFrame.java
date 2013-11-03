@@ -82,7 +82,7 @@ public class LagerbestandFilterFrame extends javax.swing.JFrame {
 
         lblFachadresse.setText("Fachadresse:");
 
-        lblTeiltyp.setText("Teiltyp:");
+        lblTeiltyp.setText("Typ:");
 
         lblMengeVon.setText("Menge von:");
 
@@ -99,7 +99,7 @@ public class LagerbestandFilterFrame extends javax.swing.JFrame {
             }
         });
 
-        lblTeil.setText("Teil:");
+        lblTeil.setText("Bezeichnung:");
 
         cbxY.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
 
@@ -155,16 +155,13 @@ public class LagerbestandFilterFrame extends javax.swing.JFrame {
                                         .addGap(93, 93, 93)
                                         .addComponent(txfMengeBis, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(panMainLayout.createSequentialGroup()
-                                        .addGroup(panMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panMainLayout.createSequentialGroup()
-                                                .addComponent(cbxLagertyp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(34, 34, 34)
-                                                .addComponent(cbxX, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(cbxY, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(cbxZ, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addComponent(lblTeil, javax.swing.GroupLayout.Alignment.LEADING))
+                                        .addComponent(cbxLagertyp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(34, 34, 34)
+                                        .addComponent(cbxX, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(cbxY, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(cbxZ, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(3, 3, 3))
                                     .addGroup(panMainLayout.createSequentialGroup()
                                         .addComponent(lblMengeVon)
@@ -183,7 +180,8 @@ public class LagerbestandFilterFrame extends javax.swing.JFrame {
                     .addGroup(panMainLayout.createSequentialGroup()
                         .addGroup(panMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblTeiltyp)
-                            .addComponent(lblHaltbarkeit))
+                            .addComponent(lblHaltbarkeit)
+                            .addComponent(lblTeil))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         panMainLayout.setVerticalGroup(
@@ -212,9 +210,9 @@ public class LagerbestandFilterFrame extends javax.swing.JFrame {
                 .addGroup(panMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblMengeBis)
                     .addComponent(txfMengeBis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(8, 8, 8)
+                .addGap(4, 4, 4)
                 .addComponent(lblTeil)
-                .addGap(7, 7, 7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(cbxTeil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblTeiltyp)

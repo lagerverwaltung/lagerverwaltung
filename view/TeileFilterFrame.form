@@ -58,7 +58,7 @@
                               <Component id="lblZeichnungsnummer" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="lblVolumeneinheiten" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="62" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <Component id="jSeparator2" max="32767" attributes="0"/>
@@ -159,7 +159,7 @@
       <SubComponents>
         <Component class="javax.swing.JLabel" name="lblTeiltyp">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Teiltyp:"/>
+            <Property name="text" type="java.lang.String" value="Typ:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JComboBox" name="cbxTeiltyp">
@@ -182,7 +182,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="lblTeil">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Teil:"/>
+            <Property name="text" type="java.lang.String" value="Bezeichnung:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="btnExecuteFilter">
@@ -234,7 +234,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="lblVolumeneinheiten">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Volumeneinheiten:"/>
+            <Property name="text" type="java.lang.String" value="Groesse in Volumeneinheiten:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txfVeVon">

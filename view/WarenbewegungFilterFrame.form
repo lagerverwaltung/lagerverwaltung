@@ -85,7 +85,7 @@
                               <Component id="txfVerantwrotlicher" alignment="0" max="32767" attributes="0"/>
                               <Component id="cbxTeil" alignment="0" max="32767" attributes="0"/>
                           </Group>
-                          <EmptySpace min="0" pref="21" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -169,7 +169,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="lblTeiltyp">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Teiltyp:"/>
+            <Property name="text" type="java.lang.String" value="Typ:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lblDatumBis">
@@ -247,7 +247,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="lblTeil">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Teil:"/>
+            <Property name="text" type="java.lang.String" value="Bezeichnung:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JComboBox" name="cbxQuelleX">

@@ -78,13 +78,13 @@ public class TeileFilterFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        lblTeiltyp.setText("Teiltyp:");
+        lblTeiltyp.setText("Typ:");
 
         cbxTeiltyp.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Kaufteile", "Werkzeuge", "unfertige Baugruppe", "Vorratsteile", "Vorrichtungen" }));
 
         lblFilter.setText("Filter:");
 
-        lblTeil.setText("Teil:");
+        lblTeil.setText("Bezeichnung:");
 
         btnExecuteFilter.setText("Filter ausführen");
         btnExecuteFilter.addActionListener(new java.awt.event.ActionListener() {
@@ -106,7 +106,7 @@ public class TeileFilterFrame extends javax.swing.JFrame {
 
         lblMaterialgruppe.setText("Materialgruppe:");
 
-        lblVolumeneinheiten.setText("Volumeneinheiten:");
+        lblVolumeneinheiten.setText("Groesse in Volumeneinheiten:");
 
         lblVEvon.setText("von:");
 
@@ -139,7 +139,7 @@ public class TeileFilterFrame extends javax.swing.JFrame {
                             .addComponent(lblMaterialgruppe)
                             .addComponent(lblZeichnungsnummer)
                             .addComponent(lblVolumeneinheiten))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(0, 62, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panMainLayout.createSequentialGroup()
                         .addComponent(jSeparator2)
                         .addGap(108, 108, 108))
