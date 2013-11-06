@@ -38,7 +38,7 @@ public class WarenbewegungFilterFrame extends javax.swing.JFrame {
         int x = main.getX();
         int width = main.getPreferredSize().width;
         int rightBorder = x+width;
-        int newOrigin = rightBorder -this.getWidth()+3;
+        int newOrigin = rightBorder -this.getWidth()-9;
         this.setLocation(newOrigin, this.getY()+210);
     }
     

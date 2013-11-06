@@ -6,7 +6,6 @@
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
-    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
   </SyntheticProperties>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
@@ -49,10 +48,10 @@
                                           <Component id="lblTeilID" alignment="0" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace min="47" pref="47" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="txfTeilID" min="-2" pref="210" max="-2" attributes="0"/>
-                                          <Component id="panQuellFach" min="-2" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="panQuellFach" max="32767" attributes="0"/>
                                           <Component id="txfUmzulagerndeMenge" alignment="0" min="-2" pref="60" max="-2" attributes="0"/>
+                                          <Component id="txfTeilID" alignment="0" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <Component id="panUmlagern" alignment="0" max="32767" attributes="0"/>
@@ -663,9 +662,6 @@
       </SubComponents>
     </Container>
     <Component class="javax.swing.JTextField" name="txfTeilID">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="01023123"/>
-      </Properties>
     </Component>
   </SubComponents>
 </Form>

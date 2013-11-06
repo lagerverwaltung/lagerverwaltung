@@ -6,7 +6,6 @@
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
-    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
   </SyntheticProperties>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
@@ -58,7 +57,7 @@
                               <Component id="lblZeichnungsnummer" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="lblVolumeneinheiten" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="0" pref="62" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="26" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <Component id="jSeparator2" max="32767" attributes="0"/>
@@ -234,7 +233,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="lblVolumeneinheiten">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Groesse in Volumeneinheiten:"/>
+            <Property name="text" type="java.lang.String" value="Gr&#xf6;&#xdf;e in Volumeneinheiten:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txfVeVon">

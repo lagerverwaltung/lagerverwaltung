@@ -40,7 +40,7 @@ public class TeileFilterFrame extends javax.swing.JFrame {
         int x = main.getX();
         int width = main.getPreferredSize().width;
         int rightBorder = x+width;
-        int newOrigin = rightBorder -this.getWidth()+3;
+        int newOrigin = rightBorder -this.getWidth()-9;
         this.setLocation(newOrigin, this.getY()+198);
     }
     /**
@@ -106,7 +106,7 @@ public class TeileFilterFrame extends javax.swing.JFrame {
 
         lblMaterialgruppe.setText("Materialgruppe:");
 
-        lblVolumeneinheiten.setText("Groesse in Volumeneinheiten:");
+        lblVolumeneinheiten.setText("Größe in Volumeneinheiten:");
 
         lblVEvon.setText("von:");
 
@@ -139,7 +139,7 @@ public class TeileFilterFrame extends javax.swing.JFrame {
                             .addComponent(lblMaterialgruppe)
                             .addComponent(lblZeichnungsnummer)
                             .addComponent(lblVolumeneinheiten))
-                        .addGap(0, 62, Short.MAX_VALUE))
+                        .addGap(0, 26, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panMainLayout.createSequentialGroup()
                         .addComponent(jSeparator2)
                         .addGap(108, 108, 108))
