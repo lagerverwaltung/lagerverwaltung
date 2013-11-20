@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.8" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
+<Form version="1.8" maxVersion="1.8" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
+  <Properties>
+    <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+      <Dimension value="[664, 32767]"/>
+    </Property>
+    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+      <Dimension value="[664, 733]"/>
+    </Property>
+  </Properties>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
@@ -16,113 +24,41 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+          <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="lblEinrichtungsassi" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="lbl1Schritt" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="lblTyp" min="-2" pref="208" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          <Component id="btnWeiter" min="-2" pref="225" max="-2" attributes="0"/>
-                      </Group>
-                      <Component id="lblAuswahl" min="-2" max="-2" attributes="0"/>
-                      <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="lblFach2" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblFach3" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblFach6" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblFach4" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblFach5" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblFach1" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="lblEinrichtungsassi" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="lbl1Schritt" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="lblTyp" min="-2" pref="208" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="lblX" min="-2" pref="17" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                                  <Component id="lblY" min="-2" pref="17" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="lblZ" min="-2" pref="17" max="-2" attributes="0"/>
+                          <Component id="lblAuswahl" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jSeparator1" min="-2" pref="238" max="-2" attributes="0"/>
+                                  <Component id="spFaecher" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jSeparator1" alignment="0" min="-2" pref="286" max="-2" attributes="0"/>
-                                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="lbl4X" min="-2" pref="18" max="-2" attributes="0"/>
-                                              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                                              <Component id="lbl4Y" min="-2" pref="18" max="-2" attributes="0"/>
-                                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Component id="lbl4Z" min="-2" pref="18" max="-2" attributes="0"/>
-                                              <EmptySpace max="32767" attributes="0"/>
-                                              <Component id="cbxGröße4" min="-2" pref="111" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-                                              <Component id="lbl5X" min="-2" pref="18" max="-2" attributes="0"/>
-                                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Component id="lbl5Y" min="-2" pref="18" max="-2" attributes="0"/>
-                                              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                                              <Component id="lbl5Z" min="-2" pref="18" max="-2" attributes="0"/>
-                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                              <Component id="cbxGröße5" min="-2" pref="111" max="-2" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Group type="102" alignment="0" attributes="0">
-                                                  <Component id="lbl2X" min="-2" pref="18" max="-2" attributes="0"/>
-                                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                                  <Component id="lbl2Y" min="-2" pref="18" max="-2" attributes="0"/>
-                                                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                                                  <Component id="lbl2Z" min="-2" pref="18" max="-2" attributes="0"/>
-                                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                                  <Component id="cbxGröße2" min="-2" pref="111" max="-2" attributes="0"/>
-                                              </Group>
-                                              <Group type="102" alignment="0" attributes="0">
-                                                  <Component id="lbl3X" min="-2" pref="18" max="-2" attributes="0"/>
-                                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                                  <Component id="lbl3Y" min="-2" pref="18" max="-2" attributes="0"/>
-                                                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                                                  <Component id="lbl3Z" min="-2" pref="18" max="-2" attributes="0"/>
-                                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                                  <Component id="cbxGröße3" min="-2" pref="111" max="-2" attributes="0"/>
-                                              </Group>
-                                              <Group type="102" alignment="0" attributes="0">
-                                                  <Component id="lbl6X" min="-2" pref="18" max="-2" attributes="0"/>
-                                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                                  <Component id="lbl6Y" min="-2" pref="18" max="-2" attributes="0"/>
-                                                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                                                  <Component id="lbl6Z" min="-2" pref="18" max="-2" attributes="0"/>
-                                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                                  <Component id="cbxGröße6" min="-2" pref="111" max="-2" attributes="0"/>
-                                              </Group>
-                                              <Group type="102" alignment="0" attributes="0">
-                                                  <Component id="lbl1X" min="-2" pref="18" max="-2" attributes="0"/>
-                                                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                                                  <Component id="lbl1Y" min="-2" pref="18" max="-2" attributes="0"/>
-                                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                                  <Component id="lbl1Z" min="-2" pref="18" max="-2" attributes="0"/>
-                                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                                  <Component id="cbxGröße1" min="-2" pref="111" max="-2" attributes="0"/>
-                                              </Group>
-                                          </Group>
-                                      </Group>
-                                  </Group>
-                                  <EmptySpace pref="35" max="32767" attributes="0"/>
+                              <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
                                   <Component id="lblCube2" min="-2" pref="290" max="-2" attributes="0"/>
+                                  <Component id="btnWeiter" min="-2" pref="225" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
+                      <Component id="lblX" min="-2" pref="17" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
+                      <Component id="lblY" min="-2" pref="17" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
+                      <Component id="lblZ" min="-2" pref="17" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -138,70 +74,27 @@
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="lblAuswahl" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lblX" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblY" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblZ" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Component id="jSeparator1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lblFach1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lbl1Y" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lbl1Z" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="cbxGröße1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lbl1X" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblX" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblY" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblZ" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
+                      <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
+                      <Component id="jSeparator1" min="-2" pref="2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lbl2X" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lbl2Y" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="cbxGröße2" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lbl2Z" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblFach2" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lbl3X" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lbl3Y" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="cbxGröße3" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lbl3Z" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblFach3" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lbl4X" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lbl4Y" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lbl4Z" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="cbxGröße4" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblFach4" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lbl5X" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lbl5Y" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="cbxGröße5" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lbl5Z" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblFach5" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lbl6X" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lbl6Y" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="cbxGröße6" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lbl6Z" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblFach6" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="126" max="-2" attributes="0"/>
+                      <Component id="spFaecher" pref="0" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="140" max="-2" attributes="0"/>
+                      <Component id="lblCube2" min="-2" pref="244" max="-2" attributes="0"/>
+                      <EmptySpace pref="207" max="32767" attributes="0"/>
                       <Component id="btnWeiter" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="lblCube2" min="-2" pref="244" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="20" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -210,11 +103,6 @@
     <Component class="javax.swing.JLabel" name="lblAuswahl">
       <Properties>
         <Property name="text" type="java.lang.String" value="W&#xe4;hlen Sie nun die Fachgr&#xf6;&#xdf;en f&#xfc;r die einzelnen F&#xe4;cher:"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblFach1">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Fach 1"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblX">
@@ -235,204 +123,7 @@
         <Property name="text" type="java.lang.String" value="z"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="lbl1Y">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="1"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lbl1Z">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="1"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JComboBox" name="cbxGr&#xf6;&#xdf;e1">
-      <Properties>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="3">
-            <StringItem index="0" value="klein"/>
-            <StringItem index="1" value="mittel"/>
-            <StringItem index="2" value="gro&#xdf;"/>
-          </StringArray>
-        </Property>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JComboBox" name="cbxGr&#xf6;&#xdf;e2">
-      <Properties>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="3">
-            <StringItem index="0" value="klein"/>
-            <StringItem index="1" value="mittel"/>
-            <StringItem index="2" value="gro&#xdf;"/>
-          </StringArray>
-        </Property>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lbl2Y">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="1"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lbl2X">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="1"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblFach2">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Fach 2 "/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lbl2Z">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="2"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JComboBox" name="cbxGr&#xf6;&#xdf;e3">
-      <Properties>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="3">
-            <StringItem index="0" value="klein"/>
-            <StringItem index="1" value="mittel"/>
-            <StringItem index="2" value="gro&#xdf;"/>
-          </StringArray>
-        </Property>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lbl3Z">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="3"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lbl3Y">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="1"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lbl3X">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="1"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblFach3">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Fach 3 "/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblFach5">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Fach 5 "/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblFach6">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Fach 6 "/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblFach4">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Fach 4"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lbl4X">
-      <Properties>
-        <Property name="text" type="java.lang.String" value=" 2"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lbl5X">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="2"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lbl6X">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="2"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lbl6Y">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="1"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lbl5Y">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="1"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lbl4Y">
-      <Properties>
-        <Property name="text" type="java.lang.String" value=" 1"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lbl4Z">
-      <Properties>
-        <Property name="text" type="java.lang.String" value=" 1"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lbl5Z">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="2"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lbl6Z">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="3"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JComboBox" name="cbxGr&#xf6;&#xdf;e5">
-      <Properties>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="3">
-            <StringItem index="0" value="mittel"/>
-            <StringItem index="1" value="gro&#xdf;"/>
-            <StringItem index="2" value="klein"/>
-          </StringArray>
-        </Property>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JComboBox" name="cbxGr&#xf6;&#xdf;e4">
-      <Properties>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="3">
-            <StringItem index="0" value="mittel"/>
-            <StringItem index="1" value="gro&#xdf;"/>
-            <StringItem index="2" value="klein"/>
-          </StringArray>
-        </Property>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JComboBox" name="cbxGr&#xf6;&#xdf;e6">
-      <Properties>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="3">
-            <StringItem index="0" value="mittel"/>
-            <StringItem index="1" value="gro&#xdf;"/>
-            <StringItem index="2" value="klein"/>
-          </StringArray>
-        </Property>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JSeparator" name="jSeparator1">
-    </Component>
-    <Component class="javax.swing.JLabel" name="lbl1X">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="1"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblCube2">
-      <Properties>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/view/images/lagerDimensions2.gif"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="jLabel7"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JButton" name="btnWeiter">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="weiter zum Freilager"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnWeiterActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lblTyp">
       <Properties>
@@ -456,6 +147,52 @@
           <Font name="Dialog" size="14" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Ersteinrichtungsassistent"/>
+      </Properties>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="spFaecher">
+      <Properties>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="null"/>
+        </Property>
+        <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+        <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[1000767, 32767]"/>
+        </Property>
+      </Properties>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Container class="javax.swing.JPanel" name="spFaecherPanel">
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <EmptySpace min="0" pref="322" max="32767" attributes="0"/>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <EmptySpace min="0" pref="574" max="32767" attributes="0"/>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+        </Container>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JButton" name="btnWeiter">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="weiter zum Freilager"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnWeiterActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblCube2">
+      <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/view/images/lagerDimensions2.gif"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="jLabel7"/>
       </Properties>
     </Component>
   </SubComponents>

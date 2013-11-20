@@ -6,7 +6,6 @@
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
-    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
   </SyntheticProperties>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
@@ -23,13 +22,13 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
+          <Group type="102" alignment="1" attributes="0">
               <Group type="103" groupAlignment="1" attributes="0">
                   <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="256" max="-2" attributes="0"/>
-                      <Component id="btnanlegen" min="-2" pref="142" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="btnanlegen" min="-2" pref="182" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jSeparator1" max="32767" attributes="0"/>
@@ -48,9 +47,9 @@
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="txfBezeichnung" min="-2" pref="229" max="-2" attributes="0"/>
                                           <Component id="cbxTyp" min="-2" pref="213" max="-2" attributes="0"/>
-                                          <Component id="txfMaterialAnlegen" min="-2" pref="164" max="-2" attributes="0"/>
+                                          <Component id="txfMaterial" min="-2" pref="164" max="-2" attributes="0"/>
                                           <Component id="txfZeichnungsnummer" min="-2" pref="165" max="-2" attributes="0"/>
-                                          <Component id="txfGrößeVE" alignment="0" min="-2" pref="88" max="-2" attributes="0"/>
+                                          <Component id="txfGroesseVE" alignment="0" min="-2" pref="88" max="-2" attributes="0"/>
                                           <Component id="txfPreisInEuro" alignment="0" min="-2" pref="88" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
@@ -84,7 +83,7 @@
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="txfMaterialAnlegen" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txfMaterial" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lblMaterialGruppe" alignment="3" max="32767" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -100,7 +99,7 @@
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lblGrößeVE" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txfGrößeVE" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txfGroesseVE" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="67" max="-2" attributes="0"/>
               <Component id="btnanlegen" min="-2" max="-2" attributes="0"/>
@@ -123,9 +122,9 @@
         <Property name="text" type="java.lang.String" value="Bezeichnung:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txfMaterialAnlegen">
+    <Component class="javax.swing.JTextField" name="txfMaterial">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txfMaterialAnlegenActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txfMaterialActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lblTyp">
@@ -134,20 +133,12 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JComboBox" name="cbxTyp">
-      <Properties>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="5">
-            <StringItem index="0" value="Kaufteile "/>
-            <StringItem index="1" value="Werkzeuge "/>
-            <StringItem index="2" value="unfertige Baugruppe"/>
-            <StringItem index="3" value="Vorratsteile"/>
-            <StringItem index="4" value="Vorrichtungen"/>
-          </StringArray>
-        </Property>
-      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbxTypActionPerformed"/>
       </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JComboBox(getTyps())"/>
+      </AuxValues>
     </Component>
     <Component class="javax.swing.JLabel" name="lblMaterialGruppe">
       <Properties>
@@ -194,7 +185,7 @@
         <Property name="text" type="java.lang.String" value="Gr&#xf6;&#xdf;e in Volumeneinheiten:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txfGr&#xf6;&#xdf;eVE">
+    <Component class="javax.swing.JTextField" name="txfGroesseVE">
     </Component>
   </SubComponents>
 </Form>

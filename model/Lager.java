@@ -6,8 +6,15 @@
 
 package model;
 
+import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
+import helper.DatabaseManager;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @DatabaseTable(tableName = "lager")
 public class Lager {
@@ -38,6 +45,21 @@ public class Lager {
 
     public Lager () {
     
+    }
+    
+    public static Lager getLager (Lagerort ort)  {
+        Dao<Lager,Integer> lagerDao = DatabaseManager.getInstance().getLagerDao();
+        List<Lager> list;
+        try {
+            list = lagerDao.queryForEq("lagerort", ort);
+            for (Lager f : list) {
+                return f;
+            }
+        } 
+        catch (SQLException ex) {
+                Logger.getLogger(Lager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
     /**
      * @return the hoehe
@@ -156,6 +178,27 @@ public class Lager {
             hochregal (),
             ;	
     }
-	
-
+    
+    public void createFaecher(int breite, int tiefe,int hoehe) throws SQLException
+    {
+        for(int i = 1; i <= breite; i++){
+            for(int j = 1; j <= tiefe;j++){
+                for(int k = 1; k <= hoehe; k++){
+                    Lagerfach fach = new Lagerfach();
+                    fach.setLager(this);
+                    fach.setX(i);
+                    fach.setY(j);
+                    fach.setZ(k);
+                    fach.setGroesse(Lagerfach.Groesse.mittel);
+                    fach.save();
+                }
+            }
+        }
+    }
+    
+    public List<Lagerfach> getFaecher() throws SQLException
+    {
+        Dao<Lagerfach,Integer> lagerfachDao = DatabaseManager.getInstance().getLagerfachDao();
+        return lagerfachDao.queryForEq("lagerID", this);
+    }
 }

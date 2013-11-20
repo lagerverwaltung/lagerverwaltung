@@ -4,6 +4,28 @@
  */
 package view;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import model.Lager;
+import model.Lager.Lagerort;
+import model.Lagerfach;
+
 /**
  *
  * @author simon
@@ -11,16 +33,107 @@ package view;
 public class InitFaecherPanel extends javax.swing.JPanel {
     MainFrame mainFrame;
     Boolean freilager = false;
+    class FachGroesse{
+        Lagerfach.Groesse groesse;
+        int lagerfach;
+        FachGroesse (Lagerfach.Groesse groesse, int lagerfach){
+            this.groesse = groesse;
+            this.lagerfach = lagerfach;
+        }
+        public String toString(){
+            return groesse.toString();
+        }
+    }
+    
     /**
      * Creates new form InitFaecherPanel
      */
     public InitFaecherPanel() {
-        initComponents();
+        initComponents(); 
     }
     
     public void setMainFrame(MainFrame mainFrame)
     {
         this.mainFrame = mainFrame;
+    }
+    
+    public void createFaecherPanel() {
+        Lagerort lo;
+        spFaecherPanel.removeAll();
+        if (freilager){
+            lo = Lager.Lagerort.freilager;
+        }
+        else {
+            lo = Lager.Lagerort.hochregal;
+        }
+        Lager t;
+        try {
+            t = Lager.getLager(lo);
+            
+            int amount = t.getBreite()*t.getTiefe()*t.getHoehe();
+            JLabel labelX[] = new JLabel[amount];
+            JLabel labelY[] = new JLabel[amount];
+            JLabel labelZ[] = new JLabel[amount];
+            
+            JComboBox cb[] = new JComboBox[amount];
+            JPanel jp[] = new JPanel[amount];
+            HashMap m[] = new HashMap[amount];
+           // FachGroesse fg[] = new FachGroesse[amount];
+            
+            if(t != null){
+                List<Lagerfach> list;
+                list = t.getFaecher();
+                int i = 0;
+                for (Lagerfach f : list) {
+                    //System.out.println("x"+f.getX()+" y:"+f.getY()+" z:"+f.getZ());
+                    jp[i] = new JPanel();
+                    jp[i].setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+                    labelX[i] = new JLabel();
+                    labelX[i].setPreferredSize(new Dimension(57,20));
+                    labelX[i].setText(String.valueOf(f.getX()));
+                    jp[i].add(labelX[i]);
+                    labelY[i] = new JLabel();
+                    labelY[i].setText(String.valueOf(f.getY()));
+                    labelY[i].setPreferredSize(new Dimension(57,20));
+                    jp[i].add(labelY[i]);
+                    labelZ[i] = new JLabel();
+                    labelZ[i].setText(String.valueOf(f.getZ()));
+                    labelZ[i].setPreferredSize(new Dimension(57,20));
+                    jp[i].add(labelZ[i]);
+                    jp[i].setBounds(10, 10+i*30, 304, 30);
+                    FachGroesse fg[] = new FachGroesse[3];
+                    fg[0] = new FachGroesse(Lagerfach.Groesse.klein,f.getFachnummer());
+                    fg[1] = new FachGroesse(Lagerfach.Groesse.mittel,f.getFachnummer());
+                    fg[2] = new FachGroesse(Lagerfach.Groesse.gross,f.getFachnummer());
+                    cb[i] = new JComboBox(fg);
+                    cb[i].addItemListener(new ItemListener(){
+                          public void itemStateChanged(ItemEvent e){
+                            FachGroesse c = (FachGroesse)e.getItem();
+                            //System.out.println(c.lagerfach);
+                            try {
+                                Lagerfach lf = Lagerfach.getLagerfach(c.lagerfach);
+                                lf.setGroesse(c.groesse);
+                                lf.save();
+                            } catch (SQLException ex) {
+                                Logger.getLogger(InitFaecherPanel.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
+                    });
+                    jp[i].add(cb[i]);
+                    
+                    spFaecherPanel.add(jp[i]);
+                    if(i == amount-1){
+                        break;
+                    }
+                    i++;
+                    //System.out.println("i"+i+" amount"+amount);
+                }
+            }
+            spFaecherPanel.setPreferredSize(new Dimension(307, amount*40+20));
+        } 
+        catch (SQLException ex) {
+            Logger.getLogger(InitFaecherPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     public void prepareFreilager()
@@ -40,49 +153,22 @@ public class InitFaecherPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         lblAuswahl = new javax.swing.JLabel();
-        lblFach1 = new javax.swing.JLabel();
         lblX = new javax.swing.JLabel();
         lblY = new javax.swing.JLabel();
         lblZ = new javax.swing.JLabel();
-        lbl1Y = new javax.swing.JLabel();
-        lbl1Z = new javax.swing.JLabel();
-        cbxGröße1 = new javax.swing.JComboBox();
-        cbxGröße2 = new javax.swing.JComboBox();
-        lbl2Y = new javax.swing.JLabel();
-        lbl2X = new javax.swing.JLabel();
-        lblFach2 = new javax.swing.JLabel();
-        lbl2Z = new javax.swing.JLabel();
-        cbxGröße3 = new javax.swing.JComboBox();
-        lbl3Z = new javax.swing.JLabel();
-        lbl3Y = new javax.swing.JLabel();
-        lbl3X = new javax.swing.JLabel();
-        lblFach3 = new javax.swing.JLabel();
-        lblFach5 = new javax.swing.JLabel();
-        lblFach6 = new javax.swing.JLabel();
-        lblFach4 = new javax.swing.JLabel();
-        lbl4X = new javax.swing.JLabel();
-        lbl5X = new javax.swing.JLabel();
-        lbl6X = new javax.swing.JLabel();
-        lbl6Y = new javax.swing.JLabel();
-        lbl5Y = new javax.swing.JLabel();
-        lbl4Y = new javax.swing.JLabel();
-        lbl4Z = new javax.swing.JLabel();
-        lbl5Z = new javax.swing.JLabel();
-        lbl6Z = new javax.swing.JLabel();
-        cbxGröße5 = new javax.swing.JComboBox();
-        cbxGröße4 = new javax.swing.JComboBox();
-        cbxGröße6 = new javax.swing.JComboBox();
         jSeparator1 = new javax.swing.JSeparator();
-        lbl1X = new javax.swing.JLabel();
-        lblCube2 = new javax.swing.JLabel();
-        btnWeiter = new javax.swing.JButton();
         lblTyp = new javax.swing.JLabel();
         lbl1Schritt = new javax.swing.JLabel();
         lblEinrichtungsassi = new javax.swing.JLabel();
+        spFaecher = new javax.swing.JScrollPane();
+        spFaecherPanel = new javax.swing.JPanel();
+        btnWeiter = new javax.swing.JButton();
+        lblCube2 = new javax.swing.JLabel();
+
+        setMaximumSize(new java.awt.Dimension(664, 32767));
+        setPreferredSize(new java.awt.Dimension(664, 733));
 
         lblAuswahl.setText("Wählen Sie nun die Fachgrößen für die einzelnen Fächer:");
-
-        lblFach1.setText("Fach 1");
 
         lblX.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblX.setText("x");
@@ -93,74 +179,6 @@ public class InitFaecherPanel extends javax.swing.JPanel {
         lblZ.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblZ.setText("z");
 
-        lbl1Y.setText("1");
-
-        lbl1Z.setText("1");
-
-        cbxGröße1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "klein", "mittel", "groß" }));
-
-        cbxGröße2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "klein", "mittel", "groß" }));
-
-        lbl2Y.setText("1");
-
-        lbl2X.setText("1");
-
-        lblFach2.setText("Fach 2 ");
-
-        lbl2Z.setText("2");
-
-        cbxGröße3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "klein", "mittel", "groß" }));
-
-        lbl3Z.setText("3");
-
-        lbl3Y.setText("1");
-
-        lbl3X.setText("1");
-
-        lblFach3.setText("Fach 3 ");
-
-        lblFach5.setText("Fach 5 ");
-
-        lblFach6.setText("Fach 6 ");
-
-        lblFach4.setText("Fach 4");
-
-        lbl4X.setText(" 2");
-
-        lbl5X.setText("2");
-
-        lbl6X.setText("2");
-
-        lbl6Y.setText("1");
-
-        lbl5Y.setText("1");
-
-        lbl4Y.setText(" 1");
-
-        lbl4Z.setText(" 1");
-
-        lbl5Z.setText("2");
-
-        lbl6Z.setText("3");
-
-        cbxGröße5.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "mittel", "groß", "klein" }));
-
-        cbxGröße4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "mittel", "groß", "klein" }));
-
-        cbxGröße6.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "mittel", "groß", "klein" }));
-
-        lbl1X.setText("1");
-
-        lblCube2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/lagerDimensions2.gif"))); // NOI18N
-        lblCube2.setText("jLabel7");
-
-        btnWeiter.setText("weiter zum Freilager");
-        btnWeiter.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnWeiterActionPerformed(evt);
-            }
-        });
-
         lblTyp.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         lblTyp.setText("Hochregallager");
 
@@ -170,98 +188,64 @@ public class InitFaecherPanel extends javax.swing.JPanel {
         lblEinrichtungsassi.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         lblEinrichtungsassi.setText("Ersteinrichtungsassistent");
 
+        spFaecher.setBorder(null);
+        spFaecher.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        spFaecher.setMaximumSize(new java.awt.Dimension(1000767, 32767));
+
+        javax.swing.GroupLayout spFaecherPanelLayout = new javax.swing.GroupLayout(spFaecherPanel);
+        spFaecherPanel.setLayout(spFaecherPanelLayout);
+        spFaecherPanelLayout.setHorizontalGroup(
+            spFaecherPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 322, Short.MAX_VALUE)
+        );
+        spFaecherPanelLayout.setVerticalGroup(
+            spFaecherPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 574, Short.MAX_VALUE)
+        );
+
+        spFaecher.setViewportView(spFaecherPanel);
+
+        btnWeiter.setText("weiter zum Freilager");
+        btnWeiter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnWeiterActionPerformed(evt);
+            }
+        });
+
+        lblCube2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/lagerDimensions2.gif"))); // NOI18N
+        lblCube2.setText("jLabel7");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblEinrichtungsassi)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lbl1Schritt)
-                        .addGap(18, 18, 18)
-                        .addComponent(lblTyp, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addGap(0, 0, Short.MAX_VALUE)
-                            .addComponent(btnWeiter, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(lblAuswahl)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(lblFach2)
-                                .addComponent(lblFach3)
-                                .addComponent(lblFach6)
-                                .addComponent(lblFach4)
-                                .addComponent(lblFach5)
-                                .addComponent(lblFach1))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(lblX, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(lblY, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(lblZ, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                                .addComponent(lbl4X, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(lbl4Y, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(lbl4Z, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(cbxGröße4, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                                .addGap(4, 4, 4)
-                                                .addComponent(lbl5X, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(lbl5Y, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(lbl5Z, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(cbxGröße5, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addGap(4, 4, 4)
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addGroup(layout.createSequentialGroup()
-                                                    .addComponent(lbl2X, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addGap(18, 18, 18)
-                                                    .addComponent(lbl2Y, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addGap(18, 18, 18)
-                                                    .addComponent(lbl2Z, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                    .addComponent(cbxGröße2, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addGroup(layout.createSequentialGroup()
-                                                    .addComponent(lbl3X, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addGap(18, 18, 18)
-                                                    .addComponent(lbl3Y, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addGap(18, 18, 18)
-                                                    .addComponent(lbl3Z, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                    .addComponent(cbxGröße3, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addGroup(layout.createSequentialGroup()
-                                                    .addComponent(lbl6X, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addGap(18, 18, 18)
-                                                    .addComponent(lbl6Y, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addGap(18, 18, 18)
-                                                    .addComponent(lbl6Z, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                    .addComponent(cbxGröße6, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addGroup(layout.createSequentialGroup()
-                                                    .addComponent(lbl1X, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addGap(18, 18, 18)
-                                                    .addComponent(lbl1Y, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addGap(18, 18, 18)
-                                                    .addComponent(lbl1Z, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                    .addComponent(cbxGröße1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
-                                    .addComponent(lblCube2, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addGap(46, 46, 46))
+                        .addGap(39, 39, 39)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblEinrichtungsassi)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lbl1Schritt)
+                                .addGap(18, 18, 18)
+                                .addComponent(lblTyp, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lblAuswahl)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(spFaecher, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(34, 34, 34)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lblCube2, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnWeiter, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(52, 52, 52)
+                        .addComponent(lblX, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(44, 44, 44)
+                        .addComponent(lblY, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(45, 45, 45)
+                        .addComponent(lblZ, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -274,61 +258,23 @@ public class InitFaecherPanel extends javax.swing.JPanel {
                     .addComponent(lblTyp))
                 .addGap(18, 18, 18)
                 .addComponent(lblAuswahl)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblX)
-                    .addComponent(lblY)
-                    .addComponent(lblZ))
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblFach1)
-                            .addComponent(lbl1Y)
-                            .addComponent(lbl1Z)
-                            .addComponent(cbxGröße1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbl1X))
+                            .addComponent(lblX)
+                            .addComponent(lblY)
+                            .addComponent(lblZ))
+                        .addGap(18, 18, 18)
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lbl2X)
-                            .addComponent(lbl2Y)
-                            .addComponent(cbxGröße2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbl2Z)
-                            .addComponent(lblFach2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lbl3X)
-                            .addComponent(lbl3Y)
-                            .addComponent(cbxGröße3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbl3Z)
-                            .addComponent(lblFach3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lbl4X)
-                            .addComponent(lbl4Y)
-                            .addComponent(lbl4Z)
-                            .addComponent(cbxGröße4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblFach4))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lbl5X)
-                            .addComponent(lbl5Y)
-                            .addComponent(cbxGröße5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbl5Z)
-                            .addComponent(lblFach5))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lbl6X)
-                            .addComponent(lbl6Y)
-                            .addComponent(cbxGröße6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbl6Z)
-                            .addComponent(lblFach6))
-                        .addGap(126, 126, 126)
-                        .addComponent(btnWeiter))
-                    .addComponent(lblCube2, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(20, Short.MAX_VALUE))
+                        .addComponent(spFaecher, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(140, 140, 140)
+                        .addComponent(lblCube2, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 207, Short.MAX_VALUE)
+                        .addComponent(btnWeiter)))
+                .addGap(12, 12, 12))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -345,44 +291,16 @@ public class InitFaecherPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnWeiter;
-    private javax.swing.JComboBox cbxGröße1;
-    private javax.swing.JComboBox cbxGröße2;
-    private javax.swing.JComboBox cbxGröße3;
-    private javax.swing.JComboBox cbxGröße4;
-    private javax.swing.JComboBox cbxGröße5;
-    private javax.swing.JComboBox cbxGröße6;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lbl1Schritt;
-    private javax.swing.JLabel lbl1X;
-    private javax.swing.JLabel lbl1Y;
-    private javax.swing.JLabel lbl1Z;
-    private javax.swing.JLabel lbl2X;
-    private javax.swing.JLabel lbl2Y;
-    private javax.swing.JLabel lbl2Z;
-    private javax.swing.JLabel lbl3X;
-    private javax.swing.JLabel lbl3Y;
-    private javax.swing.JLabel lbl3Z;
-    private javax.swing.JLabel lbl4X;
-    private javax.swing.JLabel lbl4Y;
-    private javax.swing.JLabel lbl4Z;
-    private javax.swing.JLabel lbl5X;
-    private javax.swing.JLabel lbl5Y;
-    private javax.swing.JLabel lbl5Z;
-    private javax.swing.JLabel lbl6X;
-    private javax.swing.JLabel lbl6Y;
-    private javax.swing.JLabel lbl6Z;
     private javax.swing.JLabel lblAuswahl;
     private javax.swing.JLabel lblCube2;
     private javax.swing.JLabel lblEinrichtungsassi;
-    private javax.swing.JLabel lblFach1;
-    private javax.swing.JLabel lblFach2;
-    private javax.swing.JLabel lblFach3;
-    private javax.swing.JLabel lblFach4;
-    private javax.swing.JLabel lblFach5;
-    private javax.swing.JLabel lblFach6;
     private javax.swing.JLabel lblTyp;
     private javax.swing.JLabel lblX;
     private javax.swing.JLabel lblY;
     private javax.swing.JLabel lblZ;
+    private javax.swing.JScrollPane spFaecher;
+    private javax.swing.JPanel spFaecherPanel;
     // End of variables declaration//GEN-END:variables
 }

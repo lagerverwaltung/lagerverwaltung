@@ -4,6 +4,18 @@
  */
 package view;
 
+import com.j256.ormlite.dao.Dao;
+import helper.DatabaseManager;
+import helper.Misc;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import model.Lager;
+import model.Lager.Lagerort;
+import model.Lagerfach;
+
 /**
  *
  * @author simon
@@ -23,6 +35,12 @@ public class InitPanel extends javax.swing.JPanel {
         freilager = true;
         lblHochregallager.setText("Freilager");
         lbl1Schritt.setText("2. Schritt");
+        txfFachanzahlBreite.setText("");
+        txfFachanzahlHoehe.setText("");
+        txfFachanzahlTiefe.setText("");
+        txfKlein.setText("");
+        txfMittel.setText("");
+        txfGross.setText("");
     }
     
     public void setMainFrame(MainFrame mainFrame)
@@ -42,7 +60,7 @@ public class InitPanel extends javax.swing.JPanel {
         lblCube = new javax.swing.JLabel();
         lblHochregallager = new javax.swing.JLabel();
         Pan1 = new javax.swing.JPanel();
-        jTextField6 = new javax.swing.JTextField();
+        txfMittel = new javax.swing.JTextField();
         lblHinweisFachgröße = new javax.swing.JLabel();
         lblHinweisMetrik = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
@@ -50,7 +68,7 @@ public class InitPanel extends javax.swing.JPanel {
         jLabel13 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         txfKlein = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        txfGross = new javax.swing.JTextField();
         lblHinweisMenge = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         weiterButton = new javax.swing.JButton();
@@ -61,7 +79,7 @@ public class InitPanel extends javax.swing.JPanel {
         jSeparator1 = new javax.swing.JSeparator();
         txfFachanzahlBreite = new javax.swing.JTextField();
         lblFachanzahlTiefe = new javax.swing.JLabel();
-        txfFachanzahlHöhe = new javax.swing.JTextField();
+        txfFachanzahlHoehe = new javax.swing.JTextField();
         lblFachanzahlBreite = new javax.swing.JLabel();
         lblwählenSie = new javax.swing.JLabel();
         lbl1Schritt = new javax.swing.JLabel();
@@ -123,8 +141,8 @@ public class InitPanel extends javax.swing.JPanel {
                                 .addGap(125, 125, 125)
                                 .addGroup(Pan1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(txfKlein, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(txfMittel, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txfGross, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(lblHinweisMetrik))
                         .addContainerGap(28, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Pan1Layout.createSequentialGroup()
@@ -149,12 +167,12 @@ public class InitPanel extends javax.swing.JPanel {
                     .addComponent(txfKlein, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(Pan1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txfMittel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel12))
                 .addGap(18, 18, 18)
                 .addGroup(Pan1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txfGross, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(weiterButton)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -171,6 +189,12 @@ public class InitPanel extends javax.swing.JPanel {
         });
 
         lblFachanzahlTiefe.setText("Fachanzahl Tiefe:");
+
+        txfFachanzahlHoehe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txfFachanzahlHoeheActionPerformed(evt);
+            }
+        });
 
         lblFachanzahlBreite.setText("Fachanzahl Breite:");
 
@@ -192,7 +216,7 @@ public class InitPanel extends javax.swing.JPanel {
                         .addGap(44, 44, 44)
                         .addGroup(Pan2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txfFachanzahlBreite, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txfFachanzahlHöhe, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txfFachanzahlHoehe, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txfFachanzahlTiefe, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblwählenSie))
@@ -218,7 +242,7 @@ public class InitPanel extends javax.swing.JPanel {
                 .addGap(35, 35, 35)
                 .addGroup(Pan2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblFachanzahlHöhe)
-                    .addComponent(txfFachanzahlHöhe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txfFachanzahlHoehe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -271,13 +295,114 @@ public class InitPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_txfFachanzahlBreiteActionPerformed
 
     private void weiterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_weiterButtonActionPerformed
-        mainFrame.navigationController.showCard("init2");
-        if(freilager){
-            InitFaecherPanel initFaecherPanel = (InitFaecherPanel) mainFrame.getInitFaecherPanel();
-            initFaecherPanel.prepareFreilager();
+       
+        String errors = "";
+        int breite,hoehe,tiefe,fachKlein,fachMittel,fachGross;
+        breite = hoehe = tiefe = fachKlein = fachMittel = fachGross = 0;
+        
+        try {
+            breite = Integer.parseInt(txfFachanzahlBreite.getText());
+        }
+        catch(NumberFormatException e) {
+            errors += "Die Breite muss numerisch sein. \n";
         }
         
+        try {
+            hoehe = Integer.parseInt(txfFachanzahlHoehe.getText());
+         }
+        catch(NumberFormatException e) {
+            errors += "Die Höhe muss numerisch sein. \n";
+        }
+        
+        try {
+            tiefe = Integer.parseInt(txfFachanzahlTiefe.getText());
+        }
+        catch(NumberFormatException e) {
+            errors += "Die Tiefe muss numerisch sein. \n";
+        }
+        
+        try {
+            fachKlein = Integer.parseInt(txfKlein.getText());
+        }
+        catch(NumberFormatException e) {
+            errors += "Die Fachgröße 'klein' muss numerisch sein. \n";
+        }
+        
+        try {
+            fachMittel = Integer.parseInt(txfMittel.getText());
+        }
+        catch(NumberFormatException e) {
+              errors += "Die Fachgröße 'mittel' muss numerisch sein. \n";
+        }
+        
+        try {
+            fachGross = Integer.parseInt(txfGross.getText());
+        }
+        catch(NumberFormatException e) {
+              errors += "Die Fachgröße 'groß' muss numerisch sein. \n";
+        }
+        
+        if(breite > 1000 && breite != 0){
+            errors += "Die Breite darf maximal 1000 sein. \n";
+        }
+        
+        if(hoehe > 1000 && hoehe != 0){
+            errors += "Die Höhe darf maximal 1000 sein. \n";
+        }
+        if(tiefe > 1000 && tiefe != 0){
+            errors += "Die Tiefe darf maximal 1000 sein. \n";
+        }
+        
+        if(errors.length() > 0){
+            if(Misc.createErrorDialog(mainFrame, errors) == true){
+                return;
+            }
+           
+        }
+        errors = "";
+        if(breite * hoehe * tiefe > 5000){
+              errors += "Das Produckt aus Breite, Höhe und Tiefe darf 5000 nicht überschreiten (maximale Fachanzahl).\n";
+        }
+        if(breite == 0 || hoehe == 0 || tiefe == 0 || fachKlein == 0 || fachMittel == 0 || fachGross == 0){
+            errors += "Der Wert 0 ist nicht zugelassen.";
+        }
+        if(errors.length() > 0){ 
+            Misc.createErrorDialog(mainFrame, errors);
+            return;
+        }
+        
+        //Auslesen der Formattribute
+        Lager t = new Lager();
+        t.setBreite(breite);
+        t.setHoehe(hoehe);
+        t.setTiefe(tiefe);
+        t.setKleinVE(fachKlein);
+        t.setMittelVE(fachMittel);
+        t.setGrossVE(fachGross);
+        
+        InitFaecherPanel initFaecherPanel = (InitFaecherPanel) mainFrame.getInitFaecherPanel();
+        if(freilager){
+            initFaecherPanel.prepareFreilager();
+            t.setLagerort(Lager.Lagerort.freilager);
+        }
+        else {
+            t.setLagerort(Lager.Lagerort.hochregal);
+        }
+        
+        Dao<Lager, Integer> lagerDao = DatabaseManager.getInstance().getLagerDao();
+        try {
+            lagerDao.createOrUpdate(t);
+            t.createFaecher(breite, tiefe, hoehe);
+            initFaecherPanel.createFaecherPanel(); 
+         } catch (SQLException ex) {
+            Logger.getLogger(InitPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        mainFrame.navigationController.showCard("init2");
     }//GEN-LAST:event_weiterButtonActionPerformed
+
+    private void txfFachanzahlHoeheActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfFachanzahlHoeheActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txfFachanzahlHoeheActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Pan1;
@@ -287,8 +412,6 @@ public class InitPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField6;
     private javax.swing.JLabel lbl1Schritt;
     private javax.swing.JLabel lblCube;
     private javax.swing.JLabel lblEinrichtungsassi;
@@ -303,9 +426,11 @@ public class InitPanel extends javax.swing.JPanel {
     private javax.swing.JLabel lblLagergrößen;
     private javax.swing.JLabel lblwählenSie;
     private javax.swing.JTextField txfFachanzahlBreite;
-    private javax.swing.JTextField txfFachanzahlHöhe;
+    private javax.swing.JTextField txfFachanzahlHoehe;
     private javax.swing.JTextField txfFachanzahlTiefe;
+    private javax.swing.JTextField txfGross;
     private javax.swing.JTextField txfKlein;
+    private javax.swing.JTextField txfMittel;
     private javax.swing.JButton weiterButton;
     // End of variables declaration//GEN-END:variables
 }

@@ -4,31 +4,25 @@
  */
 package model.table;
 
-import java.util.ArrayList;
+import java.util.List;
 import javax.swing.table.AbstractTableModel;
+import model.Teilebestand;
+import model.collection.TeilebestandCollection;
 
 /**
  *
  * @author simon
  */
 public class TeileTableModel extends AbstractTableModel {
-    ArrayList<Object[]> teileRows = new ArrayList();
+    TeilebestandCollection<Teilebestand> teileRows = new TeilebestandCollection();
     
-    public void setData(ArrayList<Object[]> arr)
+    public void setData(TeilebestandCollection<Teilebestand> arr)
     {
         this.teileRows = arr;
     }
     
-    public ArrayList<Object[]> dummyArrayList()
-    {
-        ArrayList<Object[]> arr = new ArrayList();
-        String[] row = {"001212","Schraube M5","Betriebsstoffe","A231231f.cad","0,84 €", "Vorratsteile"};
-        arr.add(row);
-        return arr;
-    }
-    
     public int getColumnCount() {
-        return 6;
+        return 7;
     }
     
     public int getRowCount() {
@@ -57,16 +51,52 @@ public class TeileTableModel extends AbstractTableModel {
             case 5:
                 name = "Typ";
                 break;
+            case 6:
+                name = "Größe in VE";
+                break;
         }
         return name;
     }
 
     public Object getValueAt(int row, int col) {
+        Teilebestand rowO;
         if(teileRows.size()>0){
-            Object[] commisionColumns = teileRows.get(row);
-            return commisionColumns[col];
+            rowO = (Teilebestand) teileRows.get(row);
+            if(rowO != null){
+                switch(col){
+                    case 0:
+                         return rowO.getIdentnummer();
+                    case 1:
+                        if(rowO.getBezeichnung() != null){
+                        return rowO.getBezeichnung();
+                        }
+                    case 2:
+                        if(rowO.getMaterialgruppe() != null){
+                            return rowO.getMaterialgruppe();
+                        }
+                    case 3:
+                         if(rowO.getZeichnungsnummer() != null){
+                            return rowO.getZeichnungsnummer();
+                         }
+                    case 4:
+                        System.out.println("4");
+                        if(rowO.getPreis() != 0){
+                            return new Float(rowO.getPreis());
+                        }
+                    case 5:
+                        if(rowO.getTyp() != null){
+                        return rowO.getTyp();
+                        }
+                    case 6:
+                        if(rowO.getVe() > 0){
+                        return rowO.getVe();
+                        }
+                    default:     
+                    return "empty";
+                }
+            }
         }
-        return "notfound";
+        return new String("not");
     }
 
     public Class getColumnClass(int c) {

@@ -122,8 +122,8 @@
                                   <EmptySpace min="-2" pref="125" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="1" attributes="0">
                                       <Component id="txfKlein" min="-2" pref="52" max="-2" attributes="0"/>
-                                      <Component id="jTextField6" min="-2" pref="52" max="-2" attributes="0"/>
-                                      <Component id="jTextField2" alignment="0" min="-2" pref="53" max="-2" attributes="0"/>
+                                      <Component id="txfMittel" min="-2" pref="52" max="-2" attributes="0"/>
+                                      <Component id="txfGross" alignment="0" min="-2" pref="53" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <Component id="lblHinweisMetrik" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -157,13 +157,13 @@
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jTextField6" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txfMittel" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel13" alignment="3" min="-2" pref="15" max="-2" attributes="0"/>
-                      <Component id="jTextField2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txfGross" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="weiterButton" min="-2" max="-2" attributes="0"/>
@@ -173,7 +173,7 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JTextField" name="jTextField6">
+        <Component class="javax.swing.JTextField" name="txfMittel">
         </Component>
         <Component class="javax.swing.JLabel" name="lblHinweisFachgr&#xf6;&#xdf;e">
           <Properties>
@@ -204,7 +204,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="txfKlein">
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField2">
+        <Component class="javax.swing.JTextField" name="txfGross">
         </Component>
         <Component class="javax.swing.JLabel" name="lblHinweisMenge">
           <Properties>
@@ -244,7 +244,7 @@
                           <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="txfFachanzahlBreite" min="-2" pref="49" max="-2" attributes="0"/>
-                              <Component id="txfFachanzahlHöhe" min="-2" pref="49" max="-2" attributes="0"/>
+                              <Component id="txfFachanzahlHoehe" min="-2" pref="49" max="-2" attributes="0"/>
                               <Component id="txfFachanzahlTiefe" min="-2" pref="49" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -277,7 +277,7 @@
                   <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="lblFachanzahlHöhe" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txfFachanzahlHöhe" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txfFachanzahlHoehe" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -309,7 +309,10 @@
             <Property name="text" type="java.lang.String" value="Fachanzahl Tiefe:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txfFachanzahlH&#xf6;he">
+        <Component class="javax.swing.JTextField" name="txfFachanzahlHoehe">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txfFachanzahlHoeheActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lblFachanzahlBreite">
           <Properties>

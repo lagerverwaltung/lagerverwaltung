@@ -6,8 +6,12 @@
 
 package model;
 
+import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
+import helper.DatabaseManager;
+import java.sql.SQLException;
+import java.util.List;
 
 @DatabaseTable(tableName = "lagerfach")
 public class Lagerfach {
@@ -80,6 +84,19 @@ public class Lagerfach {
         return lager;
     }
 
+    public static Lagerfach getLagerfach(int id) throws SQLException{
+        Dao<Lagerfach,Integer> lagerfachDao = DatabaseManager.getInstance().getLagerfachDao();
+        List<Lagerfach> l = lagerfachDao.queryForEq("fachID", id);
+        if(l.size()>0){
+            return l.get(0);
+        }
+        return null;
+    }
+    
+   public void save() throws SQLException{
+       Dao<Lagerfach,Integer> lagerfachDao = DatabaseManager.getInstance().getLagerfachDao();
+       lagerfachDao.createOrUpdate(this);
+   }
     /**
      * @param lager the lager to set
      */

@@ -1,7 +1,11 @@
 package view;
 
 import controller.NavigationController;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JPanel;
+import model.Lager;
 
 /*
  * To change this template, choose Tools | Templates
@@ -53,38 +57,47 @@ public class MainFrame extends javax.swing.JFrame {
         startPanel = new javax.swing.JPanel();
         panInit = new view.InitPanel();
         panInitFaecher = new view.InitFaecherPanel();
-        panMain = new view.MainPanel();
         panLogin = new view.LoginPanel();
+        panMain = new view.MainPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(800, 768));
         setName("StartPanel"); // NOI18N
         setPreferredSize(new java.awt.Dimension(1010, 830));
 
-        startPanel.setMinimumSize(new java.awt.Dimension(800, 600));
+        startPanel.setMinimumSize(new java.awt.Dimension(600, 600));
         startPanel.setPreferredSize(new java.awt.Dimension(800, 600));
         startPanel.setLayout(new java.awt.CardLayout());
 
         panInit.setMainFrame(this);
-        startPanel.add(panInit, "init");
+        Lager t = Lager.getLager(Lager.Lagerort.freilager);
+        if(t == null){
+            startPanel.add(panInit, "init");
+        }
 
         panInitFaecher.setMainFrame(this);
-        startPanel.add(panInitFaecher, "init2");
-
-        panMain.setMainFrame(this);
-        panMain.setMinimumSize(new java.awt.Dimension(1000, 844));
-        startPanel.add(panMain, "main");
+        panInitFaecher.setMaximumSize(new java.awt.Dimension(664, 32767));
+        panInitFaecher.setMinimumSize(new java.awt.Dimension(610, 606));
+        panInitFaecher.setPreferredSize(new java.awt.Dimension(610, 733));
+        panInitFaecher.setRequestFocusEnabled(false);
+        if(t == null){
+            startPanel.add(panInitFaecher, "init2");
+        }
 
         panLogin.setMainFrame(this);
         panLogin.setMinimumSize(new java.awt.Dimension(1024, 768));
         panLogin.setPreferredSize(new java.awt.Dimension(1024, 768));
         startPanel.add(panLogin, "login");
 
+        panMain.setMainFrame(this);
+        panMain.setMinimumSize(new java.awt.Dimension(1000, 844));
+        startPanel.add(panMain, "main");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(startPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 1077, Short.MAX_VALUE)
+            .addComponent(startPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 1048, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

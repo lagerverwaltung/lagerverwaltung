@@ -1,7 +1,10 @@
 package view;
 
+import helper.Misc;
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 import javax.swing.table.TableColumn;
+import model.collection.TeilebestandCollection;
 import model.table.TeileTableModel;
 
 /*
@@ -29,7 +32,7 @@ public class TeilebestandPanel extends javax.swing.JPanel {
     
     public void setTableWidths(JTable table)
     {
-        int[] arrWidths = {85, 120, 120, 120, 50, 100};
+        int[] arrWidths = {35, 130, 130, 130, 50, 120,50};
         TableColumn tc;
         table.setRowHeight(23);
         int i = 0;
@@ -68,9 +71,12 @@ public class TeilebestandPanel extends javax.swing.JPanel {
         lblTeilebestand.setText("Teilebestand");
 
         TeileTableModel tm = new TeileTableModel();
-        tm.setData(tm.dummyArrayList());
+        tm.setData(TeilebestandCollection.getInstance());
+        tblMain.setAutoCreateRowSorter(true);
+        tblMain.setSelectionMode(ListSelectionModel.SINGLE_SELECTION );
         tblMain.setModel(tm);
         setTableWidths(tblMain);
+        tblMain.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
         tblMain.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         scpMain.setViewportView(tblMain);
 
@@ -176,6 +182,7 @@ public class TeilebestandPanel extends javax.swing.JPanel {
     private void btnNeuesTeilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNeuesTeilActionPerformed
         TeilFrame teilframe = new TeilFrame();
         teilframe.setVisible(true);
+        teilframe.setTable(tblMain);
     }//GEN-LAST:event_btnNeuesTeilActionPerformed
 
     private void btnSuchenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuchenActionPerformed
@@ -183,8 +190,18 @@ public class TeilebestandPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnSuchenActionPerformed
 
     private void btnTeilAendernActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTeilAendernActionPerformed
-        TeilFrame teilframe = new TeilFrame(true);
-        teilframe.setVisible(true);
+        int selectedId;
+        if(tblMain.getSelectedRow() >=0){
+            selectedId = Integer.parseInt(tblMain.getValueAt(tblMain.getSelectedRow(), 0).toString());
+            TeilFrame teilframe = new TeilFrame(true);
+            teilframe.initTeil(selectedId);
+            teilframe.setVisible(true);
+            teilframe.setTable(tblMain);
+        }
+        else{
+            Misc.createErrorDialog(mainFrame, "Es muss erst ein Teil zum Ändern aus der "
+                    + "Liste gewählt werden!", true);
+        }
     }//GEN-LAST:event_btnTeilAendernActionPerformed
 
     private void btnTeilLoschenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTeilLoschenActionPerformed
