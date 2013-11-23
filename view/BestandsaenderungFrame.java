@@ -234,12 +234,12 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         int mng = Integer.parseInt(txfMenge.getText());
         int td= Integer.parseInt(txfTeilID.getText());
        
-        Lager.Lagerort lager = (Lager.Lagerort) cbxFachTyp.getSelectedItem();
-        int x = (int) cbxFachX.getSelectedItem();
-        int y = (int) cbxFachY.getSelectedItem();
-        int z = (int) cbxFachZ.getSelectedItem();
+        String ort = (String) cbxFachTyp.getSelectedItem();
+        int x = Integer.parseInt((String) cbxFachX.getSelectedItem());
+        int y = Integer.parseInt((String) cbxFachY.getSelectedItem());
+        int z = Integer.parseInt((String) cbxFachZ.getSelectedItem());
         try {
-            fachID = Lagerfach.getFach(lager, x, y, z).getFachnummer();
+            fachID = Lagerfach.getFach(ort, x, y, z).getFachnummer();
         } catch (SQLException ex) {
             Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -256,7 +256,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
-        refreshLagerbestandTableModel();
+     //   refreshLagerbestandTableModel();
         this.dispose();
     }//GEN-LAST:event_einlagernButtonActionPerformed
     private void refreshLagerbestandTableModel(){

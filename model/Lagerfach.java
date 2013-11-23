@@ -97,10 +97,10 @@ public class Lagerfach {
     }
     //gibt Lagerfach zur lagerfachadresse aus
     
-    public static Lagerfach getFach(Lager.Lagerort lg, int x, int y, int z) throws SQLException{
+    public static Lagerfach getFach(String ort, int x, int y, int z) throws SQLException{
         
         int lo = 1;
-        if(lg.equals(Lager.Lagerort.freilager)){
+        if(ort.equals(Lager.Lagerort.freilager)){
             lo = 2;
         }
         
