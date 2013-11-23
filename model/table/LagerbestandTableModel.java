@@ -4,22 +4,30 @@
  */
 package model.table;
 
-import java.util.ArrayList;
+//import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
+//import Modellklassen
+import java.util.List;
+import model.Lager;
+import model.Lagerbestand;
+import model.Lagerfach;
+import model.Teilebestand;
+import model.collection.LagerbestandCollection;
+
 
 /**
  *
- * @author simon
+ * @author artjom,simon?
  */
 public class LagerbestandTableModel extends AbstractTableModel {
 
-    ArrayList<Object[]> lagerbestandRows = new ArrayList();
-    
-    public void setData(ArrayList<Object[]> arr)
+    //ArrayList<Object[]> lagerbestandRows = new ArrayList();
+    LagerbestandCollection<Lagerbestand> lagerbestandRows = new LagerbestandCollection();
+    public void setData(LagerbestandCollection<Lagerbestand> arr)
     {
         this.lagerbestandRows = arr;
     }
-    
+    /*ab hier muss Lagerbestandsliste ausgegeben sein
     public ArrayList<Object[]> dummyArrayList()
     {
         ArrayList<Object[]> arr = new ArrayList();
@@ -27,7 +35,7 @@ public class LagerbestandTableModel extends AbstractTableModel {
         arr.add(row);
         return arr;
     }
-    
+    */
     public int getColumnCount() {
         return 9;
     }
@@ -44,7 +52,7 @@ public class LagerbestandTableModel extends AbstractTableModel {
                 name = "FachID";
                 break;
             case 1:
-                name = "Lager";
+                name = "Lagerort";
                 break;
             case 2:
                 name = "x";
@@ -70,15 +78,75 @@ public class LagerbestandTableModel extends AbstractTableModel {
         }
         return name;
     }
-
-    public Object getValueAt(int row, int col) {
+    //Simons garbage
+   /* public Object getValueAt(int row, int col) {
         if(lagerbestandRows.size()>0){
             Object[] commisionColumns = lagerbestandRows.get(row);
             return commisionColumns[col];
         }
         return "notfound";
-    }
+    }*/
+    
+        public Object getValueAt(int row, int col) {
+        Lagerbestand rowO;
+        Lager rowA;
+        Teilebestand rowC;
+        Lagerfach rowD;
+        
+        if(lagerbestandRows.size()>0){
+            rowO = (Lagerbestand) lagerbestandRows.get(row);
+            rowA = (Lager) lagerbestandRows.get(row);
+            rowC = (Teilebestand) lagerbestandRows.get(row);
+            rowD = (Lagerfach) lagerbestandRows.get(row);
+            if(rowO != null && rowA != null && rowC != null&& rowD != null){
+                switch(col){
+                    case 0:
+                         return rowO.getLagerfach();
+                    case 1:
+                       
+                        if(rowA.getLagerort() == null){
+                        } else {
+                         return rowA.getLagerort();
+                        }
+                    case 2:
+                        if(rowD.getX() != 0){
+                        return rowD.getX();
+                        }
+                    case 3:
+                            if(rowD.getY() != 0){
+                            return rowD.getY();
+                            }
+                    case 4:
+                            if(rowD.getZ() != 0){
+                            return rowD.getZ();
+                            }
+                    case 5:
+                            if(rowC.getBezeichnung() != null){
+                            return rowC.getBezeichnung();
+                            }
+                    case 6:
+                             if(rowC.getIdentnummer() != 0){
+                            return rowC.getIdentnummer();
+                            }
+                    case7:
+                             if(rowO.getMenge()!= 0){
+                            return rowO.getMenge();
+                         }
+                    case8:
+                            System.out.println("8");
+                            if(rowO.getAnschaffungsgrund() != null){
+                            return rowO.getAnschaffungsgrund();
+                        }
+                    default:     
+                    return "empty";
+                }
+            }
+        }
+        
+        return new String("not");
+        }
 
+    
     public Class getColumnClass(int c) {
         return getValueAt(0, c).getClass();
     }

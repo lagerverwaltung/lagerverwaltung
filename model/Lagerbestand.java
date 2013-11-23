@@ -6,8 +6,14 @@
 
 package model;
 
+import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
+import helper.DatabaseManager;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @DatabaseTable(tableName = "lagerbestand")
 public class Lagerbestand {
@@ -96,8 +102,36 @@ public class Lagerbestand {
     public void setAnschaffungsgrund(String anschaffungsgrund) {
         this.anschaffungsgrund = anschaffungsgrund;
     }
-	
-	
+	//ab hier Artjoms Code, angepasst an Lagerfach-Model,Ausgabe Lagebestands
+    
+        public static Lagerbestand loadLagerObjekt(int id){
+            Dao<Lagerbestand,Integer> lagerbestandDao = DatabaseManager.getInstance().getLagerbestandDao();
+        try {
+            List<Lagerbestand> lb = lagerbestandDao.queryForEq("lagerbestandID", id);
+            if(lb.size()>0){
+                return lb.get(0);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Lagerbestand.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            return null;
+        }
+        
+        
+        
+	public static Lagerbestand getLagerbestand(int id) throws SQLException{
+        Dao<Lagerbestand,Integer> LagerbestandDao = DatabaseManager.getInstance().getLagerbestandDao();
+        List<Lagerbestand> lb = LagerbestandDao.queryForEq("lagerbestandID", id);
+        if(lb.size()>0){
+            return lb.get(0);
+        }
+        return null;
+    }
+    //Speichern Lagerbestand
+   public void save() throws SQLException{
+       Dao<Lagerbestand,Integer> LagerbestandDao = DatabaseManager.getInstance().getLagerbestandDao();
+       LagerbestandDao.createOrUpdate(this);
 
 }
 
+}

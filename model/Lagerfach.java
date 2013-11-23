@@ -8,10 +8,13 @@ package model;
 
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.stmt.PreparedQuery;
+import com.j256.ormlite.stmt.QueryBuilder;
 import com.j256.ormlite.table.DatabaseTable;
 import helper.DatabaseManager;
 import java.sql.SQLException;
 import java.util.List;
+
 
 @DatabaseTable(tableName = "lagerfach")
 public class Lagerfach {
@@ -92,6 +95,33 @@ public class Lagerfach {
         }
         return null;
     }
+    //gibt Lagerfach zur lagerfachadresse aus
+    
+    public static Lagerfach getFach(Lager.Lagerort lg, int x, int y, int z) throws SQLException{
+        
+        int lo = 1;
+        if(lg.equals(Lager.Lagerort.freilager)){
+            lo = 2;
+        }
+        
+	 Dao<Lagerfach,Integer> lagerfachDao = DatabaseManager.getInstance().getLagerfachDao();
+	QueryBuilder<Lagerfach, Integer> queryBuilder = lagerfachDao.queryBuilder();
+	queryBuilder	.where()
+                	.eq("LagerID", lo )
+			.and()
+			.eq("x", x)
+			.and()
+                	.eq("y", y)
+			.and()
+			.eq("z", z);	
+	PreparedQuery<Lagerfach> preparedQuery = queryBuilder.prepare();
+        List<Lagerfach> l = lagerfachDao.query(preparedQuery);
+        
+        if(l.size()>0){
+            return l.get(0);
+        }
+        return null;
+}
     
    public void save() throws SQLException{
        Dao<Lagerfach,Integer> lagerfachDao = DatabaseManager.getInstance().getLagerfachDao();

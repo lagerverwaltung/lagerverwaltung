@@ -4,12 +4,31 @@
  */
 package view;
 
+import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.Format;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JTable;
+import model.Lager;
+import model.Lagerbestand;
+import model.Lagerfach;
+import model.Warenbewegung;
+import model.collection.LagerbestandCollection;
+import model.table.LagerbestandTableModel;
+
 /**
  *
  * @author simon
  */
+//ändern
 public class BestandsaenderungFrame extends javax.swing.JFrame {
     Boolean einlagern = false;
+    JTable lagerBestandTable;
+    int lagerID;
     /**
      * Creates new form BestandsaenderungFrame
      */
@@ -23,8 +42,27 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         this.einlagern = einlagern;
         lblEinlagern.setText("Teile einlagern");
         einlagernButton.setText("Teile einlagern");
+        
     }
-
+    
+     public void initLagerObjekt(int id)
+    {
+        Lagerbestand l = Lagerbestand.loadLagerObjekt(id);
+        Warenbewegung w = Warenbewegung.loadWarenbewegung(id);
+        if(l != null){
+            lagerID = id;
+            txaAnschaffungsgrund.setText(l.getAnschaffungsgrund());
+            txfMenge.setText(Integer.toString(l.getMenge()));
+            //if(t.getTyp() != null){
+              //  cbxTyp.setSelectedItem(t.getTyp());
+            //}
+           //
+            Format f = new SimpleDateFormat("DD.MM.YYYY");
+            txfHaltbarkeitsdatum.setText(f.format(w.getHaltbarkeitsDatum()));
+        }
+    }
+     
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -181,11 +219,53 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+//ändern
     private void einlagernButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_einlagernButtonActionPerformed
+        Lagerbestand l= new Lagerbestand();
+        Warenbewegung w = new Warenbewegung();
+        int fachID = 0;
+        String ag = txaAnschaffungsgrund.getText();
+        DateFormat df= new SimpleDateFormat("DD.MM.YYYY");
+        try {
+            Date hd = df.parse(txfHaltbarkeitsdatum.getText());
+        } catch (ParseException ex) {
+            Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        int mng = Integer.parseInt(txfMenge.getText());
+        int td= Integer.parseInt(txfTeilID.getText());
+       
+        Lager.Lagerort lager = (Lager.Lagerort) cbxFachTyp.getSelectedItem();
+        int x = (int) cbxFachX.getSelectedItem();
+        int y = (int) cbxFachY.getSelectedItem();
+        int z = (int) cbxFachZ.getSelectedItem();
+        try {
+            fachID = Lagerfach.getFach(lager, x, y, z).getFachnummer();
+        } catch (SQLException ex) {
+            Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        l.setLagerbestandsnummer(fachID);
+        l.setAnschaffungsgrund(ag);
+        l.setLagerbestandsnummer(td);
+        if(lagerID > 0){
+             l.setLagerbestandsnummer(lagerID);
+        }
+        l.setMenge(mng);
+        try {
+            l.save();
+        } catch (SQLException ex) {
+            Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        refreshLagerbestandTableModel();
         this.dispose();
     }//GEN-LAST:event_einlagernButtonActionPerformed
-
+    private void refreshLagerbestandTableModel(){
+        LagerbestandCollection lc = LagerbestandCollection.getInstance(true);
+        LagerbestandTableModel lm = new LagerbestandTableModel();
+        lm.setData(lc);
+        lagerBestandTable.setModel(lm);
+    }
+    
     private void cbxFachYActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxFachYActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbxFachYActionPerformed
@@ -248,4 +328,8 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
     private javax.swing.JTextField txfMenge;
     private javax.swing.JTextField txfTeilID;
     // End of variables declaration//GEN-END:variables
+
+    void setTable(JTable t) {
+        //To change body of generated methods, choose Tools | Templates.
+    }
 }

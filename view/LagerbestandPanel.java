@@ -1,9 +1,11 @@
 package view;
 
+import helper.Misc;
 import javax.swing.JTable;
 import javax.swing.table.TableColumn;
+import javax.swing.ListSelectionModel;
 import model.table.LagerbestandTableModel;
-
+import model.collection.LagerbestandCollection;
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -61,9 +63,12 @@ public class LagerbestandPanel extends javax.swing.JPanel {
         btnFiltern = new javax.swing.JButton();
 
         LagerbestandTableModel tm = new LagerbestandTableModel();
-        tm.setData(tm.dummyArrayList());
+        tm.setData(LagerbestandCollection.getInstance());
+        tabMaintable.setAutoCreateRowSorter(true);
+        tabMaintable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         tabMaintable.setModel(tm);
         setTableWidths(tabMaintable);
+        tabMaintable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
         tabMaintable.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         scpMainPane.setViewportView(tabMaintable);
 
@@ -173,6 +178,7 @@ public class LagerbestandPanel extends javax.swing.JPanel {
     private void btnteilEinlagernActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnteilEinlagernActionPerformed
         BestandsaenderungFrame bestandsaenderungFrame = new BestandsaenderungFrame(true);
         bestandsaenderungFrame.setVisible(true);
+        bestandsaenderungFrame.setTable(tabMaintable);
     }//GEN-LAST:event_btnteilEinlagernActionPerformed
 
     private void btnSucheActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSucheActionPerformed

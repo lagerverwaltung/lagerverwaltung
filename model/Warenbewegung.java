@@ -6,10 +6,16 @@
 
 package model;
 
+import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.ForeignCollection;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.field.ForeignCollectionField;
 import com.j256.ormlite.table.DatabaseTable;
+import helper.DatabaseManager;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -121,6 +127,19 @@ public class Warenbewegung {
         this.haltbarkeitsDatum = haltbarkeitsDatum;
     }
 	
+    public static Warenbewegung loadWarenbewegung(int id)
+    {
+        Dao<Warenbewegung,Integer> warenbewegungDao = DatabaseManager.getInstance().getWarenbewegungDao();
+        try {
+            List<Warenbewegung> lt = warenbewegungDao.queryForEq("warenbID", id);
+            if(lt.size()>0){
+                return lt.get(0);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Warenbewegung.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
 	
 
 }

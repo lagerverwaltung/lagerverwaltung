@@ -94,7 +94,7 @@ public class DatabaseManager {
             t.setMittelVE(10);
             t.setGrossVE(100);
             t.setLagerort(Lager.Lagerort.freilager);
-            lagerDao.createOrUpdate(t);
+            lagerDao.createOrUpdate(t);//Methode zum Speichern
             
             Lager t1 = new Lager();
             t1.setLagerID(2);
