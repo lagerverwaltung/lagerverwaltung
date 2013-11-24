@@ -55,7 +55,11 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         this.txfTeilID.setEditable(false);
         
     }
-    
+    //Table setzen
+    public void setTable(JTable t)
+    {
+        lagerBestandTable = t;
+    }
      public void initLagerObjekt(int id)
     {
         Lagerbestand l = Lagerbestand.loadLagerObjekt(id);
@@ -366,7 +370,5 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
     private javax.swing.JTextField txfTeilID;
     // End of variables declaration//GEN-END:variables
 
-    void setTable(JTable t) {
-        //To change body of generated methods, choose Tools | Templates.
-    }
+    
 }
