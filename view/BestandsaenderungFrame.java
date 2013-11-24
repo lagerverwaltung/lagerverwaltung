@@ -266,7 +266,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
-     //   refreshLagerbestandTableModel();
+       refreshLagerbestandTableModel();
         this.dispose();
     }//GEN-LAST:event_einlagernButtonActionPerformed
     private void refreshLagerbestandTableModel(){
