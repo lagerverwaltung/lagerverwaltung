@@ -16,6 +16,7 @@ import javax.swing.JTable;
 import model.Lager;
 import model.Lagerbestand;
 import model.Lagerfach;
+import model.Teilebestand;
 import model.Warenbewegung;
 import model.collection.LagerbestandCollection;
 import model.table.LagerbestandTableModel;
@@ -231,18 +232,25 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 //ändern
     private void einlagernButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_einlagernButtonActionPerformed
-        Lagerbestand l= new Lagerbestand();
-        Warenbewegung w = new Warenbewegung();
+        
+        //Variablendeklaration
+        Lagerbestand lb= new Lagerbestand();
+        Warenbewegung wb = new Warenbewegung();
+        Lagerfach lf = new Lagerfach();
+        Teilebestand tb = new Teilebestand();
+        
         int fachID = 0;
-        String ag = txaAnschaffungsgrund.getText();
         DateFormat df= new SimpleDateFormat("DD.MM.YYYY");
+                
+        //Übernahme der Variablen aus der GUI
+        String ag = txaAnschaffungsgrund.getText();
         try {
             Date hd = df.parse(txfHaltbarkeitsdatum.getText());
         } catch (ParseException ex) {
             Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
         int mng = Integer.parseInt(txfMenge.getText());
-        int td= Integer.parseInt(txfTeilID.getText());
+        int teiID = Integer.parseInt(txfTeilID.getText());
        
         String ort = (String) cbxFachTyp.getSelectedItem();
         int x = Integer.parseInt((String) cbxFachX.getSelectedItem());
@@ -251,18 +259,37 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         try {
             fachID = Lagerfach.getFach(ort, x, y, z).getFachnummer();
         } catch (SQLException ex) {
-            Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, ex); 
         }
         
-        l.setLagerbestandsnummer(fachID);
-        l.setAnschaffungsgrund(ag);
-        l.setLagerbestandsnummer(td);
-        if(lagerID > 0){
-             l.setLagerbestandsnummer(lagerID);
-        }
-        l.setMenge(mng);
+        //Setzt das Ziellagerfach zusammen
+        lf.setFachnummer(fachID);
+        lf.setX(x);
+        lf.setY(y);
+        lf.setZ(z);
+      
+        //Setzt den Teilebestand zusammen
+        tb.setIdentnummer(teiID);
+        
+        //Setzt den Lagerbestand zusammen
+        lb.setTeil(tb);
+        lb.setLagerfach(lf);
+        lb.setAnschaffungsgrund(ag);
+        lb.setMenge(mng);
+        
+         /* Testausgabe
+        System.out.println("FachID "+fachID+"\n"
+                            +"TeilID "+td+"\n"
+                            +"Anschaffungsgrund "+ag+"\n"
+                            +"LagerID "+lagerID
+                            +"Menge "+mng+"\n"
+                            +"x: "+lf.getX()+ ", y :"+lf.getY()+ ", z :"+lf.getZ()+"\n"
+        );
+        */
+
+        //Lagerbestand speichern
         try {
-            l.save();
+            lb.save();
         } catch (SQLException ex) {
             Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
