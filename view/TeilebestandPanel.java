@@ -64,6 +64,7 @@ public class TeilebestandPanel extends javax.swing.JPanel {
         lblTeilebestandErweitern = new javax.swing.JLabel();
         btnFilterZurücksetzen = new javax.swing.JButton();
         btnFiltern = new javax.swing.JButton();
+        btnteilEinlagern = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(1020, 761));
 
@@ -123,6 +124,13 @@ public class TeilebestandPanel extends javax.swing.JPanel {
             }
         });
 
+        btnteilEinlagern.setText("Teile einlagern");
+        btnteilEinlagern.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnteilEinlagernActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -146,13 +154,15 @@ public class TeilebestandPanel extends javax.swing.JPanel {
                         .addComponent(btnTeilAendern, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnTeilLoschen, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(149, 149, 149)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnteilEinlagern, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblTeilebestandErweitern)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnNeuesTeil, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(lblTeilebestand, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(scpMain))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -174,7 +184,8 @@ public class TeilebestandPanel extends javax.swing.JPanel {
                     .addComponent(btnTeilAendern)
                     .addComponent(btnTeilLoschen)
                     .addComponent(lblTeilebestandErweitern)
-                    .addComponent(btnNeuesTeil))
+                    .addComponent(btnNeuesTeil)
+                    .addComponent(btnteilEinlagern))
                 .addGap(364, 364, 364))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -212,6 +223,20 @@ public class TeilebestandPanel extends javax.swing.JPanel {
        TeileFilterFrame.getInstance(mainFrame);
     }//GEN-LAST:event_btnFilternActionPerformed
 
+    private void btnteilEinlagernActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnteilEinlagernActionPerformed
+        int selectedId;
+        if(tblMain.getSelectedRow() >=0){
+        selectedId = Integer.parseInt(tblMain.getValueAt(tblMain.getSelectedRow(), 0).toString());
+        BestandsaenderungFrame bestandsaenderungFrame = new BestandsaenderungFrame(true,selectedId);
+        bestandsaenderungFrame.setVisible(true);
+        bestandsaenderungFrame.setTable(tblMain);
+        }
+        else{
+            Misc.createErrorDialog(mainFrame, "Es muss erst ein Teil zum Einlagern aus der "
+                    + "Liste gewählt werden!", true);
+        }
+    }//GEN-LAST:event_btnteilEinlagernActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnFilterZurücksetzen;
     private javax.swing.JButton btnFiltern;
@@ -219,6 +244,7 @@ public class TeilebestandPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnSuchen;
     private javax.swing.JButton btnTeilAendern;
     private javax.swing.JButton btnTeilLoschen;
+    private javax.swing.JButton btnteilEinlagern;
     private javax.swing.JLabel lblAktionSelektiert;
     private javax.swing.JLabel lblFreitextsuche;
     private javax.swing.JLabel lblTeilebestand;

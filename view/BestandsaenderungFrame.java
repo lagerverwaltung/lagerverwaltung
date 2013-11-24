@@ -45,6 +45,16 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         
     }
     
+    BestandsaenderungFrame(boolean einlagern, int id) {
+        this();
+        this.einlagern = einlagern;
+        lblEinlagern.setText("Teile einlagern");
+        einlagernButton.setText("Teile einlagern");
+        this.txfTeilID.setText(""+id);
+        this.txfTeilID.setEditable(false);
+        
+    }
+    
      public void initLagerObjekt(int id)
     {
         Lagerbestand l = Lagerbestand.loadLagerObjekt(id);
