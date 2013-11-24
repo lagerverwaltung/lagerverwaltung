@@ -56,6 +56,11 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         
     }
     
+        public void setTable(JTable t)
+    {
+        lagerBestandTable = t;
+    }
+    
      public void initLagerObjekt(int id)
     {
         Lagerbestand l = Lagerbestand.loadLagerObjekt(id);
@@ -256,6 +261,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         int x = Integer.parseInt((String) cbxFachX.getSelectedItem());
         int y = Integer.parseInt((String) cbxFachY.getSelectedItem());
         int z = Integer.parseInt((String) cbxFachZ.getSelectedItem());
+       
         try {
             fachID = Lagerfach.getFach(ort, x, y, z).getFachnummer();
         } catch (SQLException ex) {
@@ -293,7 +299,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
-     //   refreshLagerbestandTableModel();
+        refreshLagerbestandTableModel();
         this.dispose();
     }//GEN-LAST:event_einlagernButtonActionPerformed
     private void refreshLagerbestandTableModel(){
@@ -366,7 +372,5 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
     private javax.swing.JTextField txfTeilID;
     // End of variables declaration//GEN-END:variables
 
-    void setTable(JTable t) {
-        //To change body of generated methods, choose Tools | Templates.
-    }
+
 }
