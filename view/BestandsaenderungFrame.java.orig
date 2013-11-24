@@ -55,12 +55,20 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         this.txfTeilID.setEditable(false);
         
     }
-
+<<<<<<< HEAD
+    
+        public void setTable(JTable t)
+    {
+        lagerBestandTable = t;
+    }
+    
+=======
     //Table setzen
     public void setTable(JTable t)
     {
         lagerBestandTable = t;
     }
+>>>>>>> 547874a5b53271b58cdb5505c34070365db3b9de
      public void initLagerObjekt(int id)
     {
         Lagerbestand l = Lagerbestand.loadLagerObjekt(id);
@@ -261,6 +269,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         int x = Integer.parseInt((String) cbxFachX.getSelectedItem());
         int y = Integer.parseInt((String) cbxFachY.getSelectedItem());
         int z = Integer.parseInt((String) cbxFachZ.getSelectedItem());
+       
         try {
             fachID = Lagerfach.getFach(ort, x, y, z).getFachnummer();
         } catch (SQLException ex) {
@@ -298,8 +307,11 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
-     //   refreshLagerbestandTableModel();
+<<<<<<< HEAD
+        refreshLagerbestandTableModel();
+=======
        refreshLagerbestandTableModel();
+>>>>>>> 547874a5b53271b58cdb5505c34070365db3b9de
         this.dispose();
     }//GEN-LAST:event_einlagernButtonActionPerformed
     private void refreshLagerbestandTableModel(){
@@ -372,4 +384,9 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
     private javax.swing.JTextField txfTeilID;
     // End of variables declaration//GEN-END:variables
 
+<<<<<<< HEAD
+
+=======
+    
+>>>>>>> 547874a5b53271b58cdb5505c34070365db3b9de
 }
