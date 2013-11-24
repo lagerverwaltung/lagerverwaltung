@@ -21,8 +21,8 @@ public class WarenbewegungTableModel extends AbstractTableModel {
         this.warenbRows = arr;
     }
     
-    public ArrayList<Object[]> dummyArrayList()
-    {
+   public ArrayList<Object[]> dummyArrayList(){
+    
         ArrayList<Object[]> arr = new ArrayList();
         String[] row = {"1","Stollen","-","0","HR010101","3","Dr. Modlich","12.11.2013","24.12.2013","Ersteinlagerung"};
         arr.add(row);
@@ -32,8 +32,9 @@ public class WarenbewegungTableModel extends AbstractTableModel {
         arr.add(row2);
         String[] row3 = {"2","Stollen","HR010101","3","HR010201","1","Dr. Modlich","13.11.2013","24.12.2013","Split"};
         arr.add(row3);
-        return arr;
-    }
+        return arr; 
+
+   }
     
     public int getColumnCount() {
         return 10;
