@@ -88,15 +88,15 @@ public class LagerbestandTableModel extends AbstractTableModel {
     }*/
     
         public Object getValueAt(int row, int col) {
-        Lagerbestand rowO = new Lagerbestand();
-        Lagerfach lf = new Lagerfach();
-        Teilebestand tl = new Teilebestand();
-        Lager l = new Lager();
-       
-        
+        Lagerbestand rowO=null;
+        rowO = (Lagerbestand) lagerbestandRows.get(row);
+        Lagerfach lf = rowO.getLagerfach();
+        Teilebestand tl = rowO.getTeil();
+        Lager l = lf.getLager();
+      
         
         if(lagerbestandRows.size()>0){
-            rowO = (Lagerbestand) lagerbestandRows.get(row);
+         rowO = (Lagerbestand) lagerbestandRows.get(row);
             if(rowO != null){
                 switch(col){
                     case 0:
