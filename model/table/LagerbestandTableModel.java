@@ -88,52 +88,51 @@ public class LagerbestandTableModel extends AbstractTableModel {
     }*/
     
         public Object getValueAt(int row, int col) {
-        Lagerbestand rowO;
-        Lager rowA;
-        Teilebestand rowC;
-        Lagerfach rowD;
+        Lagerbestand rowO = null;
+        Teilebestand tl = rowO.getTeil();
+        Lagerfach lf = rowO.getLagerfach();
+        Lager l = lf.getLager();
+      
         
         if(lagerbestandRows.size()>0){
             rowO = (Lagerbestand) lagerbestandRows.get(row);
-            rowA = (Lager) lagerbestandRows.get(row);
-            rowC = (Teilebestand) lagerbestandRows.get(row);
-            rowD = (Lagerfach) lagerbestandRows.get(row);
-            if(rowO != null && rowA != null && rowC != null&& rowD != null){
+            if(rowO != null){
                 switch(col){
                     case 0:
-                         return rowO.getLagerfach();
+                         return lf.getFachnummer();
+                          
                     case 1:
                        
-                        if(rowA.getLagerort() == null){
+                        if(lf.getLager() == null){
                         } else {
-                         return rowA.getLagerort();
+                         return lf.getLager();
                         }
                     case 2:
-                        if(rowD.getX() != 0){
-                        return rowD.getX();
+                        if(lf.getX() != 0){
+                        return lf.getX();
                         }
                     case 3:
-                            if(rowD.getY() != 0){
-                            return rowD.getY();
+                            if(lf.getY() != 0){
+                            return lf.getY();
                             }
                     case 4:
-                            if(rowD.getZ() != 0){
-                            return rowD.getZ();
+                            if(lf.getZ() != 0){
+                            return lf.getZ();
                             }
                     case 5:
-                            if(rowC.getBezeichnung() != null){
-                            return rowC.getBezeichnung();
+                            if(tl.getBezeichnung() != null){
+                            return tl.getBezeichnung();
                             }
                     case 6:
-                             if(rowC.getIdentnummer() != 0){
-                            return rowC.getIdentnummer();
+                             if(tl.getIdentnummer() != 0){
+                            return tl.getIdentnummer();
                             }
-                    case7:
+                    case 7:
                              if(rowO.getMenge()!= 0){
                             return rowO.getMenge();
                          }
-                    case8:
-                            System.out.println("8");
+                    case 8:
+                            
                             if(rowO.getAnschaffungsgrund() != null){
                             return rowO.getAnschaffungsgrund();
                         }
