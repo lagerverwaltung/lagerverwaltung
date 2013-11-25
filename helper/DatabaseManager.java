@@ -22,6 +22,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 import model.Lagerbestand;
 import model.Lagerfach;
 import model.Teilebestand;
@@ -84,9 +85,9 @@ public class DatabaseManager {
             zielpositionDao = DaoManager.createDao(connectionSource, ZielPosition.class);
             warenbewegungDao = DaoManager.createDao(connectionSource, Warenbewegung.class);
             
-            /* Test Komplettzusammenhang
+            /*
             Lager t = new Lager();
-            t.setLagerID(1);
+            t.setLagerID(33);
             t.setBreite(1);
             t.setHoehe(1);
             t.setTiefe(1);
@@ -97,7 +98,7 @@ public class DatabaseManager {
             lagerDao.createOrUpdate(t);//Methode zum Speichern
             
             Lager t1 = new Lager();
-            t1.setLagerID(2);
+            t1.setLagerID(34);
             t1.setBreite(1);
             t1.setHoehe(1);
             t1.setTiefe(1);
@@ -122,7 +123,7 @@ public class DatabaseManager {
             Teilebestand tb = new Teilebestand();
             tb.setBezeichnung("Schraube M5");
             tb.setMaterialgruppe("Materialgruppe");
-            tb.setZeichnungsnummer(121212);
+            tb.setZeichnungsnummer("1212f");
             tb.setPreis((float)180.12);
             tb.setVe(1);
             teilebestandDao.createOrUpdate(tb);
@@ -140,6 +141,7 @@ public class DatabaseManager {
             warenbewegungDao.create(wb);
             int  w = warenbewegungDao.extractId(wb);
             
+            //Wie man Zielposition verwendet:
             ZielPosition z1 = new ZielPosition();
             z1.setLagerfach(lf1);
             z1.setMenge(10);
@@ -151,6 +153,14 @@ public class DatabaseManager {
             z2.setMenge(10);
             z2.setWarenbewegung(wb);
             zielpositionDao.createOrUpdate(z2);
+            
+            List l = warenbewegungDao.queryForEq("warenbID", w);
+            Warenbewegung wb2 = (Warenbewegung) l.get(0);
+            ForeignCollection<ZielPosition> al;
+            al = wb2.getArrZielPosition();
+            for (ZielPosition z : al) {
+                System.out.println("ZielPosNr"+z.getZielPositionID());
+            }
             */
     }
 
