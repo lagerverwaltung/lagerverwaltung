@@ -27,13 +27,13 @@ public class Warenbewegung {
     @DatabaseField(columnName = "warenbID", generatedId = true)
     private int warenBewegungsID;
       
-    @ForeignCollectionField(columnName = "zielPositionID",eager = true)
+    @ForeignCollectionField(eager = true)
     ForeignCollection<ZielPosition> arrZielPosition;
     
     @DatabaseField()
     private String verantwortlicher;
     
-    @DatabaseField(columnName = "lagerbestandID", foreign = true)
+    @DatabaseField(columnName = "lagerbestandID", foreign = true, foreignAutoRefresh=true)
     private Lagerbestand lagerbestand;
     
     @DatabaseField()

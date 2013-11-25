@@ -21,10 +21,10 @@ public class Lagerbestand {
     @DatabaseField(columnName = "lagerbestandID", generatedId = true)
     private int lagerbestandsnummer;
     
-    @DatabaseField(columnName = "teilID", foreign = true)
+    @DatabaseField(columnName = "teilID", foreign = true, foreignAutoRefresh=true)
     private Teilebestand teil;
     
-    @DatabaseField(columnName = "fachID", foreign = true)
+    @DatabaseField(columnName = "fachID", foreign = true, foreignAutoRefresh=true)
     private Lagerfach lagerfach;
     
     @DatabaseField()
