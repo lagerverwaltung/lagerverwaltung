@@ -108,6 +108,7 @@ public class WarenbewegungTableModel extends AbstractTableModel{
                     case 5:
                         //name = "Menge";
                         return "zielMenge";
+                     
                     case 6:
                         //name = "Verantwortlicher";
                         if(rowO.getVerantwortlicher() != null){

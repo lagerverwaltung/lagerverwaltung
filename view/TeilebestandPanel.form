@@ -51,7 +51,7 @@
                   <Component id="lblTeilebestand" min="-2" pref="151" max="-2" attributes="0"/>
                   <Component id="scpMain" alignment="0" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace pref="13" max="32767" attributes="0"/>
+              <EmptySpace pref="88" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -73,11 +73,11 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lblAktionSelektiert" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnTeilAendern" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnTeilLoschen" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lblTeilebestandErweitern" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnNeuesTeil" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnteilEinlagern" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnTeilAendern" alignment="1" min="-2" pref="23" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="364" max="-2" attributes="0"/>
           </Group>

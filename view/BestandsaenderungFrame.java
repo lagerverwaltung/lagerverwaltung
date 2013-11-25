@@ -20,6 +20,7 @@ import model.Teilebestand;
 import model.Warenbewegung;
 import model.collection.LagerbestandCollection;
 import model.table.LagerbestandTableModel;
+import model.table.TeileTableModel;
 
 /**
  *
@@ -28,6 +29,7 @@ import model.table.LagerbestandTableModel;
 //ändern
 public class BestandsaenderungFrame extends javax.swing.JFrame {
     Boolean einlagern = false;
+    Boolean auslagern = false;
     JTable lagerBestandTable;
     int lagerID;
     /**
@@ -38,13 +40,13 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }
 
-    BestandsaenderungFrame(boolean einlagern) {
+   BestandsaenderungFrame(boolean einlagern) {
         this();
         this.einlagern = einlagern;
         lblEinlagern.setText("Teile einlagern");
-        einlagernButton.setText("Teile einlagern");
+        einlagernButton.setText("Teile einlagern");} 
         
-    }
+   
     
     BestandsaenderungFrame(boolean einlagern, int id) {
         this();
@@ -52,9 +54,23 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         lblEinlagern.setText("Teile einlagern");
         einlagernButton.setText("Teile einlagern");
         this.txfTeilID.setText(""+id);
-        this.txfTeilID.setEditable(false);
-        
+        this.txfTeilID.setEditable(false); 
     }
+        //Bestandsänderungsframe um Teile auszulagern
+        BestandsaenderungFrame(boolean auslagern, int id,String anschGr,String hbDate) {
+        this();
+        this.auslagern = auslagern;
+        lblEinlagern.setText("Teile auslagern");
+        einlagernButton.setText("Teile auslagern");
+        this.txfTeilID.setText(""+id);
+        this.txaAnschaffungsgrund.setText(anschGr);
+        this.txfHaltbarkeitsdatum.setText(hbDate+"kommt noch");
+      //  this.txfHaltbarkeitsdatum.setText(haltbDate);
+             this.txfTeilID.setEditable(false);
+        }
+        
+        
+    
 
     //Table setzen
     public void setTable(JTable t)

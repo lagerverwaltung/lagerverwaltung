@@ -162,7 +162,7 @@ public class TeilebestandPanel extends javax.swing.JPanel {
                         .addComponent(btnNeuesTeil, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(lblTeilebestand, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(scpMain))
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addContainerGap(88, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -181,11 +181,11 @@ public class TeilebestandPanel extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblAktionSelektiert)
-                    .addComponent(btnTeilAendern)
                     .addComponent(btnTeilLoschen)
                     .addComponent(lblTeilebestandErweitern)
                     .addComponent(btnNeuesTeil)
-                    .addComponent(btnteilEinlagern))
+                    .addComponent(btnteilEinlagern)
+                    .addComponent(btnTeilAendern, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(364, 364, 364))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -201,7 +201,7 @@ public class TeilebestandPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnSuchenActionPerformed
 
     private void btnTeilAendernActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTeilAendernActionPerformed
-        int selectedId;
+         int selectedId;
         if(tblMain.getSelectedRow() >=0){
             selectedId = Integer.parseInt(tblMain.getValueAt(tblMain.getSelectedRow(), 0).toString());
             TeilFrame teilframe = new TeilFrame(true);

@@ -1,15 +1,14 @@
 package view;
 
 import helper.Misc;
+import java.util.Date;
 import javax.swing.JTable;
 import javax.swing.table.TableColumn;
 import javax.swing.ListSelectionModel;
 import model.table.LagerbestandTableModel;
 import model.collection.LagerbestandCollection;
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+// import model.table.WarenbewegungTableModel;
+
 
 /**
  *
@@ -189,15 +188,47 @@ public class LagerbestandPanel extends javax.swing.JPanel {
         UmlagernFrame umlagernframe = new UmlagernFrame();
         umlagernframe.setVisible(true);
     }//GEN-LAST:event_btnTeilUmlagernActionPerformed
+    /**
+     * Formulaar Teile Auslager mit Daten()ID,Anschaffungsgrund und Haltbarkeitsdatum befüllenbefüllen
+    */
 
     private void btnTeilAuslagernActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTeilAuslagernActionPerformed
-        BestandsaenderungFrame bestandsaenderungFrame = new BestandsaenderungFrame();
+       int selectedId;
+       String selectedAnschGr;
+       String selectedHbDate;
+        if(tabMaintable.getSelectedRow() >=0){
+        selectedId = Integer.parseInt(tabMaintable.getValueAt(tabMaintable.getSelectedRow(), 0).toString());
+        /**
+         * Anschaffungsgrund Attribute wird aus der Tabelle tabMainTable(Lagerbestandstabelle) aus der 8.Position herausgezogen
+          */
+        selectedAnschGr = tabMaintable.getValueAt(tabMaintable.getSelectedRow(), 8).toString();
+        //hier wird späterWert Attribut Haltbarkeitsdatum hbDateaus der Tabelle Warenbewegung ausgelesen
+        selectedHbDate = tabMaintable.getValueAt(tabMaintable.getSelectedRow(), 0).toString();
+        BestandsaenderungFrame bestandsaenderungFrame = new BestandsaenderungFrame(true,selectedId,selectedAnschGr,selectedHbDate);
         bestandsaenderungFrame.setVisible(true);
+        bestandsaenderungFrame.initLagerObjekt(selectedId);
+        bestandsaenderungFrame.setTable(tabMaintable);
+        }
+        else{
+            Misc.createErrorDialog(mainFrame, "Es muss erst ein Teil zum Auslagern aus der "
+                    + "Liste gewählt werden!", true);
+        }
+                                  
     }//GEN-LAST:event_btnTeilAuslagernActionPerformed
 
     private void btnTeilSplittenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTeilSplittenActionPerformed
-        UmlagernFrame umlagernframe = new UmlagernFrame(true);
-        umlagernframe.setVisible(true);
+         int selectedId;
+        if(tabMaintable.getSelectedRow() >=0){
+        selectedId = Integer.parseInt(tabMaintable.getValueAt(tabMaintable.getSelectedRow(), 0).toString());
+        
+        BestandsaenderungFrame bestandsaenderungFrame = new BestandsaenderungFrame(true,selectedId);
+        bestandsaenderungFrame.setVisible(true);
+        bestandsaenderungFrame.setTable(tabMaintable);
+        }
+        else{
+            Misc.createErrorDialog(mainFrame, "Es muss erst ein Teil zum Splitten aus der "
+                    + "Liste gewählt werden!", true);
+        }
     }//GEN-LAST:event_btnTeilSplittenActionPerformed
 
     private void btnFilternActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFilternActionPerformed
