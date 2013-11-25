@@ -6,19 +6,21 @@ package model.table;
 
 import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
+import model.Warenbewegung;
+import model.collection.WarenbewegungCollection;
 
 /**
  *
  * @author simon
  */
-public class WarenbewegungTableModel extends AbstractTableModel {
+public class WarenbewegungTableModel extends AbstractTableModel{
 
-
-    ArrayList<Object[]> warenbRows = new ArrayList();
+    WarenbewegungCollection<Warenbewegung> warenRows = new WarenbewegungCollection();
+    ArrayList<Object[]> warenRowsArr = new ArrayList();
     
     public void setData(ArrayList<Object[]> arr)
     {
-        this.warenbRows = arr;
+        this.warenRowsArr = arr;
     }
     
    public ArrayList<Object[]> dummyArrayList(){
@@ -41,7 +43,7 @@ public class WarenbewegungTableModel extends AbstractTableModel {
     }
     
     public int getRowCount() {
-        return warenbRows.size();
+        return warenRowsArr.size();
     }
 
     public String getColumnName(int col) {
@@ -83,11 +85,44 @@ public class WarenbewegungTableModel extends AbstractTableModel {
     }
 
     public Object getValueAt(int row, int col) {
-        if(warenbRows.size()>0){
+        Warenbewegung rowO;
+        if(warenRows.size()>0){
+            rowO = (Warenbewegung) warenRows.get(row);
+            if(rowO != null){
+                switch(col){
+                    case 0:
+                        return rowO.getWarenBewegungsID();
+                    case 1:
+                        //name = "Teil";
+                    case 2:
+                        //name = "Quellfach";
+                    case 3:
+                        //name = "Menge";
+                    case 4:
+                        //name = "Zielfach";
+                    case 5:
+                        //name = "Menge";
+                    case 6:
+                        //name = "Verantwortlicher";
+                    case 7:
+                        //name = "Datum";
+                    case 8:
+                        //name = "Haltbar bis";
+                    case 9:
+                        //name = "Typ";
+                    default:
+                        return "empty";
+                }
+                
+            }
+        }
+        return "notfoudnd";
+        /*if(warenbRows.size()>0){
             Object[] commisionColumns = warenbRows.get(row);
             return commisionColumns[col];
         }
         return "notfound";
+        */
     }
 
     public Class getColumnClass(int c) {
