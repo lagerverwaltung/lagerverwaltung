@@ -261,7 +261,16 @@ public class TeilFrame extends javax.swing.JFrame {
         float euro = 0;
         
         try {
+            /*ersetzt alle Kommas durch Punkte,
+            * um Floatanforderungen zu entsrpechen
+            */
+             String euroStr = txfPreisInEuro.getText();
+             if (euroStr.contains(",")){
+                 euroStr = euroStr.replace(',', '.');
+                 euro = Float.parseFloat(euroStr);
+             }else{
              euro = Float.parseFloat(txfPreisInEuro.getText());
+             }
         }
         catch(NumberFormatException e) {
             errors += "Der Preis muss eine Fließkommazahl sein. Verwenden sie Punkt"

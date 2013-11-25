@@ -227,6 +227,7 @@ public class TeilebestandPanel extends javax.swing.JPanel {
         int selectedId;
         if(tblMain.getSelectedRow() >=0){
         selectedId = Integer.parseInt(tblMain.getValueAt(tblMain.getSelectedRow(), 0).toString());
+        
         BestandsaenderungFrame bestandsaenderungFrame = new BestandsaenderungFrame(true,selectedId);
         bestandsaenderungFrame.setVisible(true);
         bestandsaenderungFrame.setTable(tblMain);
