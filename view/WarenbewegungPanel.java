@@ -1,7 +1,9 @@
 package view;
 
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 import javax.swing.table.TableColumn;
+import model.collection.WarenbewegungCollection;
 import model.table.WarenbewegungTableModel;
 
 /*
@@ -64,9 +66,12 @@ public class WarenbewegungPanel extends javax.swing.JPanel {
         panMain.setPreferredSize(new java.awt.Dimension(1020, 761));
 
         WarenbewegungTableModel tm = new WarenbewegungTableModel();
-        tm.setData(tm.dummyArrayList());
+        tm.setData(WarenbewegungCollection.getInstance());
+        tblMain.setAutoCreateRowSorter(true);
+        tblMain.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         tblMain.setModel(tm);
         setTableWidths(tblMain);
+        tblMain.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
         tblMain.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         scpMain.setViewportView(tblMain);
 

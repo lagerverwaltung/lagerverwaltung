@@ -79,7 +79,6 @@ public class TeileTableModel extends AbstractTableModel {
                             return rowO.getZeichnungsnummer();
                          }
                     case 4:
-                        System.out.println("4");
                         if(rowO.getPreis() != 0){
                             return new Float(rowO.getPreis());
                         }

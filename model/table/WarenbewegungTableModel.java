@@ -18,7 +18,7 @@ public class WarenbewegungTableModel extends AbstractTableModel{
     WarenbewegungCollection<Warenbewegung> warenRows = new WarenbewegungCollection();
     ArrayList<Object[]> warenRowsArr = new ArrayList();
     
-    public void setData(ArrayList<Object[]> arr)
+    public void setData(WarenbewegungCollection<Warenbewegung> arr)
     {
         this.warenRowsArr = arr;
     }
@@ -91,25 +91,41 @@ public class WarenbewegungTableModel extends AbstractTableModel{
             if(rowO != null){
                 switch(col){
                     case 0:
+                        //WarenbewegungsID
                         return rowO.getWarenBewegungsID();
                     case 1:
                         //name = "Teil";
+                        return "TeilID";
                     case 2:
                         //name = "Quellfach";
+                        return "QuellfachID";
                     case 3:
                         //name = "Menge";
+                        return "Quell-Menge";
                     case 4:
                         //name = "Zielfach";
+                        return "ZielfachID";
                     case 5:
                         //name = "Menge";
+                        return "zielMenge";
                     case 6:
                         //name = "Verantwortlicher";
+                        if(rowO.getVerantwortlicher() != null){
+                            return rowO.getVerantwortlicher();
+                        }
                     case 7:
                         //name = "Datum";
+                        if(rowO.getDatum() != null){
+                            return rowO.getDatum();
+                        }
                     case 8:
                         //name = "Haltbar bis";
+                        if(rowO.getHaltbarkeitsDatum() != null){
+                            return rowO.getHaltbarkeitsDatum();
+                        }
                     case 9:
                         //name = "Typ";
+                        return "Teiletyp";
                     default:
                         return "empty";
                 }
