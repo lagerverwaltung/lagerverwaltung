@@ -67,7 +67,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         einlagernButton.setText("Teile auslagern");
         this.txfTeilID.setText(""+id);
         this.txaAnschaffungsgrund.setText(anschGr);
-        this.txfHaltbarkeitsdatum.setText(hbDate+"kommt noch");
+    //    this.txfHaltbarkeitsdatum.setText(hbDate+"kommt noch");
       //  this.txfHaltbarkeitsdatum.setText(haltbDate);
              this.txfTeilID.setEditable(false);
         }
@@ -118,8 +118,6 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         lblMenge = new javax.swing.JLabel();
         txfMenge = new javax.swing.JTextField();
         einlagernButton = new javax.swing.JButton();
-        lblHaltbarkeitsdatum = new javax.swing.JLabel();
-        txfHaltbarkeitsdatum = new javax.swing.JTextField();
         cbxFachTyp = new javax.swing.JComboBox();
         cbxFachX = new javax.swing.JComboBox();
         cbxFachY = new javax.swing.JComboBox();
@@ -151,10 +149,6 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
             }
         });
 
-        lblHaltbarkeitsdatum.setText("Haltbarkeitsdatum:");
-
-        txfHaltbarkeitsdatum.setText("dd.mm.YYYY");
-
         cbxFachTyp.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "FL", "RL" }));
 
         cbxFachX.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
@@ -184,12 +178,10 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblAnschaffungsgrund)
-                            .addComponent(lblMenge)
-                            .addComponent(lblHaltbarkeitsdatum))
+                            .addComponent(lblMenge))
                         .addGap(39, 39, 39)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txfMenge, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txfHaltbarkeitsdatum, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(spnAnschaffungsgrund)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -242,11 +234,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblMenge)
                     .addComponent(txfMenge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblHaltbarkeitsdatum, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txfHaltbarkeitsdatum, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(37, 37, 37)
+                .addGap(75, 75, 75)
                 .addComponent(einlagernButton)
                 .addContainerGap(34, Short.MAX_VALUE))
         );
@@ -415,13 +403,11 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
     private javax.swing.JLabel lblAnschaffungsgrund;
     private javax.swing.JLabel lblEinlagern;
     private javax.swing.JLabel lblFachAdresse;
-    private javax.swing.JLabel lblHaltbarkeitsdatum;
     private javax.swing.JLabel lblHinweis;
     private javax.swing.JLabel lblMenge;
     private javax.swing.JLabel lblTeilID;
     private javax.swing.JScrollPane spnAnschaffungsgrund;
     private javax.swing.JTextArea txaAnschaffungsgrund;
-    private javax.swing.JTextField txfHaltbarkeitsdatum;
     private javax.swing.JTextField txfMenge;
     private javax.swing.JTextField txfTeilID;
     // End of variables declaration//GEN-END:variables
