@@ -4,7 +4,6 @@
  */
 package view;
 
-import com.j256.ormlite.dao.ForeignCollection;
 import helper.DatabaseManager;
 import java.sql.SQLException;
 import java.text.DateFormat;
@@ -12,7 +11,6 @@ import java.text.Format;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JTable;
@@ -24,7 +22,6 @@ import model.Warenbewegung;
 import model.ZielPosition;
 import model.collection.LagerbestandCollection;
 import model.table.LagerbestandTableModel;
-import model.table.TeileTableModel;
 
 /**
  *
@@ -36,12 +33,6 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
     Boolean auslagern = false;
     JTable lagerBestandTable;
     int lagerID;
-    private String[] cbxArrOrt;
-    private String[] cbxArrX;
-    private String[] cbxArrY;
-    private String[] cbxArrZ;
-    
-    
     
     /**
      * Creates new form BestandsaenderungFrame
@@ -49,63 +40,50 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
     public BestandsaenderungFrame(){
         initComponents();
         setLocationRelativeTo(null);
-        
-        try{
-        cbxArrOrt = fillCbx('o');
-        cbxArrX = fillCbx('x');
-        cbxArrY = fillCbx('y');
-        cbxArrZ = fillCbx('z');
+        try {
+            loadHlCbx();
         } catch (SQLException ex) {
             Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, ex); 
         }
     }
 
-
-    /*
-    * erstellt Arrays für die ComboBoxes
-    */
-    private String[] fillCbx(char c) throws SQLException{
-        String[] s = null;
-        Lager lager = new Lager();
-        DatabaseManager dbm = new DatabaseManager();
-        List l = dbm.getLagerDao().queryForAll();
-        lager = (Lager) l.get(0);
+    private void loadHlCbx() throws SQLException{
+        Lager hl = Lager.getLager(Lager.Lagerort.hochregal);
+        int x = hl.getHoehe();
+        int y = hl.getBreite();
+        int z = hl.getTiefe();
         
-        switch (c){
-            case 'x':
-                s = fillArr(lager.getHoehe());
-                return s;
-            case 'y':
-                s = fillArr(lager.getBreite());
-                return s;
-            case 'z':
-                s = fillArr(lager.getTiefe());
-                return s;
-            case 'o':
-                if("freilager".equals(lager.getLagerort().freilager)){
-                    s[0] = "HL";
-                } else {
-                    s[0] = "FL";
-                }
-                return s;
+        for(int i = 1; i >= x; i++){
+            cbxFachX.addItem(i);
         }
-        return s;
-    }
-    
-    /*
-    * @param int i
-    * erstellt ein Array angegebener Größe
-    * und füllt es ganzzahlig und aufsteigend
-    */
-    private String[] fillArr(int i){
-        String[] s = new String[i];
-        for(int j = 0; j > i; j++){
-            s[j] = String.valueOf(j+1);
+        
+        for(int i = 1; i >= x; i++){
+            cbxFachX.addItem(i);
         }
-        return s;
+                
+         for(int i = 1; i >= z; i++){
+            cbxFachX.addItem(i);
+        }
     }
-    
 
+    public void loadFlCbx() throws SQLException{
+        Lager fl = Lager.getLager(Lager.Lagerort.freilager);
+        int x = fl.getHoehe();
+        int y = fl.getBreite();
+        int z = fl.getTiefe();
+        
+        for(int i = 1; i >= x; i++){
+            cbxFachX.addItem(i);
+        }
+        
+        for(int i = 1; i >= x; i++){
+            cbxFachX.addItem(i);
+        }
+                
+         for(int i = 1; i >= z; i++){
+            cbxFachX.addItem(i);
+        }
+    }
 
    BestandsaenderungFrame(boolean einlagern) {
         this();
@@ -213,19 +191,23 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
             }
         });
 
-        cbxFachTyp.setModel(new javax.swing.DefaultComboBoxModel(cbxArrOrt));
+        cbxFachTyp.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "HL", "FL"}));
+        cbxFachTyp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxFachTypActionPerformed(evt);
+            }
+        });
 
-        cbxFachX.setModel(new javax.swing.DefaultComboBoxModel(cbxArrZ);
-        ));
+        cbxFachX.setModel(new javax.swing.DefaultComboBoxModel());
 
-        cbxFachY.setModel(new javax.swing.DefaultComboBoxModel(cbxArrX));
+        cbxFachY.setModel(new javax.swing.DefaultComboBoxModel());
         cbxFachY.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbxFachYActionPerformed(evt);
             }
         });
 
-        cbxFachZ.setModel(new javax.swing.DefaultComboBoxModel(cbxArrY));
+        cbxFachZ.setModel(new javax.swing.DefaultComboBoxModel());
 
         txfTeilID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -423,6 +405,22 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
     private void txfTeilIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfTeilIDActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txfTeilIDActionPerformed
+
+    private void cbxFachTypActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxFachTypActionPerformed
+        if(cbxFachTyp.getSelectedItem().equals("HL")){
+            try {
+                loadHlCbx();
+            } catch (SQLException ex) {
+                Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }else{
+            try {
+                loadFlCbx();
+            } catch (SQLException ex) {
+                Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_cbxFachTypActionPerformed
 
     /**
      * @param args the command line arguments
