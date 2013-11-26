@@ -106,7 +106,7 @@ public class LagerbestandTableModel extends AbstractTableModel {
                        
                         if(lf.getLager() == null){
                         } else {
-                         return lf.getLager();
+                         return lf.getLager().getLagerort();
                         }
                     case 2:
                         if(lf.getX() != 0){
