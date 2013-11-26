@@ -95,8 +95,11 @@ public class Lagerfach {
         }
         return null;
     }
-    //gibt Lagerfach zur lagerfachadresse aus
-    
+    /*
+    * @param String ort, x int, y int, z int
+    * @return Lagerfach
+    * gibt Lagerfach zur lagerfachadresse aus
+    */
     public static Lagerfach getFach(String ort, int x, int y, int z) throws SQLException{
         
         int lo = 1;

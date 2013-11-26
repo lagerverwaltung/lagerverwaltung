@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JTable;
+import model.Lager;
 import model.Lagerbestand;
 import model.Lagerfach;
 import model.Teilebestand;
@@ -35,13 +36,76 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
     Boolean auslagern = false;
     JTable lagerBestandTable;
     int lagerID;
+    private String[] cbxArrOrt;
+    private String[] cbxArrX;
+    private String[] cbxArrY;
+    private String[] cbxArrZ;
+    
+    
+    
     /**
      * Creates new form BestandsaenderungFrame
      */
-    public BestandsaenderungFrame() {
+    public BestandsaenderungFrame(){
         initComponents();
         setLocationRelativeTo(null);
+        
+        try{
+        cbxArrOrt = fillCbx('o');
+        cbxArrX = fillCbx('x');
+        cbxArrY = fillCbx('y');
+        cbxArrZ = fillCbx('z');
+        } catch (SQLException ex) {
+            Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, ex); 
+        }
     }
+
+
+    /*
+    * erstellt Arrays für die ComboBoxes
+    */
+    private String[] fillCbx(char c) throws SQLException{
+        String[] s = null;
+        Lager lager = new Lager();
+        DatabaseManager dbm = new DatabaseManager();
+        List l = dbm.getLagerDao().queryForAll();
+        lager = (Lager) l.get(0);
+        
+        switch (c){
+            case 'x':
+                s = fillArr(lager.getHoehe());
+                return s;
+            case 'y':
+                s = fillArr(lager.getBreite());
+                return s;
+            case 'z':
+                s = fillArr(lager.getTiefe());
+                return s;
+            case 'o':
+                if("freilager".equals(lager.getLagerort().freilager)){
+                    s[0] = "HL";
+                } else {
+                    s[0] = "FL";
+                }
+                return s;
+        }
+        return s;
+    }
+    
+    /*
+    * @param int i
+    * erstellt ein Array angegebener Größe
+    * und füllt es ganzzahlig und aufsteigend
+    */
+    private String[] fillArr(int i){
+        String[] s = new String[i];
+        for(int j = 0; j > i; j++){
+            s[j] = String.valueOf(j+1);
+        }
+        return s;
+    }
+    
+
 
    BestandsaenderungFrame(boolean einlagern) {
         this();
@@ -149,18 +213,19 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
             }
         });
 
-        cbxFachTyp.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "FL", "RL" }));
+        cbxFachTyp.setModel(new javax.swing.DefaultComboBoxModel(cbxArrOrt));
 
-        cbxFachX.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
+        cbxFachX.setModel(new javax.swing.DefaultComboBoxModel(cbxArrZ);
+        ));
 
-        cbxFachY.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
+        cbxFachY.setModel(new javax.swing.DefaultComboBoxModel(cbxArrX));
         cbxFachY.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbxFachYActionPerformed(evt);
             }
         });
 
-        cbxFachZ.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
+        cbxFachZ.setModel(new javax.swing.DefaultComboBoxModel(cbxArrY));
 
         txfTeilID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

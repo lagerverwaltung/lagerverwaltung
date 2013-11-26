@@ -71,13 +71,15 @@
               <EmptySpace max="32767" attributes="0"/>
               <Component id="scpMain" min="-2" pref="470" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lblAktionSelektiert" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnTeilLoschen" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblTeilebestandErweitern" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnNeuesTeil" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnteilEinlagern" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="btnTeilAendern" alignment="1" min="-2" pref="23" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="lblAktionSelektiert" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnTeilLoschen" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblTeilebestandErweitern" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnNeuesTeil" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnteilEinlagern" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace min="-2" pref="364" max="-2" attributes="0"/>
           </Group>
