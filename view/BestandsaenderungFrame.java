@@ -305,9 +305,6 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         lb.setAnschaffungsgrund(ag);
         lb.setMenge(mng);
  
-
-        
-        
         //Speichert die Warenbewegung
         wb.setVerantwortlicher("Lagerverwalter");
         wb.setLagerbestand(lb);
