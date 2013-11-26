@@ -5,19 +5,14 @@
 package model.collection;
 import com.j256.ormlite.dao.Dao;
 import helper.DatabaseManager;
-import java.lang.reflect.Array;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.Teilebestand;
 
 /**
- *
+ * @param <Teilebestand>
  * @author simon
  */
 public class TeilebestandCollection<Teilebestand> extends ArrayList {
@@ -31,16 +26,16 @@ public class TeilebestandCollection<Teilebestand> extends ArrayList {
         return singleton;
     }
     
+    public TeilebestandCollection() {
+        loadCollection();
+    }
+    
     public static TeilebestandCollection getInstance(boolean refresh)
     {
          singleton = TeilebestandCollection.getInstance();
          return singleton.loadCollection();
     }
-    
-    public TeilebestandCollection() {
-        loadCollection();
-    }
-    
+   
     public TeilebestandCollection<Teilebestand> loadCollection()
     { 
         try {

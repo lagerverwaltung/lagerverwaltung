@@ -100,7 +100,7 @@ public class Lagerfach {
     public static Lagerfach getFach(String ort, int x, int y, int z) throws SQLException{
         
         int lo = 1;
-        if(ort.equals(Lager.Lagerort.freilager)){
+        if(ort.equals(Lager.Lagerort.freilager.toString())){
             lo = 2;
         }
         

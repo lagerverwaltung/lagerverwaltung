@@ -4,20 +4,23 @@
  */
 package view;
 
+import com.j256.ormlite.dao.ForeignCollection;
+import helper.DatabaseManager;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.Format;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JTable;
-import model.Lager;
 import model.Lagerbestand;
 import model.Lagerfach;
 import model.Teilebestand;
 import model.Warenbewegung;
+import model.ZielPosition;
 import model.collection.LagerbestandCollection;
 import model.table.LagerbestandTableModel;
 
@@ -238,19 +241,24 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
 //ändern
     private void einlagernButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_einlagernButtonActionPerformed
         
+        //Einlagern
+        if(einlagern){
+
         //Variablendeklaration
         Lagerbestand lb= new Lagerbestand();
         Warenbewegung wb = new Warenbewegung();
         Lagerfach lf = new Lagerfach();
         Teilebestand tb = new Teilebestand();
-        
+
         int fachID = 0;
         DateFormat df= new SimpleDateFormat("DD.MM.YYYY");
-                
+        Date hd = new Date();
+        Date today = new Date();
+        
         //Übernahme der Variablen aus der GUI
         String ag = txaAnschaffungsgrund.getText();
         try {
-            Date hd = df.parse(txfHaltbarkeitsdatum.getText());
+            hd = df.parse(txfHaltbarkeitsdatum.getText());
         } catch (ParseException ex) {
             Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -281,26 +289,60 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         lb.setLagerfach(lf);
         lb.setAnschaffungsgrund(ag);
         lb.setMenge(mng);
+ 
+
         
-         /* Testausgabe
-        System.out.println("FachID "+fachID+"\n"
-                            +"TeilID "+td+"\n"
-                            +"Anschaffungsgrund "+ag+"\n"
-                            +"LagerID "+lagerID
-                            +"Menge "+mng+"\n"
-                            +"x: "+lf.getX()+ ", y :"+lf.getY()+ ", z :"+lf.getZ()+"\n"
-        );
-        */
+        
+        //Speichert die Warenbewegung
+        wb.setVerantwortlicher("Lagerverwalter");
+        wb.setLagerbestand(lb);
+        wb.setDatum(today);
+        wb.setHaltbarkeitsDatum(hd);
+        
+        //Speichern der Zielpositionen
+            //Variablendeklaration
+            ZielPosition zpQuelle = new ZielPosition();
+            Lagerfach lfq = new Lagerfach();
+            DatabaseManager dbm = new DatabaseManager();
+            
+            //Quellagerfach zusammensetzen
+             lfq.setFachnummer(-1);           
+            zpQuelle.setLagerfach(lfq);
+            zpQuelle.setMenge(mng);
+            zpQuelle.setWarenbewegung(wb);
+            try {
+                dbm.getZielpositionDao().createOrUpdate(zpQuelle);
+            } catch (SQLException ex) {
+                Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            //Ziellagerfach zusammensetzen
+            ZielPosition zpZiel = new ZielPosition();
+            zpZiel.setLagerfach(lf);
+            zpZiel.setMenge(mng);
+            zpZiel.setWarenbewegung(wb);
+                try {
+                    dbm.getZielpositionDao().createOrUpdate(zpZiel);
+                } catch (SQLException ex) {
+                    Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
 
         //Lagerbestand speichern
         try {
             lb.save();
+            wb.save();
         } catch (SQLException ex) {
             Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
-     //   refreshLagerbestandTableModel();
-       refreshLagerbestandTableModel();
+        
+        refreshLagerbestandTableModel();
         this.dispose();
+        
+        //Auslagern
+        }else{
+            
+        }
+
+
     }//GEN-LAST:event_einlagernButtonActionPerformed
     private void refreshLagerbestandTableModel(){
         LagerbestandCollection lc = LagerbestandCollection.getInstance(true);
