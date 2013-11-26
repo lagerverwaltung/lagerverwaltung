@@ -4,7 +4,13 @@
  */
 package model.table;
 
+import com.j256.ormlite.dao.ForeignCollection;
+import helper.DatabaseManager;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.AbstractTableModel;
 import model.Teilebestand;
 import model.Warenbewegung;
@@ -79,39 +85,50 @@ public class WarenbewegungTableModel extends AbstractTableModel{
         Warenbewegung rowO;
         if(warenRows.size()>0){
             rowO = (Warenbewegung) warenRows.get(row);
+            DatabaseManager dbm = new DatabaseManager();
+             List l = null;
+                try {
+                    l = dbm.getWarenbewegungDao().queryForEq("warenbID", rowO.getWarenBewegungsID());
+                } catch (SQLException ex) {
+                    Logger.getLogger(WarenbewegungTableModel.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                        Warenbewegung wbq = (Warenbewegung) l.get(0);
+                        ForeignCollection<ZielPosition> alq;
+                        alq = wbq.getArrZielPosition();
+                        Warenbewegung wbz = (Warenbewegung) l.get(0);
+                        ForeignCollection<ZielPosition> alz;
+                        alz = wbz.getArrZielPosition();
+            
             if(rowO != null){
                 switch(col){
                     case 0:
                         //WarenbewegungsID
                         return rowO.getWarenBewegungsID();
                     case 1:
-                        
-                        /*
-                        System.out.println(rowO.getLagerbestand().getTeil().getBezeichnung().toString());
+                        //Bezeichnung
                         if(rowO.getLagerbestand().getTeil().getBezeichnung() != null){
                             return rowO.getLagerbestand().getTeil().getBezeichnung();
                         }
-                        */
-                    
                     case 2:
                         //name = "Quellfach";
-                        /*    
-                        System.out.println(rowO.getArrZielPosition().isEmpty());
-                        System.out.println(rowO.getArrZielPosition().iterator());
-                        System.out.println(rowO.getArrZielPosition().iterator(0));
-                        System.out.println(rowO.getArrZielPosition().iterator(1));
-                        System.out.println(rowO.getArrZielPosition().iterator(2));
-                        return "Quellfach";
-                        */
+                        for (ZielPosition z : alq) {
+                            return z.getLagerfach().getFachnummer();
+                        }
                     case 3:
                         //name = "Menge";
-                        return "Quell-Menge";
+                        for (ZielPosition z : alq) {
+                            return z.getMenge();
+                        }
                     case 4:
                         //name = "Zielfach";
-                        return "ZielfachID";
+                        for (ZielPosition z : alz) {
+                            return z.getLagerfach().getFachnummer();
+                        }
                     case 5:
                         //name = "Menge";
-                        return "zielMenge";
+                        for (ZielPosition z : alz) {
+                            return z.getMenge();
+                        }
                     case 6:
                         //name = "Verantwortlicher";
                         if(rowO.getVerantwortlicher() != null){
