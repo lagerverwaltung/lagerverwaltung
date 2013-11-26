@@ -6,6 +6,7 @@ import javax.swing.JTable;
 import javax.swing.table.TableColumn;
 import javax.swing.ListSelectionModel;
 import model.table.LagerbestandTableModel;
+import model.table.TeileTableModel;
 import model.collection.LagerbestandCollection;
 // import model.table.WarenbewegungTableModel;
 
@@ -202,7 +203,7 @@ public class LagerbestandPanel extends javax.swing.JPanel {
          * Anschaffungsgrund Attribute wird aus der Tabelle tabMainTable(Lagerbestandstabelle) aus der 8.Position herausgezogen
           */
         selectedAnschGr = tabMaintable.getValueAt(tabMaintable.getSelectedRow(), 8).toString();
-        //hier wird späterWert Attribut Haltbarkeitsdatum hbDateaus der Tabelle Warenbewegung ausgelesen
+        //hier wird späterWert Attribut Haltbarkeitsdatum hbDateaus der Tabelle Warenbewegung ausgelesen, Wie kriege ich die Attribute aus der Warenbewegungstabelle?
         selectedHbDate = tabMaintable.getValueAt(tabMaintable.getSelectedRow(), 0).toString();
         BestandsaenderungFrame bestandsaenderungFrame = new BestandsaenderungFrame(true,selectedId,selectedAnschGr,selectedHbDate);
         bestandsaenderungFrame.setVisible(true);
@@ -234,7 +235,7 @@ public class LagerbestandPanel extends javax.swing.JPanel {
     private void btnFilternActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFilternActionPerformed
         LagerbestandFilterFrame.getInstance(mainFrame);
     }//GEN-LAST:event_btnFilternActionPerformed
-
+//ich brauch hier neue Variable JTable Warnebewegungstable
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnFilterZuruecksetzen;
     private javax.swing.JButton btnFiltern;
