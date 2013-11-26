@@ -136,6 +136,8 @@ public class Teilebestand {
     public void setVe(int ve) {
         this.ve = ve;
     }
+    
+
     // ab hier relevant für uns,zum Auslesen von Teilebestand
     public static Teilebestand loadTeil(int id)
     {

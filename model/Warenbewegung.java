@@ -141,5 +141,8 @@ public class Warenbewegung {
         return null;
     }
 	
-
+   public void save() throws SQLException{
+       Dao<Warenbewegung,Integer> warenbewegungDao = DatabaseManager.getInstance().getWarenbewegungDao();
+       warenbewegungDao.createOrUpdate(this);
+   }
 }

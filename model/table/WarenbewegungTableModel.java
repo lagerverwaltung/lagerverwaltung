@@ -6,7 +6,9 @@ package model.table;
 
 import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
+import model.Teilebestand;
 import model.Warenbewegung;
+import model.ZielPosition;
 import model.collection.WarenbewegungCollection;
 
 /**
@@ -23,29 +25,17 @@ public class WarenbewegungTableModel extends AbstractTableModel{
         this.warenRowsArr = arr;
     }
     
-   public ArrayList<Object[]> dummyArrayList(){
-    
-        ArrayList<Object[]> arr = new ArrayList();
-        String[] row = {"1","Stollen","-","0","HR010101","3","Dr. Modlich","12.11.2013","24.12.2013","Ersteinlagerung"};
-        arr.add(row);
-        String[] row1 = {"2","Stollen","HR010101","3","HR010102","1","Dr. Modlich","13.11.2013","24.12.2013","Split"};
-        arr.add(row1);
-        String[] row2 = {"2","Stollen","HR010101","3","HR010103","1","Dr. Modlich","13.11.2013","24.12.2013","Split"};
-        arr.add(row2);
-        String[] row3 = {"2","Stollen","HR010101","3","HR010201","1","Dr. Modlich","13.11.2013","24.12.2013","Split"};
-        arr.add(row3);
-        return arr; 
-
-   }
-    
+    @Override
     public int getColumnCount() {
         return 10;
     }
     
+    @Override
     public int getRowCount() {
-        return warenRowsArr.size();
+        return warenRows.size();
     }
 
+    @Override
     public String getColumnName(int col) {
         String name = "";
         switch (col)
@@ -84,6 +74,7 @@ public class WarenbewegungTableModel extends AbstractTableModel{
         return name;
     }
 
+    @Override
     public Object getValueAt(int row, int col) {
         Warenbewegung rowO;
         if(warenRows.size()>0){
@@ -94,11 +85,24 @@ public class WarenbewegungTableModel extends AbstractTableModel{
                         //WarenbewegungsID
                         return rowO.getWarenBewegungsID();
                     case 1:
-                        //name = "Teil";
-                        return "TeilID";
+                        
+                        /*
+                        System.out.println(rowO.getLagerbestand().getTeil().getBezeichnung().toString());
+                        if(rowO.getLagerbestand().getTeil().getBezeichnung() != null){
+                            return rowO.getLagerbestand().getTeil().getBezeichnung();
+                        }
+                        */
+                    
                     case 2:
                         //name = "Quellfach";
-                        return "QuellfachID";
+                        /*    
+                        System.out.println(rowO.getArrZielPosition().isEmpty());
+                        System.out.println(rowO.getArrZielPosition().iterator());
+                        System.out.println(rowO.getArrZielPosition().iterator(0));
+                        System.out.println(rowO.getArrZielPosition().iterator(1));
+                        System.out.println(rowO.getArrZielPosition().iterator(2));
+                        return "Quellfach";
+                        */
                     case 3:
                         //name = "Menge";
                         return "Quell-Menge";
@@ -126,7 +130,10 @@ public class WarenbewegungTableModel extends AbstractTableModel{
                         }
                     case 9:
                         //name = "Typ";
-                        return "Teiletyp";
+                        String typ = rowO.getLagerbestand().getTeil().getTyp().toString();
+                        if(rowO != null){
+                            return typ;
+                        }
                     default:
                         return "empty";
                 }
@@ -142,6 +149,7 @@ public class WarenbewegungTableModel extends AbstractTableModel{
         */
     }
 
+    @Override
     public Class getColumnClass(int c) {
         return getValueAt(0, c).getClass();
     }
@@ -149,6 +157,7 @@ public class WarenbewegungTableModel extends AbstractTableModel{
     /*
      * Verhindert das Editieren der Zellen
      */
+    @Override
     public boolean isCellEditable(int row, int col) {
        return false;
     }
