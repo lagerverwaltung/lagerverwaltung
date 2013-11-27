@@ -176,9 +176,25 @@ public class LagerbestandPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnteilEinlagernActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnteilEinlagernActionPerformed
-        BestandsaenderungFrame bestandsaenderungFrame = new BestandsaenderungFrame(true);
+       int selectedId;
+       String selectedAnschGr;
+        if(tabMaintable.getSelectedRow() >=0){
+        selectedId = Integer.parseInt(tabMaintable.getValueAt(tabMaintable.getSelectedRow(), 0).toString());
+        /**
+         * Anschaffungsgrund Attribute wird aus der Tabelle tabMainTable(Lagerbestandstabelle) aus der 8.Position herausgezogen
+          */
+        selectedAnschGr = tabMaintable.getValueAt(tabMaintable.getSelectedRow(), 8).toString();
+        //hier wird späterWert Attribut Haltbarkeitsdatum hbDateaus der Tabelle Warenbewegung ausgelesen, Wie kriege ich die Attribute aus der Warenbewegungstabelle?
+        
+        BestandsaenderungFrame bestandsaenderungFrame = new BestandsaenderungFrame(true,selectedId,selectedAnschGr);
         bestandsaenderungFrame.setVisible(true);
+        bestandsaenderungFrame.initLagerObjekt(selectedId);
         bestandsaenderungFrame.setTable(tabMaintable);
+        }
+        else{
+            Misc.createErrorDialog(mainFrame, "Es muss erst ein Teil zum Einlagern aus der "
+                    + "Liste gewählt werden!", true);
+        }
     }//GEN-LAST:event_btnteilEinlagernActionPerformed
 
     private void btnSucheActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSucheActionPerformed
@@ -218,12 +234,19 @@ public class LagerbestandPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnTeilAuslagernActionPerformed
 
     private void btnTeilSplittenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTeilSplittenActionPerformed
-         int selectedId;
+        int selectedId;
+       //String selectedAnschGr;
         if(tabMaintable.getSelectedRow() >=0){
         selectedId = Integer.parseInt(tabMaintable.getValueAt(tabMaintable.getSelectedRow(), 0).toString());
+        /**
+         * Anschaffungsgrund Attribute wird aus der Tabelle tabMainTable(Lagerbestandstabelle) aus der 8.Position herausgezogen
+          */
+       // selectedAnschGr = tabMaintable.getValueAt(tabMaintable.getSelectedRow(), 8).toString();
+        //hier wird späterWert Attribut Haltbarkeitsdatum hbDateaus der Tabelle Warenbewegung ausgelesen, Wie kriege ich die Attribute aus der Warenbewegungstabelle?
         
         BestandsaenderungFrame bestandsaenderungFrame = new BestandsaenderungFrame(true,selectedId);
         bestandsaenderungFrame.setVisible(true);
+        bestandsaenderungFrame.initLagerObjekt(selectedId);
         bestandsaenderungFrame.setTable(tabMaintable);
         }
         else{

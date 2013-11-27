@@ -6,6 +6,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.TableColumn;
 import model.collection.TeilebestandCollection;
 import model.table.TeileTableModel;
+import model.table.LagerbestandTableModel;
 
 /*
  * To change this template, choose Tools | Templates
@@ -179,14 +180,13 @@ public class TeilebestandPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(scpMain, javax.swing.GroupLayout.PREFERRED_SIZE, 470, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnTeilAendern, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(lblAktionSelektiert)
-                        .addComponent(btnTeilLoschen)
-                        .addComponent(lblTeilebestandErweitern)
-                        .addComponent(btnNeuesTeil)
-                        .addComponent(btnteilEinlagern)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblAktionSelektiert)
+                    .addComponent(btnTeilLoschen)
+                    .addComponent(lblTeilebestandErweitern)
+                    .addComponent(btnNeuesTeil)
+                    .addComponent(btnteilEinlagern)
+                    .addComponent(btnTeilAendern))
                 .addGap(364, 364, 364))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -226,9 +226,10 @@ public class TeilebestandPanel extends javax.swing.JPanel {
 
     private void btnteilEinlagernActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnteilEinlagernActionPerformed
         int selectedId;
+       // String selectedAnschGr;
         if(tblMain.getSelectedRow() >=0){
         selectedId = Integer.parseInt(tblMain.getValueAt(tblMain.getSelectedRow(), 0).toString());
-        
+      //  selectedAnschGr = (tblMain.getValueAt(tblMain.getSelectedRow(), 8).toString());
         BestandsaenderungFrame bestandsaenderungFrame = new BestandsaenderungFrame(true,selectedId);
         bestandsaenderungFrame.setVisible(true);
         bestandsaenderungFrame.setTable(tblMain);

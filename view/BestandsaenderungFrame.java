@@ -32,6 +32,7 @@ import model.table.LagerbestandTableModel;
 public class BestandsaenderungFrame extends javax.swing.JFrame {
     Boolean einlagern = false;
     Boolean auslagern = false;
+    Boolean splitten = false;
     JTable lagerBestandTable;
     int lagerID;
     
@@ -102,21 +103,29 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         }
         
     }
-
-   BestandsaenderungFrame(boolean einlagern) {
+//Artjom
+   BestandsaenderungFrame(boolean einlagern, int id,String anschGr) {
         this();
         this.einlagern = einlagern;
         lblEinlagern.setText("Teile einlagern");
-        einlagernButton.setText("Teile einlagern");} 
+        einlagernButton.setText("Teile einlagern");
+        this.txfTeilID.setText(""+id);
+        this.txaAnschaffungsgrund.setText(anschGr);
+    //    this.txfHaltbarkeitsdatum.setText(hbDate+"kommt noch");
+      //  this.txfHaltbarkeitsdatum.setText(haltbDate);
+             this.txfTeilID.setEditable(false);
+             this.txaAnschaffungsgrund.setEditable(false);
+   }
         
    
-    
+    //Sebastian,nur ID generiert,Ansch.muss noch
     BestandsaenderungFrame(boolean einlagern, int id) {
         this();
         this.einlagern = einlagern;
         lblEinlagern.setText("Teile einlagern");
         einlagernButton.setText("Teile einlagern");
         this.txfTeilID.setText(""+id);
+      //  this.txaAnschaffungsgrund.setText(anschGr);
         this.txfTeilID.setEditable(false); 
     }
         //Bestandsänderungsframe um Teile auszulagern
@@ -130,8 +139,25 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
     //    this.txfHaltbarkeitsdatum.setText(hbDate+"kommt noch");
       //  this.txfHaltbarkeitsdatum.setText(haltbDate);
              this.txfTeilID.setEditable(false);
+             this.txaAnschaffungsgrund.setEditable(false);
+             this.txfHaltbarkeitsdatum.setVisible(false);
+             this.lblHaltbarkeitsdatum.setVisible(false);
         }
         
+        BestandsaenderungFrame(boolean splitten) {
+        this();
+        this.splitten = splitten;
+        lblEinlagern.setText("Teile splitten");
+        einlagernButton.setText("Teile splitten");
+       // this.txfTeilID.setText(""+id);
+        //this.txaAnschaffungsgrund.setText(anschGr);
+    //    this.txfHaltbarkeitsdatum.setText(hbDate+"kommt noch");
+      //  this.txfHaltbarkeitsdatum.setText(haltbDate);
+             this.txfTeilID.setEditable(false);
+           //  this.txaAnschaffungsgrund.setEditable(false);
+             this.txfHaltbarkeitsdatum.setVisible(false);
+             this.lblHaltbarkeitsdatum.setVisible(false);
+        }
         
     
 
