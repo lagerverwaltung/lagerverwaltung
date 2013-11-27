@@ -50,21 +50,33 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
     * Läd Comboboxen für Hochlager
     */
     private void loadHlCbx() throws SQLException{
+        cbxFachX.removeAllItems();
+        cbxFachY.removeAllItems();
+        cbxFachZ.removeAllItems();
+        
+
+        
+        
         Lager hl = Lager.getLager(Lager.Lagerort.hochregal);
         int x = hl.getHoehe();
         int y = hl.getBreite();
         int z = hl.getTiefe();
         
+        cbxFachX.addItem(x);
+        cbxFachY.addItem(y);
+        cbxFachZ.addItem(z);
+        cbxFachX.addItem(19);
+        
         for(int i = 1; i >= x; i++){
             cbxFachX.addItem(i);
         }
         
         for(int i = 1; i >= x; i++){
-            cbxFachX.addItem(i);
+            cbxFachY.addItem(i);
         }
                 
          for(int i = 1; i >= z; i++){
-            cbxFachX.addItem(i);
+            cbxFachZ.addItem(i);
         }
     }
 
@@ -72,22 +84,31 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
     * läd ComboBoxen für Freilagern
     */
     public void loadFlCbx() throws SQLException{
+        cbxFachX.removeAllItems();
+        cbxFachY.removeAllItems();
+        cbxFachZ.removeAllItems();
+        
         Lager fl = Lager.getLager(Lager.Lagerort.freilager);
         int x = fl.getHoehe();
         int y = fl.getBreite();
         int z = fl.getTiefe();
         
+        cbxFachX.addItem(x);
+        cbxFachY.addItem(y);
+        cbxFachZ.addItem(z);
+        /*
         for(int i = 1; i >= x; i++){
             cbxFachX.addItem(i);
         }
         
         for(int i = 1; i >= x; i++){
-            cbxFachX.addItem(i);
+            cbxFachY.addItem(i);
         }
                 
          for(int i = 1; i >= z; i++){
-            cbxFachX.addItem(i);
+            cbxFachZ.addItem(i);
         }
+        */
     }
 
    BestandsaenderungFrame(boolean einlagern) {
@@ -170,6 +191,8 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         cbxFachY = new javax.swing.JComboBox();
         cbxFachZ = new javax.swing.JComboBox();
         txfTeilID = new javax.swing.JTextField();
+        lblHaltbarkeitsdatum = new javax.swing.JLabel();
+        txfHaltbarkeitsdatum = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -220,6 +243,15 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
             }
         });
 
+        lblHaltbarkeitsdatum.setText("Haltbarkeitsdatum");
+
+        txfHaltbarkeitsdatum.setText("dd.mm.YYYY");
+        txfHaltbarkeitsdatum.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txfHaltbarkeitsdatumActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -233,8 +265,10 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
                             .addComponent(lblMenge))
                         .addGap(39, 39, 39)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txfMenge, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(spnAnschaffungsgrund)))
+                            .addComponent(spnAnschaffungsgrund)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(txfMenge, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -256,7 +290,11 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
                                 .addComponent(lblHinweis))
                             .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 467, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblEinlagern, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(einlagernButton))
+                            .addComponent(einlagernButton)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblHaltbarkeitsdatum)
+                                .addGap(44, 44, 44)
+                                .addComponent(txfHaltbarkeitsdatum, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 40, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
@@ -286,7 +324,11 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblMenge)
                     .addComponent(txfMenge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(75, 75, 75)
+                .addGap(26, 26, 26)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblHaltbarkeitsdatum)
+                    .addComponent(txfHaltbarkeitsdatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29)
                 .addComponent(einlagernButton)
                 .addContainerGap(34, Short.MAX_VALUE))
         );
@@ -427,6 +469,10 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_cbxFachTypActionPerformed
 
+    private void txfHaltbarkeitsdatumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfHaltbarkeitsdatumActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txfHaltbarkeitsdatumActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -471,11 +517,13 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
     private javax.swing.JLabel lblAnschaffungsgrund;
     private javax.swing.JLabel lblEinlagern;
     private javax.swing.JLabel lblFachAdresse;
+    private javax.swing.JLabel lblHaltbarkeitsdatum;
     private javax.swing.JLabel lblHinweis;
     private javax.swing.JLabel lblMenge;
     private javax.swing.JLabel lblTeilID;
     private javax.swing.JScrollPane spnAnschaffungsgrund;
     private javax.swing.JTextArea txaAnschaffungsgrund;
+    private javax.swing.JTextField txfHaltbarkeitsdatum;
     private javax.swing.JTextField txfMenge;
     private javax.swing.JTextField txfTeilID;
     // End of variables declaration//GEN-END:variables
