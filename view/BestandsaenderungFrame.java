@@ -46,7 +46,9 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
             Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, ex); 
         }
     }
-
+    /*
+    * Läd Comboboxen für Hochlager
+    */
     private void loadHlCbx() throws SQLException{
         Lager hl = Lager.getLager(Lager.Lagerort.hochregal);
         int x = hl.getHoehe();
@@ -66,6 +68,9 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         }
     }
 
+    /*
+    * läd ComboBoxen für Freilagern
+    */
     public void loadFlCbx() throws SQLException{
         Lager fl = Lager.getLager(Lager.Lagerort.freilager);
         int x = fl.getHoehe();
