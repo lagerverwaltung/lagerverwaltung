@@ -13,6 +13,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JComboBox;
 import javax.swing.JTable;
 import model.Lager;
 import model.Lagerbestand;
@@ -50,9 +51,9 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
     * Läd Comboboxen für Hochlager
     */
     private void loadHlCbx() throws SQLException{
+        cbxFachZ.removeAllItems();
         cbxFachX.removeAllItems();
         cbxFachY.removeAllItems();
-        cbxFachZ.removeAllItems();
         
 
         
@@ -62,21 +63,16 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         int y = hl.getBreite();
         int z = hl.getTiefe();
         
-        cbxFachX.addItem(x);
-        cbxFachY.addItem(y);
-        cbxFachZ.addItem(z);
-        cbxFachX.addItem(19);
+        for(int i = 1; i <= x; i++){
+            cbxFachZ.addItem(i);
+        }
         
-        for(int i = 1; i >= x; i++){
+        for(int i = 1; i <= y; i++){
             cbxFachX.addItem(i);
         }
-        
-        for(int i = 1; i >= x; i++){
-            cbxFachY.addItem(i);
-        }
                 
-         for(int i = 1; i >= z; i++){
-            cbxFachZ.addItem(i);
+         for(int i = 1; i <= z; i++){
+            cbxFachY.addItem(i);
         }
     }
 
@@ -84,31 +80,27 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
     * läd ComboBoxen für Freilagern
     */
     public void loadFlCbx() throws SQLException{
+        cbxFachZ.removeAllItems();
         cbxFachX.removeAllItems();
         cbxFachY.removeAllItems();
-        cbxFachZ.removeAllItems();
         
         Lager fl = Lager.getLager(Lager.Lagerort.freilager);
         int x = fl.getHoehe();
         int y = fl.getBreite();
         int z = fl.getTiefe();
         
-        cbxFachX.addItem(x);
-        cbxFachY.addItem(y);
-        cbxFachZ.addItem(z);
-        /*
-        for(int i = 1; i >= x; i++){
+        for(int i = 1; i <= x; i++){
             cbxFachX.addItem(i);
         }
         
-        for(int i = 1; i >= x; i++){
+        for(int i = 1; i <= y; i++){
             cbxFachY.addItem(i);
         }
                 
-         for(int i = 1; i >= z; i++){
+         for(int i = 1; i <= z; i++){
             cbxFachZ.addItem(i);
         }
-        */
+        
     }
 
    BestandsaenderungFrame(boolean einlagern) {
@@ -187,9 +179,9 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         txfMenge = new javax.swing.JTextField();
         einlagernButton = new javax.swing.JButton();
         cbxFachTyp = new javax.swing.JComboBox();
+        cbxFachZ = new javax.swing.JComboBox();
         cbxFachX = new javax.swing.JComboBox();
         cbxFachY = new javax.swing.JComboBox();
-        cbxFachZ = new javax.swing.JComboBox();
         txfTeilID = new javax.swing.JTextField();
         lblHaltbarkeitsdatum = new javax.swing.JLabel();
         txfHaltbarkeitsdatum = new javax.swing.JTextField();
@@ -226,16 +218,16 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
             }
         });
 
-        cbxFachX.setModel(new javax.swing.DefaultComboBoxModel());
+        cbxFachZ.setModel(new javax.swing.DefaultComboBoxModel());
 
-        cbxFachY.setModel(new javax.swing.DefaultComboBoxModel());
-        cbxFachY.addActionListener(new java.awt.event.ActionListener() {
+        cbxFachX.setModel(new javax.swing.DefaultComboBoxModel());
+        cbxFachX.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbxFachYActionPerformed(evt);
+                cbxFachXActionPerformed(evt);
             }
         });
 
-        cbxFachZ.setModel(new javax.swing.DefaultComboBoxModel());
+        cbxFachY.setModel(new javax.swing.DefaultComboBoxModel());
 
         txfTeilID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -280,11 +272,11 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(cbxFachTyp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(cbxFachX, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(cbxFachY, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(cbxFachZ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(cbxFachX, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(cbxFachZ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(txfTeilID))
                                 .addGap(32, 32, 32)
                                 .addComponent(lblHinweis))
@@ -309,9 +301,9 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
                     .addComponent(lblFachAdresse)
                     .addComponent(lblHinweis)
                     .addComponent(cbxFachTyp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbxFachZ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbxFachX, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbxFachY, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbxFachZ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbxFachY, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTeilID)
@@ -363,9 +355,9 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         int teiID = Integer.parseInt(txfTeilID.getText());
        
         String ort = (String) cbxFachTyp.getSelectedItem();
-        int x = Integer.parseInt((String) cbxFachX.getSelectedItem());
-        int y = Integer.parseInt((String) cbxFachY.getSelectedItem());
-        int z = Integer.parseInt((String) cbxFachZ.getSelectedItem());
+        int x = (int) (cbxFachZ.getSelectedItem());
+        int y = (int) (cbxFachX.getSelectedItem());
+        int z = (int) (cbxFachY.getSelectedItem());
         try {
             fachID = Lagerfach.getFach(ort, x, y, z).getFachnummer();
         } catch (SQLException ex) {
@@ -445,9 +437,9 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         lagerBestandTable.setModel(lm);
     }
     
-    private void cbxFachYActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxFachYActionPerformed
+    private void cbxFachXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxFachXActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cbxFachYActionPerformed
+    }//GEN-LAST:event_cbxFachXActionPerformed
 
     private void txfTeilIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfTeilIDActionPerformed
         // TODO add your handling code here:
