@@ -12,6 +12,8 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.AbstractTableModel;
+import model.Lagerbestand;
+import model.Lagerfach;
 import model.Teilebestand;
 import model.Warenbewegung;
 import model.ZielPosition;
@@ -81,13 +83,21 @@ public class WarenbewegungTableModel extends AbstractTableModel{
     }
 
     @Override
-    public Object getValueAt(int row, int col) {
+     public Object getValueAt(int row, int col) {
         Warenbewegung rowO;
+        rowO = (Warenbewegung) warenRows.get(row);
+        Lagerbestand lb = rowO.getLagerbestand();
+        Lagerfach lf = lb.getLagerfach();
+        Teilebestand tl = lb.getTeil();
+        String s = new String();
+        s = "vergessen";
+      //  ZielPosition zp = rowO.getZielPosition();
+        
         if(warenRows.size()>0){
-            rowO = (Warenbewegung) warenRows.get(row);
-            DatabaseManager dbm = new DatabaseManager();
-             List l = null;
-                try {
+            
+        //    DatabaseManager dbm = new DatabaseManager();
+          //   List l = null;
+            /*    try {
                     l = dbm.getWarenbewegungDao().queryForEq("warenbID", rowO.getWarenBewegungsID());
                 } catch (SQLException ex) {
                     Logger.getLogger(WarenbewegungTableModel.class.getName()).log(Level.SEVERE, null, ex);
@@ -97,7 +107,7 @@ public class WarenbewegungTableModel extends AbstractTableModel{
                         alq = wbq.getArrZielPosition();
                         Warenbewegung wbz = (Warenbewegung) l.get(0);
                         ForeignCollection<ZielPosition> alz;
-                        alz = wbz.getArrZielPosition();
+                        alz = wbz.getArrZielPosition();*/
             
             if(rowO != null){
                 switch(col){
@@ -106,30 +116,31 @@ public class WarenbewegungTableModel extends AbstractTableModel{
                         return rowO.getWarenBewegungsID();
                     case 1:
                         //Bezeichnung
-                        if(rowO.getLagerbestand().getTeil().getBezeichnung() != null){
-                            return rowO.getLagerbestand().getTeil().getBezeichnung();
+                        if(tl.getBezeichnung() != null){
+                            return tl.getBezeichnung();
                         }
                     case 2:
-                        //name = "Quellfach";
-                        for (ZielPosition z : alq) {
-                            return z.getLagerfach().getFachnummer();
+                        if(lf.getFachnummer()!= 0){
+                            return lf.getFachnummer();
                         }
                     case 3:
-                        //name = "Menge";
-                        for (ZielPosition z : alq) {
-                            return z.getMenge();
+                        //name = "Menge" aus dem Lagerbestand;
+                        if(lb.getMenge() != 0){
+                            return lb.getMenge();
                         }
                     case 4:
                         //name = "Zielfach";
-                        for (ZielPosition z : alz) {
-                            return z.getLagerfach().getFachnummer();
-                        }
+                   //   if( zp.getLagerfach()!= null){
+                    //       return zp.getLagerfach(); }
+                    //    return s;
+                       
                     case 5:
                         //name = "Menge";
-                        for (ZielPosition z : alz) {
-                            return z.getMenge();
-                        }
-                    case 6:
+                     //   if( zp.getMenge()!= 0){
+                        //    return zp.getMenge();}
+                            return s;
+                        
+                        case 6:
                         //name = "Verantwortlicher";
                         if(rowO.getVerantwortlicher() != null){
                             return rowO.getVerantwortlicher();
@@ -146,9 +157,8 @@ public class WarenbewegungTableModel extends AbstractTableModel{
                         }
                     case 9:
                         //name = "Typ";
-                        String typ = rowO.getLagerbestand().getTeil().getTyp().toString();
-                        if(rowO != null){
-                            return typ;
+                         if(tl.getTyp()!= null){
+                            return tl.getTyp();
                         }
                     default:
                         return "empty";
