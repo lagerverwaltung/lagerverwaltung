@@ -232,7 +232,9 @@ public class TeilebestandPanel extends javax.swing.JPanel {
       //  selectedAnschGr = (tblMain.getValueAt(tblMain.getSelectedRow(), 8).toString());
         BestandsaenderungFrame bestandsaenderungFrame = new BestandsaenderungFrame(true,selectedId);
         bestandsaenderungFrame.setVisible(true);
-        bestandsaenderungFrame.setTable(tblMain);
+        JTable lagerbestand=mainFrame.getPanMain().getLagerbestand().gettabMain();
+        
+        bestandsaenderungFrame.setTable(lagerbestand);
         }
         else{
             Misc.createErrorDialog(mainFrame, "Es muss erst ein Teil zum Einlagern aus der "
