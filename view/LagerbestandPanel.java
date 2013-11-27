@@ -24,6 +24,11 @@ public class LagerbestandPanel extends javax.swing.JPanel {
         initComponents();
     }
     
+    public JTable gettabMain()
+    { 
+        return tabMaintable;
+    }
+    
     public void setTableWidths(JTable table)
     {
         int[] arrWidths = {50, 110, 10, 10, 10, 110,70, 50, 150};
