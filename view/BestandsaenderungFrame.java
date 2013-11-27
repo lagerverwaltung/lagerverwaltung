@@ -48,6 +48,132 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
             Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, ex); 
         }
     }
+    
+//Artjom
+   BestandsaenderungFrame(boolean einlagern, int id,String anschGr) {
+        this();
+        this.einlagern = einlagern;
+        lblEinlagern.setText("Teile einlagern");
+        einlagernButton.setText("Teile einlagern");
+        this.txfTeilID.setText(""+id);
+        this.txaAnschaffungsgrund.setText(anschGr);
+        //this.txfHaltbarkeitsdatum.setText(hbDate+"kommt noch");
+        //this.txfHaltbarkeitsdatum.setText(haltbDate);
+        this.txfTeilID.setEditable(false);
+        this.txaAnschaffungsgrund.setEditable(false);
+        
+            //ComboBox füllen
+            try {
+                loadHlCbx();
+            } catch (SQLException ex) {
+                Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, ex); 
+            }
+   }
+        
+   
+    //Sebastian,nur ID generiert,Ansch.muss noch
+    BestandsaenderungFrame(boolean einlagern, int id) {
+        this();
+        this.einlagern = einlagern;
+        lblEinlagern.setText("Teile einlagern");
+        einlagernButton.setText("Teile einlagern");
+        this.txfTeilID.setText(""+id);
+      //  this.txaAnschaffungsgrund.setText(anschGr);
+        this.txfTeilID.setEditable(false); 
+        
+            //ComboBox füllen
+            try {
+                loadHlCbx();
+            } catch (SQLException ex) {
+                Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, ex); 
+            }
+    }
+    
+        //Bestandsänderungsframe um Teile auszulagern
+        BestandsaenderungFrame(boolean auslagern, int id,String anschGr,String hbDate) {
+        this();
+        this.auslagern = auslagern;
+        lblEinlagern.setText("Teile auslagern");
+        einlagernButton.setText("Teile auslagern");
+        this.txfTeilID.setText(""+id);
+        this.txaAnschaffungsgrund.setText(anschGr);
+        //this.txfHaltbarkeitsdatum.setText(hbDate+"kommt noch");
+        //this.txfHaltbarkeitsdatum.setText(haltbDate);
+        this.txfTeilID.setEditable(false);
+        this.txaAnschaffungsgrund.setEditable(false);
+        this.txfHaltbarkeitsdatum.setVisible(false);
+        this.lblHaltbarkeitsdatum.setVisible(false);
+        this.cbxFachTyp.setEditable(false);
+        this.cbxFachX.setEditable(false);
+        this.cbxFachY.setEditable(false);
+        this.cbxFachZ.setEditable(false);
+        this.cbxFachTyp.setEnabled(false);
+        this.cbxFachX.setEnabled(false);
+        this.cbxFachY.setEnabled(false);
+        this.cbxFachZ.setEnabled(false);
+        
+                //ComboBox füllen
+                Lagerfach lf = new Lagerfach();
+                    try {
+                        lf = Lagerfach.getLagerfach(id);
+                    } catch (SQLException ex) {
+                        Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, ex);
+                    }             
+
+                if(lf.getLager().getLagerort().freilager.equals(Lager.Lagerort.hochregal)){
+                    cbxFachTyp.removeItem("HL");
+                }else{
+                    cbxFachTyp.removeItem("FL");
+                }               
+                cbxFachZ.removeAllItems();
+                cbxFachX.removeAllItems();
+                cbxFachY.removeAllItems();
+               
+                cbxFachX.addItem(lf.getX());
+                cbxFachY.addItem(lf.getY());
+                cbxFachZ.addItem(lf.getZ());
+
+        }
+        
+        BestandsaenderungFrame(boolean splitten) {
+        this();
+        this.splitten = splitten;
+        lblEinlagern.setText("Teile splitten");
+        einlagernButton.setText("Teile splitten");
+       // this.txfTeilID.setText(""+id);
+        //this.txaAnschaffungsgrund.setText(anschGr);
+    //    this.txfHaltbarkeitsdatum.setText(hbDate+"kommt noch");
+      //  this.txfHaltbarkeitsdatum.setText(haltbDate);
+             this.txfTeilID.setEditable(false);
+           //  this.txaAnschaffungsgrund.setEditable(false);
+             this.txfHaltbarkeitsdatum.setVisible(false);
+             this.lblHaltbarkeitsdatum.setVisible(false);
+        }
+        
+    
+
+    //Table setzen
+    public void setTable(JTable t)
+    {
+        lagerBestandTable = t;
+    }
+     public void initLagerObjekt(int id)
+    {
+        Lagerbestand l = Lagerbestand.loadLagerObjekt(id);
+        Warenbewegung w = Warenbewegung.loadWarenbewegung(id);
+        if(l != null){
+            lagerID = id;
+            txaAnschaffungsgrund.setText(l.getAnschaffungsgrund());
+            txfMenge.setText(Integer.toString(l.getMenge()));
+            //if(t.getTyp() != null){
+              //  cbxTyp.setSelectedItem(t.getTyp());
+            //}
+           //
+            Format f = new SimpleDateFormat("DD.MM.YYYY");
+            txfHaltbarkeitsdatum.setText(f.format(w.getHaltbarkeitsDatum()));
+        }
+    }
+     
     /*
     * Läd Comboboxen für Hochlager
     */
@@ -55,10 +181,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         cbxFachZ.removeAllItems();
         cbxFachX.removeAllItems();
         cbxFachY.removeAllItems();
-        
 
-        
-        
         Lager hl = Lager.getLager(Lager.Lagerort.hochregal);
         int x = hl.getHoehe();
         int y = hl.getBreite();
@@ -102,85 +225,6 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
             cbxFachZ.addItem(i);
         }
         
-    }
-//Artjom
-   BestandsaenderungFrame(boolean einlagern, int id,String anschGr) {
-        this();
-        this.einlagern = einlagern;
-        lblEinlagern.setText("Teile einlagern");
-        einlagernButton.setText("Teile einlagern");
-        this.txfTeilID.setText(""+id);
-        this.txaAnschaffungsgrund.setText(anschGr);
-    //    this.txfHaltbarkeitsdatum.setText(hbDate+"kommt noch");
-      //  this.txfHaltbarkeitsdatum.setText(haltbDate);
-             this.txfTeilID.setEditable(false);
-             this.txaAnschaffungsgrund.setEditable(false);
-   }
-        
-   
-    //Sebastian,nur ID generiert,Ansch.muss noch
-    BestandsaenderungFrame(boolean einlagern, int id) {
-        this();
-        this.einlagern = einlagern;
-        lblEinlagern.setText("Teile einlagern");
-        einlagernButton.setText("Teile einlagern");
-        this.txfTeilID.setText(""+id);
-      //  this.txaAnschaffungsgrund.setText(anschGr);
-        this.txfTeilID.setEditable(false); 
-    }
-        //Bestandsänderungsframe um Teile auszulagern
-        BestandsaenderungFrame(boolean auslagern, int id,String anschGr,String hbDate) {
-        this();
-        this.auslagern = auslagern;
-        lblEinlagern.setText("Teile auslagern");
-        einlagernButton.setText("Teile auslagern");
-        this.txfTeilID.setText(""+id);
-        this.txaAnschaffungsgrund.setText(anschGr);
-    //    this.txfHaltbarkeitsdatum.setText(hbDate+"kommt noch");
-      //  this.txfHaltbarkeitsdatum.setText(haltbDate);
-             this.txfTeilID.setEditable(false);
-             this.txaAnschaffungsgrund.setEditable(false);
-             this.txfHaltbarkeitsdatum.setVisible(false);
-             this.lblHaltbarkeitsdatum.setVisible(false);
-        }
-        
-        BestandsaenderungFrame(boolean splitten) {
-        this();
-        this.splitten = splitten;
-        lblEinlagern.setText("Teile splitten");
-        einlagernButton.setText("Teile splitten");
-       // this.txfTeilID.setText(""+id);
-        //this.txaAnschaffungsgrund.setText(anschGr);
-    //    this.txfHaltbarkeitsdatum.setText(hbDate+"kommt noch");
-      //  this.txfHaltbarkeitsdatum.setText(haltbDate);
-             this.txfTeilID.setEditable(false);
-           //  this.txaAnschaffungsgrund.setEditable(false);
-             this.txfHaltbarkeitsdatum.setVisible(false);
-             this.lblHaltbarkeitsdatum.setVisible(false);
-        }
-        
-    
-
-    //Table setzen
-    public void setTable(JTable t)
-    {
-        lagerBestandTable = t;
-    }
-     public void initLagerObjekt(int id)
-    {
-        Lagerbestand l = Lagerbestand.loadLagerObjekt(id);
-        Warenbewegung w = Warenbewegung.loadWarenbewegung(id);
-        if(l != null){
-            lagerID = id;
-            txaAnschaffungsgrund.setText(l.getAnschaffungsgrund());
-            txfMenge.setText(Integer.toString(l.getMenge()));
-            //if(t.getTyp() != null){
-              //  cbxTyp.setSelectedItem(t.getTyp());
-            //}
-           //
-            Format f = new SimpleDateFormat("DD.MM.YYYY");
-            txfHaltbarkeitsdatum.setText(f.format(w.getHaltbarkeitsDatum()));
-        }
     }
      
     

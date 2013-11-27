@@ -6,7 +6,9 @@
 
 package model;
 
+import com.j256.ormlite.dao.CloseableIterator;
 import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.dao.ForeignCollection;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.stmt.PreparedQuery;
 import com.j256.ormlite.stmt.QueryBuilder;
@@ -125,6 +127,15 @@ public class Lagerfach {
         }
         return null;
 }
+    /*
+    * Rückgabewert: Menge der Benutzten Lagerkapazität in VE
+    */
+    public static int getUsedVe(Lagerfach l) throws SQLException{
+        String fachID = new Integer(l.getFachnummer()).toString();
+        DatabaseManager dbm = new DatabaseManager();
+        return 0;
+  
+    }
     
    public void save() throws SQLException{
        Dao<Lagerfach,Integer> lagerfachDao = DatabaseManager.getInstance().getLagerfachDao();
