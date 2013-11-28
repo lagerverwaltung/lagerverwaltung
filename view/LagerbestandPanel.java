@@ -217,7 +217,7 @@ public class LagerbestandPanel extends javax.swing.JPanel {
     private void btnTeilAuslagernActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTeilAuslagernActionPerformed
        int selectedId;
        String selectedAnschGr;
-       String selectedHbDate;
+       //String selectedHbDate;
         if(tabMaintable.getSelectedRow() >=0){
         selectedId = Integer.parseInt(tabMaintable.getValueAt(tabMaintable.getSelectedRow(), 6).toString());
         /**
@@ -225,8 +225,8 @@ public class LagerbestandPanel extends javax.swing.JPanel {
           */
         selectedAnschGr = tabMaintable.getValueAt(tabMaintable.getSelectedRow(), 8).toString();
         //hier wird späterWert Attribut Haltbarkeitsdatum hbDateaus der Tabelle Warenbewegung ausgelesen, Wie kriege ich die Attribute aus der Warenbewegungstabelle?
-        selectedHbDate = tabMaintable.getValueAt(tabMaintable.getSelectedRow(), 6).toString();
-        BestandsaenderungFrame bestandsaenderungFrame = new BestandsaenderungFrame(true,selectedId,selectedAnschGr,selectedHbDate);
+        //selectedHbDate = tabMaintable.getValueAt(tabMaintable.getSelectedRow(), 6).toString();
+        BestandsaenderungFrame bestandsaenderungFrame = new BestandsaenderungFrame(true,selectedId,selectedAnschGr);
         bestandsaenderungFrame.setVisible(true);
         bestandsaenderungFrame.initLagerObjekt(selectedId);
         bestandsaenderungFrame.setTable(tabMaintable);
@@ -239,19 +239,19 @@ public class LagerbestandPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnTeilAuslagernActionPerformed
 
     private void btnTeilSplittenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTeilSplittenActionPerformed
-        int selectedId;
+       // int selectedId;
        //String selectedAnschGr;
         if(tabMaintable.getSelectedRow() >=0){
-        selectedId = Integer.parseInt(tabMaintable.getValueAt(tabMaintable.getSelectedRow(), 6).toString());
+      //  selectedId = Integer.parseInt(tabMaintable.getValueAt(tabMaintable.getSelectedRow(), 6).toString());
         /**
          * Anschaffungsgrund Attribute wird aus der Tabelle tabMainTable(Lagerbestandstabelle) aus der 8.Position herausgezogen
           */
        // selectedAnschGr = tabMaintable.getValueAt(tabMaintable.getSelectedRow(), 8).toString();
         //hier wird späterWert Attribut Haltbarkeitsdatum hbDateaus der Tabelle Warenbewegung ausgelesen, Wie kriege ich die Attribute aus der Warenbewegungstabelle?
         
-        BestandsaenderungFrame bestandsaenderungFrame = new BestandsaenderungFrame(true,selectedId);
+        BestandsaenderungFrame bestandsaenderungFrame = new BestandsaenderungFrame(true);
         bestandsaenderungFrame.setVisible(true);
-        bestandsaenderungFrame.initLagerObjekt(selectedId);
+   //     bestandsaenderungFrame.initLagerObjekt(selectedId);
         bestandsaenderungFrame.setTable(tabMaintable);
         }
         else{

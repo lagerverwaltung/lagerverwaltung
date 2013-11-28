@@ -72,7 +72,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
    }*/
         
    
-    //Sebastian,nur ID generiert,Ansch.muss noch
+    //Teil einlagern aus der Registerkarte Teilebestand/Lagerbestand
     BestandsaenderungFrame(boolean einlagern, int id) {
         this();
         this.einlagern = einlagern;
@@ -80,7 +80,8 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         einlagernButton.setText("Teile einlagern");
         this.txfTeilID.setText(""+id);
       //  this.txaAnschaffungsgrund.setText(anschGr);
-        this.txfTeilID.setEditable(false); 
+        this.txfTeilID.setEditable(false);
+        this.txfTeilID.setEnabled(false);
         
             //ComboBox füllen
             try {
@@ -90,18 +91,19 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
             }
     }
     
-        //Bestandsänderungsframe um Teile auszulagern
-        BestandsaenderungFrame(boolean auslagern, int id,String anschGr,String hbDate) {
+        //Teil auslagern aus der Registerkarte Lagerbestand
+        BestandsaenderungFrame(boolean auslagern, int id,String anschGr) {
             this();
             this.auslagern = auslagern;
             lblEinlagern.setText("Teile auslagern");
             einlagernButton.setText("Teile auslagern");
             this.txfTeilID.setText("" + id);
-            this.txaAnschaffungsgrund.setText(anschGr);
+            //this.txaAnschaffungsgrund.setText(anschGr);
             //this.txfHaltbarkeitsdatum.setText(hbDate+"kommt noch");
             //this.txfHaltbarkeitsdatum.setText(haltbDate);
             this.txfTeilID.setEditable(false);
-            this.txaAnschaffungsgrund.setEditable(false);
+            this.txfTeilID.setEnabled(false);
+            this.txaAnschaffungsgrund.setEditable(true);
             this.txfHaltbarkeitsdatum.setVisible(false);
             this.lblHaltbarkeitsdatum.setVisible(false);
             this.cbxFachTyp.setEnabled(false);
@@ -265,7 +267,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
 
         lblTeilID.setText("Teil ID:");
 
-        lblAnschaffungsgrund.setText("Anschaffunsgrund:");
+        lblAnschaffungsgrund.setText("Grund:");
 
         txaAnschaffungsgrund.setColumns(20);
         txaAnschaffungsgrund.setRows(5);
@@ -319,44 +321,40 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblAnschaffungsgrund)
                             .addComponent(lblMenge))
-                        .addGap(39, 39, 39)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(spnAnschaffungsgrund)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(txfMenge, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))))
+                            .addComponent(txfMenge, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(spnAnschaffungsgrund, javax.swing.GroupLayout.PREFERRED_SIZE, 377, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblFachAdresse)
+                            .addComponent(lblTeilID))
+                        .addGap(65, 65, 65)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblFachAdresse)
-                                    .addComponent(lblTeilID))
-                                .addGap(43, 43, 43)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(cbxFachTyp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(cbxFachX, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(cbxFachY, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(cbxFachZ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(txfTeilID))
-                                .addGap(32, 32, 32)
+                                .addComponent(cbxFachTyp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cbxFachX, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cbxFachY, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cbxFachZ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(53, 53, 53)
                                 .addComponent(lblHinweis))
-                            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 467, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblEinlagern, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(einlagernButton)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblHaltbarkeitsdatum)
-                                .addGap(44, 44, 44)
-                                .addComponent(txfHaltbarkeitsdatum, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 40, Short.MAX_VALUE))))
+                            .addComponent(txfTeilID, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 467, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblEinlagern, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(einlagernButton)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblHaltbarkeitsdatum)
+                        .addGap(62, 62, 62)
+                        .addComponent(txfHaltbarkeitsdatum, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 19, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
