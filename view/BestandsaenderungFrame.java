@@ -51,7 +51,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
     }
     
     //Artjom
-   BestandsaenderungFrame(boolean einlagern, int id,String anschGr) {
+  /* BestandsaenderungFrame(boolean einlagern, int id,String anschGr) {
         this();
         this.einlagern = einlagern;
         lblEinlagern.setText("Teile einlagern");
@@ -69,7 +69,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
             } catch (SQLException ex) {
                 Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, ex); 
             }
-   }
+   }*/
         
    
     //Sebastian,nur ID generiert,Ansch.muss noch
