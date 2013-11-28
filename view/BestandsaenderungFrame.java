@@ -49,7 +49,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         }
     }
     
-//Artjom
+    //Artjom
    BestandsaenderungFrame(boolean einlagern, int id,String anschGr) {
         this();
         this.einlagern = einlagern;
@@ -103,10 +103,6 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         this.txaAnschaffungsgrund.setEditable(false);
         this.txfHaltbarkeitsdatum.setVisible(false);
         this.lblHaltbarkeitsdatum.setVisible(false);
-        this.cbxFachTyp.setEditable(false);
-        this.cbxFachX.setEditable(false);
-        this.cbxFachY.setEditable(false);
-        this.cbxFachZ.setEditable(false);
         this.cbxFachTyp.setEnabled(false);
         this.cbxFachX.setEnabled(false);
         this.cbxFachY.setEnabled(false);
@@ -413,15 +409,29 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         DateFormat df= new SimpleDateFormat("DD.MM.YYYY");
         Date hd = new Date();
         Date today = new Date();
-        
-        //Übernahme der Variablen aus der GUI
+        int mng = 0;
+        String errors = "";
+
+        //Übernahme der Variablen aus der GUI und Validierung
         String ag = txaAnschaffungsgrund.getText();
+                if(ag.length() == 0){
+            errors += "Bitte Anschaffungsgrund eingeben. \n";
+        }
         try {
             hd = df.parse(txfHaltbarkeitsdatum.getText());
         } catch (ParseException ex) {
             Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
-        int mng = Integer.parseInt(txfMenge.getText());
+                if(hd.equals(null)){
+            errors += "Bitte Haltbarkeitsdatum eingeben. \n";
+        }
+        if(hd.after(today)){
+            errors += "Achtung, Artikel ist schon abgelaufen. \n";
+        }                
+        mng = Integer.parseInt(txfMenge.getText());
+        if(mng == 0){
+            errors += "Bitte einzulagernde Menge eingeben. +\n";
+        }
         int teiID = Integer.parseInt(txfTeilID.getText());
        
         String ort = (String) cbxFachTyp.getSelectedItem();
@@ -433,7 +443,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, ex); 
         }
-        
+ 
         //Setzt das Ziellagerfach zusammen
         lf.setFachnummer(fachID);
         lf.setX(x);
@@ -444,8 +454,10 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         tb.setIdentnummer(teiID);
         
         //Setzt den Lagerbestand zusammen
+        Lagerfach quellFach = new Lagerfach();
+        quellFach.setFachnummer(-1);
         lb.setTeil(tb);
-        lb.setLagerfach(lf);
+        lb.setLagerfach(quellFach);
         lb.setAnschaffungsgrund(ag);
         lb.setMenge(mng);
  
@@ -457,20 +469,8 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         
         //Speichern der Zielpositionen
             //Variablendeklaration
-            ZielPosition zpQuelle = new ZielPosition();
-            Lagerfach lfq = new Lagerfach();
             DatabaseManager dbm = new DatabaseManager();
-            
-            //Quellagerfach zusammensetzen
-             lfq.setFachnummer(-1);           
-            zpQuelle.setLagerfach(lfq);
-            zpQuelle.setMenge(mng);
-            zpQuelle.setWarenbewegung(wb);
-            try {
-                dbm.getZielpositionDao().createOrUpdate(zpQuelle);
-            } catch (SQLException ex) {
-                Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, ex);
-            }
+           
             //Ziellagerfach zusammensetzen
             ZielPosition zpZiel = new ZielPosition();
             zpZiel.setLagerfach(lf);
