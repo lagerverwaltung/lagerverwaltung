@@ -241,68 +241,66 @@ public class TeilFrame extends javax.swing.JFrame {
 
     private void btnanlegenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnanlegenActionPerformed
         Teilebestand t = new Teilebestand();
-        if(teilID > 0){
+        if (teilID > 0) {
             t.setIdentnummer(teilID);
         }
-        
+
         String errors = "";
-        if (txfBezeichnung.getText().length() == 0){
+        if (txfBezeichnung.getText().length() == 0) {
             errors += "Es muss eine Teilbezeichnung eingegeben werden. \n";
         }
-        if (txfMaterial.getText().length() == 0){
+        if (txfMaterial.getText().length() == 0) {
             errors += "Es muss ein Material eingegeben werden. \n";
         }
-        if (txfZeichnungsnummer.getText().length() == 0){
+        if (txfZeichnungsnummer.getText().length() == 0) {
             errors += "Es muss eine Zeichnungsnummer eingegeben werden. \n";
         }
-        if (txfGroesseVE.getText().length() == 0){
+        if (txfGroesseVE.getText().length() == 0) {
             errors += "Es muss eine Größe eingegeben werden. \n";
         }
         float euro = 0;
-        
+
         try {
             /*ersetzt alle Kommas durch Punkte,
-            * um Floatanforderungen zu entsrpechen
-            */
-             String euroStr = txfPreisInEuro.getText();
-             if (euroStr.contains(",")){
-                 euroStr = euroStr.replace(',', '.');
-                 euro = Float.parseFloat(euroStr);
-             }else{
-             euro = Float.parseFloat(txfPreisInEuro.getText());
-             }
-        }
-        catch(NumberFormatException e) {
+             * um Floatanforderungen zu entsrpechen
+             */
+            String euroStr = txfPreisInEuro.getText();
+            if (euroStr.contains(",")) {
+                euroStr = euroStr.replace(',', '.');
+                euro = Float.parseFloat(euroStr);
+            } else {
+                euro = Float.parseFloat(txfPreisInEuro.getText());
+            }
+        } catch (NumberFormatException e) {
             errors += "Der Preis muss eine Fließkommazahl sein. Verwenden sie Punkt"
                     + "anstatt Komma.  \n";
         }
         String groesse = txfGroesseVE.getText();
         try {
-             if(groesse.length() > 0){
+            if (groesse.length() > 0) {
                 t.setVe(Integer.parseInt(groesse));
-             }
-        }
-        catch(NumberFormatException e) {
+            }
+        } catch (NumberFormatException e) {
             errors += "Die Fachgröße muss in Ganzzahlwerten eingegeben werden.\n";
         }
-        
-        if(Misc.createErrorDialog(this, errors) == true){
+
+        if (Misc.createErrorDialog(this, errors) == true) {
             return;
         }
-     
+
         String bezeichnung = txfBezeichnung.getText();
-        
-        Typ typ = (Teilebestand.Typ)cbxTyp.getSelectedItem();
+
+        Typ typ = (Teilebestand.Typ) cbxTyp.getSelectedItem();
         String mat = txfMaterial.getText();
         String zeichnnr = txfZeichnungsnummer.getText();
-        
+
         t.setBezeichnung(bezeichnung);
         t.setTyp(typ);
         t.setMaterialgruppe(mat);
         t.setZeichnungsnummer(zeichnnr);
         t.setPreis(euro);
-        
-        
+
+
         try {
             t.save();
         } catch (SQLException ex) {

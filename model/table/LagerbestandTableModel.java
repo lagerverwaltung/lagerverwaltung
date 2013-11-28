@@ -91,8 +91,11 @@ public class LagerbestandTableModel extends AbstractTableModel {
         Lagerbestand rowO=null;
         rowO = (Lagerbestand) lagerbestandRows.get(row);
         Lagerfach lf = rowO.getLagerfach();
+        if(lf != null){
+            Lager l = lf.getLager();
+        }
         Teilebestand tl = rowO.getTeil();
-        Lager l = lf.getLager();
+       
       
         
         if(lagerbestandRows.size()>0){

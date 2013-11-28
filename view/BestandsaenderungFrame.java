@@ -5,6 +5,7 @@
 package view;
 
 import helper.DatabaseManager;
+import helper.Misc;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.Format;
@@ -397,105 +398,107 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
     private void einlagernButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_einlagernButtonActionPerformed
         
         //Einlagern
-        if(einlagern){
+        if (einlagern) {
 
-        //Variablendeklaration
-        Lagerbestand lb= new Lagerbestand();
-        Warenbewegung wb = new Warenbewegung();
-        Lagerfach lf = new Lagerfach();
-        Teilebestand tb = new Teilebestand();
+            //Variablendeklaration
+            Lagerbestand lb = new Lagerbestand();
+            // lb.getLagerbestand();
+            Warenbewegung wb = new Warenbewegung();
+            Lagerfach lf = new Lagerfach();
+            Teilebestand tb = new Teilebestand();
 
-        int fachID = 0;
-        DateFormat df= new SimpleDateFormat("DD.MM.YYYY");
-        Date hd = new Date();
-        Date today = new Date();
-        int mng = 0;
-        String errors = "";
+            int fachID = 0;
+            DateFormat df = new SimpleDateFormat("DD.MM.YYYY");
+            Date hd = new Date();
+            Date today = new Date();
+            int mng = 0;
+            String errors = "";
 
-        //Übernahme der Variablen aus der GUI und Validierung
-        String ag = txaAnschaffungsgrund.getText();
-                if(ag.length() == 0){
-            errors += "Bitte Anschaffungsgrund eingeben. \n";
-        }
-        try {
-            hd = df.parse(txfHaltbarkeitsdatum.getText());
-        } catch (ParseException ex) {
-            Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, ex);
-        }
-                if(hd.equals(null)){
-            errors += "Bitte Haltbarkeitsdatum eingeben. \n";
-        }
-        if(hd.after(today)){
-            errors += "Achtung, Artikel ist schon abgelaufen. \n";
-        }                
-        mng = Integer.parseInt(txfMenge.getText());
-        if(mng == 0){
-            errors += "Bitte einzulagernde Menge eingeben. +\n";
-        }
-        int teiID = Integer.parseInt(txfTeilID.getText());
-       
-        String ort = (String) cbxFachTyp.getSelectedItem();
-        int x = (int) (cbxFachZ.getSelectedItem());
-        int y = (int) (cbxFachX.getSelectedItem());
-        int z = (int) (cbxFachY.getSelectedItem());
-        try {
-            fachID = Lagerfach.getFach(ort, x, y, z).getFachnummer();
-        } catch (SQLException ex) {
-            Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, ex); 
-        }
- 
-        //Setzt das Ziellagerfach zusammen
-        lf.setFachnummer(fachID);
-        lf.setX(x);
-        lf.setY(y);
-        lf.setZ(z);
-      
-        //Setzt den Teilebestand zusammen
-        tb.setIdentnummer(teiID);
+            //Übernahme der Variablen aus der GUI und Validierung
+            String ag = txaAnschaffungsgrund.getText();
+            if (ag.length() == 0) {
+                errors += "Bitte Anschaffungsgrund eingeben. \n";
+            }
+            try {
+                hd = df.parse(txfHaltbarkeitsdatum.getText());
+            } catch (ParseException ex) {
+                errors += "Das Haltbarkeitsdatum muss im Format tt.mm.jjjj eingegeben werden. \n";
+            }
+            if (hd.equals(null)) {
+                errors += "Bitte Haltbarkeitsdatum eingeben. \n";
+            }
+            if (hd.after(today)) {
+                errors += "Achtung, Artikel ist schon abgelaufen. \n";
+            }
+            mng = Integer.parseInt(txfMenge.getText());
+            if (mng == 0) {
+                errors += "Bitte einzulagernde Menge eingeben. +\n";
+            }
+            int teiID = Integer.parseInt(txfTeilID.getText());
+
+            String ort = (String) cbxFachTyp.getSelectedItem();
+            int x = (int) (cbxFachZ.getSelectedItem());
+            int y = (int) (cbxFachX.getSelectedItem());
+            int z = (int) (cbxFachY.getSelectedItem());
+            try {
+                fachID = Lagerfach.getFach(ort, x, y, z).getFachnummer();
+            } catch (SQLException ex) {
+                Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            if (Misc.createErrorDialog(this, errors) == true) {
+                return;
+            }
         
-        //Setzt den Lagerbestand zusammen
-        Lagerfach quellFach = new Lagerfach();
-        quellFach.setFachnummer(-1);
-        lb.setTeil(tb);
-        lb.setLagerfach(quellFach);
-        lb.setAnschaffungsgrund(ag);
-        lb.setMenge(mng);
- 
-        //Speichert die Warenbewegung
-        wb.setVerantwortlicher("Lagerverwalter");
-        wb.setLagerbestand(lb);
-        wb.setDatum(today);
-        wb.setHaltbarkeitsDatum(hd);
-        
-        //Speichern der Zielpositionen
+            //Setzt das Ziellagerfach zusammen
+            lf.setFachnummer(fachID);
+            lf.setX(x);
+            lf.setY(y);
+            lf.setZ(z);
+
+            //Setzt den Teilebestand zusammen
+            tb.setIdentnummer(teiID);
+
+            //Setzt den Lagerbestand zusammen
+            lb.setTeil(tb);
+            lb.setLagerfach(lf);
+            lb.setAnschaffungsgrund(ag);
+            lb.setMenge(mng);
+
+            //Speichert die Warenbewegung
+            wb.setVerantwortlicher("Lagerverwalter");
+            wb.setLagerbestand(lb);
+            wb.setDatum(today);
+            wb.setHaltbarkeitsDatum(hd);
+
+            //Speichern der Zielpositionen
             //Variablendeklaration
             DatabaseManager dbm = new DatabaseManager();
-           
+
             //Ziellagerfach zusammensetzen
             ZielPosition zpZiel = new ZielPosition();
             zpZiel.setLagerfach(lf);
             zpZiel.setMenge(mng);
             zpZiel.setWarenbewegung(wb);
-                try {
-                    dbm.getZielpositionDao().createOrUpdate(zpZiel);
-                } catch (SQLException ex) {
-                    Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, ex);
-                }
+            try {
+                dbm.getZielpositionDao().createOrUpdate(zpZiel);
+            } catch (SQLException ex) {
+                Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
 
-        //Lagerbestand speichern
-        try {
-            lb.save();
-            wb.save();
-        } catch (SQLException ex) {
-            Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        refreshLagerbestandTableModel();
-        this.dispose();
-        
-        //Auslagern
-        }else{
-            
+            //Lagerbestand speichern
+            try {
+                lb.save();
+                wb.save();
+            } catch (SQLException ex) {
+                Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            refreshLagerbestandTableModel();
+            this.dispose();
+
+            //Auslagern
+        } else {
         }
 
 

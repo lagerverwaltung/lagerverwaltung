@@ -38,7 +38,7 @@ public class Lagerfach {
     @DatabaseField()
     private Groesse groesse;
     
-    @DatabaseField(columnName = "lagerID", canBeNull = false, foreign = true)
+    @DatabaseField(columnName = "lagerID", canBeNull = false, foreign = true,foreignAutoRefresh=true)
     private Lager lager;
     /**
      * @return the fachnummer

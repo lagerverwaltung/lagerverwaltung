@@ -16,6 +16,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @DatabaseTable(tableName = "lagerbestand")
+
 public class Lagerbestand {
 
     @DatabaseField(columnName = "lagerbestandID", generatedId = true)
