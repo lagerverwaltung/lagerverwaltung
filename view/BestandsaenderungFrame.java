@@ -92,43 +92,43 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
     
         //Bestandsänderungsframe um Teile auszulagern
         BestandsaenderungFrame(boolean auslagern, int id,String anschGr,String hbDate) {
-        this();
-        this.auslagern = auslagern;
-        lblEinlagern.setText("Teile auslagern");
-        einlagernButton.setText("Teile auslagern");
-        this.txfTeilID.setText(""+id);
-        this.txaAnschaffungsgrund.setText(anschGr);
-        //this.txfHaltbarkeitsdatum.setText(hbDate+"kommt noch");
-        //this.txfHaltbarkeitsdatum.setText(haltbDate);
-        this.txfTeilID.setEditable(false);
-        this.txaAnschaffungsgrund.setEditable(false);
-        this.txfHaltbarkeitsdatum.setVisible(false);
-        this.lblHaltbarkeitsdatum.setVisible(false);
-        this.cbxFachTyp.setEnabled(false);
-        this.cbxFachX.setEnabled(false);
-        this.cbxFachY.setEnabled(false);
-        this.cbxFachZ.setEnabled(false);
-        
-                //ComboBox füllen
-                Lagerfach lf = new Lagerfach();
-                    try {
-                        lf = Lagerfach.getLagerfach(id);
-                    } catch (SQLException ex) {
-                        Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, ex);
-                    }             
+            this();
+            this.auslagern = auslagern;
+            lblEinlagern.setText("Teile auslagern");
+            einlagernButton.setText("Teile auslagern");
+            this.txfTeilID.setText("" + id);
+            this.txaAnschaffungsgrund.setText(anschGr);
+            //this.txfHaltbarkeitsdatum.setText(hbDate+"kommt noch");
+            //this.txfHaltbarkeitsdatum.setText(haltbDate);
+            this.txfTeilID.setEditable(false);
+            this.txaAnschaffungsgrund.setEditable(false);
+            this.txfHaltbarkeitsdatum.setVisible(false);
+            this.lblHaltbarkeitsdatum.setVisible(false);
+            this.cbxFachTyp.setEnabled(false);
+            this.cbxFachX.setEnabled(false);
+            this.cbxFachY.setEnabled(false);
+            this.cbxFachZ.setEnabled(false);
 
-                if(lf.getLager().getLagerort().freilager.equals(Lager.Lagerort.hochregal)){
-                    cbxFachTyp.removeItem("HL");
-                }else{
-                    cbxFachTyp.removeItem("FL");
-                }               
-                cbxFachZ.removeAllItems();
-                cbxFachX.removeAllItems();
-                cbxFachY.removeAllItems();
-               
-                cbxFachX.addItem(lf.getX());
-                cbxFachY.addItem(lf.getY());
-                cbxFachZ.addItem(lf.getZ());
+            //ComboBox füllen
+            Lagerfach lf = new Lagerfach();
+            try {
+                lf = Lagerfach.getLagerfach(id);
+            } catch (SQLException ex) {
+                Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            if (lf.getLager().getLagerort().freilager.equals(Lager.Lagerort.hochregal)) {
+                cbxFachTyp.removeItem("HL");
+            } else {
+                cbxFachTyp.removeItem("FL");
+            }
+            cbxFachZ.removeAllItems();
+            cbxFachX.removeAllItems();
+            cbxFachY.removeAllItems();
+
+            cbxFachX.addItem(lf.getX());
+            cbxFachY.addItem(lf.getY());
+            cbxFachZ.addItem(lf.getZ());
 
         }
         
@@ -195,6 +195,8 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
          for(int i = 1; i <= z; i++){
             cbxFachY.addItem(i);
         }
+         
+         
     }
 
     /*
@@ -326,7 +328,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(spnAnschaffungsgrund)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(txfMenge, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txfMenge, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -353,7 +355,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(lblHaltbarkeitsdatum)
                                 .addGap(44, 44, 44)
-                                .addComponent(txfHaltbarkeitsdatum, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(txfHaltbarkeitsdatum, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 40, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
@@ -427,7 +429,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
             if (hd.equals(null)) {
                 errors += "Bitte Haltbarkeitsdatum eingeben. \n";
             }
-            if (hd.after(today)) {
+            if (hd.before(today)) {
                 errors += "Achtung, Artikel ist schon abgelaufen. \n";
             }
             mng = Integer.parseInt(txfMenge.getText());
@@ -437,9 +439,9 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
             int teiID = Integer.parseInt(txfTeilID.getText());
 
             String ort = (String) cbxFachTyp.getSelectedItem();
-            int x = (int) (cbxFachZ.getSelectedItem());
-            int y = (int) (cbxFachX.getSelectedItem());
-            int z = (int) (cbxFachY.getSelectedItem());
+            int x = (int) (cbxFachX.getSelectedItem());
+            int y = (int) (cbxFachY.getSelectedItem());
+            int z = (int) (cbxFachZ.getSelectedItem());
             try {
                 fachID = Lagerfach.getFach(ort, x, y, z).getFachnummer();
             } catch (SQLException ex) {

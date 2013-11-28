@@ -89,6 +89,35 @@ public class Lagerfach {
         return lager;
     }
 
+    /*
+    * gibt für das übergebene Lagerfach den belegten Platzbedarf in VE zurück
+    */
+    public static int getUsedVe(Lagerfach l) throws SQLException{
+        int fachId = l.getFachnummer();
+        int usedVe = 0;
+        Dao<Teilebestand, Integer> teilebestandDao = DatabaseManager.getInstance().getTeilebestandDao();
+        Dao<Lagerbestand, Integer> lagerbestandDao = DatabaseManager.getInstance().getLagerbestandDao();
+        List<Lagerbestand> lbList = lagerbestandDao.queryForEq("fachID", fachId);
+
+        if (lbList.size() > 0) {
+            for (int i = 0; i < lbList.size(); i++) {
+                List<Teilebestand> tbList = teilebestandDao.queryForEq("teilID", lbList.get(i).getTeil().getIdentnummer());
+                if (tbList.size() > 0) {
+                    for (int j = 0; j < tbList.size(); j++) {
+                        usedVe = usedVe + lbList.get(i).getMenge() * tbList.get(j).getVe();
+                    }
+
+                }
+            }
+
+        }
+        
+        return usedVe;
+    }
+    
+    /*
+    * Gibt das Lagerfach mit angegebener id zurück
+    */
     public static Lagerfach getLagerfach(int id) throws SQLException{
         Dao<Lagerfach,Integer> lagerfachDao = DatabaseManager.getInstance().getLagerfachDao();
         List<Lagerfach> l = lagerfachDao.queryForEq("fachID", id);
@@ -103,39 +132,29 @@ public class Lagerfach {
     * gibt Lagerfach zur lagerfachadresse aus
     */
     public static Lagerfach getFach(String ort, int x, int y, int z) throws SQLException{
-        
         int lo = 1;
-        if(ort.equals(Lager.Lagerort.freilager.toString())){
+        if (ort.equals(Lager.Lagerort.freilager.toString())) {
             lo = 2;
         }
-        
-	 Dao<Lagerfach,Integer> lagerfachDao = DatabaseManager.getInstance().getLagerfachDao();
-	QueryBuilder<Lagerfach, Integer> queryBuilder = lagerfachDao.queryBuilder();
-	queryBuilder	.where()
-                	.eq("LagerID", lo )
-			.and()
-			.eq("x", x)
-			.and()
-                	.eq("y", y)
-			.and()
-			.eq("z", z);	
-	PreparedQuery<Lagerfach> preparedQuery = queryBuilder.prepare();
+
+        Dao<Lagerfach, Integer> lagerfachDao = DatabaseManager.getInstance().getLagerfachDao();
+        QueryBuilder<Lagerfach, Integer> queryBuilder = lagerfachDao.queryBuilder();
+        queryBuilder.where()
+                .eq("LagerID", lo)
+                .and()
+                .eq("x", x)
+                .and()
+                .eq("y", y)
+                .and()
+                .eq("z", z);
+        PreparedQuery<Lagerfach> preparedQuery = queryBuilder.prepare();
         List<Lagerfach> l = lagerfachDao.query(preparedQuery);
-        
-        if(l.size()>0){
+
+        if (l.size() > 0) {
             return l.get(0);
         }
         return null;
 }
-    /*
-    * Rückgabewert: Menge der Benutzten Lagerkapazität in VE
-    */
-    public static int getUsedVe(Lagerfach l) throws SQLException{
-        String fachID = new Integer(l.getFachnummer()).toString();
-        DatabaseManager dbm = new DatabaseManager();
-        return 0;
-  
-    }
     
    public void save() throws SQLException{
        Dao<Lagerfach,Integer> lagerfachDao = DatabaseManager.getInstance().getLagerfachDao();
