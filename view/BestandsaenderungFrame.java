@@ -255,15 +255,15 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         int z = fl.getTiefe();
         
         for(int i = 1; i <= x; i++){
-            cbxFachX.addItem(i);
+            cbxFachZ.addItem(i);
         }
         
         for(int i = 1; i <= y; i++){
-            cbxFachY.addItem(i);
+            cbxFachX.addItem(i);
         }
                 
          for(int i = 1; i <= z; i++){
-            cbxFachZ.addItem(i);
+            cbxFachY.addItem(i);
          }
         
     }
