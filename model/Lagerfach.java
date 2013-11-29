@@ -13,6 +13,7 @@ import com.j256.ormlite.stmt.QueryBuilder;
 import com.j256.ormlite.table.DatabaseTable;
 import helper.DatabaseManager;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -113,9 +114,7 @@ public class Lagerfach {
         return usedVe;
     }
     
-    public int getMaxVe(){     
-        int maxVe = 0;
-
+    public int getMaxVe(){
         if(groesse.equals(Groesse.klein)){
             return this.getLager().getGrossVE();
         }
@@ -125,8 +124,7 @@ public class Lagerfach {
         if(groesse.equals(Groesse.gross)){
             return this.getLager().getKleinVE();
         }
-        
-        return maxVe;
+        return 0;
     }
     
     /*
@@ -147,7 +145,7 @@ public class Lagerfach {
     */
     public static Lagerfach getFach(String ort, int x, int y, int z) throws SQLException{
         int lo = 1;
-        if (ort.equals(Lager.Lagerort.freilager.toString())) {
+        if (ort.equals("FL")) {
             lo = 2;
         }
 
