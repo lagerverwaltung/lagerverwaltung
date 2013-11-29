@@ -6,9 +6,7 @@
 
 package model;
 
-import com.j256.ormlite.dao.CloseableIterator;
 import com.j256.ormlite.dao.Dao;
-import com.j256.ormlite.dao.ForeignCollection;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.stmt.PreparedQuery;
 import com.j256.ormlite.stmt.QueryBuilder;
@@ -92,8 +90,8 @@ public class Lagerfach {
     /*
     * gibt für das übergebene Lagerfach den belegten Platzbedarf in VE zurück
     */
-    public static int getUsedVe(Lagerfach l) throws SQLException{
-        int fachId = l.getFachnummer();
+    public int getUsedVe() throws SQLException{
+        int fachId = fachnummer;
         int usedVe = 0;
         Dao<Teilebestand, Integer> teilebestandDao = DatabaseManager.getInstance().getTeilebestandDao();
         Dao<Lagerbestand, Integer> lagerbestandDao = DatabaseManager.getInstance().getLagerbestandDao();
@@ -113,6 +111,22 @@ public class Lagerfach {
         }
         
         return usedVe;
+    }
+    
+    public int getMaxVe(){     
+        int maxVe = 0;
+
+        if(groesse.equals(Groesse.klein)){
+            return this.getLager().getGrossVE();
+        }
+        if(groesse.equals(Groesse.mittel)){
+            return this.getLager().getMittelVE();
+        }
+        if(groesse.equals(Groesse.gross)){
+            return this.getLager().getKleinVE();
+        }
+        
+        return maxVe;
     }
     
     /*
