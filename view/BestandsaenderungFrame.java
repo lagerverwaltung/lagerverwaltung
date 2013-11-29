@@ -527,9 +527,11 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
 
             //Speichert die Warenbewegung
             wb.setVerantwortlicher("Lagerverwalter");
+            wb.setQuellFach(lf);
             wb.setLagerbestand(lb);
             wb.setDatum(today);
             wb.setHaltbarkeitsDatum(hd);
+            wb.setAnschaffungsgrund(ag);
 
             //Speichern der Zielpositionen
             //Variablendeklaration

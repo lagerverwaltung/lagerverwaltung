@@ -33,6 +33,9 @@ public class Warenbewegung {
     @DatabaseField()
     private String verantwortlicher;
     
+    @DatabaseField(columnName = "fachID", foreign = true, foreignAutoRefresh=true)
+    private Lagerfach quellFach;
+    
     @DatabaseField(columnName = "lagerbestandID", foreign = true, foreignAutoRefresh=true)
     private Lagerbestand lagerbestand;
     
@@ -42,7 +45,11 @@ public class Warenbewegung {
     @DatabaseField()
     private java.util.Date haltbarkeitsDatum;
 
+    @DatabaseField(columnName = "anschaffg")
+    private String anschaffungsgrund;
 
+ 
+    
     /**
      * @return the arrZielPosition
      */
@@ -50,6 +57,14 @@ public class Warenbewegung {
         return arrZielPosition;
     }
 
+    public Lagerfach getQuellFach() {
+        return quellFach;
+    }
+
+    public void setQuellFach(Lagerfach quellFach) {
+        this.quellFach = quellFach;
+    }
+    
     /**
      * @param arrZielPosition the arrZielPosition to set
      */
@@ -125,6 +140,14 @@ public class Warenbewegung {
      */
     public void setHaltbarkeitsDatum(java.util.Date haltbarkeitsDatum) {
         this.haltbarkeitsDatum = haltbarkeitsDatum;
+    }
+    
+    public String getAnschaffungsgrund() {
+        return anschaffungsgrund;
+    }
+
+    public void setAnschaffungsgrund(String anschaffungsgrund) {
+        this.anschaffungsgrund = anschaffungsgrund;
     }
 	
     public static Warenbewegung loadWarenbewegung(int id)

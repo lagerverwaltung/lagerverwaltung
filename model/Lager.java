@@ -109,6 +109,17 @@ public class Lager {
     public Lager.Lagerort getLagerort() {
         return lagerort;
     }
+    
+    public String getLagerortCode() {
+        String code = "";
+        if(lagerort == Lager.Lagerort.freilager){
+            code = "FL";
+        }
+        else {
+            code = "HR";
+        }
+        return code;
+    }
 
     /**
      * @param lagerort the lagerort to set

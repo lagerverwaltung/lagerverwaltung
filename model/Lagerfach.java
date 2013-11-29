@@ -180,6 +180,11 @@ public class Lagerfach {
     public void setLager(Lager lager) {
         this.lager = lager;
     }
+    
+    public String toString()
+    {
+        return getLager().getLagerortCode()+" "+getX()+" "+getY()+" "+getZ();
+    }
 	public enum Groesse {
 	
 		klein (),
