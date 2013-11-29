@@ -266,15 +266,15 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         int z = fl.getTiefe();
         
         for(int i = 1; i <= x; i++){
-            cbxFachX.addItem(i);
+            cbxFachZ.addItem(i);
         }
         
         for(int i = 1; i <= y; i++){
-            cbxFachY.addItem(i);
+            cbxFachX.addItem(i);
         }
                 
          for(int i = 1; i <= z; i++){
-            cbxFachZ.addItem(i);
+            cbxFachY.addItem(i);
          }
         
     }
@@ -453,7 +453,6 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
 
             //Variablendeklaration
             Lagerbestand lb = new Lagerbestand();
-            // lb.getLagerbestand();
             Warenbewegung wb = new Warenbewegung();
             Lagerfach lf = new Lagerfach();
             Teilebestand tb = new Teilebestand();
@@ -533,10 +532,13 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
             lb.setLagerfach(lf);
             lb.setAnschaffungsgrund(ag);
             lb.setMenge(mng);
+            
+            Lagerfach qlf = new Lagerfach();
+            qlf.setFachnummer(0);
 
             //Speichert die Warenbewegung
             wb.setVerantwortlicher("Lagerverwalter");
-            wb.setQuellFach(lf);
+            wb.setQuellFach(qlf);
             wb.setLagerbestand(lb);
             wb.setDatum(today);
             wb.setHaltbarkeitsDatum(hd);
@@ -551,16 +553,19 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
             zpZiel.setLagerfach(lf);
             zpZiel.setMenge(mng);
             zpZiel.setWarenbewegung(wb);
+            /*
             try {
                 dbm.getZielpositionDao().createOrUpdate(zpZiel);
             } catch (SQLException ex) {
                 Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
+            */
 
             //Lagerbestand speichern
             try {
                 lb.save();
                 wb.save();
+                zpZiel.save();
             } catch (SQLException ex) {
                 Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, ex);
             }

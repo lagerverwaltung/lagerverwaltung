@@ -6,8 +6,11 @@
 
 package model;
 
+import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
+import helper.DatabaseManager;
+import java.sql.SQLException;
 
 @DatabaseTable(tableName = "zielposition")
 public class ZielPosition {
@@ -68,4 +71,8 @@ public class ZielPosition {
         this.lagerfach = lagerfach;
     }
 
+    public void save() throws SQLException{
+       Dao<ZielPosition,Integer> zielPositionsDao = DatabaseManager.getInstance().getZielpositionDao();
+       zielPositionsDao.createOrUpdate(this);
+   }
 }
