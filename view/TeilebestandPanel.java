@@ -31,6 +31,11 @@ public class TeilebestandPanel extends javax.swing.JPanel {
         this.mainFrame = mainFrame;
     }
     
+    public JTable getTeileTable()
+    {
+    return tblMain;
+    }
+    
     public void setTableWidths(JTable table)
     {
         int[] arrWidths = {35, 130, 130, 130, 50, 120,50};

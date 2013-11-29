@@ -200,6 +200,7 @@ public class LagerbestandPanel extends javax.swing.JPanel {
         bestandsaenderungFrame.setVisible(true);
         bestandsaenderungFrame.initLagerObjekt(selectedId);
         bestandsaenderungFrame.setTable(tabMaintable);
+        
         }
         else{
             Misc.createErrorDialog(mainFrame, "Es muss erst ein Teil zum Einlagern aus der "
@@ -228,13 +229,21 @@ public class LagerbestandPanel extends javax.swing.JPanel {
         /**
          * Anschaffungsgrund Attribute wird aus der Tabelle tabMainTable(Lagerbestandstabelle) aus der 8.Position herausgezogen
           */
+         int x=Integer.parseInt(tabMaintable.getValueAt(tabMaintable.getSelectedRow(), 2).toString());
+        int y=Integer.parseInt(tabMaintable.getValueAt(tabMaintable.getSelectedRow(), 3).toString());
+        int z=Integer.parseInt(tabMaintable.getValueAt(tabMaintable.getSelectedRow(), 4).toString()); 
+        int fachid=Integer.parseInt(tabMaintable.getValueAt(tabMaintable.getSelectedRow(), 0).toString());
+        String lo= tabMaintable.getValueAt(tabMaintable.getSelectedRow(), 1).toString();
         selectedAnschGr = tabMaintable.getValueAt(tabMaintable.getSelectedRow(), 8).toString();
+        int menge=Integer.parseInt(tabMaintable.getValueAt(tabMaintable.getSelectedRow(), 7).toString()); 
         //hier wird späterWert Attribut Haltbarkeitsdatum hbDateaus der Tabelle Warenbewegung ausgelesen, Wie kriege ich die Attribute aus der Warenbewegungstabelle?
         //selectedHbDate = tabMaintable.getValueAt(tabMaintable.getSelectedRow(), 6).toString();
-        BestandsaenderungFrame bestandsaenderungFrame = new BestandsaenderungFrame(true,selectedId,selectedAnschGr);
+        BestandsaenderungFrame bestandsaenderungFrame = new BestandsaenderungFrame(true,selectedId,selectedAnschGr,x,y,z,lo,fachid,menge);
         bestandsaenderungFrame.setVisible(true);
         bestandsaenderungFrame.initLagerObjekt(selectedId);
         bestandsaenderungFrame.setTable(tabMaintable);
+        JTable teileTable= mainFrame.getPanMain().getTeilebestand().getTeileTable();
+        bestandsaenderungFrame.setTeileTable(teileTable);
         }
         else{
             Misc.createErrorDialog(mainFrame, "Es muss erst ein Teil zum Auslagern aus der "
