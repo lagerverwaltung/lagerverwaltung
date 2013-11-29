@@ -147,8 +147,6 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
              this.lblHaltbarkeitsdatum.setVisible(false);
         }
         
-    
-
     //Table setzen
     public void setTable(JTable t)
     {
@@ -222,7 +220,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
                 
          for(int i = 1; i <= z; i++){
             cbxFachZ.addItem(i);
-        }
+         }
         
     }
      
@@ -448,6 +446,28 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
                 Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
 
+            int freeVe = 0;
+            int usedVe = 0;
+            int maxVe = 0;
+            
+            try {
+                maxVe = Lagerfach.getLagerfach(fachID).getMaxVe();
+            } catch (SQLException ex) {
+                Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            try {
+                usedVe = Lagerfach.getLagerfach(fachID).getUsedVe();
+            } catch (SQLException ex) {
+                Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            freeVe = maxVe - usedVe;
+            
+            if (mng > freeVe){
+                errors += "Es steht nicht genug Platz zum einlagern zur Verfügung. +\n";
+                errors += usedVe+" von "+maxVe+" VE belegt. "+freeVe+" VE frei. +\n";
+            }
             if (Misc.createErrorDialog(this, errors) == true) {
                 return;
             }
