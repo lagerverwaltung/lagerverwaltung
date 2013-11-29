@@ -37,6 +37,12 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
     Boolean bestehendesTeil=false;
     JTable lagerBestandTable;
     int lagerID;
+    int x;
+    int y;
+    int z;
+    int fachid;
+    String lo;
+    int teilid;
     
     /**
      * Creates new form BestandsaenderungFrame
@@ -94,12 +100,20 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
     BestandsaenderungFrame(boolean einlagern, int id,boolean bestehendesteil,int x,int y, int z,String lo, int fachid) {
         this();
         this.einlagern = einlagern;
+        this.bestehendesTeil=bestehendesteil;
+        this.x=x;
+        this.y=y;
+        this.z=z;
+        this.lo=lo;
+        this.fachid=fachid;
+        this.teilid=id;
         lblEinlagern.setText("Teile einlagern");
         einlagernButton.setText("Teile einlagern");
         this.txfTeilID.setText(""+id);
       //  this.txaAnschaffungsgrund.setText(anschGr);
         this.txfTeilID.setEditable(false);
         this.txfTeilID.setEnabled(false);
+        
         this.cbxFachX.setSelectedItem(x);
         this.cbxFachY.setSelectedItem(y);
         this.cbxFachZ.setSelectedItem(z);
@@ -527,9 +541,42 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
 
             //Einlagern mit bestehendem Teil
         } else if(bestehendesTeil) {
-        
-            
-        }
+            int lagerbestandsid=-1;
+            try {
+                 lagerbestandsid=Lagerbestand.getLagerbestandID(this.x,this.y,this.z,this.lo,this.teilid,this.fachid);
+            } catch (SQLException ex) {
+                Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            Lagerbestand lb=null;
+            try {
+                 lb= Lagerbestand.getLagerbestand(lagerbestandsid);
+            } catch (SQLException ex) {
+                Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            int menge=0;
+         
+            try{
+                menge=Integer.parseInt(this.txfMenge.getText());
+            }
+            catch(Exception e)
+            {
+                Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, e);
+            } 
+            if (menge>0)
+            {    lb.setMenge(lb.getMenge()+menge);
+                try {
+                    lb.save();
+                } catch (SQLException ex) {
+                    Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            else
+            {
+                System.out.println("Menge zu klein");
+            }
+            refreshLagerbestandTableModel();
+            this.dispose();
+        }       
         // auslagern
         else
         {
