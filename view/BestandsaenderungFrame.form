@@ -25,56 +25,49 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="lblAnschaffungsgrund" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="lblMenge" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="spnAnschaffungsgrund" max="32767" attributes="0"/>
-                          <Group type="102" attributes="0">
-                              <Component id="txfMenge" min="-2" pref="40" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          </Group>
+                          <Component id="txfMenge" min="-2" pref="40" max="-2" attributes="0"/>
+                          <Component id="spnAnschaffungsgrund" min="-2" pref="377" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="lblFachAdresse" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblTeilID" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Component id="cbxFachTyp" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="cbxFachX" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="cbxFachY" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="cbxFachZ" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Component id="txfTeilID" max="32767" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                          <Component id="lblFachAdresse" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblTeilID" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="cbxFachTyp" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="cbxFachX" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="cbxFachY" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="cbxFachZ" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
                               <Component id="lblHinweis" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="jSeparator1" alignment="0" min="-2" pref="467" max="-2" attributes="0"/>
-                          <Component id="lblEinlagern" alignment="0" min="-2" pref="131" max="-2" attributes="0"/>
-                          <Component id="einlagernButton" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="lblHaltbarkeitsdatum" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
-                              <Component id="txfHaltbarkeitsdatum" min="-2" pref="80" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="txfTeilID" min="-2" pref="36" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="0" pref="40" max="32767" attributes="0"/>
+                  </Group>
+                  <Component id="jSeparator1" alignment="0" min="-2" pref="467" max="-2" attributes="0"/>
+                  <Component id="lblEinlagern" alignment="0" min="-2" pref="131" max="-2" attributes="0"/>
+                  <Component id="einlagernButton" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="lblHaltbarkeitsdatum" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
+                      <Component id="txfHaltbarkeitsdatum" min="-2" pref="82" max="-2" attributes="0"/>
                   </Group>
               </Group>
+              <EmptySpace min="0" pref="19" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -146,7 +139,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="lblAnschaffungsgrund">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Anschaffunsgrund:"/>
+        <Property name="text" type="java.lang.String" value="Grund:"/>
       </Properties>
     </Component>
     <Container class="javax.swing.JScrollPane" name="spnAnschaffungsgrund">
