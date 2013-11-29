@@ -406,7 +406,8 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
             Teilebestand tb = new Teilebestand();
 
             int fachID = 0;
-            DateFormat df = new SimpleDateFormat("DD.MM.YYYY");
+            DateFormat df = new SimpleDateFormat("dd.MM.yyyy");
+            df.setLenient(false);
             Date hd = new Date();
             Date today = new Date();
             int mng = 0;
@@ -421,9 +422,6 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
                 hd = df.parse(txfHaltbarkeitsdatum.getText());
             } catch (ParseException ex) {
                 errors += "Das Haltbarkeitsdatum muss im Format tt.mm.jjjj eingegeben werden. \n";
-            }
-            if (hd.equals(null)) {
-                errors += "Bitte Haltbarkeitsdatum eingeben. \n";
             }
             if (hd.before(today)) {
                 errors += "Achtung, Artikel ist schon abgelaufen. \n";
