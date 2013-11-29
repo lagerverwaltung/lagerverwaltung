@@ -34,6 +34,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
     Boolean einlagern = false;
     Boolean auslagern = false;
     Boolean splitten = false;
+    Boolean bestehendesTeil=false;
     JTable lagerBestandTable;
     int lagerID;
     
@@ -89,6 +90,33 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
             } catch (SQLException ex) {
                 Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, ex); 
             }
+    }
+    BestandsaenderungFrame(boolean einlagern, int id,boolean bestehendesteil,int x,int y, int z,String lo, int fachid) {
+        this();
+        this.einlagern = einlagern;
+        lblEinlagern.setText("Teile einlagern");
+        einlagernButton.setText("Teile einlagern");
+        this.txfTeilID.setText(""+id);
+      //  this.txaAnschaffungsgrund.setText(anschGr);
+        this.txfTeilID.setEditable(false);
+        this.txfTeilID.setEnabled(false);
+        this.cbxFachX.setSelectedItem(x);
+        this.cbxFachY.setSelectedItem(y);
+        this.cbxFachZ.setSelectedItem(z);
+        this.cbxFachTyp.setSelectedItem(lo);
+        
+        this.cbxFachX.setEnabled(false);
+        this.cbxFachY.setEnabled(false);
+        this.cbxFachZ.setEnabled(false);
+        this.cbxFachTyp.setEnabled(false);
+        
+        
+            //ComboBox füllen
+       /*     try {
+                loadHlCbx();
+            } catch (SQLException ex) {
+                Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, ex); 
+            }*/
     }
     
         //Teil auslagern aus der Registerkarte Lagerbestand
@@ -398,7 +426,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
     private void einlagernButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_einlagernButtonActionPerformed
         
         //Einlagern
-        if (einlagern) {
+        if (einlagern && !bestehendesTeil) {
 
             //Variablendeklaration
             Lagerbestand lb = new Lagerbestand();
@@ -497,8 +525,15 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
             refreshLagerbestandTableModel();
             this.dispose();
 
-            //Auslagern
-        } else {
+            //Einlagern mit bestehendem Teil
+        } else if(bestehendesTeil) {
+        
+            
+        }
+        // auslagern
+        else
+        {
+        
         }
 
 

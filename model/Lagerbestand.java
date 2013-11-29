@@ -8,6 +8,8 @@ package model;
 
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.stmt.PreparedQuery;
+import com.j256.ormlite.stmt.QueryBuilder;
 import com.j256.ormlite.table.DatabaseTable;
 import helper.DatabaseManager;
 import java.sql.SQLException;
@@ -128,6 +130,34 @@ public class Lagerbestand {
         }
         return null;
     }
+        
+   public static int getLagerbestandID(int x, int y, int z,String ort, int teilid) throws SQLException
+   {
+       int lo = 1;
+        if (ort.equals(Lager.Lagerort.freilager.toString())) {
+            lo = 2;
+        }
+        Dao<Lagerbestand, Integer> lagerbestandDao = DatabaseManager.getInstance().getLagerbestandDao();
+        QueryBuilder<Lagerbestand, Integer> queryBuilder = lagerbestandDao.queryBuilder();
+        queryBuilder.where()
+                .eq("LagerID", lo)
+                .and()
+                .eq("x", x)
+                .and()
+                .eq("y", y)
+                .and()
+                .eq("z", z)
+                .and()
+                .eq("teilID", teilid);
+        PreparedQuery<Lagerbestand> preparedQuery = queryBuilder.prepare();
+        List<Lagerbestand> l = lagerbestandDao.query(preparedQuery);
+
+        if (l.size() > 0) {
+            return l.get(0).getLagerbestandsnummer();
+        }
+        return 0;
+   
+   }
     //Speichern Lagerbestand
    public void save() throws SQLException{
        Dao<Lagerbestand,Integer> LagerbestandDao = DatabaseManager.getInstance().getLagerbestandDao();

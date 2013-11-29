@@ -190,8 +190,13 @@ public class LagerbestandPanel extends javax.swing.JPanel {
           */
        // selectedAnschGr = tabMaintable.getValueAt(tabMaintable.getSelectedRow(), 8).toString();
         //hier wird späterWert Attribut Haltbarkeitsdatum hbDateaus der Tabelle Warenbewegung ausgelesen, Wie kriege ich die Attribute aus der Warenbewegungstabelle?
-        
-        BestandsaenderungFrame bestandsaenderungFrame = new BestandsaenderungFrame(true,selectedId);
+        int x=Integer.parseInt(tabMaintable.getValueAt(tabMaintable.getSelectedRow(), 2).toString());
+        int y=Integer.parseInt(tabMaintable.getValueAt(tabMaintable.getSelectedRow(), 3).toString());
+        int z=Integer.parseInt(tabMaintable.getValueAt(tabMaintable.getSelectedRow(), 4).toString()); 
+        int fachid=Integer.parseInt(tabMaintable.getValueAt(tabMaintable.getSelectedRow(), 0).toString());
+        String lo= tabMaintable.getValueAt(tabMaintable.getSelectedRow(), 1).toString();
+
+        BestandsaenderungFrame bestandsaenderungFrame = new BestandsaenderungFrame(true,selectedId,true,x,y,z,lo,fachid);
         bestandsaenderungFrame.setVisible(true);
         bestandsaenderungFrame.initLagerObjekt(selectedId);
         bestandsaenderungFrame.setTable(tabMaintable);
