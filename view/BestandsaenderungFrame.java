@@ -442,7 +442,6 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
 
             //Variablendeklaration
             Lagerbestand lb = new Lagerbestand();
-            // lb.getLagerbestand();
             Warenbewegung wb = new Warenbewegung();
             Lagerfach lf = new Lagerfach();
             Teilebestand tb = new Teilebestand();
@@ -543,16 +542,19 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
             zpZiel.setLagerfach(lf);
             zpZiel.setMenge(mng);
             zpZiel.setWarenbewegung(wb);
+            /*
             try {
                 dbm.getZielpositionDao().createOrUpdate(zpZiel);
             } catch (SQLException ex) {
                 Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
+            */
 
             //Lagerbestand speichern
             try {
                 lb.save();
                 wb.save();
+                zpZiel.save();
             } catch (SQLException ex) {
                 Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
