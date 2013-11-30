@@ -18,10 +18,10 @@ public class ZielPosition {
     @DatabaseField()
     private int menge;
     
-    @DatabaseField(columnName = "warenbID", foreign = true)
+    @DatabaseField(columnName = "warenbID", foreign = true, foreignAutoRefresh=true)
     private Warenbewegung warenbewegung;
     
-    @DatabaseField(columnName = "fachID", foreign = true)
+    @DatabaseField(columnName = "fachID", foreign = true,foreignAutoRefresh=true)
     private Lagerfach lagerfach;
 
     /**

@@ -526,7 +526,6 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
             //Speichert die Warenbewegung
             wb.setVerantwortlicher("Lagerverwalter");
             wb.setQuellFach(lf);
-            wb.setLagerbestand(lb);
             wb.setDatum(today);
             wb.setHaltbarkeitsDatum(hd);
             wb.setAnschaffungsgrund(ag);
@@ -535,21 +534,24 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
             //Variablendeklaration
             DatabaseManager dbm = new DatabaseManager();
 
-            //Ziellagerfach zusammensetzen
-            ZielPosition zpZiel = new ZielPosition();
-            zpZiel.setLagerfach(lf);
-            zpZiel.setMenge(mng);
-            zpZiel.setWarenbewegung(wb);
-            try {
-                dbm.getZielpositionDao().createOrUpdate(zpZiel);
-            } catch (SQLException ex) {
-                Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
             //Lagerbestand speichern
             try {
                 lb.save();
+                wb.setLagerbestand(lb);
                 wb.save();
+                
+                //Ziellagerfach zusammensetzen
+                ZielPosition zpZiel = new ZielPosition();
+                zpZiel.setLagerfach(lf);
+                zpZiel.setMenge(mng);
+                zpZiel.setWarenbewegung(wb);
+                try {
+                    dbm.getZielpositionDao().createOrUpdate(zpZiel);
+                } catch (SQLException ex) {
+                    Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+               
             } catch (SQLException ex) {
                 Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
