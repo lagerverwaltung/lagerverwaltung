@@ -4,6 +4,7 @@
  */
 package view;
 
+import com.j256.ormlite.dao.Dao;
 import helper.DatabaseManager;
 import helper.Misc;
 import java.sql.SQLException;
@@ -15,6 +16,7 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import model.Lager;
 import model.Lagerbestand;
@@ -23,7 +25,9 @@ import model.Teilebestand;
 import model.Warenbewegung;
 import model.ZielPosition;
 import model.collection.LagerbestandCollection;
+import model.collection.TeilebestandCollection;
 import model.table.LagerbestandTableModel;
+import model.table.TeileTableModel;
 
 /**
  *
@@ -36,13 +40,11 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
     Boolean splitten = false;
     Boolean bestehendesTeil=false;
     JTable lagerBestandTable;
+    JTable teileBestandTable;
     int lagerID;
-    int x;
-    int y;
-    int z;
     int fachid;
-    String lo;
     int teilid;
+    int mengeTable;
     
     /**
      * Creates new form BestandsaenderungFrame
@@ -101,10 +103,6 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         this();
         this.einlagern = einlagern;
         this.bestehendesTeil=bestehendesteil;
-        this.x=x;
-        this.y=y;
-        this.z=z;
-        this.lo=lo;
         this.fachid=fachid;
         this.teilid=id;
         lblEinlagern.setText("Teile einlagern");
@@ -134,12 +132,14 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
     }
     
         //Teil auslagern aus der Registerkarte Lagerbestand
-        BestandsaenderungFrame(boolean auslagern, int id,String anschGr) {
+        BestandsaenderungFrame(boolean auslagern, int id,String anschGr, int x, int y, int z, String lo, int fachid, int menge) {
+          
             this();
             this.auslagern = auslagern;
             lblEinlagern.setText("Teile auslagern");
             einlagernButton.setText("Teile auslagern");
             this.txfTeilID.setText("" + id);
+            this.mengeTable=menge;
             //this.txaAnschaffungsgrund.setText(anschGr);
             //this.txfHaltbarkeitsdatum.setText(hbDate+"kommt noch");
             //this.txfHaltbarkeitsdatum.setText(haltbDate);
@@ -152,8 +152,14 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
             this.cbxFachX.setEnabled(false);
             this.cbxFachY.setEnabled(false);
             this.cbxFachZ.setEnabled(false);
+            this.cbxFachX.setSelectedItem(x);
+            this.cbxFachY.setSelectedItem(y);
+            this.cbxFachZ.setSelectedItem(z);
+            this.cbxFachTyp.setSelectedItem(lo); //Lagerort noch BUGGY!
+            this.fachid=fachid;
+            this.teilid=id;
 
-            //ComboBox füllen
+        /*  //ComboBox füllen
             Lagerfach lf = new Lagerfach();
             try {
                 lf = Lagerfach.getLagerfach(id);
@@ -172,8 +178,9 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
 
             cbxFachX.addItem(lf.getX());
             cbxFachY.addItem(lf.getY());
-            cbxFachZ.addItem(lf.getZ());
-
+            cbxFachZ.addItem(lf.getZ()); 
+            
+            */
         }
         
         BestandsaenderungFrame(boolean splitten) {
@@ -195,6 +202,10 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
     public void setTable(JTable t)
     {
         lagerBestandTable = t;
+    }
+    public void setTeileTable(JTable t)
+    {
+        teileBestandTable = t;
     }
      public void initLagerObjekt(int id)
     {
@@ -255,15 +266,15 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         int z = fl.getTiefe();
         
         for(int i = 1; i <= x; i++){
-            cbxFachX.addItem(i);
+            cbxFachZ.addItem(i);
         }
         
         for(int i = 1; i <= y; i++){
-            cbxFachY.addItem(i);
+            cbxFachX.addItem(i);
         }
                 
          for(int i = 1; i <= z; i++){
-            cbxFachZ.addItem(i);
+            cbxFachY.addItem(i);
          }
         
     }
@@ -442,7 +453,6 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
 
             //Variablendeklaration
             Lagerbestand lb = new Lagerbestand();
-            // lb.getLagerbestand();
             Warenbewegung wb = new Warenbewegung();
             Lagerfach lf = new Lagerfach();
             Teilebestand tb = new Teilebestand();
@@ -522,10 +532,13 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
             lb.setLagerfach(lf);
             lb.setAnschaffungsgrund(ag);
             lb.setMenge(mng);
+            
+            Lagerfach qlf = new Lagerfach();
+            qlf.setFachnummer(0);
 
             //Speichert die Warenbewegung
             wb.setVerantwortlicher("Lagerverwalter");
-            wb.setQuellFach(lf);
+            wb.setQuellFach(qlf);
             wb.setDatum(today);
             wb.setHaltbarkeitsDatum(hd);
             wb.setAnschaffungsgrund(ag);
@@ -545,13 +558,16 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
                 zpZiel.setLagerfach(lf);
                 zpZiel.setMenge(mng);
                 zpZiel.setWarenbewegung(wb);
+            /*
                 try {
                     dbm.getZielpositionDao().createOrUpdate(zpZiel);
                 } catch (SQLException ex) {
                     Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, ex);
                 }
+            */
                 
                
+                zpZiel.save();
             } catch (SQLException ex) {
                 Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -563,7 +579,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         } else if(bestehendesTeil) {
             int lagerbestandsid=-1;
             try {
-                 lagerbestandsid=Lagerbestand.getLagerbestandID(this.x,this.y,this.z,this.lo,this.teilid,this.fachid);
+                 lagerbestandsid=Lagerbestand.getLagerbestandID(this.teilid,this.fachid);
             } catch (SQLException ex) {
                 Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -592,7 +608,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
             }
             else
             {
-                System.out.println("Menge zu klein");
+                Misc.createErrorDialog(this, "Eingegebene Menge muss größer 0 sein!");
             }
             refreshLagerbestandTableModel();
             this.dispose();
@@ -600,7 +616,75 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         // auslagern
         else
         {
-        
+         int lagerbestandsid=-1;
+            try {
+                 lagerbestandsid=Lagerbestand.getLagerbestandID(this.teilid,this.fachid);
+            } catch (SQLException ex) {
+                Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            Lagerbestand lb=null;
+            try {
+                 lb= Lagerbestand.getLagerbestand(lagerbestandsid);
+            } catch (SQLException ex) {
+                Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            int menge=0;
+         
+            try{
+                menge=Integer.parseInt(this.txfMenge.getText());
+            }
+            catch(Exception e)
+            {
+                Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, e);
+            } 
+            if (menge<=mengeTable)
+            {    lb.setMenge(lb.getMenge()-menge);
+             try {
+                 lb.save();
+             } catch (SQLException ex) {
+                 Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, ex);
+             }
+               
+                if (menge==mengeTable)
+                {
+                 int option=  JOptionPane.showConfirmDialog(this, "Soll der zugehörige Datensatz gelöscht werden ?");
+                 
+                 if(option==JOptionPane.YES_OPTION)
+                 {
+                     Dao<Lagerbestand, Integer> lagerbestandDao = DatabaseManager.getInstance().getLagerbestandDao();
+                     try {
+                         lagerbestandDao.delete(lb);
+                     } catch (SQLException ex) {
+                         Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, ex);
+                     }
+                     Dao<Teilebestand, Integer> teilebestandDao =DatabaseManager.getInstance().getTeilebestandDao();
+                     try {
+                         teilebestandDao.deleteById(teilid);
+                     } catch (SQLException ex) {
+                         Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, ex);
+                     }
+                 }
+                 else
+                 {
+                     Dao<Lagerbestand, Integer> lagerbestandDao = DatabaseManager.getInstance().getLagerbestandDao();
+                      try {
+                         lagerbestandDao.delete(lb);
+                     } catch (SQLException ex) {
+                         Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, ex);
+                     }
+                 }
+                }
+            }
+            else
+            {
+                Misc.createErrorDialog(this, "Eingegebene Menge ist größer der eingelagerten Menge!");
+                return;
+            }
+            
+            refreshTeilebestandTableModel();
+            this.dispose();
+            refreshLagerbestandTableModel();
+            
         }
 
 
@@ -610,6 +694,12 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         LagerbestandTableModel lm = new LagerbestandTableModel();
         lm.setData(lc);
         lagerBestandTable.setModel(lm);
+    }
+    private void refreshTeilebestandTableModel(){
+        TeilebestandCollection tc = TeilebestandCollection.getInstance(true);
+        TeileTableModel tm = new TeileTableModel();
+        tm.setData(tc);
+        teileBestandTable.setModel(tm);
     }
     
     private void cbxFachXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxFachXActionPerformed
