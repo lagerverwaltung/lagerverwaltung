@@ -78,75 +78,68 @@ public class LagerbestandTableModel extends AbstractTableModel {
         }
         return name;
     }
-    //Simons garbage
-   /* public Object getValueAt(int row, int col) {
-        if(lagerbestandRows.size()>0){
-            Object[] commisionColumns = lagerbestandRows.get(row);
-            return commisionColumns[col];
-        }
-        return "notfound";
-    }*/
     
         public Object getValueAt(int row, int col) {
-        Lagerbestand rowO=null;
-        rowO = (Lagerbestand) lagerbestandRows.get(row);
-        Lagerfach lf = rowO.getLagerfach();
-        if(lf != null){
-            Lager l = lf.getLager();
-        }
-        Teilebestand tl = rowO.getTeil();
-       
-      
-        
-        if(lagerbestandRows.size()>0){
-         rowO = (Lagerbestand) lagerbestandRows.get(row);
-            if(rowO != null){
-                switch(col){
-                    case 0:
-                         return lf.getFachnummer();
-                          
-                    case 1:
-                       
-                        if(lf.getLager() == null){
-                        } else {
-                         return lf.getLager().getLagerort();
+            if (getRowCount() != 0){
+                Lagerbestand rowO=null;
+                rowO = (Lagerbestand) lagerbestandRows.get(row);
+                Lagerfach lf = rowO.getLagerfach();
+                if(lf != null){
+                    Lager l = lf.getLager();
+                }
+                Teilebestand tl = rowO.getTeil();
+
+
+
+                if(lagerbestandRows.size()>0){
+                 rowO = (Lagerbestand) lagerbestandRows.get(row);
+                    if(rowO != null){
+                        switch(col){
+                            case 0:
+                                 return lf.getFachnummer();
+
+                            case 1:
+
+                                if(lf.getLager() == null){
+                                } else {
+                                 return lf.getLager().getLagerort();
+                                }
+                            case 2:
+                                if(lf.getX() != 0){
+                                return lf.getX();
+                                }
+                            case 3:
+                                    if(lf.getY() != 0){
+                                    return lf.getY();
+                                    }
+                            case 4:
+                                    if(lf.getZ() != 0){
+                                    return lf.getZ();
+                                    }
+                            case 5:
+                                    if(tl.getBezeichnung() != null){
+                                    return tl.getBezeichnung();
+                                    }
+                            case 6:
+                                     if(tl.getIdentnummer() != 0){
+                                    return tl.getIdentnummer();
+                                    }
+                            case 7:
+                                     if(rowO.getMenge()!= 0){
+                                    return rowO.getMenge();
+                                 }
+                            case 8:
+
+                                    if(rowO.getAnschaffungsgrund() != null){
+                                    return rowO.getAnschaffungsgrund();
+                                }
+                            default:     
+                            return "empty";
                         }
-                    case 2:
-                        if(lf.getX() != 0){
-                        return lf.getX();
-                        }
-                    case 3:
-                            if(lf.getY() != 0){
-                            return lf.getY();
-                            }
-                    case 4:
-                            if(lf.getZ() != 0){
-                            return lf.getZ();
-                            }
-                    case 5:
-                            if(tl.getBezeichnung() != null){
-                            return tl.getBezeichnung();
-                            }
-                    case 6:
-                             if(tl.getIdentnummer() != 0){
-                            return tl.getIdentnummer();
-                            }
-                    case 7:
-                             if(rowO.getMenge()!= 0){
-                            return rowO.getMenge();
-                         }
-                    case 8:
-                            
-                            if(rowO.getAnschaffungsgrund() != null){
-                            return rowO.getAnschaffungsgrund();
-                        }
-                    default:     
-                    return "empty";
+                    }
                 }
             }
-        }
-        
-        return new String("not");
+            return new String("not");
         }
 
     

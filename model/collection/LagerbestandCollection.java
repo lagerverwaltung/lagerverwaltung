@@ -5,6 +5,8 @@
 package model.collection;
 
 import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.stmt.PreparedQuery;
+import com.j256.ormlite.stmt.QueryBuilder;
 import helper.DatabaseManager;
 import java.sql.SQLException;
 import java.util.ArrayList; 
@@ -41,7 +43,14 @@ public class LagerbestandCollection<Lagerbestand> extends ArrayList {
     {
        try {
             Dao<model.Lagerbestand, Integer> lagerbestandDao = DatabaseManager.getInstance().getLagerbestandDao();
-            List<Lagerbestand> list =  (List<Lagerbestand>) lagerbestandDao.queryForAll();
+            //List<Lagerbestand> list =  (List<Lagerbestand>) lagerbestandDao.queryForAll(); 
+            
+            QueryBuilder<model.Lagerbestand, Integer> queryBuilder = lagerbestandDao.queryBuilder();
+            queryBuilder.where().gt("anzahl", 0);
+                   
+            PreparedQuery<model.Lagerbestand> preparedQuery = queryBuilder.prepare();
+            List<Lagerbestand> list = (List<Lagerbestand>) lagerbestandDao.query(preparedQuery);
+        
             clear();
             for (Lagerbestand lb1 : list) {
                 add(lb1);

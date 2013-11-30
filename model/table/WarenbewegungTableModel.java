@@ -96,7 +96,6 @@ public class WarenbewegungTableModel extends AbstractTableModel{
         int i = 1;
         for (ZielPosition z : al) {
             strZiel += "Ziel "+i+": Menge "+z.getMenge()+" an "+z.getLagerfach()+"<br>";
-            System.out.println(strZiel);
             qGes += z.getMenge();
         }
         strZiel += "</html>";
