@@ -532,23 +532,16 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
                 wb.setHaltbarkeitsDatum(hd);
                 wb.setAnschaffungsgrund(ag);
 
-            //Ziellagerfach zusammensetzen
-            ZielPosition zpZiel = new ZielPosition();
-            zpZiel.setLagerfach(lf);
-            zpZiel.setMenge(mng);
-            zpZiel.setWarenbewegung(wb);
-
-                //Lagerbestand speichern
-                lb.save();
-                wb.setLagerbestand(lb);
-                wb.save();
-
                 //Ziellagerfach zusammensetzen
                 ZielPosition zpZiel = new ZielPosition();
                 zpZiel.setLagerfach(lf);
                 zpZiel.setMenge(mng);
                 zpZiel.setWarenbewegung(wb);
 
+                //Lagerbestand speichern
+                lb.save();
+                wb.setLagerbestand(lb);
+                wb.save();
                 zpZiel.save();
 
                 refreshLagerbestandTableModel();
