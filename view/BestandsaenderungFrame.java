@@ -534,21 +534,11 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
             wb.setAnschaffungsgrund(ag);
 
             //Speichern der Zielpositionen
-            //Variablendeklaration
-            DatabaseManager dbm = new DatabaseManager();
-
             //Ziellagerfach zusammensetzen
             ZielPosition zpZiel = new ZielPosition();
             zpZiel.setLagerfach(lf);
             zpZiel.setMenge(mng);
             zpZiel.setWarenbewegung(wb);
-            /*
-            try {
-                dbm.getZielpositionDao().createOrUpdate(zpZiel);
-            } catch (SQLException ex) {
-                Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            */
 
             //Lagerbestand speichern
             try {
