@@ -36,6 +36,10 @@ public class MainPanel extends javax.swing.JPanel {
     {
         return panLagerbestand;
     }
+    public TeilebestandPanel getTeilebestand()
+    {
+        return panTeilebestand;
+    }
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -136,6 +140,8 @@ public class MainPanel extends javax.swing.JPanel {
                 btnWarenbewegung.setBackground(color);
                 break;
         }
+        
+        
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLagerbestand;

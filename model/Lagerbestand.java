@@ -131,23 +131,12 @@ public class Lagerbestand {
         return null;
     }
         
-   public static int getLagerbestandID(int x, int y, int z,String ort, int teilid,int fachid) throws SQLException
+   public static int getLagerbestandID(int teilid,int fachid) throws SQLException
    {
-       int lo = 1;
-        if (ort.equals(Lager.Lagerort.freilager.toString())) {
-            lo = 2;
-        }
+      
         Dao<Lagerbestand, Integer> lagerbestandDao = DatabaseManager.getInstance().getLagerbestandDao();
         QueryBuilder<Lagerbestand, Integer> queryBuilder = lagerbestandDao.queryBuilder();
         queryBuilder.where()
-              /*  .eq("lagerID", lo)
-                .and()
-                .eq("x", x)
-                .and()
-                .eq("y", y)
-                .and()
-                .eq("z", z)
-                .and()*/
                 .eq("teilID", teilid)
                 .and()
                 .eq("fachID",fachid);

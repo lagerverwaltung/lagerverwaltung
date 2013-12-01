@@ -35,7 +35,7 @@ public class WarenbewegungTableModel extends AbstractTableModel{
     
     @Override
     public int getColumnCount() {
-        return 10;
+        return 9;
     }
     
     @Override
@@ -95,7 +95,7 @@ public class WarenbewegungTableModel extends AbstractTableModel{
         al = wb.getArrZielPosition();
         int i = 1;
         for (ZielPosition z : al) {
-            strZiel += "Ziel "+i+" Menge "+z.getMenge()+" an "+z.getLagerfach();
+            strZiel += "Ziel "+i+": Menge "+z.getMenge()+" an "+z.getLagerfach()+"<br>";
             qGes += z.getMenge();
         }
         strZiel += "</html>";
@@ -113,7 +113,7 @@ public class WarenbewegungTableModel extends AbstractTableModel{
                         }
                     case 2:
                         if(lf.getFachnummer()!= 0){
-                            return lf.getFachnummer();
+                            return lf;
                         }
                     case 3:
                         //name = "Menge" aus dem Lagerbestand;

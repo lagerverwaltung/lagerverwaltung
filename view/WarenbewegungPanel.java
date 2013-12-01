@@ -26,7 +26,7 @@ public class WarenbewegungPanel extends javax.swing.JPanel {
 
      public void setTableWidths(JTable table)
     {
-        int[] arrWidths = {15, 120, 70, 20, 70, 20, 80, 55, 55,90};
+        int[] arrWidths = {15, 120, 70, 40, 170, 90, 65, 55,90};
         TableColumn tc;
         table.setRowHeight(23);
         int i = 0;
