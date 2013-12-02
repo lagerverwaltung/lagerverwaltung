@@ -483,12 +483,18 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
                     errors += "Bitte einzulagernde Menge eingeben. +\n";
                 }
                 int teiID = Integer.parseInt(txfTeilID.getText());
-                String ort = (String) cbxFachTyp.getSelectedItem();
+                Lager l = new Lager();    
+                if (cbxFachTyp.getSelectedItem().equals("FL")) {
+
+                    l.setLagerort(Lager.Lagerort.freilager);
+                } else {
+                    l.setLagerort(Lager.Lagerort.hochregal);
+                }
                 int x = (int) (cbxFachX.getSelectedItem());
                 int y = (int) (cbxFachY.getSelectedItem());
                 int z = (int) (cbxFachZ.getSelectedItem());
 
-                fachID = Lagerfach.getFach(ort, x, y, z).getFachnummer();
+                fachID = Lagerfach.getFach(l , x, y, z).getFachnummer();
 
                 int freeVe = 0;
                 int usedVe = 0;
@@ -572,6 +578,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
                     Misc.createErrorDialog(this, "Eingegebene Menge muss größer 0 sein!");
                 }
                 refreshLagerbestandTableModel();
+                refreshWarenbestandTableModel();
                 this.dispose();
             }       
             // auslagern

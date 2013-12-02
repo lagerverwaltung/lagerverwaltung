@@ -11,7 +11,6 @@ import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 import helper.DatabaseManager;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -190,7 +189,7 @@ public class Lager {
             ;	
     }
     
-    public void createFaecher(int breite, int tiefe,int hoehe) throws SQLException
+    public void createFaecher(int breite, int tiefe, int hoehe) throws SQLException
     {
         for(int i = 1; i <= breite; i++){
             for(int j = 1; j <= tiefe;j++){

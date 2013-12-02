@@ -143,9 +143,9 @@ public class Lagerfach {
     * @return Lagerfach
     * gibt Lagerfach zur lagerfachadresse aus
     */
-    public static Lagerfach getFach(String ort, int x, int y, int z) throws SQLException{
+    public static Lagerfach getFach(Lager lager, int x, int y, int z) throws SQLException{
         int lo = 1;
-        if (ort.equals("FL")) {
+        if (lager.equals(Lager.Lagerort.freilager)) {
             lo = 2;
         }
 
