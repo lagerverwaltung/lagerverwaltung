@@ -26,8 +26,10 @@ import model.Warenbewegung;
 import model.ZielPosition;
 import model.collection.LagerbestandCollection;
 import model.collection.TeilebestandCollection;
+import model.collection.WarenbewegungCollection;
 import model.table.LagerbestandTableModel;
 import model.table.TeileTableModel;
+import model.table.WarenbewegungTableModel;
 
 /**
  *
@@ -41,6 +43,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
     Boolean bestehendesTeil=false;
     JTable lagerBestandTable;
     JTable teileBestandTable;
+    JTable warenBewegungTable;
     int lagerID;
     int fachid;
     int teilid;
@@ -181,30 +184,36 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
             */
         }
         
-        BestandsaenderungFrame(boolean splitten) {
+    BestandsaenderungFrame(boolean splitten) {
         this();
         this.splitten = splitten;
         lblEinlagern.setText("Teile splitten");
         einlagernButton.setText("Teile splitten");
-       // this.txfTeilID.setText(""+id);
+        // this.txfTeilID.setText(""+id);
         //this.txaAnschaffungsgrund.setText(anschGr);
-    //    this.txfHaltbarkeitsdatum.setText(hbDate+"kommt noch");
-      //  this.txfHaltbarkeitsdatum.setText(haltbDate);
-             this.txfTeilID.setEditable(false);
-           //  this.txaAnschaffungsgrund.setEditable(false);
-             this.txfHaltbarkeitsdatum.setVisible(false);
-             this.lblHaltbarkeitsdatum.setVisible(false);
-        }
-        
+        //    this.txfHaltbarkeitsdatum.setText(hbDate+"kommt noch");
+        //  this.txfHaltbarkeitsdatum.setText(haltbDate);
+        this.txfTeilID.setEditable(false);
+        //  this.txaAnschaffungsgrund.setEditable(false);
+        this.txfHaltbarkeitsdatum.setVisible(false);
+        this.lblHaltbarkeitsdatum.setVisible(false);
+    }
+
     //Table setzen
     public void setTable(JTable t)
     {
         lagerBestandTable = t;
     }
+    
     public void setTeileTable(JTable t)
     {
         teileBestandTable = t;
     }
+    
+    public void setWarenBewegungTable(JTable t){
+        warenBewegungTable = t;
+    }
+    
      public void initLagerObjekt(int id)
     {
         Lagerbestand l = Lagerbestand.loadLagerObjekt(id); 
@@ -213,10 +222,6 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
             lagerID = id;
             txaAnschaffungsgrund.setText(l.getAnschaffungsgrund());
             txfMenge.setText(Integer.toString(l.getMenge()));
-            //if(t.getTyp() != null){
-              //  cbxTyp.setSelectedItem(t.getTyp());
-            //}
-           //
             Format f = new SimpleDateFormat("DD.MM.YYYY");
             txfHaltbarkeitsdatum.setText(f.format(w.getHaltbarkeitsDatum()));
         }
@@ -246,35 +251,32 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
          for(int i = 1; i <= z; i++){
             cbxFachY.addItem(i);
         }
-         
-         
     }
 
     /*
-    * läd ComboBoxen für Freilagern
-    */
-    public void loadFlCbx() throws SQLException{
+     * läd ComboBoxen für Freilagern
+     */
+    public void loadFlCbx() throws SQLException {
         cbxFachZ.removeAllItems();
         cbxFachX.removeAllItems();
         cbxFachY.removeAllItems();
-        
+
         Lager fl = Lager.getLager(Lager.Lagerort.freilager);
         int x = fl.getHoehe();
         int y = fl.getBreite();
         int z = fl.getTiefe();
-        
-        for(int i = 1; i <= x; i++){
+
+        for (int i = 1; i <= x; i++) {
             cbxFachZ.addItem(i);
         }
-        
-        for(int i = 1; i <= y; i++){
+
+        for (int i = 1; i <= y; i++) {
             cbxFachX.addItem(i);
         }
-                
-         for(int i = 1; i <= z; i++){
+
+        for (int i = 1; i <= z; i++) {
             cbxFachY.addItem(i);
-         }
-        
+        }
     }
      
     
@@ -493,8 +495,6 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
                 int maxVe = 0;
 
                 maxVe = Lagerfach.getLagerfach(fachID).getMaxVe();
-
-
                 usedVe = Lagerfach.getLagerfach(fachID).getUsedVe();
 
                 freeVe = maxVe - usedVe;
@@ -545,14 +545,15 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
                 zpZiel.save();
 
                 refreshLagerbestandTableModel();
+                refreshWarenbestandTableModel();
                 this.dispose();
 
                 //Einlagern mit bestehendem Teil
             } else if(bestehendesTeil) {
                 int lagerbestandsid=-1;
                      lagerbestandsid=Lagerbestand.getLagerbestandID(this.teilid,this.fachid);
-                Lagerbestand lb=null;
-                     lb= Lagerbestand.getLagerbestand(lagerbestandsid);
+                Lagerbestand lb = null;
+                     lb = Lagerbestand.getLagerbestand(lagerbestandsid);
                 int menge=0;
 
                 try{
@@ -633,6 +634,11 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         TeileTableModel tm = new TeileTableModel();
         tm.setData(tc);
         teileBestandTable.setModel(tm);
+    }
+    private void refreshWarenbestandTableModel(){
+        WarenbewegungCollection wc = WarenbewegungCollection.getInstance(true);
+        WarenbewegungTableModel wm = new WarenbewegungTableModel();
+        wm.setData(wc);
     }
     
     private void cbxFachXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxFachXActionPerformed

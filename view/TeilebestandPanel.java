@@ -237,9 +237,11 @@ public class TeilebestandPanel extends javax.swing.JPanel {
       //  selectedAnschGr = (tblMain.getValueAt(tblMain.getSelectedRow(), 8).toString());
         BestandsaenderungFrame bestandsaenderungFrame = new BestandsaenderungFrame(true,selectedId);
         bestandsaenderungFrame.setVisible(true);
-        JTable lagerbestand=mainFrame.getPanMain().getLagerbestand().gettabMain();
+        JTable lagerbestand = mainFrame.getPanMain().getLagerbestand().gettabMain();
+        JTable warenbewegung = mainFrame.getPanMain().getWarenbewegung().gettabMain();
         
         bestandsaenderungFrame.setTable(lagerbestand);
+        bestandsaenderungFrame.setWarenBewegungTable(warenbewegung);
         }
         else{
             Misc.createErrorDialog(mainFrame, "Es muss erst ein Teil zum Einlagern aus der "

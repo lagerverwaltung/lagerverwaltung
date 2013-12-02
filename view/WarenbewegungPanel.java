@@ -23,6 +23,10 @@ public class WarenbewegungPanel extends javax.swing.JPanel {
     public WarenbewegungPanel() {
         initComponents();
     }
+    
+    public JTable gettabMain() {
+        return tblMain;
+    }
 
      public void setTableWidths(JTable table)
     {

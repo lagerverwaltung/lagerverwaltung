@@ -28,6 +28,12 @@ public class WarenbewegungCollection<Warenbewegung> extends ArrayList {
         return singleton;
     }
     
+    public static WarenbewegungCollection getInstance(boolean refresh) {
+        singleton = WarenbewegungCollection.getInstance();
+        return singleton.loadCollection();
+    }
+   
+    
     public WarenbewegungCollection() {
         loadCollection();
     }
