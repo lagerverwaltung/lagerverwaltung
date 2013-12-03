@@ -73,7 +73,7 @@ public class LagerbestandTableModel extends AbstractTableModel {
                 name = "Menge";
                 break;
             case 8:
-                name = "letzter Ansch. Grund";
+                name = " Grund";
                 break;
         }
         return name;

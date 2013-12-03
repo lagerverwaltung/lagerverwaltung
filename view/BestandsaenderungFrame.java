@@ -101,7 +101,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
                 Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, ex); 
             }
     }
-    BestandsaenderungFrame(boolean einlagern, int id,boolean bestehendesteil,int x,int y, int z,String lo, int fachid) {
+    BestandsaenderungFrame(boolean einlagern, int id,boolean bestehendesteil,int x,int y, int z,String lo, int fachid,String anschGr) {
         this();
         this.einlagern = einlagern;
         this.bestehendesTeil=bestehendesteil;
@@ -110,7 +110,8 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         lblEinlagern.setText("Teile einlagern");
         einlagernButton.setText("Teile einlagern");
         this.txfTeilID.setText(""+id);
-      //  this.txaAnschaffungsgrund.setText(anschGr);
+        this.txaAnschaffungsgrund.setText(anschGr);
+        this.txaAnschaffungsgrund.setEnabled(false);
         this.txfTeilID.setEditable(false);
         this.txfTeilID.setEnabled(false);
         
@@ -141,7 +142,8 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
             lblEinlagern.setText("Teile auslagern");
             einlagernButton.setText("Teile auslagern");
             this.txfTeilID.setText("" + id);
-            //this.txaAnschaffungsgrund.setText(anschGr);
+            this.txaAnschaffungsgrund.setText(anschGr);
+            this.txaAnschaffungsgrund.setEnabled(false);
             //this.txfHaltbarkeitsdatum.setText(hbDate+"kommt noch");
             //this.txfHaltbarkeitsdatum.setText(haltbDate);
             this.txfTeilID.setEditable(false);
@@ -470,6 +472,14 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
                 if (ag.length() == 0) {
                     errors += "Bitte Anschaffungsgrund eingeben. \n";
                 }
+                   //Grund darf kein Leerezeichen enthalten
+ 
+                 for (int i = 0; i < ag.length(); i++) {
+                     if (ag.charAt(i) == ' ') {
+                         errors += "Grund darf kein Leerezeichen enthalten. \n";
+                    }
+ 
+                 }
                 try {
                     hd = df.parse(txfHaltbarkeitsdatum.getText());
                 } catch (ParseException ex) {

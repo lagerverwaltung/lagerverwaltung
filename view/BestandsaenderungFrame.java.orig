@@ -26,8 +26,10 @@ import model.Warenbewegung;
 import model.ZielPosition;
 import model.collection.LagerbestandCollection;
 import model.collection.TeilebestandCollection;
+import model.collection.WarenbewegungCollection;
 import model.table.LagerbestandTableModel;
 import model.table.TeileTableModel;
+import model.table.WarenbewegungTableModel;
 
 /**
  *
@@ -41,6 +43,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
     Boolean bestehendesTeil=false;
     JTable lagerBestandTable;
     JTable teileBestandTable;
+    JTable warenBewegungTable;
     int lagerID;
     int fachid;
     int teilid;
@@ -98,7 +101,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
                 Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, ex); 
             }
     }
-    BestandsaenderungFrame(boolean einlagern, int id,boolean bestehendesteil,int x,int y, int z,String lo, int fachid) {
+    BestandsaenderungFrame(boolean einlagern, int id,boolean bestehendesteil,int x,int y, int z,String lo, int fachid,String anschGr) {
         this();
         this.einlagern = einlagern;
         this.bestehendesTeil=bestehendesteil;
@@ -107,7 +110,8 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         lblEinlagern.setText("Teile einlagern");
         einlagernButton.setText("Teile einlagern");
         this.txfTeilID.setText(""+id);
-      //  this.txaAnschaffungsgrund.setText(anschGr);
+        this.txaAnschaffungsgrund.setText(anschGr);
+        this.txaAnschaffungsgrund.setEnabled(false);
         this.txfTeilID.setEditable(false);
         this.txfTeilID.setEnabled(false);
         
@@ -138,7 +142,8 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
             lblEinlagern.setText("Teile auslagern");
             einlagernButton.setText("Teile auslagern");
             this.txfTeilID.setText("" + id);
-            //this.txaAnschaffungsgrund.setText(anschGr);
+            this.txaAnschaffungsgrund.setText(anschGr);
+            this.txaAnschaffungsgrund.setEnabled(false);
             //this.txfHaltbarkeitsdatum.setText(hbDate+"kommt noch");
             //this.txfHaltbarkeitsdatum.setText(haltbDate);
             this.txfTeilID.setEditable(false);
@@ -181,30 +186,36 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
             */
         }
         
-        BestandsaenderungFrame(boolean splitten) {
+    BestandsaenderungFrame(boolean splitten) {
         this();
         this.splitten = splitten;
         lblEinlagern.setText("Teile splitten");
         einlagernButton.setText("Teile splitten");
-       // this.txfTeilID.setText(""+id);
+        // this.txfTeilID.setText(""+id);
         //this.txaAnschaffungsgrund.setText(anschGr);
-    //    this.txfHaltbarkeitsdatum.setText(hbDate+"kommt noch");
-      //  this.txfHaltbarkeitsdatum.setText(haltbDate);
-             this.txfTeilID.setEditable(false);
-           //  this.txaAnschaffungsgrund.setEditable(false);
-             this.txfHaltbarkeitsdatum.setVisible(false);
-             this.lblHaltbarkeitsdatum.setVisible(false);
-        }
-        
+        //    this.txfHaltbarkeitsdatum.setText(hbDate+"kommt noch");
+        //  this.txfHaltbarkeitsdatum.setText(haltbDate);
+        this.txfTeilID.setEditable(false);
+        //  this.txaAnschaffungsgrund.setEditable(false);
+        this.txfHaltbarkeitsdatum.setVisible(false);
+        this.lblHaltbarkeitsdatum.setVisible(false);
+    }
+
     //Table setzen
     public void setTable(JTable t)
     {
         lagerBestandTable = t;
     }
+    
     public void setTeileTable(JTable t)
     {
         teileBestandTable = t;
     }
+    
+    public void setWarenBewegungTable(JTable t){
+        warenBewegungTable = t;
+    }
+    
      public void initLagerObjekt(int id)
     {
         Lagerbestand l = Lagerbestand.loadLagerObjekt(id); 
@@ -213,10 +224,6 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
             lagerID = id;
             txaAnschaffungsgrund.setText(l.getAnschaffungsgrund());
             txfMenge.setText(Integer.toString(l.getMenge()));
-            //if(t.getTyp() != null){
-              //  cbxTyp.setSelectedItem(t.getTyp());
-            //}
-           //
             Format f = new SimpleDateFormat("DD.MM.YYYY");
             txfHaltbarkeitsdatum.setText(f.format(w.getHaltbarkeitsDatum()));
         }
@@ -246,35 +253,32 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
          for(int i = 1; i <= z; i++){
             cbxFachY.addItem(i);
         }
-         
-         
     }
 
     /*
-    * läd ComboBoxen für Freilagern
-    */
-    public void loadFlCbx() throws SQLException{
+     * läd ComboBoxen für Freilagern
+     */
+    public void loadFlCbx() throws SQLException {
         cbxFachZ.removeAllItems();
         cbxFachX.removeAllItems();
         cbxFachY.removeAllItems();
-        
+
         Lager fl = Lager.getLager(Lager.Lagerort.freilager);
         int x = fl.getHoehe();
         int y = fl.getBreite();
         int z = fl.getTiefe();
-        
-        for(int i = 1; i <= x; i++){
+
+        for (int i = 1; i <= x; i++) {
             cbxFachZ.addItem(i);
         }
-        
-        for(int i = 1; i <= y; i++){
+
+        for (int i = 1; i <= y; i++) {
             cbxFachX.addItem(i);
         }
-                
-         for(int i = 1; i <= z; i++){
+
+        for (int i = 1; i <= z; i++) {
             cbxFachY.addItem(i);
-         }
-        
+        }
     }
      
     
@@ -468,6 +472,14 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
                 if (ag.length() == 0) {
                     errors += "Bitte Anschaffungsgrund eingeben. \n";
                 }
+                   //Grund darf kein Leerezeichen enthalten
+ 
+                 for (int i = 0; i < ag.length(); i++) {
+                     if (ag.charAt(i) == ' ') {
+                         errors += "Grund darf kein Leerezeichen enthalten. \n";
+                    }
+ 
+                 }
                 try {
                     hd = df.parse(txfHaltbarkeitsdatum.getText());
                 } catch (ParseException ex) {
@@ -476,28 +488,32 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
                 if (hd.before(today)) {
                     errors += "Achtung, Artikel ist schon abgelaufen. \n";
                 }
-                mng = Integer.parseInt(txfMenge.getText());
-                if (mng == 0) {
+                try{
+                    if((txfMenge.getText().length() > 0) || (txfMenge.getText().matches("[0-9]+"))){
+                            mng = Integer.parseInt(txfMenge.getText());
+                    } else{
+                      errors += "Bitte einzulagernde Menge eingeben. +\n";  
+                    }
+                } catch (NumberFormatException e){
                     errors += "Bitte einzulagernde Menge eingeben. +\n";
                 }
                 int teiID = Integer.parseInt(txfTeilID.getText());
-                String ort = (String) cbxFachTyp.getSelectedItem();
+                Lager l = new Lager();    
+                if (cbxFachTyp.getSelectedItem().equals("FL")) {
+
+                    l.setLagerort(Lager.Lagerort.freilager);
+                } else {
+                    l.setLagerort(Lager.Lagerort.hochregal);
+                }
                 int x = (int) (cbxFachX.getSelectedItem());
                 int y = (int) (cbxFachY.getSelectedItem());
                 int z = (int) (cbxFachZ.getSelectedItem());
 
-                fachID = Lagerfach.getFach(ort, x, y, z).getFachnummer();
-
-                int freeVe = 0;
-                int usedVe = 0;
-                int maxVe = 0;
-
-                maxVe = Lagerfach.getLagerfach(fachID).getMaxVe();
-
-
-                usedVe = Lagerfach.getLagerfach(fachID).getUsedVe();
-
-                freeVe = maxVe - usedVe;
+                fachID = Lagerfach.getFach(l , x, y, z).getFachnummer();
+                
+                int freeVe = Lagerfach.getLagerfach(fachID).getFreeVe();
+                int maxVe = Lagerfach.getLagerfach(fachID).getMaxVe();
+                int usedVe = Lagerfach.getLagerfach(fachID).getUsedVe();
 
                 if (mng > freeVe) {
                     errors += "Es steht nicht genug Platz zum einlagern zur Verfügung. +\n";
@@ -516,37 +532,11 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
                 //Setzt den Teilebestand zusammen
                 tb.setIdentnummer(teiID);
 
-<<<<<<< HEAD
-            //Setzt den Lagerbestand zusammen
-            lb.setTeil(tb);
-            lb.setLagerfach(lf);
-            lb.setAnschaffungsgrund(ag);
-            lb.setMenge(mng);
-            
-            Lagerfach qlf = new Lagerfach();
-            qlf.setFachnummer(0);
-
-            //Speichert die Warenbewegung
-            wb.setVerantwortlicher("Lagerverwalter");
-            wb.setQuellFach(qlf);
-            wb.setLagerbestand(lb);
-            wb.setDatum(today);
-            wb.setHaltbarkeitsDatum(hd);
-            wb.setAnschaffungsgrund(ag);
-
-            //Speichern der Zielpositionen
-            //Ziellagerfach zusammensetzen
-            ZielPosition zpZiel = new ZielPosition();
-            zpZiel.setLagerfach(lf);
-            zpZiel.setMenge(mng);
-            zpZiel.setWarenbewegung(wb);
-=======
                 //Setzt den Lagerbestand zusammen
                 lb.setTeil(tb);
                 lb.setLagerfach(lf);
                 lb.setAnschaffungsgrund(ag);
                 lb.setMenge(mng);
->>>>>>> 1b4d1ace782cde83a7c44c0aad2eb175abc0bb29
 
                 Lagerfach qlf = new Lagerfach();
                 qlf.setFachnummer(0);
@@ -558,98 +548,120 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
                 wb.setHaltbarkeitsDatum(hd);
                 wb.setAnschaffungsgrund(ag);
 
-                //Speichern der Zielpositionen
-                //Variablendeklaration
-                DatabaseManager dbm = new DatabaseManager();
-
-                //Lagerbestand speichern
-                lb.save();
-                wb.setLagerbestand(lb);
-                wb.save();
-
                 //Ziellagerfach zusammensetzen
                 ZielPosition zpZiel = new ZielPosition();
                 zpZiel.setLagerfach(lf);
                 zpZiel.setMenge(mng);
                 zpZiel.setWarenbewegung(wb);
 
+                //Lagerbestand speichern
+                lb.save();
+                wb.setLagerbestand(lb);
+                wb.save();
                 zpZiel.save();
 
                 refreshLagerbestandTableModel();
+                refreshWarenbestandTableModel();
                 this.dispose();
 
                 //Einlagern mit bestehendem Teil
             } else if(bestehendesTeil) {
-                int lagerbestandsid=-1;
-                     lagerbestandsid=Lagerbestand.getLagerbestandID(this.teilid,this.fachid);
-                Lagerbestand lb=null;
-                     lb= Lagerbestand.getLagerbestand(lagerbestandsid);
-                int menge=0;
-
-                try{
-                    menge=Integer.parseInt(this.txfMenge.getText());
+                int lagerbestandsid = Lagerbestand.getLagerbestandID(this.teilid, this.fachid);
+                Lagerbestand lb = null;
+                lb = Lagerbestand.getLagerbestand(lagerbestandsid);
+                Lagerfach lf = lb.getLagerfach();
+                String errors = "";
+                
+                int menge = 0;
+                try {
+                    if ((txfMenge.getText().length() > 0) || (txfMenge.getText().matches("[0-9]+"))) {
+                        menge = Integer.parseInt(txfMenge.getText());
+                    } else {
+                        errors += "Bitte einzulagernde Menge eingeben. +\n";
+                    }
+                } catch (NumberFormatException e) {
+                    errors += "Bitte einzulagernde Menge eingeben. +\n";
                 }
-                catch(Exception e)
-                {
+                
+                int freeVe = lf.getFreeVe();
+                try {
+                    menge = Integer.parseInt(this.txfMenge.getText());
+                } catch (Exception e) {
                     Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, e);
-                } 
-                if (menge>0)
-                {    lb.setMenge(lb.getMenge()+menge);
-                        lb.save();
                 }
-                else
-                {
-                    Misc.createErrorDialog(this, "Eingegebene Menge muss größer 0 sein!");
+                if (menge > 0 && menge <= freeVe) {
+                    lb.setMenge(lb.getMenge() + menge);
+                    lb.save();
+                } else {
+                    Misc.createErrorDialog(this, "Eingegebene Menge muss größer 0 sein! \n"
+                                                +"Oder nicht genug Platz im Lagerfach,"+freeVe+" VE frei");
                 }
                 refreshLagerbestandTableModel();
+                refreshWarenbestandTableModel();
                 this.dispose();
             }       
             // auslagern
-            else
-            {
-                int lagerbestandsid=-1;
-                lagerbestandsid=Lagerbestand.getLagerbestandID(this.teilid,this.fachid);
-                Lagerbestand lb=null;
-                lb = Lagerbestand.getLagerbestand(lagerbestandsid);
-                int menge=0;
-
-                menge=Integer.parseInt(this.txfMenge.getText());
-                if (menge<=lb.getMenge())
-                {    
-                    int oldMenge = lb.getMenge();   
-                    lb.setMenge(lb.getMenge()-menge);
+            else {
+                int lagerbestandsid = Lagerbestand.getLagerbestandID(this.teilid, this.fachid);
+                Lagerbestand lb = Lagerbestand.getLagerbestand(lagerbestandsid);
+                Teilebestand tb = lb.getTeil();
+                boolean isLastTeil = true;
+                String errors ="";
+                int menge = 0;
+                try {
+                    if ((txfMenge.getText().length() > 0) || (txfMenge.getText().matches("[0-9]+"))) {
+                        menge = Integer.parseInt(txfMenge.getText());
+                    } else {
+                        errors += "Bitte einzulagernde Menge eingeben. +\n";
+                    }
+                } catch (NumberFormatException e) {
+                    errors += "Bitte einzulagernde Menge eingeben. +\n";
+                }
+                
+<<<<<<< HEAD
+                isLastTeil = Lagerbestand.isLastTeil(lb, menge);
+                System.out.println(isLastTeil);
+=======
+               // isLastTeil = Lagerbestand.isLastTeil(lb, menge);
+                
+>>>>>>> a0e33dae4356bf917ff787c2a17ae6cb2ef8efc4
+                if (menge <= lb.getMenge()  && isLastTeil) {
+                    int oldMenge = lb.getMenge();
+                    lb.setMenge(lb.getMenge() - menge);
                     lb.save();
 
-                    if (menge==oldMenge)
-                    {
-                        int option=  JOptionPane.showConfirmDialog(this, "Soll das zugehörige Teil aus dem Teilebestand gelöscht werden ?");
+                    if (menge == oldMenge) {
+                        int option = JOptionPane.showConfirmDialog(this, "Soll das zugehörige Teil aus dem Teilebestand gelöscht werden ?");
 
-                        if(option==JOptionPane.YES_OPTION)
-                        {
+                        if (option == JOptionPane.YES_OPTION) {
                             Dao<Lagerbestand, Integer> lagerbestandDao = DatabaseManager.getInstance().getLagerbestandDao();
                             lagerbestandDao.delete(lb);
-                            Dao<Teilebestand, Integer> teilebestandDao =DatabaseManager.getInstance().getTeilebestandDao();
+                            Dao<Teilebestand, Integer> teilebestandDao = DatabaseManager.getInstance().getTeilebestandDao();
                             //teilebestandDao.deleteById(teilid);
                         }
-                        else
-                        {
-                            Dao<Lagerbestand, Integer> lagerbestandDao = DatabaseManager.getInstance().getLagerbestandDao();
+                        if (option == JOptionPane.CANCEL_OPTION) {
+                            
+                            //Do Stuff
+                            
+                            //Dao<Lagerbestand, Integer> lagerbestandDao = DatabaseManager.getInstance().getLagerbestandDao();
                             //lagerbestandDao.delete(lb);
                         }
-                     }
-                }
-                else
-                {
+                        if (option == JOptionPane.NO_OPTION){
+                            
+                            //Do some other suff
+                            
+                        }
+                    }
+                } else {
                     Misc.createErrorDialog(this, "Eingegebene Menge ist größer der eingelagerten Menge!");
                     return;
                 }
-                
+
                 refreshTeilebestandTableModel();
                 this.dispose();
-                refreshLagerbestandTableModel(); 
+                refreshLagerbestandTableModel();
             }
-        } 
-        catch (SQLException ex) {
+        } catch (SQLException ex) {
             Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_einlagernButtonActionPerformed
@@ -664,6 +676,11 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         TeileTableModel tm = new TeileTableModel();
         tm.setData(tc);
         teileBestandTable.setModel(tm);
+    }
+    private void refreshWarenbestandTableModel(){
+        WarenbewegungCollection wc = WarenbewegungCollection.getInstance(true);
+        WarenbewegungTableModel wm = new WarenbewegungTableModel();
+        wm.setData(wc);
     }
     
     private void cbxFachXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxFachXActionPerformed
