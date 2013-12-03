@@ -4,8 +4,13 @@
  */
 package helper;
 
+import com.j256.ormlite.dao.Dao;
 import java.awt.Frame;
+import java.sql.SQLException;
+import java.util.List;
 import javax.swing.JOptionPane;
+import model.Lagerbestand;
+import model.Teilebestand;
 
 /**
  *

@@ -556,15 +556,24 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
 
                 //Einlagern mit bestehendem Teil
             } else if(bestehendesTeil) {
-                int lagerbestandsid = -1;
-                lagerbestandsid = Lagerbestand.getLagerbestandID(this.teilid, this.fachid);
+                int lagerbestandsid = Lagerbestand.getLagerbestandID(this.teilid, this.fachid);
                 Lagerbestand lb = null;
                 lb = Lagerbestand.getLagerbestand(lagerbestandsid);
                 Lagerfach lf = lb.getLagerfach();
+                String errors = "";
                 
                 int menge = 0;
+                try {
+                    if ((txfMenge.getText().length() > 0) || (txfMenge.getText().matches("[0-9]+"))) {
+                        menge = Integer.parseInt(txfMenge.getText());
+                    } else {
+                        errors += "Bitte einzulagernde Menge eingeben. +\n";
+                    }
+                } catch (NumberFormatException e) {
+                    errors += "Bitte einzulagernde Menge eingeben. +\n";
+                }
+                
                 int freeVe = lf.getFreeVe();
-                System.out.println(freeVe);
                 try {
                     menge = Integer.parseInt(this.txfMenge.getText());
                 } catch (Exception e) {
@@ -582,51 +591,62 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
                 this.dispose();
             }       
             // auslagern
-            else
-            {
-                int lagerbestandsid=-1;
-                lagerbestandsid=Lagerbestand.getLagerbestandID(this.teilid,this.fachid);
-                Lagerbestand lb=null;
-                lb = Lagerbestand.getLagerbestand(lagerbestandsid);
-                int menge=0;
-
-                menge=Integer.parseInt(this.txfMenge.getText());
-                if (menge<=lb.getMenge())
-                {    
-                    int oldMenge = lb.getMenge();   
-                    lb.setMenge(lb.getMenge()-menge);
+            else {
+                int lagerbestandsid = Lagerbestand.getLagerbestandID(this.teilid, this.fachid);
+                Lagerbestand lb = Lagerbestand.getLagerbestand(lagerbestandsid);
+                Teilebestand tb = lb.getTeil();
+                boolean isLastTeil = true;
+                String errors ="";
+                int menge = 0;
+                try {
+                    if ((txfMenge.getText().length() > 0) || (txfMenge.getText().matches("[0-9]+"))) {
+                        menge = Integer.parseInt(txfMenge.getText());
+                    } else {
+                        errors += "Bitte einzulagernde Menge eingeben. +\n";
+                    }
+                } catch (NumberFormatException e) {
+                    errors += "Bitte einzulagernde Menge eingeben. +\n";
+                }
+                
+                isLastTeil = Lagerbestand.isLastTeil(lb, menge);
+                System.out.println(isLastTeil);
+                if (menge <= lb.getMenge()  && isLastTeil) {
+                    int oldMenge = lb.getMenge();
+                    lb.setMenge(lb.getMenge() - menge);
                     lb.save();
 
-                    if (menge==oldMenge)
-                    {
-                        int option=  JOptionPane.showConfirmDialog(this, "Soll das zugehörige Teil aus dem Teilebestand gelöscht werden ?");
+                    if (menge == oldMenge) {
+                        int option = JOptionPane.showConfirmDialog(this, "Soll das zugehörige Teil aus dem Teilebestand gelöscht werden ?");
 
-                        if(option==JOptionPane.YES_OPTION)
-                        {
+                        if (option == JOptionPane.YES_OPTION) {
                             Dao<Lagerbestand, Integer> lagerbestandDao = DatabaseManager.getInstance().getLagerbestandDao();
                             lagerbestandDao.delete(lb);
-                            Dao<Teilebestand, Integer> teilebestandDao =DatabaseManager.getInstance().getTeilebestandDao();
+                            Dao<Teilebestand, Integer> teilebestandDao = DatabaseManager.getInstance().getTeilebestandDao();
                             //teilebestandDao.deleteById(teilid);
                         }
-                        else
-                        {
-                            Dao<Lagerbestand, Integer> lagerbestandDao = DatabaseManager.getInstance().getLagerbestandDao();
+                        if (option == JOptionPane.CANCEL_OPTION) {
+                            
+                            //Do Stuff
+                            
+                            //Dao<Lagerbestand, Integer> lagerbestandDao = DatabaseManager.getInstance().getLagerbestandDao();
                             //lagerbestandDao.delete(lb);
                         }
-                     }
-                }
-                else
-                {
+                        if (option == JOptionPane.NO_OPTION){
+                            
+                            //Do some other suff
+                            
+                        }
+                    }
+                } else {
                     Misc.createErrorDialog(this, "Eingegebene Menge ist größer der eingelagerten Menge!");
                     return;
                 }
-                
+
                 refreshTeilebestandTableModel();
                 this.dispose();
-                refreshLagerbestandTableModel(); 
+                refreshLagerbestandTableModel();
             }
-        } 
-        catch (SQLException ex) {
+        } catch (SQLException ex) {
             Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_einlagernButtonActionPerformed
