@@ -158,7 +158,7 @@ public class Lagerbestand {
     */
     public static boolean isLastTeil(Lagerbestand lb, int menge) throws SQLException {
         Dao<Lagerbestand, Integer> lagerbestandDao = DatabaseManager.getInstance().getLagerbestandDao();
-        List<Lagerbestand> lbList = lagerbestandDao.queryForEq("fachID", lb.getLagerfach().getFachnummer());
+        List<Lagerbestand> lbList = lagerbestandDao.queryForAll();
         int teilId = lb.getTeil().getIdentnummer();
         int count = 0;
 
