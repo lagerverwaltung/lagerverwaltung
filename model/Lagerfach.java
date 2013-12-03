@@ -127,6 +127,12 @@ public class Lagerfach {
         return 0;
     }
     
+    public int getFreeVe() throws SQLException {
+        int maxVe = Lagerfach.getLagerfach(fachnummer).getMaxVe();
+        int usedVe = Lagerfach.getLagerfach(fachnummer).getUsedVe();
+
+        return maxVe - usedVe;
+    }
     /*
     * Gibt das Lagerfach mit angegebener id zurück
     */

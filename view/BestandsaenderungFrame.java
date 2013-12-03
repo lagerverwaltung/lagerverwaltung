@@ -491,9 +491,19 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
                 if (hd.before(today)) {
                     errors += "Achtung, Artikel ist schon abgelaufen. \n";
                 }
+<<<<<<< HEAD
                 if (txfMenge.getText().length() > 0) {
                     mng = Integer.parseInt(txfMenge.getText());
                 } else {
+=======
+                try{
+                    if((txfMenge.getText().length() > 0) || (txfMenge.getText().matches("[0-9]+"))){
+                            mng = Integer.parseInt(txfMenge.getText());
+                    } else{
+                      errors += "Bitte einzulagernde Menge eingeben. +\n";  
+                    }
+                } catch (NumberFormatException e){
+>>>>>>> 2cf3078525a9442402a3818943c5bbf01071d417
                     errors += "Bitte einzulagernde Menge eingeben. +\n";
                 }
                 
@@ -509,6 +519,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
                 int y = (int) (cbxFachY.getSelectedItem());
                 int z = (int) (cbxFachZ.getSelectedItem());
 
+<<<<<<< HEAD
                 fachID = Lagerfach.getFach(l, x, y, z).getFachnummer();
 
                 int freeVe = 0;
@@ -519,6 +530,13 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
                 usedVe = Lagerfach.getLagerfach(fachID).getUsedVe();
 
                 freeVe = maxVe - usedVe;
+=======
+                fachID = Lagerfach.getFach(l , x, y, z).getFachnummer();
+                
+                int freeVe = Lagerfach.getLagerfach(fachID).getFreeVe();
+                int maxVe = Lagerfach.getLagerfach(fachID).getMaxVe();
+                int usedVe = Lagerfach.getLagerfach(fachID).getUsedVe();
+>>>>>>> 2cf3078525a9442402a3818943c5bbf01071d417
 
                 if (mng > freeVe) {
                     errors += "Es steht nicht genug Platz zum einlagern zur Verfügung. +\n";
@@ -570,6 +588,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
                 this.dispose();
 
                 //Einlagern mit bestehendem Teil
+<<<<<<< HEAD
             } else if (bestehendesTeil) {
                 int lagerbestandsid = - 1;
                 lagerbestandsid = Lagerbestand.getLagerbestandID(this.teilid, this.fachid);
@@ -577,16 +596,37 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
                 lb = Lagerbestand.getLagerbestand(lagerbestandsid);
                 int menge = 0;
 
+=======
+            } else if(bestehendesTeil) {
+                int lagerbestandsid = -1;
+                lagerbestandsid = Lagerbestand.getLagerbestandID(this.teilid, this.fachid);
+                Lagerbestand lb = null;
+                lb = Lagerbestand.getLagerbestand(lagerbestandsid);
+                Lagerfach lf = lb.getLagerfach();
+                
+                int menge = 0;
+                int freeVe = lf.getFreeVe();
+                System.out.println(freeVe);
+>>>>>>> 2cf3078525a9442402a3818943c5bbf01071d417
                 try {
                     menge = Integer.parseInt(this.txfMenge.getText());
                 } catch (Exception e) {
                     Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, e);
                 }
+<<<<<<< HEAD
                 if (menge > 0) {
                     lb.setMenge(lb.getMenge() + menge);
                     lb.save();
                 } else {
                     Misc.createErrorDialog(this, "Eingegebene Menge muss größer 0 sein!");
+=======
+                if (menge > 0 && menge <= freeVe) {
+                    lb.setMenge(lb.getMenge() + menge);
+                    lb.save();
+                } else {
+                    Misc.createErrorDialog(this, "Eingegebene Menge muss größer 0 sein! \n"
+                                                +"Oder nicht genug Platz im Lagerfach,"+freeVe+" VE frei");
+>>>>>>> 2cf3078525a9442402a3818943c5bbf01071d417
                 }
                 refreshLagerbestandTableModel();
                 refreshWarenbestandTableModel();
