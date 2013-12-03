@@ -478,8 +478,13 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
                 if (hd.before(today)) {
                     errors += "Achtung, Artikel ist schon abgelaufen. \n";
                 }
-                mng = Integer.parseInt(txfMenge.getText());
-                if (mng == 0) {
+                try{
+                    if((txfMenge.getText().length() > 0) || (txfMenge.getText().matches("[0-9]+"))){
+                            mng = Integer.parseInt(txfMenge.getText());
+                    } else{
+                      errors += "Bitte einzulagernde Menge eingeben. +\n";  
+                    }
+                } catch (NumberFormatException e){
                     errors += "Bitte einzulagernde Menge eingeben. +\n";
                 }
                 int teiID = Integer.parseInt(txfTeilID.getText());
