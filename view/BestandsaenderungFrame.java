@@ -309,6 +309,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         txfTeilID = new javax.swing.JTextField();
         lblHaltbarkeitsdatum = new javax.swing.JLabel();
         txfHaltbarkeitsdatum = new javax.swing.JTextField();
+        lblHinweisDatum = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -361,12 +362,14 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
 
         lblHaltbarkeitsdatum.setText("Haltbarkeitsdatum");
 
-        txfHaltbarkeitsdatum.setText("dd.mm.YYYY");
+        txfHaltbarkeitsdatum.setText("");
         txfHaltbarkeitsdatum.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txfHaltbarkeitsdatumActionPerformed(evt);
             }
         });
+
+        lblHinweisDatum.setText("Hinweis: dd.mm.yyyy");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -406,8 +409,10 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblHaltbarkeitsdatum)
                         .addGap(62, 62, 62)
-                        .addComponent(txfHaltbarkeitsdatum, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 19, Short.MAX_VALUE))
+                        .addComponent(txfHaltbarkeitsdatum, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblHinweisDatum)))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -439,7 +444,8 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblHaltbarkeitsdatum)
-                    .addComponent(txfHaltbarkeitsdatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txfHaltbarkeitsdatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblHinweisDatum))
                 .addGap(29, 29, 29)
                 .addComponent(einlagernButton)
                 .addContainerGap(34, Short.MAX_VALUE))
@@ -462,7 +468,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
                 int fachID = 0;
                 DateFormat df = new SimpleDateFormat("dd.MM.yyyy");
                 df.setLenient(false);
-                Date hd = new Date();
+                Date hd = null;
                 Date today = new Date();
                 int mng = 0;
                 String errors = "";
@@ -480,14 +486,18 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
                     }
  
                  }
-                try {
-                    hd = df.parse(txfHaltbarkeitsdatum.getText());
-                } catch (ParseException ex) {
-                    errors += "Das Haltbarkeitsdatum muss im Format tt.mm.jjjj eingegeben werden. \n";
+                 
+                if (txfHaltbarkeitsdatum.getText().length() > 0) {
+                    try {
+                        hd = df.parse(txfHaltbarkeitsdatum.getText());
+                    } catch (ParseException ex) {
+                        errors += "Das Haltbarkeitsdatum muss im Format tt.mm.jjjj eingegeben werden. \n";
+                    }
+                    if (hd.before(today)) {
+                        errors += "Achtung, Artikel ist schon abgelaufen. \n";
+                    }
                 }
-                if (hd.before(today)) {
-                    errors += "Achtung, Artikel ist schon abgelaufen. \n";
-                }
+
                 try{
                     if((txfMenge.getText().length() > 0) || (txfMenge.getText().matches("[0-9]+"))){
                             mng = Integer.parseInt(txfMenge.getText());
@@ -596,6 +606,9 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
                     Misc.createErrorDialog(this, "Eingegebene Menge muss größer 0 sein! \n"
                                                 +"Oder nicht genug Platz im Lagerfach,"+freeVe+" VE frei");
                 }
+                if (Misc.createErrorDialog(this, errors) == true) {
+                    return;
+                }
                 refreshLagerbestandTableModel();
                 refreshWarenbestandTableModel();
                 this.dispose();
@@ -652,6 +665,10 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
                     return;
                 }
 
+                if (Misc.createErrorDialog(this, errors) == true) {
+                    return;
+                }
+                
                 refreshTeilebestandTableModel();
                 this.dispose();
                 refreshLagerbestandTableModel();
@@ -752,6 +769,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
     private javax.swing.JLabel lblFachAdresse;
     private javax.swing.JLabel lblHaltbarkeitsdatum;
     private javax.swing.JLabel lblHinweis;
+    private javax.swing.JLabel lblHinweisDatum;
     private javax.swing.JLabel lblMenge;
     private javax.swing.JLabel lblTeilID;
     private javax.swing.JScrollPane spnAnschaffungsgrund;

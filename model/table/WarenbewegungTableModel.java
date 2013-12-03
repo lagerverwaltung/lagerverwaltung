@@ -131,11 +131,15 @@ public class WarenbewegungTableModel extends AbstractTableModel{
                         //name = "Datum";
                         if(wb.getDatum() != null){
                             return wb.getDatum();
+                        }else{
+                            return "";
                         }
                     case 7:
                         //name = "Haltbar bis";
                         if(wb.getHaltbarkeitsDatum() != null){
                             return wb.getHaltbarkeitsDatum();
+                        }else{
+                            return "";
                         }
                     case 8:
                         //name = "Typ";
