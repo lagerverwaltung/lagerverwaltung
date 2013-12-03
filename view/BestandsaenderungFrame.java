@@ -500,15 +500,10 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
                 int z = (int) (cbxFachZ.getSelectedItem());
 
                 fachID = Lagerfach.getFach(l , x, y, z).getFachnummer();
-
-                int freeVe = 0;
-                int usedVe = 0;
-                int maxVe = 0;
-
-                maxVe = Lagerfach.getLagerfach(fachID).getMaxVe();
-                usedVe = Lagerfach.getLagerfach(fachID).getUsedVe();
-
-                freeVe = maxVe - usedVe;
+                
+                int freeVe = Lagerfach.getLagerfach(fachID).getFreeVe();
+                int maxVe = Lagerfach.getLagerfach(fachID).getMaxVe();
+                int usedVe = Lagerfach.getLagerfach(fachID).getUsedVe();
 
                 if (mng > freeVe) {
                     errors += "Es steht nicht genug Platz zum einlagern zur Verfügung. +\n";
@@ -561,26 +556,26 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
 
                 //Einlagern mit bestehendem Teil
             } else if(bestehendesTeil) {
-                int lagerbestandsid=-1;
-                     lagerbestandsid=Lagerbestand.getLagerbestandID(this.teilid,this.fachid);
+                int lagerbestandsid = -1;
+                lagerbestandsid = Lagerbestand.getLagerbestandID(this.teilid, this.fachid);
                 Lagerbestand lb = null;
-                     lb = Lagerbestand.getLagerbestand(lagerbestandsid);
-                int menge=0;
-
-                try{
-                    menge=Integer.parseInt(this.txfMenge.getText());
-                }
-                catch(Exception e)
-                {
+                lb = Lagerbestand.getLagerbestand(lagerbestandsid);
+                Lagerfach lf = lb.getLagerfach();
+                
+                int menge = 0;
+                int freeVe = lf.getFreeVe();
+                System.out.println(freeVe);
+                try {
+                    menge = Integer.parseInt(this.txfMenge.getText());
+                } catch (Exception e) {
                     Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, e);
-                } 
-                if (menge>0)
-                {    lb.setMenge(lb.getMenge()+menge);
-                        lb.save();
                 }
-                else
-                {
-                    Misc.createErrorDialog(this, "Eingegebene Menge muss größer 0 sein!");
+                if (menge > 0 && menge <= freeVe) {
+                    lb.setMenge(lb.getMenge() + menge);
+                    lb.save();
+                } else {
+                    Misc.createErrorDialog(this, "Eingegebene Menge muss größer 0 sein! \n"
+                                                +"Oder nicht genug Platz im Lagerfach,"+freeVe+" VE frei");
                 }
                 refreshLagerbestandTableModel();
                 refreshWarenbestandTableModel();

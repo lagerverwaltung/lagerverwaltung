@@ -28,10 +28,4 @@ public class Misc {
             return false;
         }
     }
-    public static boolean containsChars(String s){
-        if(s.matches( "\\d+")){
-        return false;
-        }
-        return true;
-    }
 }
