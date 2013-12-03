@@ -635,28 +635,35 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
                 System.out.println(isLastTeil);
                 if (menge <= lb.getMenge()  && isLastTeil) {
                     int oldMenge = lb.getMenge();
+                    if(menge==oldMenge)
+                    {
                     lb.setMenge(lb.getMenge() - menge);
                     lb.save();
+                    }
 
                     if (menge == oldMenge) {
                         int option = JOptionPane.showConfirmDialog(this, "Soll das zugehörige Teil aus dem Teilebestand gelöscht werden ?");
 
                         if (option == JOptionPane.YES_OPTION) {
                             Dao<Lagerbestand, Integer> lagerbestandDao = DatabaseManager.getInstance().getLagerbestandDao();
-                            lagerbestandDao.delete(lb);
+                            // lagerbestandDao.delete(lb);
+                            lb.setMenge(0);
                             Dao<Teilebestand, Integer> teilebestandDao = DatabaseManager.getInstance().getTeilebestandDao();
-                            //teilebestandDao.deleteById(teilid);
+                            teilebestandDao.deleteById(teilid);
+                            
+                            refreshLagerbestandTableModel();
+                            refreshTeilebestandTableModel();
+                            this.dispose();
                         }
                         if (option == JOptionPane.CANCEL_OPTION) {
                             
-                            //Do Stuff
                             
-                            //Dao<Lagerbestand, Integer> lagerbestandDao = DatabaseManager.getInstance().getLagerbestandDao();
-                            //lagerbestandDao.delete(lb);
                         }
                         if (option == JOptionPane.NO_OPTION){
                             
-                            //Do some other suff
+                            lb.setMenge(oldMenge-menge);
+                            refreshLagerbestandTableModel();
+                            this.dispose();
                             
                         }
                     }
@@ -665,13 +672,9 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
                     return;
                 }
 
-                if (Misc.createErrorDialog(this, errors) == true) {
-                    return;
-                }
                 
-                refreshTeilebestandTableModel();
-                this.dispose();
-                refreshLagerbestandTableModel();
+             
+               
             }
         } catch (SQLException ex) {
             Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, ex);
