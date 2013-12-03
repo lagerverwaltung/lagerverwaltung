@@ -635,7 +635,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
                 System.out.println(isLastTeil);
                 if (menge <= lb.getMenge()  && isLastTeil) {
                     int oldMenge = lb.getMenge();
-                    if(menge==oldMenge)
+                    if(menge<oldMenge)
                     {
                     lb.setMenge(lb.getMenge() - menge);
                     lb.save();
