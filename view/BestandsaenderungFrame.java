@@ -60,29 +60,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
             Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, ex); 
         }
     }
-    
-    //Artjom
-  /* BestandsaenderungFrame(boolean einlagern, int id,String anschGr) {
-        this();
-        this.einlagern = einlagern;
-        lblEinlagern.setText("Teile einlagern");
-        einlagernButton.setText("Teile einlagern");
-        this.txfTeilID.setText(""+id);
-        this.txaAnschaffungsgrund.setText(anschGr);
-        //this.txfHaltbarkeitsdatum.setText(hbDate+"kommt noch");
-        //this.txfHaltbarkeitsdatum.setText(haltbDate);
-        this.txfTeilID.setEditable(false);
-        this.txaAnschaffungsgrund.setEditable(false);
-        
-            //ComboBox füllen
-            try {
-                loadHlCbx();
-            } catch (SQLException ex) {
-                Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, ex); 
-            }
-   }*/
-        
-   
+      
     //Teil einlagern aus der Registerkarte Teilebestand/Lagerbestand
     BestandsaenderungFrame(boolean einlagern, int id) {
         this();
@@ -125,13 +103,6 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         this.cbxFachZ.setEnabled(false);
         this.cbxFachTyp.setEnabled(false);
         
-        
-            //ComboBox füllen
-       /*     try {
-                loadHlCbx();
-            } catch (SQLException ex) {
-                Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, ex); 
-            }*/
     }
     
         //Teil auslagern aus der Registerkarte Lagerbestand
@@ -161,29 +132,8 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
             this.cbxFachTyp.setSelectedItem(lo); //Lagerort noch BUGGY!
             this.fachid=fachid;
             this.teilid=id;
+            this.lblHinweisDatum.setVisible(false);
 
-        /*  //ComboBox füllen
-            Lagerfach lf = new Lagerfach();
-            try {
-                lf = Lagerfach.getLagerfach(id);
-            } catch (SQLException ex) {
-                Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-            if (lf.getLager().getLagerort().freilager.equals(Lager.Lagerort.hochregal)) {
-                cbxFachTyp.removeItem("HL");
-            } else {
-                cbxFachTyp.removeItem("FL");
-            }
-            cbxFachZ.removeAllItems();
-            cbxFachX.removeAllItems();
-            cbxFachY.removeAllItems();
-
-            cbxFachX.addItem(lf.getX());
-            cbxFachY.addItem(lf.getY());
-            cbxFachZ.addItem(lf.getZ()); 
-            
-            */
         }
         
     BestandsaenderungFrame(boolean splitten) {
@@ -710,6 +660,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         WarenbewegungCollection wc = WarenbewegungCollection.getInstance(true);
         WarenbewegungTableModel wm = new WarenbewegungTableModel();
         wm.setData(wc);
+        warenBewegungTable.setModel(wm);
     }
     
     private void cbxFachXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxFachXActionPerformed
