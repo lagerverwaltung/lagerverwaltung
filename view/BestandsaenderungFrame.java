@@ -225,7 +225,11 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
             txaAnschaffungsgrund.setText(l.getAnschaffungsgrund());
             txfMenge.setText(Integer.toString(l.getMenge()));
             Format f = new SimpleDateFormat("DD.MM.YYYY");
+            if(w.getHaltbarkeitsDatum() == null){
+                txfHaltbarkeitsdatum.setText("");
+            }else{
             txfHaltbarkeitsdatum.setText(f.format(w.getHaltbarkeitsDatum()));
+            }
         }
     }
      
@@ -633,15 +637,17 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
                 
                 isLastTeil = Lagerbestand.isLastTeil(lb, menge);
                 System.out.println(isLastTeil);
+                System.out.println(menge);
+                System.out.println(lb.getMenge());
                 if (menge <= lb.getMenge()  ) {
-                    int oldMenge = lb.getMenge();
-                    if(menge<oldMenge)
+                    int lbMenge = lb.getMenge();
+                    if(menge < lbMenge)
                     {
                     lb.setMenge(lb.getMenge() - menge);
                     lb.save();
                     }
 
-                    if (menge == oldMenge && isLastTeil) {
+                    if (menge == lbMenge && isLastTeil) {
                         int option = JOptionPane.showConfirmDialog(this, "Soll das zugehörige Teil aus dem Teilebestand gelöscht werden ?");
 
                         if (option == JOptionPane.YES_OPTION) {
@@ -661,16 +667,16 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
                         }
                         if (option == JOptionPane.NO_OPTION){
                             
-                            lb.setMenge(oldMenge-menge);
+                            lb.setMenge(lbMenge-menge);
                             lb.save();
                             refreshLagerbestandTableModel();
                             this.dispose();
                             
                         }
                     }
-                    else if(menge==oldMenge)
+                    else if(menge==lbMenge)
                     {
-                        lb.setMenge(oldMenge-menge);
+                        lb.setMenge(lbMenge-menge);
                         lb.save();
                         refreshLagerbestandTableModel();
                         this.dispose();
