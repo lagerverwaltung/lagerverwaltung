@@ -5,12 +5,9 @@
 package model.table;
 
 import com.j256.ormlite.dao.ForeignCollection;
-import helper.DatabaseManager;
-import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.table.AbstractTableModel;
 import model.Lagerbestand;
 import model.Lagerfach;
@@ -86,8 +83,8 @@ public class WarenbewegungTableModel extends AbstractTableModel{
         Lagerbestand lb = wb.getLagerbestand();
         Lagerfach lf = lb.getLagerfach();
         Teilebestand tl = lb.getTeil();
-        String s = new String();
-        s = "vergessen";
+        DateFormat df = new SimpleDateFormat("dd.MM.yyyy");
+        df.setLenient(false);
         
         int qGes = 0;
         String strZiel = "<html>";
@@ -137,7 +134,7 @@ public class WarenbewegungTableModel extends AbstractTableModel{
                     case 7:
                         //name = "Haltbar bis";
                         if(wb.getHaltbarkeitsDatum() != null){
-                            return wb.getHaltbarkeitsDatum();
+                            return df.format(wb.getHaltbarkeitsDatum());
                         }else{
                             return "";
                         }
@@ -149,16 +146,9 @@ public class WarenbewegungTableModel extends AbstractTableModel{
                     default:
                         return "empty";
                 }
-                
             }
         }
         return "notfoudnd";
-        /*if(warenbRows.size()>0){
-            Object[] commisionColumns = warenbRows.get(row);
-            return commisionColumns[col];
-        }
-        return "notfound";
-        */
     }
 
     @Override
