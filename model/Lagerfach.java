@@ -100,12 +100,14 @@ public class Lagerfach {
 
         if (lbList.size() > 0) {
             for (int i = 0; i < lbList.size(); i++) {
-                List<Teilebestand> tbList = teilebestandDao.queryForEq("teilID", lbList.get(i).getTeil().getIdentnummer());
-                if (tbList.size() > 0) {
-                    for (int j = 0; j < tbList.size(); j++) {
-                        usedVe = usedVe + lbList.get(i).getMenge() * tbList.get(j).getVe();
-                    }
+                if(lbList.get(i) != null){
+                    List<Teilebestand> tbList = teilebestandDao.queryForEq("teilID", lbList.get(i).getTeil().getIdentnummer());
+                    if (tbList.size() > 0) {
+                        for (int j = 0; j < tbList.size(); j++) {
+                            usedVe = usedVe + lbList.get(i).getMenge() * tbList.get(j).getVe();
+                        }
 
+                    }
                 }
             }
 

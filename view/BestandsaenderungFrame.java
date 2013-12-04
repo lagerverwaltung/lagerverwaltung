@@ -18,6 +18,7 @@ import java.util.logging.Logger;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.table.TableColumn;
 import model.Lager;
 import model.Lagerbestand;
 import model.Lagerfach;
@@ -40,7 +41,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
     Boolean einlagern = false;
     Boolean auslagern = false;
     Boolean splitten = false;
-    Boolean bestehendesTeil=false;
+    Boolean bestehenderLagerbestand=false;
     JTable lagerBestandTable;
     JTable teileBestandTable;
     JTable warenBewegungTable;
@@ -82,14 +83,13 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
     BestandsaenderungFrame(boolean einlagern, int id,boolean bestehendesteil,int x,int y, int z,String lo, int fachid,String anschGr) {
         this();
         this.einlagern = einlagern;
-        this.bestehendesTeil=bestehendesteil;
+        this.bestehenderLagerbestand=bestehendesteil;
         this.fachid=fachid;
         this.teilid=id;
         lblEinlagern.setText("Teile einlagern");
         einlagernButton.setText("Teile einlagern");
         this.txfTeilID.setText(""+id);
         this.txaAnschaffungsgrund.setText(anschGr);
-        this.txaAnschaffungsgrund.setEnabled(false);
         this.txfTeilID.setEditable(false);
         this.txfTeilID.setEnabled(false);
         
@@ -114,7 +114,6 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
             einlagernButton.setText("Teile auslagern");
             this.txfTeilID.setText("" + id);
             this.txaAnschaffungsgrund.setText(anschGr);
-            this.txaAnschaffungsgrund.setEnabled(false);
             //this.txfHaltbarkeitsdatum.setText(hbDate+"kommt noch");
             //this.txfHaltbarkeitsdatum.setText(haltbDate);
             this.txfTeilID.setEditable(false);
@@ -331,21 +330,23 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblAnschaffungsgrund)
-                            .addComponent(lblMenge))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txfMenge, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(spnAnschaffungsgrund, javax.swing.GroupLayout.PREFERRED_SIZE, 377, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 467, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblEinlagern, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(einlagernButton)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblFachAdresse)
-                            .addComponent(lblTeilID))
+                            .addComponent(lblTeilID)
+                            .addComponent(lblAnschaffungsgrund)
+                            .addComponent(lblMenge)
+                            .addComponent(lblHaltbarkeitsdatum))
                         .addGap(65, 65, 65)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(txfHaltbarkeitsdatum, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(lblHinweisDatum))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(cbxFachTyp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -354,19 +355,12 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
                                 .addComponent(cbxFachY, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(cbxFachZ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(53, 53, 53)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(lblHinweis))
-                            .addComponent(txfTeilID, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 467, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblEinlagern, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(einlagernButton)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblHaltbarkeitsdatum)
-                        .addGap(62, 62, 62)
-                        .addComponent(txfHaltbarkeitsdatum, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblHinweisDatum)))
-                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(spnAnschaffungsgrund, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txfTeilID, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txfMenge, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(0, 35, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -443,7 +437,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         
          if(lb!=null)
          {
-             bestehendesTeil=true;
+             bestehenderLagerbestand=true;
          }
         }
         catch(SQLException e)
@@ -453,7 +447,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
                 
         try {
             //Einlagern
-            if (einlagern && !bestehendesTeil) {
+            if (einlagern && !bestehenderLagerbestand) {
 
                 //Variablendeklaration
                 lb = new Lagerbestand();
@@ -489,7 +483,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
                     } catch (ParseException ex) {
                         errors += "Das Haltbarkeitsdatum muss im Format tt.mm.jjjj eingegeben werden. \n";
                     }
-                    if (hd.before(today)) {
+                    if (hd != null && hd.before(today)) {
                         errors += "Achtung, Artikel ist schon abgelaufen. \n";
                     }
                 }
@@ -522,8 +516,8 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
                 int usedVe = Lagerfach.getLagerfach(fachID).getUsedVe();
 
                 if (mng > freeVe) {
-                    errors += "Es steht nicht genug Platz zum einlagern zur Verfügung. +\n";
-                    errors += usedVe + " von " + maxVe + " VE belegt. " + freeVe + " VE frei. +\n";
+                    errors += "Es steht nicht genug Platz zum Einlagern zur Verfügung. \n";
+                    errors += usedVe + " von " + maxVe + " VE belegt. " + freeVe + " VE frei. \n";
                 }
                 if (Misc.createErrorDialog(this, errors) == true) {
                     return;
@@ -571,7 +565,11 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
                 this.dispose();
 
                 //Einlagern mit bestehendem Teil
-            } else if(bestehendesTeil && !auslagern) {
+            } else if(bestehenderLagerbestand && !auslagern) {
+                if(fachID ==  0){
+                    fachID = Lagerfach.getFach(l , x, y, z).getFachnummer();
+                }
+                 
                  lagerbestandsid = Lagerbestand.getLagerbestandID(teiID, fachID);
                  System.out.println(" Lagerbestandsid "+lagerbestandsid);
                 lb = null;
@@ -591,17 +589,20 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
                 }
                 
                 int freeVe = lf.getFreeVe();
+                System.out.println("frei"+freeVe);
                 try {
                     menge = Integer.parseInt(this.txfMenge.getText());
                 } catch (Exception e) {
                     Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, e);
                 }
-                if (menge > 0 && menge <= freeVe) {
+                if (menge > 0 && menge*lb.getTeil().getVe() <= freeVe) {
                     lb.setMenge(lb.getMenge() + menge);
                     lb.save();
-                } else {
-                    Misc.createErrorDialog(this, "Eingegebene Menge muss größer 0 sein! \n"
-                                                +"Oder nicht genug Platz im Lagerfach,"+freeVe+" VE frei");
+                } else if (menge <= 0){
+                   errors += "Die eingegebene Menge muss größer 0 sein! \n";
+                }
+                else {
+                      errors += "Es ist nicht genug Platz im Lagerfach, nur "+freeVe+" VE frei, benötigt:"+lb.getTeil().getVe()*menge+"\n";
                 }
                 if (Misc.createErrorDialog(this, errors) == true) {
                     return;
@@ -704,6 +705,16 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         WarenbewegungTableModel wm = new WarenbewegungTableModel();
         wm.setData(wc);
         warenBewegungTable.setModel(wm);
+
+        int[] arrWidths = {15, 120, 70, 40, 170, 90, 65, 60,90};
+        TableColumn tc;
+        warenBewegungTable.setRowHeight(23);
+        int i = 0;
+        for (int width : arrWidths){
+            tc = warenBewegungTable.getColumnModel().getColumn(i++);
+            tc.setPreferredWidth(width);
+        }
+  
     }
     
     private void cbxFachXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxFachXActionPerformed

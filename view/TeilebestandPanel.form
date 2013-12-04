@@ -23,35 +23,42 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <Component id="lblFreitextsuche" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="txfFreitextsuche" min="-2" pref="196" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="btnSuchen" min="-2" pref="118" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="291" max="-2" attributes="0"/>
-                      <Component id="btnFiltern" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="btnFilterZurücksetzen" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="lblFreitextsuche" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="txfFreitextsuche" min="-2" pref="196" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="btnSuchen" min="-2" pref="118" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="291" max="-2" attributes="0"/>
+                              <Component id="btnFiltern" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="btnFilterZurücksetzen" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="lblTeilebestand" min="-2" pref="151" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace pref="47" max="32767" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="lblAktionSelektiert" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="btnTeilAendern" min="-2" pref="151" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="btnTeilLoschen" min="-2" pref="151" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnteilEinlagern" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="lblTeilebestandErweitern" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="btnNeuesTeil" min="-2" pref="180" max="-2" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="lblAktionSelektiert" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="btnTeilAendern" min="-2" pref="151" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="btnTeilLoschen" min="-2" pref="151" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="btnteilEinlagern" min="-2" pref="169" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="btnNeuesTeil" min="-2" pref="180" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="scpMain" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="lblTeilebestand" min="-2" pref="151" max="-2" attributes="0"/>
-                  <Component id="scpMain" alignment="0" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace pref="46" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -68,18 +75,17 @@
                   <Component id="btnFilterZurücksetzen" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                   <Component id="btnFiltern" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="11" max="32767" attributes="0"/>
               <Component id="scpMain" min="-2" pref="470" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lblAktionSelektiert" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnTeilLoschen" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblTeilebestandErweitern" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnNeuesTeil" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnteilEinlagern" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnTeilAendern" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnteilEinlagern" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnNeuesTeil" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="364" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="359" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -164,11 +170,6 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTeilLoschenActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="lblTeilebestandErweitern">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Teilebestand erweitern:"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JButton" name="btnFilterZur&#xfc;cksetzen">
       <Properties>
         <Property name="text" type="java.lang.String" value="Filter zur&#xfc;cksetzen"/>
@@ -184,7 +185,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnteilEinlagern">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Teile einlagern"/>
+        <Property name="text" type="java.lang.String" value="Teil einlagern"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnteilEinlagernActionPerformed"/>
