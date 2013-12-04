@@ -353,6 +353,17 @@ public class InitPanel extends javax.swing.JPanel {
             errors += "Die Tiefe darf maximal 1000 sein. \n";
         }
         
+        if(breite < 0 || tiefe < 0 || hoehe < 0 || fachKlein < 0 || fachMittel < 0 || fachGross < 0){
+            errors += "Es dürfen keine negativen Werte angegeben werden. \n";
+        }
+        
+        if(hoehe > 1000 && hoehe != 0){
+            errors += "Die Höhe darf maximal 1000 sein. \n";
+        }
+        if(tiefe > 1000 && tiefe != 0){
+            errors += "Die Tiefe darf maximal 1000 sein. \n";
+        }
+        
         if(errors.length() > 0){
             if(Misc.createErrorDialog(mainFrame, errors) == true){
                 return;

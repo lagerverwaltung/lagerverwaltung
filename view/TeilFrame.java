@@ -246,16 +246,16 @@ public class TeilFrame extends javax.swing.JFrame {
         }
 
         String errors = "";
-        if (txfBezeichnung.getText().length() == 0) {
+        if (txfBezeichnung.getText().trim().length() == 0) {
             errors += "Es muss eine Teilbezeichnung eingegeben werden. \n";
         }
-        if (txfMaterial.getText().length() == 0) {
+        if (txfMaterial.getText().trim().length() == 0) {
             errors += "Es muss ein Material eingegeben werden. \n";
         }
-        if (txfZeichnungsnummer.getText().length() == 0) {
+        if (txfZeichnungsnummer.getText().trim().length() == 0) {
             errors += "Es muss eine Zeichnungsnummer eingegeben werden. \n";
         }
-        if (txfGroesseVE.getText().length() == 0) {
+        if (txfGroesseVE.getText().trim().length() == 0) {
             errors += "Es muss eine Größe eingegeben werden. \n";
         }
         float euro = 0;
@@ -272,18 +272,25 @@ public class TeilFrame extends javax.swing.JFrame {
                 euro = Float.parseFloat(txfPreisInEuro.getText());
             }
         } catch (NumberFormatException e) {
-            errors += "Der Preis muss eine Fließkommazahl sein. Verwenden sie Punkt"
-                    + "anstatt Komma.  \n";
+            errors += "Der Preis muss eine Fließkommazahl sein. \n";
+        }
+        if(euro <= 0){
+             errors += "Der Preis muss größer als 0 sein.\n";
         }
         String groesse = txfGroesseVE.getText();
+        int groesseInt = 0;
         try {
             if (groesse.length() > 0) {
                 t.setVe(Integer.parseInt(groesse));
+                groesseInt = Integer.parseInt(groesse);
             }
         } catch (NumberFormatException e) {
             errors += "Die Fachgröße muss in Ganzzahlwerten eingegeben werden.\n";
         }
-
+        
+        if(groesse.length() > 0 && groesseInt <= 0){
+             errors += "Die Fachgröße muss größer als 0 sein.\n";
+        }
         if (Misc.createErrorDialog(this, errors) == true) {
             return;
         }
