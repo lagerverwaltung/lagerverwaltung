@@ -455,17 +455,59 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 //ändern
     private void einlagernButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_einlagernButtonActionPerformed
+        
+                int x = (int) (cbxFachX.getSelectedItem());
+                int y = (int) (cbxFachY.getSelectedItem());
+                int z = (int) (cbxFachZ.getSelectedItem());
+                Lager l = new Lager();    
+                if (cbxFachTyp.getSelectedItem().equals("FL")) {
+
+                    l.setLagerort(Lager.Lagerort.freilager);
+                } else {
+                    l.setLagerort(Lager.Lagerort.hochregal);
+                }
+        
+                int fachID=0;
+                int teiID = Integer.parseInt(txfTeilID.getText());
+                Lagerbestand lb=null;
+                int lagerbestandsid=0;
+        try {
+            fachID = Lagerfach.getFach(l , x, y, z).getFachnummer();
+            if ((Lagerfach.getFach(l , x, y, z))==null)
+                System.out.println("Lagerfach ist null");
+       
+        
+         lagerbestandsid=0;
+        
+        lagerbestandsid = Lagerbestand.getLagerbestandID(teiID, fachID);
+        
+        System.out.println("LagerbestandsID" + lagerbestandsid);
+        
+     
+        
+         lb = Lagerbestand.getLagerbestand(lagerbestandsid);
+        
+         if(lb!=null)
+         {
+             bestehendesTeil=true;
+         }
+        }
+        catch(SQLException e)
+        {
+            Misc.createErrorDialog(this, "SQL Error");
+        }
+                
         try {
             //Einlagern
             if (einlagern && !bestehendesTeil) {
 
                 //Variablendeklaration
-                Lagerbestand lb = new Lagerbestand();
+                lb = new Lagerbestand();
                 Warenbewegung wb = new Warenbewegung();
                 Lagerfach lf = new Lagerfach();
                 Teilebestand tb = new Teilebestand();
 
-                int fachID = 0;
+                 fachID = 0;
                 DateFormat df = new SimpleDateFormat("dd.MM.yyyy");
                 df.setLenient(false);
                 Date hd = null;
@@ -507,17 +549,17 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
                 } catch (NumberFormatException e){
                     errors += "Bitte einzulagernde Menge eingeben. +\n";
                 }
-                int teiID = Integer.parseInt(txfTeilID.getText());
-                Lager l = new Lager();    
+                 teiID = Integer.parseInt(txfTeilID.getText());
+                 l = new Lager();    
                 if (cbxFachTyp.getSelectedItem().equals("FL")) {
 
                     l.setLagerort(Lager.Lagerort.freilager);
                 } else {
                     l.setLagerort(Lager.Lagerort.hochregal);
                 }
-                int x = (int) (cbxFachX.getSelectedItem());
-                int y = (int) (cbxFachY.getSelectedItem());
-                int z = (int) (cbxFachZ.getSelectedItem());
+                 x = (int) (cbxFachX.getSelectedItem());
+                 y = (int) (cbxFachY.getSelectedItem());
+                 z = (int) (cbxFachZ.getSelectedItem());
 
                 fachID = Lagerfach.getFach(l , x, y, z).getFachnummer();
                 
@@ -575,9 +617,10 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
                 this.dispose();
 
                 //Einlagern mit bestehendem Teil
-            } else if(bestehendesTeil) {
-                int lagerbestandsid = Lagerbestand.getLagerbestandID(this.teilid, this.fachid);
-                Lagerbestand lb = null;
+            } else if(bestehendesTeil && !auslagern) {
+                 lagerbestandsid = Lagerbestand.getLagerbestandID(teiID, fachID);
+                 System.out.println(" Lagerbestandsid "+lagerbestandsid);
+                lb = null;
                 lb = Lagerbestand.getLagerbestand(lagerbestandsid);
                 Lagerfach lf = lb.getLagerfach();
                 String errors = "";
@@ -615,8 +658,8 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
             }       
             // auslagern
             else {
-                int lagerbestandsid = Lagerbestand.getLagerbestandID(this.teilid, this.fachid);
-                Lagerbestand lb = Lagerbestand.getLagerbestand(lagerbestandsid);
+                 lagerbestandsid = Lagerbestand.getLagerbestandID(this.teilid, this.fachid);
+                 lb = Lagerbestand.getLagerbestand(lagerbestandsid);
                 Teilebestand tb = lb.getTeil();
                 boolean isLastTeil = true;
                 String errors ="";
