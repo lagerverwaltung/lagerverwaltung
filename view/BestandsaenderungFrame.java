@@ -633,7 +633,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
                 
                 isLastTeil = Lagerbestand.isLastTeil(lb, menge);
                 System.out.println(isLastTeil);
-                if (menge <= lb.getMenge()  && isLastTeil) {
+                if (menge <= lb.getMenge()  ) {
                     int oldMenge = lb.getMenge();
                     if(menge<oldMenge)
                     {
@@ -641,7 +641,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
                     lb.save();
                     }
 
-                    if (menge == oldMenge) {
+                    if (menge == oldMenge && isLastTeil) {
                         int option = JOptionPane.showConfirmDialog(this, "Soll das zugehörige Teil aus dem Teilebestand gelöscht werden ?");
 
                         if (option == JOptionPane.YES_OPTION) {
@@ -650,7 +650,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
                             lb.setMenge(0);
                             Dao<Teilebestand, Integer> teilebestandDao = DatabaseManager.getInstance().getTeilebestandDao();
                             teilebestandDao.deleteById(teilid);
-                            
+                            lb.save();
                             refreshLagerbestandTableModel();
                             refreshTeilebestandTableModel();
                             this.dispose();
@@ -662,10 +662,18 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
                         if (option == JOptionPane.NO_OPTION){
                             
                             lb.setMenge(oldMenge-menge);
+                            lb.save();
                             refreshLagerbestandTableModel();
                             this.dispose();
                             
                         }
+                    }
+                    else if(menge==oldMenge)
+                    {
+                        lb.setMenge(oldMenge-menge);
+                        lb.save();
+                        refreshLagerbestandTableModel();
+                        this.dispose();
                     }
                 } else {
                     Misc.createErrorDialog(this, "Eingegebene Menge ist größer der eingelagerten Menge!");
