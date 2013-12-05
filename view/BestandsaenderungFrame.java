@@ -694,12 +694,14 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         lm.setData(lc);
         lagerBestandTable.setModel(lm);
     }
+    
     private void refreshTeilebestandTableModel(){
         TeilebestandCollection tc = TeilebestandCollection.getInstance(true);
         TeileTableModel tm = new TeileTableModel();
         tm.setData(tc);
         teileBestandTable.setModel(tm);
     }
+    
     private void refreshWarenbestandTableModel(){
         WarenbewegungCollection wc = WarenbewegungCollection.getInstance(true);
         WarenbewegungTableModel wm = new WarenbewegungTableModel();

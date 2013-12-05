@@ -4,9 +4,23 @@
  */
 package view;
 
+import com.j256.ormlite.dao.Dao;
+import helper.DatabaseManager;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JTable;
+import model.Lager;
+import model.Lager;
+import model.Teilebestand;
+import model.collection.TeilebestandCollection;
+import model.filter.TeilebestandFilterModel;
+import model.table.TeileTableModel;
 
 /**
  *
@@ -14,6 +28,7 @@ import java.awt.Toolkit;
  */
 public class TeileFilterFrame extends javax.swing.JFrame {
     private static TeileFilterFrame singleton;
+    JTable teileBestandTable;
     
     public static TeileFilterFrame getInstance(Component mainFrame)
     {
@@ -27,6 +42,7 @@ public class TeileFilterFrame extends javax.swing.JFrame {
      * Creates new form TeileFilter
      */
     public TeileFilterFrame() {
+        
         initComponents();
     }
     
@@ -248,9 +264,42 @@ public class TeileFilterFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_txfVeBisActionPerformed
 
     private void btnExecuteFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExecuteFilterActionPerformed
-         this.setVisible(false);
+        TeilebestandFilterModel tfm = new TeilebestandFilterModel();
+        
+        if (!txfMaterialgruppe.getText().isEmpty()) {
+            tfm.setMaterialgruppe("%"+txfMaterialgruppe.getText()+"%");
+        }
+        if (!txfZeichnungsnummer.getText().isEmpty()) {
+            tfm.setZeichnungsnummer("%"+txfZeichnungsnummer.getText()+"%");
+        }
+        if (!txfPreisVon.getText().isEmpty()) {
+            tfm.setVonPreis(Float.parseFloat(txfPreisVon.getText()));
+        }
+        if (!txfPreisBis.getText().isEmpty()) {
+            tfm.setBisPreis(Float.parseFloat(txfPreisBis.getText()));
+        }
+        if (!txfVeVon.getText().isEmpty()) {
+            tfm.setVonVe(Integer.parseInt(txfVeVon.getText()));
+        }
+        if (!txfVeBis.getText().isEmpty()) {
+            tfm.setBisVe(Integer.parseInt(txfVeBis.getText()));
+        }
+        try {
+            refreshTeilebestandTableModel(tfm);
+        } catch (SQLException ex) {
+            Logger.getLogger(TeileFilterFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        this.dispose();
     }//GEN-LAST:event_btnExecuteFilterActionPerformed
 
+    private void refreshTeilebestandTableModel(TeilebestandFilterModel tfm) throws SQLException{
+        TeilebestandCollection tc = TeilebestandCollection.getInstance(tfm);
+        TeileTableModel tm = new TeileTableModel();
+        tm.setData(tc);
+        teileBestandTable.setModel(tm);
+    }
+
+    
     /**
      * @param args the command line arguments
      */

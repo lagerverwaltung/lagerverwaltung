@@ -4,12 +4,18 @@
  */
 package model.collection;
 import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.stmt.PreparedQuery;
+import com.j256.ormlite.stmt.QueryBuilder;
 import helper.DatabaseManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.Teilebestand;
+import model.filter.TeilebestandFilterModel;
+import model.table.TeileTableModel;
+import view.TeileFilterFrame;
 
 /**
  * @param <Teilebestand>
@@ -35,6 +41,11 @@ public class TeilebestandCollection<Teilebestand> extends ArrayList {
          singleton = TeilebestandCollection.getInstance();
          return singleton.loadCollection();
     }
+    
+    public static TeilebestandCollection getInstance(TeilebestandFilterModel tfm) throws SQLException{
+        singleton = TeilebestandCollection.getInstance();
+        return singleton.addFilter(tfm);
+    }
    
     public TeilebestandCollection<Teilebestand> loadCollection()
     { 
@@ -52,8 +63,28 @@ public class TeilebestandCollection<Teilebestand> extends ArrayList {
         return singleton;
     }
     
-    public void addFilter(String attributeName, String attributeValue){
-        
+    /*
+     * @param TeilebestandFilterModel welches angewand werden sollen
+     */
+    public TeilebestandCollection<Teilebestand> addFilter(TeilebestandFilterModel tfm) throws SQLException {
+
+        Dao<model.Teilebestand, Integer> teileDao = DatabaseManager.getInstance().getTeilebestandDao();
+        QueryBuilder<model.Teilebestand, Integer> queryBuilder = teileDao.queryBuilder();
+        queryBuilder.where()
+                .like("materialgruppe", tfm.getMaterialgruppr())
+                .and()
+                .like("zeichnungsnummer", tfm.getZeichnungsnummer())
+                .and()
+                .between("preis", tfm.getVonPreis(), tfm.getBisPreis())
+                .and()
+                .between("ve", tfm.getVonVe(), tfm.getBisVe());
+        PreparedQuery<model.Teilebestand> preparedQuery = queryBuilder.prepare();
+        List<model.Teilebestand> list = teileDao.query(preparedQuery);
+        for (model.Teilebestand tb1 : list) {
+            add(tb1);
+        }
+        return this;
+
     }
     
     public void resetFilters()

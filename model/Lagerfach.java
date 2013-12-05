@@ -116,6 +116,9 @@ public class Lagerfach {
         return usedVe;
     }
     
+    /*
+     * Gibt die Kapazität des Fachs in VE 
+     */
     public int getMaxVe(){
         if(groesse.equals(Groesse.klein)){
             return this.getLager().getGrossVE();
