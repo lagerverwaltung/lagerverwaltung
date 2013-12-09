@@ -46,7 +46,7 @@ public class TeilebestandFilterModel {
      * @param matGr the matGr to set
      */
     public void setMaterialgruppe(String matGr) {
-        this.materialgruppe = matGr;
+        this.materialgruppe = "%"+matGr+"%";
     }
 
     /**
@@ -116,6 +116,6 @@ public class TeilebestandFilterModel {
      * @param zeichNr the zeichNr to set
      */
     public void setZeichnungsnummer(String zeichNr) {
-        this.zeichnungsnummer = zeichNr;
+        this.zeichnungsnummer = "%"+zeichNr+"%";
     }
 }

@@ -119,6 +119,11 @@ public class TeilebestandPanel extends javax.swing.JPanel {
         });
 
         btnFilterZurücksetzen.setText("Filter zurücksetzen");
+        btnFilterZurücksetzen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFilterZurücksetzenActionPerformed(evt);
+            }
+        });
 
         btnFiltern.setText("Filtern");
         btnFiltern.addActionListener(new java.awt.event.ActionListener() {
@@ -154,7 +159,7 @@ public class TeilebestandPanel extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(btnFilterZurücksetzen))
                             .addComponent(lblTeilebestand, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(47, Short.MAX_VALUE))
+                        .addContainerGap(100, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
@@ -182,7 +187,7 @@ public class TeilebestandPanel extends javax.swing.JPanel {
                     .addComponent(lblFreitextsuche)
                     .addComponent(btnFilterZurücksetzen, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnFiltern))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(scpMain, javax.swing.GroupLayout.PREFERRED_SIZE, 470, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -225,7 +230,7 @@ public class TeilebestandPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnTeilLoschenActionPerformed
 
     private void btnFilternActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFilternActionPerformed
-       TeileFilterFrame.getInstance(mainFrame);
+       TeileFilterFrame.getInstance(mainFrame, tblMain);
     }//GEN-LAST:event_btnFilternActionPerformed
 
     private void btnteilEinlagernActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnteilEinlagernActionPerformed
@@ -247,6 +252,10 @@ public class TeilebestandPanel extends javax.swing.JPanel {
                     + "Liste gewählt werden!", true);
         }
     }//GEN-LAST:event_btnteilEinlagernActionPerformed
+
+    private void btnFilterZurücksetzenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFilterZurücksetzenActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnFilterZurücksetzenActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnFilterZurücksetzen;

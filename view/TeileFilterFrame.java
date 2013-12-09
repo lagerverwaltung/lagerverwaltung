@@ -30,10 +30,10 @@ public class TeileFilterFrame extends javax.swing.JFrame {
     private static TeileFilterFrame singleton;
     JTable teileBestandTable;
     
-    public static TeileFilterFrame getInstance(Component mainFrame)
+    public static TeileFilterFrame getInstance(Component mainFrame, JTable jtable)
     {
         if (TeileFilterFrame.singleton == null){
-            singleton = new TeileFilterFrame(mainFrame);
+            singleton = new TeileFilterFrame(mainFrame, jtable);
         }
         singleton.setVisible(true);
         return singleton;
@@ -46,9 +46,10 @@ public class TeileFilterFrame extends javax.swing.JFrame {
         initComponents();
     }
     
-    public TeileFilterFrame(Component c) {
+    public TeileFilterFrame(Component c, JTable jtable) {
         this();
         alignFilterMenu(c);
+        teileBestandTable = jtable;
     }
     
     public void alignFilterMenu(Component main)
@@ -267,10 +268,10 @@ public class TeileFilterFrame extends javax.swing.JFrame {
         TeilebestandFilterModel tfm = new TeilebestandFilterModel();
         
         if (!txfMaterialgruppe.getText().isEmpty()) {
-            tfm.setMaterialgruppe("%"+txfMaterialgruppe.getText()+"%");
+            tfm.setMaterialgruppe(txfMaterialgruppe.getText());
         }
         if (!txfZeichnungsnummer.getText().isEmpty()) {
-            tfm.setZeichnungsnummer("%"+txfZeichnungsnummer.getText()+"%");
+            tfm.setZeichnungsnummer(txfZeichnungsnummer.getText());
         }
         if (!txfPreisVon.getText().isEmpty()) {
             tfm.setVonPreis(Float.parseFloat(txfPreisVon.getText()));
@@ -294,7 +295,7 @@ public class TeileFilterFrame extends javax.swing.JFrame {
 
     private void refreshTeilebestandTableModel(TeilebestandFilterModel tfm) throws SQLException{
         TeilebestandCollection tc = TeilebestandCollection.getInstance(tfm);
-        TeileTableModel tm = new TeileTableModel();
+        TeileTableModel tm = new TeileTableModel();     
         tm.setData(tc);
         teileBestandTable.setModel(tm);
     }

@@ -155,11 +155,13 @@ public class Lagerfach {
     * gibt Lagerfach zur lagerfachadresse aus
     */
     public static Lagerfach getFach(Lager lager, int x, int y, int z) throws SQLException{
+        
         int lo = 1;
         if (lager.equals(Lager.Lagerort.freilager)) {
             lo = 2;
         }
 
+        //hier lager id weg
         Dao<Lagerfach, Integer> lagerfachDao = DatabaseManager.getInstance().getLagerfachDao();
         QueryBuilder<Lagerfach, Integer> queryBuilder = lagerfachDao.queryBuilder();
         queryBuilder.where()
@@ -173,6 +175,7 @@ public class Lagerfach {
         PreparedQuery<Lagerfach> preparedQuery = queryBuilder.prepare();
         List<Lagerfach> l = lagerfachDao.query(preparedQuery);
 
+        //und hier for(l) ifl.get(i).getLagerort == lager.getLagerort ???
         if (l.size() > 0) {
             return l.get(0);
         }

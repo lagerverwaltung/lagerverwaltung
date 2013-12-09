@@ -181,28 +181,29 @@ public class LagerbestandPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnteilEinlagernActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnteilEinlagernActionPerformed
-       int selectedId;
-       String selectedAnschGr;
-        if(tabMaintable.getSelectedRow() >=0){
-        selectedId = Integer.parseInt(tabMaintable.getValueAt(tabMaintable.getSelectedRow(), 6).toString());
-        /**
-         * Anschaffungsgrund Attribute wird aus der Tabelle tabMainTable(Lagerbestandstabelle) aus der 8.Position herausgezogen
-          */
+        int selectedId;
+        String selectedAnschGr;
+        if (tabMaintable.getSelectedRow() >= 0) {
+            selectedId = Integer.parseInt(tabMaintable.getValueAt(tabMaintable.getSelectedRow(), 6).toString());
+            /**
+             * Anschaffungsgrund Attribute wird aus der Tabelle
+             * tabMainTable(Lagerbestandstabelle) aus der 8.Position
+             * herausgezogen
+             */
             selectedAnschGr = tabMaintable.getValueAt(tabMaintable.getSelectedRow(), 8).toString();
-        //hier wird späterWert Attribut Haltbarkeitsdatum hbDateaus der Tabelle Warenbewegung ausgelesen, Wie kriege ich die Attribute aus der Warenbewegungstabelle?
-        int x=Integer.parseInt(tabMaintable.getValueAt(tabMaintable.getSelectedRow(), 2).toString());
-        int y=Integer.parseInt(tabMaintable.getValueAt(tabMaintable.getSelectedRow(), 3).toString());
-        int z=Integer.parseInt(tabMaintable.getValueAt(tabMaintable.getSelectedRow(), 4).toString()); 
-        int fachid=Integer.parseInt(tabMaintable.getValueAt(tabMaintable.getSelectedRow(), 0).toString());
-        String lo= tabMaintable.getValueAt(tabMaintable.getSelectedRow(), 1).toString();
+            //hier wird späterWert Attribut Haltbarkeitsdatum hbDateaus der Tabelle Warenbewegung ausgelesen, Wie kriege ich die Attribute aus der Warenbewegungstabelle?
+            int x = Integer.parseInt(tabMaintable.getValueAt(tabMaintable.getSelectedRow(), 2).toString());
+            int y = Integer.parseInt(tabMaintable.getValueAt(tabMaintable.getSelectedRow(), 3).toString());
+            int z = Integer.parseInt(tabMaintable.getValueAt(tabMaintable.getSelectedRow(), 4).toString());
+            int fachid = Integer.parseInt(tabMaintable.getValueAt(tabMaintable.getSelectedRow(), 0).toString());
+            String lo = tabMaintable.getValueAt(tabMaintable.getSelectedRow(), 1).toString();
 
-        BestandsaenderungFrame bestandsaenderungFrame = new BestandsaenderungFrame(true,selectedId,true,x,y,z,lo,fachid, selectedAnschGr);
-        bestandsaenderungFrame.setVisible(true);
-        bestandsaenderungFrame.initLagerObjekt(selectedId);
-        bestandsaenderungFrame.setTable(tabMaintable);
-        
-        }
-        else{
+            BestandsaenderungFrame bestandsaenderungFrame = new BestandsaenderungFrame(true, selectedId, true, x, y, z, lo, fachid, selectedAnschGr);
+            bestandsaenderungFrame.setVisible(true);
+            bestandsaenderungFrame.initLagerObjekt(selectedId);
+            bestandsaenderungFrame.setTable(tabMaintable);
+
+        } else {
             Misc.createErrorDialog(mainFrame, "Es muss erst ein Teil zum Einlagern aus der "
                     + "Liste gewählt werden!", true);
         }

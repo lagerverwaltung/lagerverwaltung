@@ -43,7 +43,11 @@ public class TeilebestandCollection<Teilebestand> extends ArrayList {
     }
     
     public static TeilebestandCollection getInstance(TeilebestandFilterModel tfm) throws SQLException{
-        singleton = TeilebestandCollection.getInstance();
+        
+        if(TeilebestandCollection.singleton == null){
+            singleton = new TeilebestandCollection().addFilter(tfm);
+        }
+        
         return singleton.addFilter(tfm);
     }
    
