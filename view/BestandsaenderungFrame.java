@@ -69,7 +69,6 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         lblEinlagern.setText("Teile einlagern");
         einlagernButton.setText("Teile einlagern");
         this.txfTeilID.setText(""+id);
-      //  this.txaAnschaffungsgrund.setText(anschGr);
         this.txfTeilID.setEditable(false);
         this.txfTeilID.setEnabled(false);
         

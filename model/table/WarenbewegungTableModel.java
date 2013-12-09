@@ -106,10 +106,8 @@ public class WarenbewegungTableModel extends AbstractTableModel{
                 if(wb != null){
                     switch(col){
                         case 0:
-                            //WarenbewegungsID
                             return wb.getWarenBewegungsID();
                         case 1:
-                            //Bezeichnung
                             if(tl != null && tl.getBezeichnung() != null){
                                 return tl.getBezeichnung();
                             }
@@ -118,33 +116,28 @@ public class WarenbewegungTableModel extends AbstractTableModel{
                                 return lf;
                             }
                         case 3:
-                            //name = "Menge" aus dem Lagerbestand;
                             if(qGes != 0){
                                 return qGes;
                             }
                         case 4:
                             return strZiel;
                         case 5:
-                        //name = "Verantwortlicher";
                         if(wb.getVerantwortlicher() != null){
                             return wb.getVerantwortlicher();
                         }
                         case 6:
-                            //name = "Datum";
                             if(wb.getDatum() != null){
                                 return wb.getDatum();
                             }else{
                                 return "";
                             }
                         case 7:
-                            //name = "Haltbar bis";
                             if(wb.getHaltbarkeitsDatum() != null){
                                 return df.format(wb.getHaltbarkeitsDatum());
                             }else{
                                 return "";
                             }
                         case 8:
-                            //name = "Typ";
                              if(tl != null && tl.getTyp()!= null){
                                 return tl.getTyp();
                             }
