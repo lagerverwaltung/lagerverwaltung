@@ -4,6 +4,7 @@
  */
 package model.filter;
 
+import java.sql.SQLException;
 import model.Lager;
 
 /**
@@ -22,7 +23,7 @@ public class TeilebestandFilterModel {
     /*
      * Initialisiert den Filter in Grundeinstellungen
      */
-    public TeilebestandFilterModel() {
+    public TeilebestandFilterModel() throws SQLException {
         materialgruppe = "%%";
         vonVe = 0;
         if (Lager.getLager(Lager.Lagerort.hochregal).getGrossVE() > Lager.getLager(Lager.Lagerort.freilager).getGrossVE()) {

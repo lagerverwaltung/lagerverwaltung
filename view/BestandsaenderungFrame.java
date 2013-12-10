@@ -164,7 +164,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         warenBewegungTable = t;
     }
     
-     public void initLagerbestand(int id)
+     public void initLagerbestand(int id) throws SQLException
     {
         Lagerbestand l = Lagerbestand.loadLagerObjekt(id); 
         Warenbewegung w = Warenbewegung.loadWarenbewegung(id);

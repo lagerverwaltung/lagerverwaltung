@@ -11,7 +11,13 @@ import java.util.HashMap;
  * @author simon
  */
 public class LagerbestandHelper {
-    public HashMap<Integer, String> validateLagerbestand(String breite){
-        return new HashMap();
+   
+    private static LagerbestandHelper singleton;
+    public static LagerbestandHelper getInstance()
+    {
+        if (LagerbestandHelper.singleton == null){
+            singleton = new LagerbestandHelper();
+        }
+        return singleton;
     }
 }

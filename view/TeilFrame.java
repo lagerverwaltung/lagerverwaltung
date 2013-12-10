@@ -46,7 +46,7 @@ public class TeilFrame extends javax.swing.JFrame {
         teileBestandTable = t;
     }
     
-    public void initTeil(int id)
+    public void initTeil(int id) throws SQLException
     {
         Teilebestand t = Teilebestand.loadTeil(id);
         if(t != null){
@@ -311,7 +311,7 @@ public class TeilFrame extends javax.swing.JFrame {
         try {
             t.save();
         } catch (SQLException ex) {
-            Logger.getLogger(TeilFrame.class.getName()).log(Level.SEVERE, null, ex);
+            Misc.printSQLException(this, ex);
         }
         refreshTeileTableModel();
         this.dispose();

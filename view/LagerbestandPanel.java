@@ -1,7 +1,10 @@
 package view;
 
 import helper.Misc;
+import java.sql.SQLException;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JTable;
 import javax.swing.table.TableColumn;
 import javax.swing.ListSelectionModel;
@@ -200,12 +203,16 @@ public class LagerbestandPanel extends javax.swing.JPanel {
 
             BestandsaenderungFrame bestandsaenderungFrame = new BestandsaenderungFrame(true, selectedId, true, x, y, z, lo, fachid, selectedAnschGr);
             bestandsaenderungFrame.setVisible(true);
-            bestandsaenderungFrame.initLagerbestand(selectedId);
+            try {
+                bestandsaenderungFrame.initLagerbestand(selectedId);
+            } catch (SQLException ex) {
+                Misc.printSQLException(mainFrame, ex);
+            }
             bestandsaenderungFrame.setTable(tabMaintable);
 
         } else {
             Misc.createErrorDialog(mainFrame, "Es muss erst ein Teil zum Einlagern aus der "
-                    + "Liste gewählt werden!", true);
+                    + "Liste gewählt werden!");
         }
     }//GEN-LAST:event_btnteilEinlagernActionPerformed
 
@@ -235,14 +242,18 @@ public class LagerbestandPanel extends javax.swing.JPanel {
         int menge=Integer.parseInt(tabMaintable.getValueAt(tabMaintable.getSelectedRow(), 7).toString()); 
         BestandsaenderungFrame bestandsaenderungFrame = new BestandsaenderungFrame(true,selectedId,selectedAnschGr,x,y,z,lo,fachid,menge);
         bestandsaenderungFrame.setVisible(true);
-        bestandsaenderungFrame.initLagerbestand(selectedId);
+            try {
+                bestandsaenderungFrame.initLagerbestand(selectedId);
+            } catch (SQLException ex) {
+                Misc.printSQLException(mainFrame, ex);
+            }
         bestandsaenderungFrame.setTable(tabMaintable);
         JTable teileTable= mainFrame.getPanMain().getTeilebestand().getTeileTable();
         bestandsaenderungFrame.setTeileTable(teileTable);
         }
         else{
             Misc.createErrorDialog(mainFrame, "Es muss erst ein Teil zum Auslagern aus der "
-                    + "Liste gewählt werden!", true);
+                    + "Liste gewählt werden!");
         }
                                   
     }//GEN-LAST:event_btnTeilAuslagernActionPerformed
@@ -265,7 +276,7 @@ public class LagerbestandPanel extends javax.swing.JPanel {
         }
         else{
             Misc.createErrorDialog(mainFrame, "Es muss erst ein Teil zum Splitten aus der "
-                    + "Liste gewählt werden!", true);
+                    + "Liste gewählt werden!");
         }
     }//GEN-LAST:event_btnTeilSplittenActionPerformed
 

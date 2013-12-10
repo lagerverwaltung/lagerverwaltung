@@ -1,6 +1,9 @@
 package view;
 
 import helper.Misc;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.TableColumn;
@@ -210,13 +213,17 @@ public class TeilebestandPanel extends javax.swing.JPanel {
         if(tblMain.getSelectedRow() >=0){
             selectedId = Integer.parseInt(tblMain.getValueAt(tblMain.getSelectedRow(), 0).toString());
             TeilFrame teilframe = new TeilFrame(true);
-            teilframe.initTeil(selectedId);
+            try {
+                teilframe.initTeil(selectedId);
+            } catch (SQLException ex) {
+                Misc.printSQLException(teilframe, ex);
+            }
             teilframe.setVisible(true);
             teilframe.setTable(tblMain);
         }
         else{
             Misc.createErrorDialog(mainFrame, "Es muss erst ein Teil zum Ändern aus der "
-                    + "Liste gewählt werden!", true);
+                    + "Liste gewählt werden!");
         }
     }//GEN-LAST:event_btnTeilAendernActionPerformed
 
@@ -242,7 +249,7 @@ public class TeilebestandPanel extends javax.swing.JPanel {
         }
         else{
             Misc.createErrorDialog(mainFrame, "Es muss erst ein Teil zum Einlagern aus der "
-                    + "Liste gewählt werden!", true);
+                    + "Liste gewählt werden!");
         }
     }//GEN-LAST:event_btnteilEinlagernActionPerformed
 
