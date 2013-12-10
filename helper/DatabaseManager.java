@@ -39,6 +39,7 @@ import model.ZielPosition;
 public class DatabaseManager {
     
     private final static String DATABASE_URL = "jdbc:sqlite:lager.db";
+    private final static String DATABASE_TEST_URL="jdbc:sqlite:lagertest.db";
     ConnectionSource connectionSource;
             
     private Dao<Lager, Integer> lagerDao;
@@ -49,6 +50,7 @@ public class DatabaseManager {
     private Dao<Warenbewegung, Integer> warenbewegungDao;
     
     private static DatabaseManager singleton;
+    private static boolean test=false;
     
     /**
      * Der Konstruktor initialisiert die Datenbankschnittstellen in der Methode 
@@ -63,6 +65,12 @@ public class DatabaseManager {
     public DatabaseManager() throws SQLException  {
             setupDatabase();
     }
+    /** 
+     * 
+     * @param test Muss true für Tests gesetzt sein
+     * Testkonstruktur
+     * @throws SQLException 
+     */
     
     /**
      * Singleton Getter
@@ -83,7 +91,10 @@ public class DatabaseManager {
      * 
      */
     private void setupDatabase() throws SQLException {
-            connectionSource = new JdbcConnectionSource(DATABASE_URL);
+         if(!test)
+         {connectionSource = new JdbcConnectionSource(DATABASE_URL);}
+         else
+         {connectionSource = new JdbcConnectionSource(DATABASE_TEST_URL);}
             connectionSource.close();
             TableUtils.createTableIfNotExists(connectionSource, Lager.class);
             TableUtils.createTableIfNotExists(connectionSource, Lagerfach.class);
@@ -201,6 +212,12 @@ public class DatabaseManager {
     public Dao<Warenbewegung, Integer> getWarenbewegungDao() {
         return warenbewegungDao;
     }
+    
+    public static void setTest(boolean teste)
+    {
+        test=teste;
+    }
+   
     
     
 }
