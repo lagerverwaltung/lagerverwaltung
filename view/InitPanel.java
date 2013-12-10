@@ -305,7 +305,7 @@ public class InitPanel extends javax.swing.JPanel {
         int breite,hoehe,tiefe,fachKlein,fachMittel,fachGross;
         breite = hoehe = tiefe = fachKlein = fachMittel = fachGross = 0;
         
-        HashMap<Integer, String> errors = LagerHelper.getInstance().validateLagerdata
+        HashMap<Integer, String> errors = LagerHelper.getInstance().validateLagerData
         (
             txfFachanzahlBreite.getText(),
             txfFachanzahlHoehe.getText(),

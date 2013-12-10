@@ -71,7 +71,7 @@ public class LagerHelper {
      * @return HashMap<Integer, String> Eine Tabelle mit dem Fehlercode und der
      * Fehlernachricht
      */
-    public HashMap<Integer, String> validateLagerdata(String breite, String hoehe, String tiefe, String fachKlein, String fachMittel, String fachGross){
+    public HashMap<Integer, String> validateLagerData(String breite, String hoehe, String tiefe, String fachKlein, String fachMittel, String fachGross){
         HashMap<Integer, String> errors = new HashMap();
         int breiteS, hoeheS, tiefeS, fachKleinS, fachMittelS, fachGrossS;
         breiteS = hoeheS = tiefeS = fachKleinS = fachMittelS = fachGrossS = 0;
