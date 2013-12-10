@@ -230,10 +230,8 @@ public class TeilebestandPanel extends javax.swing.JPanel {
 
     private void btnteilEinlagernActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnteilEinlagernActionPerformed
         int selectedId;
-       // String selectedAnschGr;
         if(tblMain.getSelectedRow() >=0){
         selectedId = Integer.parseInt(tblMain.getValueAt(tblMain.getSelectedRow(), 0).toString());
-      //  selectedAnschGr = (tblMain.getValueAt(tblMain.getSelectedRow(), 8).toString());
         BestandsaenderungFrame bestandsaenderungFrame = new BestandsaenderungFrame(true,selectedId);
         bestandsaenderungFrame.setVisible(true);
         JTable lagerbestand = mainFrame.getPanMain().getLagerbestand().gettabMain();
