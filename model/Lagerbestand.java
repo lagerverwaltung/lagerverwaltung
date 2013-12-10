@@ -130,7 +130,9 @@ public class Lagerbestand {
         }
         return null;
     }
-        
+        /*
+        * @param teilID, fachID
+        */
    public static int getLagerbestandID(int teilid,int fachid) throws SQLException
    {
       
