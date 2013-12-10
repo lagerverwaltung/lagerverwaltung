@@ -10,6 +10,8 @@ import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.stmt.PreparedQuery;
 import com.j256.ormlite.stmt.QueryBuilder;
+import com.j256.ormlite.stmt.SelectArg;
+import com.j256.ormlite.stmt.Where;
 import com.j256.ormlite.table.DatabaseTable;
 import helper.DatabaseManager;
 import java.sql.SQLException;
@@ -161,20 +163,18 @@ public class Lagerfach {
         }
 
         Dao<Lagerfach, Integer> lagerfachDao = DatabaseManager.getInstance().getLagerfachDao();
-        QueryBuilder<Lagerfach, Integer> queryBuilder = lagerfachDao.queryBuilder();
-        queryBuilder.where()
-                .eq("LagerID", lo)
-                .and()
-                .eq("x", x)
-                .and()
-                .eq("y", y)
-                .and()
-                .eq("z", z);
-        PreparedQuery<Lagerfach> preparedQuery = queryBuilder.prepare();
-        List<Lagerfach> l = lagerfachDao.query(preparedQuery);
+        Dao<Lager, Integer> lagerDao = DatabaseManager.getInstance().getLagerDao();
+        
+        QueryBuilder<Lager, Integer> lagerQb = lagerDao.queryBuilder();
+        QueryBuilder<Lagerfach, Integer> lagerfachQb = lagerfachDao.queryBuilder();
+        
+        lagerQb.where().eq("lagerort", lager.getLagerort());
+        lagerfachQb.where().eq("x", x).and().eq("y", y).and().eq("z", z);
+        
+        List<Lagerfach> results = lagerfachQb.join(lagerQb).query();
 
-        if (l.size() > 0) {
-            return l.get(0);
+        if (results.size() > 0) {
+            return results.get(0);
         }
         return null;
 }
