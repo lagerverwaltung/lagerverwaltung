@@ -39,7 +39,9 @@ import model.ZielPosition;
 public class DatabaseManager {
     
     private final static String DATABASE_URL = "jdbc:sqlite:lager.db";
+    private final static String DATABASE_TEST_URL="jdbc:sqlite:lagertest.db";
     ConnectionSource connectionSource;
+    private static boolean test=false;
             
     private Dao<Lager, Integer> lagerDao;
     private Dao<Lagerfach, Integer> lagerfachDao;
@@ -83,7 +85,10 @@ public class DatabaseManager {
      * 
      */
     private void setupDatabase() throws SQLException {
-            connectionSource = new JdbcConnectionSource(DATABASE_URL);
+         if(test)
+         {connectionSource = new JdbcConnectionSource(DATABASE_URL);}
+         else
+         {connectionSource = new JdbcConnectionSource(DATABASE_TEST_URL);}
             connectionSource.close();
             TableUtils.createTableIfNotExists(connectionSource, Lager.class);
             TableUtils.createTableIfNotExists(connectionSource, Lagerfach.class);
@@ -200,6 +205,10 @@ public class DatabaseManager {
 
     public Dao<Warenbewegung, Integer> getWarenbewegungDao() {
         return warenbewegungDao;
+    }
+    public static void setTest(boolean teste)
+    {
+        test=teste;
     }
     
     
