@@ -53,7 +53,6 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="lblTeiltyp" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="lblFilter" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblTeil" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="lblMaterialgruppe" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="lblZeichnungsnummer" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="lblVolumeneinheiten" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -80,9 +79,6 @@
                               </Group>
                               <Component id="txfMaterialgruppe" alignment="0" max="32767" attributes="0"/>
                               <Component id="cbxTeiltyp" alignment="0" pref="193" max="32767" attributes="0"/>
-                              <Component id="cbxTeil" alignment="0" max="32767" attributes="0"/>
-                              <Component id="lblLagertyp" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="cbxLagertyp" alignment="0" max="32767" attributes="0"/>
                               <Group type="102" alignment="1" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="lblVEvon" alignment="0" min="-2" pref="35" max="-2" attributes="0"/>
@@ -107,15 +103,7 @@
                   <Component id="lblFilter" min="-2" pref="23" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
                   <Component id="jSeparator2" min="-2" pref="4" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="lblLagertyp" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="cbxLagertyp" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="lblTeil" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="cbxTeil" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
                   <Component id="lblTeiltyp" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="cbxTeiltyp" min="-2" max="-2" attributes="0"/>
@@ -149,7 +137,7 @@
                   <Component id="lblZeichnungsnummer" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="txfZeichnungsnummer" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="81" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
                   <Component id="btnExecuteFilter" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -164,25 +152,14 @@
         </Component>
         <Component class="javax.swing.JComboBox" name="cbxTeiltyp">
           <Properties>
-            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="5">
-                <StringItem index="0" value="Kaufteile"/>
-                <StringItem index="1" value="Werkzeuge"/>
-                <StringItem index="2" value="unfertige Baugruppe"/>
-                <StringItem index="3" value="Vorratsteile"/>
-                <StringItem index="4" value="Vorrichtungen"/>
-              </StringArray>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new javax.swing.DefaultComboBoxModel(new String[] { &quot;&quot;, &quot;Kaufteile&quot;, &quot;Werkzeuge&quot;, &quot;unfertige Baugruppe&quot;, &quot;Vorratsteile&quot;, &quot;Vorrichtungen&quot; })" type="code"/>
             </Property>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lblFilter">
           <Properties>
             <Property name="text" type="java.lang.String" value="Filter:"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="lblTeil">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Bezeichnung:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="btnExecuteFilter">
@@ -192,36 +169,6 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnExecuteFilterActionPerformed"/>
           </Events>
-        </Component>
-        <Component class="javax.swing.JComboBox" name="cbxTeil">
-          <Properties>
-            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="4">
-                <StringItem index="0" value="Schrauben"/>
-                <StringItem index="1" value="Erdbeeren"/>
-                <StringItem index="2" value="Waffeleisen"/>
-                <StringItem index="3" value="B&#xfc;ffelmozarella"/>
-              </StringArray>
-            </Property>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbxTeilActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JLabel" name="lblLagertyp">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Lagertyp:"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JComboBox" name="cbxLagertyp">
-          <Properties>
-            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="2">
-                <StringItem index="0" value="Hochregallager"/>
-                <StringItem index="1" value="Freilager"/>
-              </StringArray>
-            </Property>
-          </Properties>
         </Component>
         <Component class="javax.swing.JSeparator" name="jSeparator2">
         </Component>

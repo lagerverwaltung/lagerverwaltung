@@ -32,7 +32,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="startPanel" alignment="0" pref="1048" max="32767" attributes="0"/>
+          <Component id="startPanel" alignment="0" pref="1010" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -57,7 +57,7 @@
         <Component class="view.InitPanel" name="panInit">
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="}"/>
-            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="panInit.setMainFrame(this);&#xa;Lager t = Lager.getLager(Lager.Lagerort.freilager);&#xa;if(t == null){"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="panInit.setMainFrame(this);&#xa;Lager t = null;&#xa;try{&#xa;t = Lager.getLager(Lager.Lagerort.freilager);&#xa;}&#xa;catch(SQLException ex){&#xa;Misc.printSQLException(this, ex);&#xa;}&#xa;if(t == null){"/>
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
@@ -67,9 +67,6 @@
         </Component>
         <Component class="view.InitFaecherPanel" name="panInitFaecher">
           <Properties>
-            <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[664, 32767]"/>
-            </Property>
             <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[610, 606]"/>
             </Property>

@@ -30,9 +30,12 @@ import model.Warenbewegung;
 import model.ZielPosition;
 
 /**
- *
- * @author simon
- */
+     * Gilt als zentrale Klasse für Datenoperationen.
+     * Die Klasse kann statisch über einen Singleton aufgerufen werden und enthält
+     * DAO Objekte, welche die Modeldaten kapseln
+     * 
+     * @author Simon Pickert
+     */
 public class DatabaseManager {
     
     private final static String DATABASE_URL = "jdbc:sqlite:lager.db";
@@ -46,16 +49,27 @@ public class DatabaseManager {
     private Dao<Warenbewegung, Integer> warenbewegungDao;
     
     private static DatabaseManager singleton;
-
-    public DatabaseManager()  {
-        try {
+    
+    /**
+     * Der Konstruktor initialisiert die Datenbankschnittstellen in der Methode 
+     * setupDatabase
+     * 
+     * 
+     * @param startDate Startdatum
+     * @param endDate Enddatum
+     * @param type Typ (Einnahme oder Ausgabe)
+     * @return ArrayList mit Arrayobjekten (Matrix)
+     */
+    public DatabaseManager() throws SQLException  {
             setupDatabase();
-        } catch (SQLException ex) {
-            Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
     
-    public static DatabaseManager getInstance()
+    /**
+     * Singleton Getter
+     * 
+     * @return DatabaseManager Instanz des DatabaseManagers
+     */
+    public static DatabaseManager getInstance() throws SQLException
     {
         if (DatabaseManager.singleton == null){
             singleton = new DatabaseManager();
@@ -63,14 +77,14 @@ public class DatabaseManager {
         return singleton;
     }
     
+    /**
+     * Initialisiert alle DAO Objekte und legt Instanzen davon an
+     * Außerdem wird die Datbenbankstruktur automatisch erzeugt oder erweitert.
+     * 
+     */
     private void setupDatabase() throws SQLException {
-            try {
-                    connectionSource = new JdbcConnectionSource(DATABASE_URL);
-            } finally {
-                if (connectionSource != null) {
-                        connectionSource.close();
-                }
-            }
+            connectionSource = new JdbcConnectionSource(DATABASE_URL);
+            connectionSource.close();
             TableUtils.createTableIfNotExists(connectionSource, Lager.class);
             TableUtils.createTableIfNotExists(connectionSource, Lagerfach.class);
             TableUtils.createTableIfNotExists(connectionSource, Teilebestand.class);

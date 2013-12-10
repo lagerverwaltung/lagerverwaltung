@@ -1,6 +1,7 @@
 package view;
 
 import controller.NavigationController;
+import helper.Misc;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -74,13 +75,18 @@ public class MainFrame extends javax.swing.JFrame {
         startPanel.setLayout(new java.awt.CardLayout());
 
         panInit.setMainFrame(this);
-        Lager t = Lager.getLager(Lager.Lagerort.freilager);
+        Lager t = null;
+        try{
+            t = Lager.getLager(Lager.Lagerort.freilager);
+        }
+        catch(SQLException ex){
+            Misc.printSQLException(this, ex);
+        }
         if(t == null){
             startPanel.add(panInit, "init");
         }
 
         panInitFaecher.setMainFrame(this);
-        panInitFaecher.setMaximumSize(new java.awt.Dimension(664, 32767));
         panInitFaecher.setMinimumSize(new java.awt.Dimension(610, 606));
         panInitFaecher.setPreferredSize(new java.awt.Dimension(610, 733));
         panInitFaecher.setRequestFocusEnabled(false);
@@ -101,7 +107,7 @@ public class MainFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(startPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 1048, Short.MAX_VALUE)
+            .addComponent(startPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 1010, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

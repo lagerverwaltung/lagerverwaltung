@@ -45,7 +45,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
     JTable lagerBestandTable;
     JTable teileBestandTable;
     JTable warenBewegungTable;
-    int lagerID;
+    int lagerbestandID;
     int fachid;
     int teilid;
     
@@ -72,17 +72,17 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         this.txfTeilID.setEditable(false);
         this.txfTeilID.setEnabled(false);
         
-            //ComboBox füllen
             try {
                 loadHlCbx();
             } catch (SQLException ex) {
                 Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, ex); 
             }
     }
-    BestandsaenderungFrame(boolean einlagern, int id,boolean bestehendesteil,int x,int y, int z,String lo, int fachid,String anschGr) {
+    
+    BestandsaenderungFrame(boolean einlagern, int id,boolean bestehenderLagerbestand,int x,int y, int z,String lo, int fachid,String anschGr) {
         this();
         this.einlagern = einlagern;
-        this.bestehenderLagerbestand=bestehendesteil;
+        this.bestehenderLagerbestand=bestehenderLagerbestand;
         this.fachid=fachid;
         this.teilid=id;
         lblEinlagern.setText("Teile einlagern");
@@ -113,8 +113,6 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
             einlagernButton.setText("Teile auslagern");
             this.txfTeilID.setText("" + id);
             this.txaAnschaffungsgrund.setText(anschGr);
-            //this.txfHaltbarkeitsdatum.setText(hbDate+"kommt noch");
-            //this.txfHaltbarkeitsdatum.setText(haltbDate);
             this.txfTeilID.setEditable(false);
             this.txfTeilID.setEnabled(false);
             this.txaAnschaffungsgrund.setEditable(true);
@@ -139,12 +137,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         this.splitten = splitten;
         lblEinlagern.setText("Teile splitten");
         einlagernButton.setText("Teile splitten");
-        // this.txfTeilID.setText(""+id);
-        //this.txaAnschaffungsgrund.setText(anschGr);
-        //    this.txfHaltbarkeitsdatum.setText(hbDate+"kommt noch");
-        //  this.txfHaltbarkeitsdatum.setText(haltbDate);
         this.txfTeilID.setEditable(false);
-        //  this.txaAnschaffungsgrund.setEditable(false);
         this.txfHaltbarkeitsdatum.setVisible(false);
         this.lblHaltbarkeitsdatum.setVisible(false);
     }
@@ -164,12 +157,12 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         warenBewegungTable = t;
     }
     
-     public void initLagerObjekt(int id)
+     public void initLagerbestand(int id) throws SQLException
     {
         Lagerbestand l = Lagerbestand.loadLagerObjekt(id); 
         Warenbewegung w = Warenbewegung.loadWarenbewegung(id);
         if(l != null){
-            lagerID = id;
+            lagerbestandID = id;
             txaAnschaffungsgrund.setText(l.getAnschaffungsgrund());
             txfMenge.setText(Integer.toString(l.getMenge()));
             Format f = new SimpleDateFormat("DD.MM.YYYY");
@@ -314,7 +307,6 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
 
         lblHaltbarkeitsdatum.setText("Haltbarkeitsdatum");
 
-        txfHaltbarkeitsdatum.setText("");
         txfHaltbarkeitsdatum.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txfHaltbarkeitsdatumActionPerformed(evt);
@@ -402,48 +394,37 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 //ändern
     private void einlagernButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_einlagernButtonActionPerformed
-        
-                int x = (int) (cbxFachX.getSelectedItem());
-                int y = (int) (cbxFachY.getSelectedItem());
-                int z = (int) (cbxFachZ.getSelectedItem());
-                Lager l = new Lager();    
-                if (cbxFachTyp.getSelectedItem().equals("FL")) {
 
-                    l.setLagerort(Lager.Lagerort.freilager);
-                } else {
-                    l.setLagerort(Lager.Lagerort.hochregal);
-                }
-        
-                int fachID=0;
-                int teiID = Integer.parseInt(txfTeilID.getText());
-                Lagerbestand lb=null;
-                int lagerbestandsid=0;
-        try {
-            fachID = Lagerfach.getFach(l , x, y, z).getFachnummer();
-            if ((Lagerfach.getFach(l , x, y, z))==null)
-                System.out.println("Lagerfach ist null");
-       
-        
-         lagerbestandsid=0;
-        
-        lagerbestandsid = Lagerbestand.getLagerbestandID(teiID, fachID);
-        
-        System.out.println("LagerbestandsID" + lagerbestandsid);
-        
-     
-        
-         lb = Lagerbestand.getLagerbestand(lagerbestandsid);
-        
-         if(lb!=null)
-         {
-             bestehenderLagerbestand=true;
-         }
+        int x = (int) (cbxFachX.getSelectedItem());
+        int y = (int) (cbxFachY.getSelectedItem());
+        int z = (int) (cbxFachZ.getSelectedItem());
+        Lager l = new Lager();
+        if (cbxFachTyp.getSelectedItem().equals("FL")) {
+
+            l.setLagerort(Lager.Lagerort.freilager);
+        } else {
+            l.setLagerort(Lager.Lagerort.hochregal);
         }
-        catch(SQLException e)
-        {
+
+        int fachID = 0;
+        int teiID = Integer.parseInt(txfTeilID.getText());
+        Lagerbestand lb = null;
+        int lagerbestandsid = 0;
+        try {
+            fachID = Lagerfach.getFach(l, x, y, z).getFachnummer();
+            if ((Lagerfach.getFach(l, x, y, z)) == null) {
+                lagerbestandsid = 0;
+            }
+            lagerbestandsid = Lagerbestand.getLagerbestandID(teiID, fachID);
+            lb = Lagerbestand.getLagerbestand(lagerbestandsid);
+
+            if (lb != null) {
+                bestehenderLagerbestand = true;
+            }
+        } catch (SQLException e) {
             Misc.createErrorDialog(this, "SQL Error");
         }
-                
+
         try {
             //Einlagern
             if (einlagern && !bestehenderLagerbestand) {
@@ -454,7 +435,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
                 Lagerfach lf = new Lagerfach();
                 Teilebestand tb = new Teilebestand();
 
-                 fachID = 0;
+                fachID = 0;
                 DateFormat df = new SimpleDateFormat("dd.MM.yyyy");
                 df.setLenient(false);
                 Date hd = null;
@@ -467,15 +448,13 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
                 if (ag.length() == 0) {
                     errors += "Bitte Anschaffungsgrund eingeben. \n";
                 }
-                   //Grund darf kein Leerezeichen enthalten
- 
-                 for (int i = 0; i < ag.length(); i++) {
-                     if (ag.charAt(i) == ' ') {
-                         errors += "Grund darf kein Leerezeichen enthalten. \n";
+                //Grund darf kein Leerezeichen enthalten
+                for (int i = 0; i < ag.length(); i++) {
+                    if (ag.charAt(i) == ' ') {
+                        errors += "Grund darf kein Leerezeichen enthalten. \n";
                     }
- 
-                 }
-                 
+                }
+
                 if (txfHaltbarkeitsdatum.getText().length() > 0) {
                     try {
                         hd = df.parse(txfHaltbarkeitsdatum.getText());
@@ -487,29 +466,29 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
                     }
                 }
 
-                try{
-                    if((txfMenge.getText().length() > 0) || (txfMenge.getText().matches("[0-9]+"))){
-                            mng = Integer.parseInt(txfMenge.getText());
-                    } else{
-                      errors += "Bitte einzulagernde Menge eingeben. +\n";  
+                try {
+                    if ((txfMenge.getText().length() > 0) || (txfMenge.getText().matches("[0-9]+"))) {
+                        mng = Integer.parseInt(txfMenge.getText());
+                    } else {
+                        errors += "Bitte einzulagernde Menge eingeben. +\n";
                     }
-                } catch (NumberFormatException e){
+                } catch (NumberFormatException e) {
                     errors += "Bitte einzulagernde Menge eingeben. +\n";
                 }
-                 teiID = Integer.parseInt(txfTeilID.getText());
-                 l = new Lager();    
+                teiID = Integer.parseInt(txfTeilID.getText());
+                l = new Lager();
                 if (cbxFachTyp.getSelectedItem().equals("FL")) {
 
                     l.setLagerort(Lager.Lagerort.freilager);
                 } else {
                     l.setLagerort(Lager.Lagerort.hochregal);
                 }
-                 x = (int) (cbxFachX.getSelectedItem());
-                 y = (int) (cbxFachY.getSelectedItem());
-                 z = (int) (cbxFachZ.getSelectedItem());
+                x = (int) (cbxFachX.getSelectedItem());
+                y = (int) (cbxFachY.getSelectedItem());
+                z = (int) (cbxFachZ.getSelectedItem());
 
-                fachID = Lagerfach.getFach(l , x, y, z).getFachnummer();
-                
+                fachID = Lagerfach.getFach(l, x, y, z).getFachnummer();
+
                 int freeVe = Lagerfach.getLagerfach(fachID).getFreeVe();
                 int maxVe = Lagerfach.getLagerfach(fachID).getMaxVe();
                 int usedVe = Lagerfach.getLagerfach(fachID).getUsedVe();
@@ -564,18 +543,17 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
                 this.dispose();
 
                 //Einlagern mit bestehendem Teil
-            } else if(bestehenderLagerbestand && !auslagern) {
-                if(fachID ==  0){
-                    fachID = Lagerfach.getFach(l , x, y, z).getFachnummer();
+            } else if (bestehenderLagerbestand && !auslagern) {
+                if (fachID == 0) {
+                    fachID = Lagerfach.getFach(l, x, y, z).getFachnummer();
                 }
-                 
-                 lagerbestandsid = Lagerbestand.getLagerbestandID(teiID, fachID);
-                 System.out.println(" Lagerbestandsid "+lagerbestandsid);
+
+                lagerbestandsid = Lagerbestand.getLagerbestandID(teiID, fachID);
                 lb = null;
                 lb = Lagerbestand.getLagerbestand(lagerbestandsid);
                 Lagerfach lf = lb.getLagerfach();
                 String errors = "";
-                
+
                 int menge = 0;
                 try {
                     if ((txfMenge.getText().length() > 0) || (txfMenge.getText().matches("[0-9]+"))) {
@@ -586,22 +564,20 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
                 } catch (NumberFormatException e) {
                     errors += "Bitte einzulagernde Menge eingeben. +\n";
                 }
-                
+
                 int freeVe = lf.getFreeVe();
-                System.out.println("frei"+freeVe);
                 try {
                     menge = Integer.parseInt(this.txfMenge.getText());
                 } catch (Exception e) {
                     Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, e);
                 }
-                if (menge > 0 && menge*lb.getTeil().getVe() <= freeVe) {
+                if (menge > 0 && menge * lb.getTeil().getVe() <= freeVe) {
                     lb.setMenge(lb.getMenge() + menge);
                     lb.save();
-                } else if (menge <= 0){
-                   errors += "Die eingegebene Menge muss größer 0 sein! \n";
-                }
-                else {
-                      errors += "Es ist nicht genug Platz im Lagerfach, nur "+freeVe+" VE frei, benötigt:"+lb.getTeil().getVe()*menge+"\n";
+                } else if (menge <= 0) {
+                    errors += "Die eingegebene Menge muss größer 0 sein! \n";
+                } else {
+                    errors += "Es ist nicht genug Platz im Lagerfach, nur " + freeVe + " VE frei, benötigt:" + lb.getTeil().getVe() * menge + "\n";
                 }
                 if (Misc.createErrorDialog(this, errors) == true) {
                     return;
@@ -609,14 +585,13 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
                 refreshLagerbestandTableModel();
                 refreshWarenbestandTableModel();
                 this.dispose();
-            }       
-            // auslagern
+            } // auslagern
             else {
-                 lagerbestandsid = Lagerbestand.getLagerbestandID(this.teilid, this.fachid);
-                 lb = Lagerbestand.getLagerbestand(lagerbestandsid);
+                lagerbestandsid = Lagerbestand.getLagerbestandID(this.teilid, this.fachid);
+                lb = Lagerbestand.getLagerbestand(lagerbestandsid);
                 Teilebestand tb = lb.getTeil();
                 boolean isLastTeil = true;
-                String errors ="";
+                String errors = "";
                 int menge = 0;
                 try {
                     if ((txfMenge.getText().length() > 0) || (txfMenge.getText().matches("[0-9]+"))) {
@@ -627,17 +602,13 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
                 } catch (NumberFormatException e) {
                     errors += "Bitte einzulagernde Menge eingeben. +\n";
                 }
-                
+
                 isLastTeil = Lagerbestand.isLastTeil(lb, menge);
-                System.out.println(isLastTeil);
-                System.out.println(menge);
-                System.out.println(lb.getMenge());
-                if (menge <= lb.getMenge()  ) {
+                if (menge <= lb.getMenge()) {
                     int lbMenge = lb.getMenge();
-                    if(menge < lbMenge)
-                    {
-                    lb.setMenge(lb.getMenge() - menge);
-                    lb.save();
+                    if (menge < lbMenge) {
+                        lb.setMenge(lb.getMenge() - menge);
+                        lb.save();
                     }
 
                     if (menge == lbMenge && isLastTeil) {
@@ -655,33 +626,25 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
                             this.dispose();
                         }
                         if (option == JOptionPane.CANCEL_OPTION) {
-                            
-                            
                         }
-                        if (option == JOptionPane.NO_OPTION){
-                            
-                            lb.setMenge(lbMenge-menge);
+                        if (option == JOptionPane.NO_OPTION) {
+
+                            lb.setMenge(lbMenge - menge);
                             lb.save();
                             refreshLagerbestandTableModel();
                             this.dispose();
-                            
+
                         }
-                    }
-                    else if(menge==lbMenge)
-                    {
-                        lb.setMenge(lbMenge-menge);
+                    } else if (menge == lbMenge) {
+                        lb.setMenge(lbMenge - menge);
                         lb.save();
                         refreshLagerbestandTableModel();
                         this.dispose();
                     }
                 } else {
-                    Misc.createErrorDialog(this, "Eingegebene Menge ist größer der eingelagerten Menge!");
+                    Misc.createErrorDialog(this, "Eingegebene Menge ist größer als die eingelagerte Menge!");
                     return;
                 }
-
-                
-             
-               
             }
         } catch (SQLException ex) {
             Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, ex);
@@ -715,7 +678,6 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
             tc = warenBewegungTable.getColumnModel().getColumn(i++);
             tc.setPreferredWidth(width);
         }
-  
     }
     
     private void cbxFachXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxFachXActionPerformed

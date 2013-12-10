@@ -46,7 +46,7 @@ public class Lager {
     
     }
     
-    public static Lager getLager (Lagerort ort)  {
+    public static Lager getLager (Lagerort ort) throws SQLException  {
         Dao<Lager,Integer> lagerDao = DatabaseManager.getInstance().getLagerDao();
         List<Lager> list;
         try {
@@ -204,6 +204,17 @@ public class Lager {
                 }
             }
         }
+    }
+    /**
+     * Speichert das initialisierte Lager und initialisiert den Fächerbestand
+     * 
+     */
+    public void save() throws SQLException
+    {
+        Dao<Lager, Integer> lagerDao;
+        lagerDao = DatabaseManager.getInstance().getLagerDao();
+        lagerDao.createOrUpdate(this);
+        createFaecher(breite, tiefe, hoehe);
     }
     
     public List<Lagerfach> getFaecher() throws SQLException

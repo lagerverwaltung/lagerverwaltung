@@ -13,6 +13,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.Lager;
+import model.Lagerbestand;
+import model.Lagerfach;
+import model.filter.LagerbestandFilterModel;
 
 /**
  *
@@ -43,7 +47,6 @@ public class LagerbestandCollection<Lagerbestand> extends ArrayList {
     {
        try {
             Dao<model.Lagerbestand, Integer> lagerbestandDao = DatabaseManager.getInstance().getLagerbestandDao();
-            //List<Lagerbestand> list =  (List<Lagerbestand>) lagerbestandDao.queryForAll(); 
             
             QueryBuilder<model.Lagerbestand, Integer> queryBuilder = lagerbestandDao.queryBuilder();
             queryBuilder.where().gt("anzahl", 0);
@@ -62,8 +65,41 @@ public class LagerbestandCollection<Lagerbestand> extends ArrayList {
         return singleton;
     }
     //ab hier 2.Sprint
-    public void addFilter(String attributeName, String attributeValue){
+    public LagerbestandCollection<Lagerbestand> addFilter(LagerbestandFilterModel lfm) throws SQLException{
+       
+        List<model.Lagerbestand> result = new ArrayList();
+        Dao<model.Lagerbestand, Integer> lagerbestandDao = DatabaseManager.getInstance().getLagerbestandDao();
+        List<model.Lagerbestand> lbList = lagerbestandDao.queryForAll();
         
+        if(lbList.size() > 0){
+            for (int i = 0; i < lbList.size(); i++) {
+                if(lbList.get(i).getLagerfach().getX() == lfm.getX()){
+                  result.add(lbList.get(i));  
+                }
+                if (lbList.get(i).getLagerfach().getY() == lfm.getY()) {
+                    result.add(lbList.get(i));
+                }
+                if (lbList.get(i).getLagerfach().getZ() == lfm.getZ()) {
+                    result.add(lbList.get(i));
+                }
+                if (lbList.get(i).getLagerfach().getLager().getLagerort().equals(lfm.getLagerTyp())) {
+                    result.add(lbList.get(i));
+                }
+                if (lbList.get(i).getMenge() <= lfm.getVonMenge() 
+                        && lbList.get(i).getMenge() >= lfm.getBisMenge()
+                        && lbList.get(i).getMenge() != 0) {
+                    result.add(lbList.get(i));
+                }
+                if (lbList.get(i).getAnschaffungsgrund().contains(lfm.getGrund())) {
+                    result.add(lbList.get(i));
+                }
+                
+            }
+        }
+        for(model.Lagerbestand lb1 : result){
+            add(lb1);
+        }
+        return this;
     }
     
     public void resetFilters()

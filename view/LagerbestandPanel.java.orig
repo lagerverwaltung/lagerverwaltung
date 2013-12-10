@@ -203,11 +203,15 @@ public class LagerbestandPanel extends javax.swing.JPanel {
 
             BestandsaenderungFrame bestandsaenderungFrame = new BestandsaenderungFrame(true, selectedId, true, x, y, z, lo, fachid, selectedAnschGr);
             bestandsaenderungFrame.setVisible(true);
+<<<<<<< HEAD
+            bestandsaenderungFrame.initLagerObjekt(selectedId);
+=======
             try {
                 bestandsaenderungFrame.initLagerbestand(selectedId);
             } catch (SQLException ex) {
                 Misc.printSQLException(mainFrame, ex);
             }
+>>>>>>> 761447f00c79759954974a7e590c949fea32cbcc
             bestandsaenderungFrame.setTable(tabMaintable);
 
         } else {

@@ -150,7 +150,7 @@ public class Warenbewegung {
         this.anschaffungsgrund = anschaffungsgrund;
     }
 	
-    public static Warenbewegung loadWarenbewegung(int id)
+    public static Warenbewegung loadWarenbewegung(int id) throws SQLException
     {
         Dao<Warenbewegung,Integer> warenbewegungDao = DatabaseManager.getInstance().getWarenbewegungDao();
         try {

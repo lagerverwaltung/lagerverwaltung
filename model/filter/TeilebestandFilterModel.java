@@ -4,7 +4,11 @@
  */
 package model.filter;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.Lager;
+import model.Teilebestand;
 
 /**
  *
@@ -12,6 +16,7 @@ import model.Lager;
  */
 public class TeilebestandFilterModel {
     
+    private Teilebestand.Typ typ;
     private String materialgruppe;
     private int vonVe;
     private int bisVe;
@@ -22,13 +27,18 @@ public class TeilebestandFilterModel {
     /*
      * Initialisiert den Filter in Grundeinstellungen
      */
-    public TeilebestandFilterModel() {
+    public TeilebestandFilterModel(){
+        typ = null;
         materialgruppe = "%%";
         vonVe = 0;
-        if (Lager.getLager(Lager.Lagerort.hochregal).getGrossVE() > Lager.getLager(Lager.Lagerort.freilager).getGrossVE()) {
-            bisVe = Lager.getLager(Lager.Lagerort.hochregal).getGrossVE();
-        } else {
-            bisVe = Lager.getLager(Lager.Lagerort.freilager).getGrossVE();
+        try {
+            if (Lager.getLager(Lager.Lagerort.hochregal).getGrossVE() > Lager.getLager(Lager.Lagerort.freilager).getGrossVE()) {
+                bisVe = Lager.getLager(Lager.Lagerort.hochregal).getGrossVE();
+            } else {
+                bisVe = Lager.getLager(Lager.Lagerort.freilager).getGrossVE();
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(TeilebestandFilterModel.class.getName()).log(Level.SEVERE, null, ex);
         }
         vonPreis = 0;
         bisPreis = Float.MAX_VALUE;
@@ -117,5 +127,19 @@ public class TeilebestandFilterModel {
      */
     public void setZeichnungsnummer(String zeichNr) {
         this.zeichnungsnummer = "%"+zeichNr+"%";
+    }
+
+    /**
+     * @return the typ
+     */
+    public Teilebestand.Typ getTyp() {
+        return typ;
+    }
+
+    /**
+     * @param typ the typ to set
+     */
+    public void setTyp(Teilebestand.Typ typ) {
+        this.typ = typ;
     }
 }

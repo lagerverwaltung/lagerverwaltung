@@ -107,7 +107,7 @@ public class Lagerbestand {
     }
 	//ab hier Artjoms Code, angepasst an Lagerfach-Model,Ausgabe Lagebestands
     
-        public static Lagerbestand loadLagerObjekt(int id){
+        public static Lagerbestand loadLagerObjekt(int id) throws SQLException{
             Dao<Lagerbestand,Integer> lagerbestandDao = DatabaseManager.getInstance().getLagerbestandDao();
         try {
             List<Lagerbestand> lb = lagerbestandDao.queryForEq("lagerbestandID", id);
@@ -130,7 +130,9 @@ public class Lagerbestand {
         }
         return null;
     }
-        
+        /*
+        * @param teilID, fachID
+        */
    public static int getLagerbestandID(int teilid,int fachid) throws SQLException
    {
       
