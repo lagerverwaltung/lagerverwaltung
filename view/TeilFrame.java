@@ -5,7 +5,9 @@
 package view;
 
 import helper.Misc;
+import helper.TeilebestandHelper;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JTable;
@@ -46,7 +48,7 @@ public class TeilFrame extends javax.swing.JFrame {
         teileBestandTable = t;
     }
     
-    public void initTeil(int id)
+    public void initTeil(int id) throws SQLException
     {
         Teilebestand t = Teilebestand.loadTeil(id);
         if(t != null){
@@ -239,62 +241,38 @@ public class TeilFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txfPreisInEuroActionPerformed
 
+    /**
+     * Behandelte den Klick auf speichern und legt ein Teil an oder ändert die 
+     * Teildaten, nachdem alles validiert wurde
+     * 
+     */
     private void btnanlegenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnanlegenActionPerformed
         Teilebestand t = new Teilebestand();
         if (teilID > 0) {
             t.setIdentnummer(teilID);
         }
-
-        String errors = "";
-        if (txfBezeichnung.getText().trim().length() == 0) {
-            errors += "Es muss eine Teilbezeichnung eingegeben werden. \n";
-        }
-        if (txfMaterial.getText().trim().length() == 0) {
-            errors += "Es muss ein Material eingegeben werden. \n";
-        }
-        if (txfZeichnungsnummer.getText().trim().length() == 0) {
-            errors += "Es muss eine Zeichnungsnummer eingegeben werden. \n";
-        }
-        if (txfGroesseVE.getText().trim().length() == 0) {
-            errors += "Es muss eine Größe eingegeben werden. \n";
-        }
-        float euro = 0;
-
-        try {
-            /*ersetzt alle Kommas durch Punkte,
-             * um Floatanforderungen zu entsrpechen
-             */
-            String euroStr = txfPreisInEuro.getText();
-            if (euroStr.contains(",")) {
-                euroStr = euroStr.replace(',', '.');
-                euro = Float.parseFloat(euroStr);
-            } else {
-                euro = Float.parseFloat(txfPreisInEuro.getText());
-            }
-        } catch (NumberFormatException e) {
-            errors += "Der Preis muss eine Fließkommazahl sein. \n";
-        }
-        if(euro <= 0){
-             errors += "Der Preis muss größer als 0 sein.\n";
-        }
-        String groesse = txfGroesseVE.getText();
-        int groesseInt = 0;
-        try {
-            if (groesse.length() > 0) {
-                t.setVe(Integer.parseInt(groesse));
-                groesseInt = Integer.parseInt(groesse);
-            }
-        } catch (NumberFormatException e) {
-            errors += "Die Fachgröße muss in Ganzzahlwerten eingegeben werden.\n";
+        
+        HashMap<Integer, String> errors = TeilebestandHelper.getInstance().validateTeilData(
+               txfBezeichnung.getText(),
+               txfMaterial.getText(),
+               txfZeichnungsnummer.getText(),
+               txfGroesseVE.getText(),
+               txfPreisInEuro.getText()
+        );
+        if (Misc.createErrorDialog(this, errors) == true) {
+         return;
         }
         
-        if(groesse.length() > 0 && groesseInt <= 0){
-             errors += "Die Fachgröße muss größer als 0 sein.\n";
+        float euro = 0;
+        String euroStr = txfPreisInEuro.getText();
+        if (euroStr.contains(",")) {
+            euroStr = euroStr.replace(',', '.');
+            euro = Float.parseFloat(euroStr);
+        } else {
+            euro = Float.parseFloat(txfPreisInEuro.getText());
         }
-        if (Misc.createErrorDialog(this, errors) == true) {
-            return;
-        }
-
+        String groesse = txfGroesseVE.getText();
+        t.setVe(Integer.parseInt(groesse));
         String bezeichnung = txfBezeichnung.getText();
 
         Typ typ = (Teilebestand.Typ) cbxTyp.getSelectedItem();
@@ -307,22 +285,16 @@ public class TeilFrame extends javax.swing.JFrame {
         t.setZeichnungsnummer(zeichnnr);
         t.setPreis(euro);
 
-
         try {
             t.save();
         } catch (SQLException ex) {
-            Logger.getLogger(TeilFrame.class.getName()).log(Level.SEVERE, null, ex);
+            Misc.printSQLException(this, ex);
         }
-        refreshTeileTableModel();
+        TeilebestandHelper.refreshTeileTableModel(teileBestandTable);
         this.dispose();
     }//GEN-LAST:event_btnanlegenActionPerformed
     
-    private void refreshTeileTableModel(){
-        TeilebestandCollection tc = TeilebestandCollection.getInstance(true);
-        TeileTableModel tm = new TeileTableModel();
-        tm.setData(tc);
-        teileBestandTable.setModel(tm);
-    }
+   
     /**
      * @param args the command line arguments
      */

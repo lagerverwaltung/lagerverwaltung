@@ -6,8 +6,10 @@ package view;
 
 import com.j256.ormlite.dao.Dao;
 import helper.DatabaseManager;
+import helper.LagerHelper;
 import helper.Misc;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -293,94 +295,36 @@ public class InitPanel extends javax.swing.JPanel {
     private void txfFachanzahlBreiteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfFachanzahlBreiteActionPerformed
         
     }//GEN-LAST:event_txfFachanzahlBreiteActionPerformed
-
+    /**
+     * Behandelt den Klick auf den "Weiter-Button" durch einen Nutzer.
+     * Dabei werden die Eingaben validiert und gespeichert und das nächste Fenster vorbereitet
+     * 
+     */
     private void weiterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_weiterButtonActionPerformed
        
-        String errors = "";
         int breite,hoehe,tiefe,fachKlein,fachMittel,fachGross;
         breite = hoehe = tiefe = fachKlein = fachMittel = fachGross = 0;
         
-        try {
-            breite = Integer.parseInt(txfFachanzahlBreite.getText());
-        }
-        catch(NumberFormatException e) {
-            errors += "Die Breite muss numerisch sein. \n";
-        }
-        
-        try {
-            hoehe = Integer.parseInt(txfFachanzahlHoehe.getText());
-         }
-        catch(NumberFormatException e) {
-            errors += "Die Höhe muss numerisch sein. \n";
-        }
-        
-        try {
-            tiefe = Integer.parseInt(txfFachanzahlTiefe.getText());
-        }
-        catch(NumberFormatException e) {
-            errors += "Die Tiefe muss numerisch sein. \n";
-        }
-        
-        try {
-            fachKlein = Integer.parseInt(txfKlein.getText());
-        }
-        catch(NumberFormatException e) {
-            errors += "Die Fachgröße 'klein' muss numerisch sein. \n";
-        }
-        
-        try {
-            fachMittel = Integer.parseInt(txfMittel.getText());
-        }
-        catch(NumberFormatException e) {
-              errors += "Die Fachgröße 'mittel' muss numerisch sein. \n";
-        }
-        
-        try {
-            fachGross = Integer.parseInt(txfGross.getText());
-        }
-        catch(NumberFormatException e) {
-              errors += "Die Fachgröße 'groß' muss numerisch sein. \n";
-        }
-        
-        if(breite > 1000 && breite != 0){
-            errors += "Die Breite darf maximal 1000 sein. \n";
-        }
-        
-        if(hoehe > 1000 && hoehe != 0){
-            errors += "Die Höhe darf maximal 1000 sein. \n";
-        }
-        if(tiefe > 1000 && tiefe != 0){
-            errors += "Die Tiefe darf maximal 1000 sein. \n";
-        }
-        
-        if(breite < 0 || tiefe < 0 || hoehe < 0 || fachKlein < 0 || fachMittel < 0 || fachGross < 0){
-            errors += "Es dürfen keine negativen Werte angegeben werden. \n";
-        }
-        
-        if(hoehe > 1000 && hoehe != 0){
-            errors += "Die Höhe darf maximal 1000 sein. \n";
-        }
-        if(tiefe > 1000 && tiefe != 0){
-            errors += "Die Tiefe darf maximal 1000 sein. \n";
-        }
-        
-        if(errors.length() > 0){
-            if(Misc.createErrorDialog(mainFrame, errors) == true){
-                return;
-            }
-           
-        }
-        errors = "";
-        if(breite * hoehe * tiefe > 5000){
-              errors += "Das Produckt aus Breite, Höhe und Tiefe darf 5000 nicht überschreiten (maximale Fachanzahl).\n";
-        }
-        if(breite == 0 || hoehe == 0 || tiefe == 0 || fachKlein == 0 || fachMittel == 0 || fachGross == 0){
-            errors += "Der Wert 0 ist nicht zugelassen.";
-        }
-        if(errors.length() > 0){ 
+        HashMap<Integer, String> errors = LagerHelper.getInstance().validateLagerData
+        (
+            txfFachanzahlBreite.getText(),
+            txfFachanzahlHoehe.getText(),
+            txfFachanzahlTiefe.getText(), 
+            txfKlein.getText(),
+            txfMittel.getText(),
+            txfGross.getText()
+        );
+        if(errors.size() > 0){ 
             Misc.createErrorDialog(mainFrame, errors);
             return;
         }
+        
+        breite = Integer.parseInt(txfFachanzahlBreite.getText());
+        hoehe = Integer.parseInt(txfFachanzahlHoehe.getText());
+        tiefe = Integer.parseInt(txfFachanzahlTiefe.getText());
+        fachKlein = Integer.parseInt(txfKlein.getText());
+        fachMittel = Integer.parseInt(txfMittel.getText());
+        fachGross = Integer.parseInt(txfGross.getText());
         
         //Auslesen der Formattribute
         Lager t = new Lager();
@@ -399,15 +343,13 @@ public class InitPanel extends javax.swing.JPanel {
         else {
             t.setLagerort(Lager.Lagerort.hochregal);
         }
-        
-        Dao<Lager, Integer> lagerDao = DatabaseManager.getInstance().getLagerDao();
         try {
-            lagerDao.createOrUpdate(t);
-            t.createFaecher(breite, tiefe, hoehe);
-            initFaecherPanel.createFaecherPanel(); 
-         } catch (SQLException ex) {
-            Logger.getLogger(InitPanel.class.getName()).log(Level.SEVERE, null, ex);
+            t.save();
+        } catch (SQLException ex) {
+            Misc.printSQLException(mainFrame, ex);
         }
+        
+        initFaecherPanel.createFaecherPanel();
         mainFrame.navigationController.showCard("init2");
     }//GEN-LAST:event_weiterButtonActionPerformed
 

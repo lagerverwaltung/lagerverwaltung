@@ -139,7 +139,7 @@ public class Teilebestand {
     
 
     // ab hier relevant für uns,zum Auslesen von Teilebestand
-    public static Teilebestand loadTeil(int id)
+    public static Teilebestand loadTeil(int id) throws SQLException
     {
         Dao<Teilebestand,Integer> teilebestandDao = DatabaseManager.getInstance().getTeilebestandDao();
         try {

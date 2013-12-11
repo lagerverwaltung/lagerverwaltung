@@ -5,6 +5,12 @@
 package view;
 
 import java.awt.Component;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import model.Lager;
+import model.collection.LagerbestandCollection;
+import model.filter.LagerbestandFilterModel;
 
 /**
  *
@@ -26,6 +32,11 @@ public class LagerbestandFilterFrame extends javax.swing.JFrame {
      */
     public LagerbestandFilterFrame() {
         initComponents();
+        try{
+            loadHlCbx();
+        }catch(SQLException ex){
+            System.out.println("error");
+        }
     }
     
     public LagerbestandFilterFrame(Component c) {
@@ -42,6 +53,58 @@ public class LagerbestandFilterFrame extends javax.swing.JFrame {
         this.setLocation(newOrigin, this.getY()+210);
     }
 
+    private void loadHlCbx() throws SQLException {
+        cbxZ.removeAllItems();
+        cbxX.removeAllItems();
+        cbxY.removeAllItems();
+        cbxZ.addItem("z");
+        cbxX.addItem("x");
+        cbxY.addItem("y");
+
+        Lager hl = Lager.getLager(Lager.Lagerort.hochregal);
+        int x = hl.getHoehe();
+        int y = hl.getBreite();
+        int z = hl.getTiefe();
+
+        for (int i = 1; i <= x; i++) {
+            cbxZ.addItem(i);
+        }
+
+        for (int i = 1; i <= y; i++) {
+            cbxX.addItem(i);
+        }
+
+        for (int i = 1; i <= z; i++) {
+            cbxY.addItem(i);
+        }
+    }
+    
+    private void loadFlCbx() throws SQLException {
+        cbxZ.removeAllItems();
+        cbxX.removeAllItems();
+        cbxY.removeAllItems();
+        cbxZ.addItem("x");
+        cbxX.addItem("y");
+        cbxY.addItem("z");
+
+        Lager hl = Lager.getLager(Lager.Lagerort.freilager);
+        int x = hl.getHoehe();
+        int y = hl.getBreite();
+        int z = hl.getTiefe();
+
+        for (int i = 1; i <= x; i++) {
+            cbxZ.addItem(i);
+        }
+
+        for (int i = 1; i <= y; i++) {
+            cbxX.addItem(i);
+        }
+
+        for (int i = 1; i <= z; i++) {
+            cbxY.addItem(i);
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -54,82 +117,55 @@ public class LagerbestandFilterFrame extends javax.swing.JFrame {
         panMain = new javax.swing.JPanel();
         cbxLagertyp = new javax.swing.JComboBox();
         lblFachadresse = new javax.swing.JLabel();
-        lblTeiltyp = new javax.swing.JLabel();
+        lblGrund = new javax.swing.JLabel();
         lblMengeVon = new javax.swing.JLabel();
-        cbxTeiltyp = new javax.swing.JComboBox();
         lblFilter = new javax.swing.JLabel();
         cbxZ = new javax.swing.JComboBox();
         cbxX = new javax.swing.JComboBox();
-        lblTeil = new javax.swing.JLabel();
         cbxY = new javax.swing.JComboBox();
         executeFilterButton = new javax.swing.JButton();
         lblMengeBis = new javax.swing.JLabel();
         txfMengeVon = new javax.swing.JTextField();
         txfMengeBis = new javax.swing.JTextField();
-        cbxTeil = new javax.swing.JComboBox();
-        scpHaltbarkeit = new javax.swing.JScrollPane();
-        lisHaltbarkeit = new javax.swing.JList();
-        lblHaltbarkeit = new javax.swing.JLabel();
-        lblLagertyp = new javax.swing.JLabel();
-        cbxLagertyp2 = new javax.swing.JComboBox();
         jSeparator2 = new javax.swing.JSeparator();
-        lblFachgröße = new javax.swing.JLabel();
-        cbxFachgröße = new javax.swing.JComboBox();
+        txfGrund = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        cbxLagertyp.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "FL", "RL" }));
+        cbxLagertyp.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "", "HL", "FL" }));
+        cbxLagertyp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxLagertypActionPerformed(evt);
+            }
+        });
 
         lblFachadresse.setText("Fachadresse:");
 
-        lblTeiltyp.setText("Typ:");
+        lblGrund.setText("Grund: ");
 
         lblMengeVon.setText("Menge von:");
 
-        cbxTeiltyp.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Kaufteile", "Werkzeuge", "unfertige Baugruppe", "Vorratsteile", "Vorrichtungen" }));
-
         lblFilter.setText("Filter:");
 
-        cbxZ.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
+        cbxZ.setModel(new javax.swing.DefaultComboBoxModel());
 
-        cbxX.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
+        cbxX.setModel(new javax.swing.DefaultComboBoxModel());
         cbxX.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbxXActionPerformed(evt);
             }
         });
 
-        lblTeil.setText("Bezeichnung:");
-
-        cbxY.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
+        cbxY.setModel(new javax.swing.DefaultComboBoxModel());
 
         executeFilterButton.setText("Filter ausführen");
-
-        lblMengeBis.setText("Menge bis:");
-
-        cbxTeil.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Schrauben", "Erdbeeren", "Waffeleisen", "Büffelmozarella" }));
-        cbxTeil.addActionListener(new java.awt.event.ActionListener() {
+        executeFilterButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbxTeilActionPerformed(evt);
+                executeFilterButtonActionPerformed(evt);
             }
         });
 
-        lisHaltbarkeit.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "alle", "haltbare Teile", "abgelaufene Teile" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
-        scpHaltbarkeit.setViewportView(lisHaltbarkeit);
-
-        lblHaltbarkeit.setText("Haltbarkeit:");
-
-        lblLagertyp.setText("Lagertyp:");
-
-        cbxLagertyp2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Hochregallager", "Freilager" }));
-
-        lblFachgröße.setText("Fachgröße:");
-
-        cbxFachgröße.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "klein", "mittel", "groß" }));
+        lblMengeBis.setText("Menge bis:");
 
         javax.swing.GroupLayout panMainLayout = new javax.swing.GroupLayout(panMain);
         panMain.setLayout(panMainLayout);
@@ -139,48 +175,35 @@ public class LagerbestandFilterFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(panMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panMainLayout.createSequentialGroup()
-                        .addComponent(lblLagertyp)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(lblGrund)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txfGrund))
+                    .addComponent(jSeparator2)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panMainLayout.createSequentialGroup()
-                        .addGroup(panMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(cbxTeiltyp, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cbxTeil, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cbxLagertyp2, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(panMainLayout.createSequentialGroup()
-                                .addComponent(lblMengeBis)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txfMengeBis, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(panMainLayout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(cbxLagertyp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(34, 34, 34)
-                                .addComponent(cbxX, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cbxY, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cbxZ, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(3, 3, 3))
-                            .addGroup(panMainLayout.createSequentialGroup()
-                                .addComponent(lblMengeVon)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txfMengeVon, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panMainLayout.createSequentialGroup()
-                                .addGroup(panMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(lblFachadresse, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblFilter, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblFachgröße, javax.swing.GroupLayout.Alignment.LEADING))
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(scpHaltbarkeit, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cbxFachgröße, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(executeFilterButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(208, 208, 208))
+                        .addComponent(lblMengeBis)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txfMengeBis, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panMainLayout.createSequentialGroup()
+                        .addComponent(lblMengeVon)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txfMengeVon, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panMainLayout.createSequentialGroup()
-                        .addGroup(panMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblTeiltyp)
-                            .addComponent(lblHaltbarkeit)
-                            .addComponent(lblTeil))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGroup(panMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblFachadresse, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblFilter, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(executeFilterButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panMainLayout.createSequentialGroup()
+                        .addGap(0, 33, Short.MAX_VALUE)
+                        .addComponent(cbxLagertyp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(58, 58, 58)
+                        .addComponent(cbxX, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbxY, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbxZ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)))
+                .addGap(25, 25, 25))
         );
         panMainLayout.setVerticalGroup(
             panMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -189,10 +212,6 @@ public class LagerbestandFilterFrame extends javax.swing.JFrame {
                 .addGap(2, 2, 2)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblLagertyp)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cbxLagertyp2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblFachadresse, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -209,22 +228,10 @@ public class LagerbestandFilterFrame extends javax.swing.JFrame {
                     .addComponent(lblMengeBis)
                     .addComponent(txfMengeBis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblTeil)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(cbxTeil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblTeiltyp)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cbxTeiltyp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblHaltbarkeit)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scpHaltbarkeit, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblFachgröße)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cbxFachgröße, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblGrund)
+                    .addComponent(txfGrund, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addComponent(executeFilterButton)
                 .addContainerGap())
         );
@@ -233,9 +240,7 @@ public class LagerbestandFilterFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(panMain, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(panMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -251,10 +256,69 @@ public class LagerbestandFilterFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cbxXActionPerformed
 
-    private void cbxTeilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxTeilActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbxTeilActionPerformed
+    private void cbxLagertypActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxLagertypActionPerformed
+       if(cbxLagertyp.getSelectedItem().equals("HL")){
+            try {
+                loadHlCbx();
+            } catch (SQLException ex) {
+                Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }else{
+            try {
+                loadFlCbx();
+            } catch (SQLException ex) {
+                Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_cbxLagertypActionPerformed
 
+    private void executeFilterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_executeFilterButtonActionPerformed
+        LagerbestandFilterModel lfm = new LagerbestandFilterModel();
+        if (cbxLagertyp.getSelectedItem().toString().length() > 1) {
+            lfm.setLagerTyp(getComboLager(cbxLagertyp.getSelectedItem().toString()));
+        }
+        if (!cbxX.getSelectedItem().toString().equals("x")) {
+            lfm.setX((int) cbxX.getSelectedItem());
+        }
+        if (!cbxY.getSelectedItem().toString().equals("y")) {
+            lfm.setY((int) cbxY.getSelectedItem());
+        }
+        if (!cbxZ.getSelectedItem().toString().equals("z")) {
+            lfm.setZ((int) cbxZ.getSelectedItem());
+        }
+
+        if (!txfMengeVon.getText().isEmpty()) {
+            lfm.setVonMenge(Integer.parseInt(txfMengeVon.getText()));
+        }
+        if (!txfMengeBis.getText().isEmpty()) {
+            lfm.setBisMenge(Integer.parseInt(txfMengeBis.getText()));
+        }
+        if (!txfGrund.getText().isEmpty()) {
+            lfm.setGrund(txfGrund.getSelectedText());
+        }
+        try{
+            LagerbestandCollection lbc = new LagerbestandCollection();
+            LagerbestandCollection result = lbc.addFilter(lfm);
+            for(int i = 0; i < result.size(); i++){
+                System.out.println(lbc.addFilter(lfm).get(i).toString());
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(LagerbestandFilterFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_executeFilterButtonActionPerformed
+
+    public static Lager.Lagerort getComboLager(String s){
+        switch(s){
+            case "HL":
+                return Lager.Lagerort.hochregal;
+            case "FL":
+                return Lager.Lagerort.hochregal;
+            default:
+                return null;
+        }
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -290,28 +354,19 @@ public class LagerbestandFilterFrame extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox cbxFachgröße;
     private javax.swing.JComboBox cbxLagertyp;
-    private javax.swing.JComboBox cbxLagertyp2;
-    private javax.swing.JComboBox cbxTeil;
-    private javax.swing.JComboBox cbxTeiltyp;
     private javax.swing.JComboBox cbxX;
     private javax.swing.JComboBox cbxY;
     private javax.swing.JComboBox cbxZ;
     private javax.swing.JButton executeFilterButton;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JLabel lblFachadresse;
-    private javax.swing.JLabel lblFachgröße;
     private javax.swing.JLabel lblFilter;
-    private javax.swing.JLabel lblHaltbarkeit;
-    private javax.swing.JLabel lblLagertyp;
+    private javax.swing.JLabel lblGrund;
     private javax.swing.JLabel lblMengeBis;
     private javax.swing.JLabel lblMengeVon;
-    private javax.swing.JLabel lblTeil;
-    private javax.swing.JLabel lblTeiltyp;
-    private javax.swing.JList lisHaltbarkeit;
     private javax.swing.JPanel panMain;
-    private javax.swing.JScrollPane scpHaltbarkeit;
+    private javax.swing.JTextField txfGrund;
     private javax.swing.JTextField txfMengeBis;
     private javax.swing.JTextField txfMengeVon;
     // End of variables declaration//GEN-END:variables

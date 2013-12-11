@@ -39,7 +39,11 @@
                           </Group>
                           <Component id="lblTeilebestand" min="-2" pref="151" max="-2" attributes="0"/>
                       </Group>
+<<<<<<< HEAD
+                      <EmptySpace pref="100" max="32767" attributes="0"/>
+=======
                       <EmptySpace max="32767" attributes="0"/>
+>>>>>>> 761447f00c79759954974a7e590c949fea32cbcc
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <Group type="103" groupAlignment="1" attributes="0">

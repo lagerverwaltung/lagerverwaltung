@@ -21,10 +21,10 @@ public class TeileFilterFrame extends javax.swing.JFrame {
     private static TeileFilterFrame singleton;
     JTable teileBestandTable;
     
-    public static TeileFilterFrame getInstance(Component mainFrame)
+    public static TeileFilterFrame getInstance(Component mainFrame, JTable jtable)
     {
         if (TeileFilterFrame.singleton == null){
-            singleton = new TeileFilterFrame(mainFrame);
+            singleton = new TeileFilterFrame(mainFrame, jtable);
         }
         singleton.setVisible(true);
         return singleton;
@@ -38,9 +38,10 @@ public class TeileFilterFrame extends javax.swing.JFrame {
         initComponents();
     }
     
-    public TeileFilterFrame(Component c) {
+    public TeileFilterFrame(Component c, JTable jtable) {
         this();
         alignFilterMenu(c);
+        teileBestandTable = jtable;
     }
     
     public void alignFilterMenu(Component main)
@@ -64,11 +65,7 @@ public class TeileFilterFrame extends javax.swing.JFrame {
         lblTeiltyp = new javax.swing.JLabel();
         cbxTeiltyp = new javax.swing.JComboBox();
         lblFilter = new javax.swing.JLabel();
-        lblTeil = new javax.swing.JLabel();
         btnExecuteFilter = new javax.swing.JButton();
-        cbxTeil = new javax.swing.JComboBox();
-        lblLagertyp = new javax.swing.JLabel();
-        cbxLagertyp = new javax.swing.JComboBox();
         jSeparator2 = new javax.swing.JSeparator();
         lblMaterialgruppe = new javax.swing.JLabel();
         txfMaterialgruppe = new javax.swing.JTextField();
@@ -88,11 +85,9 @@ public class TeileFilterFrame extends javax.swing.JFrame {
 
         lblTeiltyp.setText("Typ:");
 
-        cbxTeiltyp.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Kaufteile", "Werkzeuge", "unfertige Baugruppe", "Vorratsteile", "Vorrichtungen" }));
+        cbxTeiltyp.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "", "Kaufteile", "Werkzeuge", "unfertige Baugruppe", "Vorratsteile", "Vorrichtungen" }));
 
         lblFilter.setText("Filter:");
-
-        lblTeil.setText("Bezeichnung:");
 
         btnExecuteFilter.setText("Filter ausführen");
         btnExecuteFilter.addActionListener(new java.awt.event.ActionListener() {
@@ -100,17 +95,6 @@ public class TeileFilterFrame extends javax.swing.JFrame {
                 btnExecuteFilterActionPerformed(evt);
             }
         });
-
-        cbxTeil.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Schrauben", "Erdbeeren", "Waffeleisen", "Büffelmozarella" }));
-        cbxTeil.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbxTeilActionPerformed(evt);
-            }
-        });
-
-        lblLagertyp.setText("Lagertyp:");
-
-        cbxLagertyp.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Hochregallager", "Freilager" }));
 
         lblMaterialgruppe.setText("Materialgruppe:");
 
@@ -143,7 +127,6 @@ public class TeileFilterFrame extends javax.swing.JFrame {
                         .addGroup(panMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblTeiltyp)
                             .addComponent(lblFilter)
-                            .addComponent(lblTeil)
                             .addComponent(lblMaterialgruppe)
                             .addComponent(lblZeichnungsnummer)
                             .addComponent(lblVolumeneinheiten))
@@ -165,9 +148,6 @@ public class TeileFilterFrame extends javax.swing.JFrame {
                                 .addComponent(txfPreisVon, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(txfMaterialgruppe, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cbxTeiltyp, javax.swing.GroupLayout.Alignment.LEADING, 0, 193, Short.MAX_VALUE)
-                            .addComponent(cbxTeil, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblLagertyp, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cbxLagertyp, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(panMainLayout.createSequentialGroup()
                                 .addGroup(panMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblVEvon, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -184,14 +164,6 @@ public class TeileFilterFrame extends javax.swing.JFrame {
                 .addComponent(lblFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(2, 2, 2)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 4, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(lblLagertyp)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cbxLagertyp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblTeil)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cbxTeil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblTeiltyp)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -222,7 +194,7 @@ public class TeileFilterFrame extends javax.swing.JFrame {
                 .addComponent(lblZeichnungsnummer)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txfZeichnungsnummer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(81, 81, 81)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnExecuteFilter)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -247,22 +219,20 @@ public class TeileFilterFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cbxTeilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxTeilActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbxTeilActionPerformed
-
     private void txfVeBisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfVeBisActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txfVeBisActionPerformed
 
     private void btnExecuteFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExecuteFilterActionPerformed
         TeilebestandFilterModel tfm = new TeilebestandFilterModel();
+
+        tfm.setTyp(getComboTyp(cbxTeiltyp.getSelectedItem().toString()));
         
         if (!txfMaterialgruppe.getText().isEmpty()) {
-            tfm.setMaterialgruppe("%"+txfMaterialgruppe.getText()+"%");
+            tfm.setMaterialgruppe(txfMaterialgruppe.getText());
         }
         if (!txfZeichnungsnummer.getText().isEmpty()) {
-            tfm.setZeichnungsnummer("%"+txfZeichnungsnummer.getText()+"%");
+            tfm.setZeichnungsnummer(txfZeichnungsnummer.getText());
         }
         if (!txfPreisVon.getText().isEmpty()) {
             tfm.setVonPreis(Float.parseFloat(txfPreisVon.getText()));
@@ -286,12 +256,26 @@ public class TeileFilterFrame extends javax.swing.JFrame {
 
     private void refreshTeilebestandTableModel(TeilebestandFilterModel tfm) throws SQLException{
         TeilebestandCollection tc = TeilebestandCollection.getInstance(tfm);
-        TeileTableModel tm = new TeileTableModel();
+        TeileTableModel tm = new TeileTableModel();     
         tm.setData(tc);
         teileBestandTable.setModel(tm);
     }
 
-    
+    public static Teilebestand.Typ getComboTyp(String s){
+        switch (s) {
+            case "Kaufteile":
+                return Teilebestand.Typ.kaufteile;
+            case "Werkzeuge":
+                return Teilebestand.Typ.werkzeuge;
+            case "Vorratsteile":
+                return Teilebestand.Typ.vorratsteile;
+            case "Vorrichtungen":
+                return Teilebestand.Typ.vorrichtungen;
+            case "unfertige Baugruppe":
+                return Teilebestand.Typ.unfertigeBaugruppen;
+        }
+        return null;
+    }
     /**
      * @param args the command line arguments
      */
@@ -328,16 +312,12 @@ public class TeileFilterFrame extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnExecuteFilter;
-    private javax.swing.JComboBox cbxLagertyp;
-    private javax.swing.JComboBox cbxTeil;
     private javax.swing.JComboBox cbxTeiltyp;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JLabel lblFilter;
-    private javax.swing.JLabel lblLagertyp;
     private javax.swing.JLabel lblMaterialgruppe;
     private javax.swing.JLabel lblPreisBis;
     private javax.swing.JLabel lblPreisVon;
-    private javax.swing.JLabel lblTeil;
     private javax.swing.JLabel lblTeiltyp;
     private javax.swing.JLabel lblVEbis;
     private javax.swing.JLabel lblVEvon;

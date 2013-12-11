@@ -30,12 +30,16 @@ import model.Warenbewegung;
 import model.ZielPosition;
 
 /**
- *
- * @author simon
- */
+     * Gilt als zentrale Klasse für Datenoperationen.
+     * Die Klasse kann statisch über einen Singleton aufgerufen werden und enthält
+     * DAO Objekte, welche die Modeldaten kapseln
+     * 
+     * @author Simon Pickert
+     */
 public class DatabaseManager {
     
     private final static String DATABASE_URL = "jdbc:sqlite:lager.db";
+    private final static String DATABASE_TEST_URL="jdbc:sqlite:lagertest.db";
     ConnectionSource connectionSource;
             
     private Dao<Lager, Integer> lagerDao;
@@ -46,16 +50,34 @@ public class DatabaseManager {
     private Dao<Warenbewegung, Integer> warenbewegungDao;
     
     private static DatabaseManager singleton;
-
-    public DatabaseManager()  {
-        try {
-            setupDatabase();
-        } catch (SQLException ex) {
-            Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+    private static boolean test=false;
     
-    public static DatabaseManager getInstance()
+    /**
+     * Der Konstruktor initialisiert die Datenbankschnittstellen in der Methode 
+     * setupDatabase
+     * 
+     * 
+     * @param startDate Startdatum
+     * @param endDate Enddatum
+     * @param type Typ (Einnahme oder Ausgabe)
+     * @return ArrayList mit Arrayobjekten (Matrix)
+     */
+    public DatabaseManager() throws SQLException  {
+            setupDatabase();
+    }
+    /** 
+     * 
+     * @param test Muss true für Tests gesetzt sein
+     * Testkonstruktur
+     * @throws SQLException 
+     */
+    
+    /**
+     * Singleton Getter
+     * 
+     * @return DatabaseManager Instanz des DatabaseManagers
+     */
+    public static DatabaseManager getInstance() throws SQLException
     {
         if (DatabaseManager.singleton == null){
             singleton = new DatabaseManager();
@@ -63,14 +85,17 @@ public class DatabaseManager {
         return singleton;
     }
     
+    /**
+     * Initialisiert alle DAO Objekte und legt Instanzen davon an
+     * Außerdem wird die Datbenbankstruktur automatisch erzeugt oder erweitert.
+     * 
+     */
     private void setupDatabase() throws SQLException {
-            try {
-                    connectionSource = new JdbcConnectionSource(DATABASE_URL);
-            } finally {
-                if (connectionSource != null) {
-                        connectionSource.close();
-                }
-            }
+         if(!test)
+         {connectionSource = new JdbcConnectionSource(DATABASE_URL);}
+         else
+         {connectionSource = new JdbcConnectionSource(DATABASE_TEST_URL);}
+            connectionSource.close();
             TableUtils.createTableIfNotExists(connectionSource, Lager.class);
             TableUtils.createTableIfNotExists(connectionSource, Lagerfach.class);
             TableUtils.createTableIfNotExists(connectionSource, Teilebestand.class);
@@ -187,6 +212,12 @@ public class DatabaseManager {
     public Dao<Warenbewegung, Integer> getWarenbewegungDao() {
         return warenbewegungDao;
     }
+    
+    public static void setTest(boolean teste)
+    {
+        test=teste;
+    }
+   
     
     
 }
