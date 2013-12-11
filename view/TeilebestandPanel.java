@@ -6,7 +6,6 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.TableColumn;
 import model.collection.TeilebestandCollection;
 import model.table.TeileTableModel;
-import model.table.LagerbestandTableModel;
 
 /*
  * To change this template, choose Tools | Templates

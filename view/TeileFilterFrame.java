@@ -4,20 +4,11 @@
  */
 package view;
 
-import com.j256.ormlite.dao.Dao;
-import helper.DatabaseManager;
 import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Toolkit;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JTable;
-import model.Lager;
-import model.Lager;
-import model.Teilebestand;
 import model.collection.TeilebestandCollection;
 import model.filter.TeilebestandFilterModel;
 import model.table.TeileTableModel;
@@ -38,6 +29,7 @@ public class TeileFilterFrame extends javax.swing.JFrame {
         singleton.setVisible(true);
         return singleton;
     }
+    
     /**
      * Creates new form TeileFilter
      */
