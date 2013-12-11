@@ -55,12 +55,16 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
     public BestandsaenderungFrame(){
         initComponents();
         setLocationRelativeTo(null);
+        cbxFachTyp.addItem("HL");
+        cbxFachTyp.addItem("FL");
         try {
             loadHlCbx();
         } catch (SQLException ex) {
             Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, ex); 
         }
     }
+    
+    
       
     //Teil einlagern aus der Registerkarte Teilebestand/Lagerbestand
     BestandsaenderungFrame(boolean einlagern, int id) {
@@ -79,7 +83,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
                 Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, ex); 
             }
     }
-    BestandsaenderungFrame(boolean einlagern, int id,boolean bestehenderLagerbestand,int x,int y, int z,String lo, int fachid,String anschGr) {
+    BestandsaenderungFrame(boolean einlagern, int id,boolean bestehenderLagerbestand,int x,int y, int z,Lager.Lagerort lo, int fachid,String anschGr) {
         this();
         this.einlagern = einlagern;
         this.bestehenderLagerbestand=bestehenderLagerbestand;
@@ -95,7 +99,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         this.cbxFachX.setSelectedItem(x);
         this.cbxFachY.setSelectedItem(y);
         this.cbxFachZ.setSelectedItem(z);
-        this.cbxFachTyp.setSelectedItem(lo);
+        loadLagerOrtCbx(lo);
         
         this.cbxFachX.setEnabled(false);
         this.cbxFachY.setEnabled(false);
@@ -105,7 +109,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
     }
     
         //Teil auslagern aus der Registerkarte Lagerbestand
-        BestandsaenderungFrame(boolean auslagern, int id,String anschGr, int x, int y, int z, String lo, int fachid, int menge) {
+        BestandsaenderungFrame(boolean auslagern, int id,String anschGr, int x, int y, int z, Lager.Lagerort lo, int fachid, int menge) {
           
             this();
             this.auslagern = auslagern;
@@ -127,7 +131,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
             this.cbxFachX.setSelectedItem(x);
             this.cbxFachY.setSelectedItem(y);
             this.cbxFachZ.setSelectedItem(z);
-            this.cbxFachTyp.setSelectedItem(lo); //Lagerort noch BUGGY!
+            loadLagerOrtCbx(lo); //Lagerort nicht mehr BUGGY!
             this.fachid=fachid;
             this.teilid=id;
             this.lblHinweisDatum.setVisible(false);
@@ -232,7 +236,14 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
             cbxFachY.addItem(i);
         }
     }
-     
+    private void loadLagerOrtCbx(Lager.Lagerort s){
+       if (s.equals(Lager.Lagerort.freilager)){
+           cbxFachTyp.setSelectedItem("FL");
+       } 
+       else{
+           cbxFachTyp.setSelectedItem("HL");
+       }
+    }
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -288,7 +299,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
             }
         });
 
-        cbxFachTyp.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "HL", "FL"}));
+        cbxFachTyp.setModel(new javax.swing.DefaultComboBoxModel());
         cbxFachTyp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbxFachTypActionPerformed(evt);

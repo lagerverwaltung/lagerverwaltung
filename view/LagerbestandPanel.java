@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 import javax.swing.JTable;
 import javax.swing.table.TableColumn;
 import javax.swing.ListSelectionModel;
+import model.Lager;
 import model.table.LagerbestandTableModel;
 import model.table.TeileTableModel;
 import model.collection.LagerbestandCollection;
@@ -199,7 +200,7 @@ public class LagerbestandPanel extends javax.swing.JPanel {
             int y = Integer.parseInt(tabMaintable.getValueAt(tabMaintable.getSelectedRow(), 3).toString());
             int z = Integer.parseInt(tabMaintable.getValueAt(tabMaintable.getSelectedRow(), 4).toString());
             int fachid = Integer.parseInt(tabMaintable.getValueAt(tabMaintable.getSelectedRow(), 0).toString());
-            String lo = tabMaintable.getValueAt(tabMaintable.getSelectedRow(), 1).toString();
+            Lager.Lagerort lo = (Lager.Lagerort) tabMaintable.getValueAt(tabMaintable.getSelectedRow(), 1);
 
             BestandsaenderungFrame bestandsaenderungFrame = new BestandsaenderungFrame(true, selectedId, true, x, y, z, lo, fachid, selectedAnschGr);
             bestandsaenderungFrame.setVisible(true);
@@ -221,8 +222,29 @@ public class LagerbestandPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnSucheActionPerformed
 
     private void btnTeilUmlagernActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTeilUmlagernActionPerformed
-        UmlagernFrame umlagernframe = new UmlagernFrame();
-        umlagernframe.setVisible(true);
+        int selectedId;
+        if (tabMaintable.getSelectedRow() >= 0) {
+            selectedId = Integer.parseInt(tabMaintable.getValueAt(tabMaintable.getSelectedRow(), 6).toString());
+            Lager.Lagerort lo = (Lager.Lagerort) tabMaintable.getValueAt(tabMaintable.getSelectedRow(), 1);
+            int x = Integer.parseInt(tabMaintable.getValueAt(tabMaintable.getSelectedRow(), 2).toString());
+            int y = Integer.parseInt(tabMaintable.getValueAt(tabMaintable.getSelectedRow(), 3).toString());
+            int z = Integer.parseInt(tabMaintable.getValueAt(tabMaintable.getSelectedRow(), 4).toString());
+           
+           // int fachid = Integer.parseInt(tabMaintable.getValueAt(tabMaintable.getSelectedRow(), 0).toString());
+           
+            
+            UmlagernFrame umlagernframe = new UmlagernFrame(true, selectedId,x,y,z,lo);
+            umlagernframe.setVisible(true);
+            try {
+                umlagernframe.initUmlagernObj(selectedId);
+            } catch (SQLException ex) {
+                Misc.printSQLException(mainFrame, ex);
+            }
+            umlagernframe.setTable(tabMaintable);
+        } else {
+            Misc.createErrorDialog(mainFrame, "Es muss Teil ausgewählt werden");
+        }
+        
     }//GEN-LAST:event_btnTeilUmlagernActionPerformed
     /**
      * Formulaar Teile Auslager mit Daten()ID,Anschaffungsgrund und Haltbarkeitsdatum befüllenbefüllen
@@ -237,7 +259,7 @@ public class LagerbestandPanel extends javax.swing.JPanel {
         int y=Integer.parseInt(tabMaintable.getValueAt(tabMaintable.getSelectedRow(), 3).toString());
         int z=Integer.parseInt(tabMaintable.getValueAt(tabMaintable.getSelectedRow(), 4).toString()); 
         int fachid=Integer.parseInt(tabMaintable.getValueAt(tabMaintable.getSelectedRow(), 0).toString());
-        String lo= tabMaintable.getValueAt(tabMaintable.getSelectedRow(), 1).toString();
+        Lager.Lagerort lo= (Lager.Lagerort) tabMaintable.getValueAt(tabMaintable.getSelectedRow(), 1);
         selectedAnschGr = tabMaintable.getValueAt(tabMaintable.getSelectedRow(), 8).toString();
         int menge=Integer.parseInt(tabMaintable.getValueAt(tabMaintable.getSelectedRow(), 7).toString()); 
         BestandsaenderungFrame bestandsaenderungFrame = new BestandsaenderungFrame(true,selectedId,selectedAnschGr,x,y,z,lo,fachid,menge);

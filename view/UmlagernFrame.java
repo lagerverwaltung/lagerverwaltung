@@ -4,13 +4,31 @@
  */
 package view;
 
+import java.sql.SQLException;
+import java.text.Format;
+import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JTable;
+import model.Lager;
+//import model.table.LagerbestandTableModel;
+//import model.collection.LagerbestandCollection;
+import model.Lagerbestand;
+import model.Warenbewegung;
+import view.BestandsaenderungFrame;
+
 /**
  *
- * @author simon
+ * @author simon,artjom
  */
 public class UmlagernFrame extends javax.swing.JFrame {
+
     Boolean split = false;
-    
+    JTable lagerBestandtable;
+    int lagerbestandId;
+    int fachid;
+    int teilid;
+
     /**
      * Creates new form UmlagernFrame
      */
@@ -18,16 +36,170 @@ public class UmlagernFrame extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         panSplitl.setVisible(false);
+        cbxQuelleLagertyp.addItem("HL");
+        cbxQuelleLagertyp.addItem("FL");
+        try {
+            loadHlCbx();
+        } catch (SQLException ex) {
+            Logger.getLogger(UmlagernFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        try {
+            loadHlCbxZiel();
+        } catch (SQLException ex) {
+            Logger.getLogger(UmlagernFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        panSplitl.setVisible(false);
+        
+        
+        
     }
     
-    public UmlagernFrame(Boolean split) {
+    public UmlagernFrame(boolean split, int id, int x, int y, int z,Lager.Lagerort lo) {
+        
         this();
         this.split = split;
-        panSplitl.setVisible(split);
-        panUmlagern.setVisible(!split);
-        String text = "Teile Splitten";
+      //  this.fachid=fachid;
+        this.teilid=id;
+        //  panSplitl.setVisible(split);
+        //  panUmlagern.setVisible(!split);
+        String text = "Teile Umlagern";
         lblUmlagern.setText(text);
         btnUmlagern.setText(text);
+        this.txfTeilID.setText("" + id);
+        this.txfTeilID.setEditable(false);
+        this.txfTeilID.setEnabled(false);
+        
+        this.cbxQuelleX.setSelectedItem(x);
+        this.cbxQuelleY.setSelectedItem(y);
+        this.cbxQuelleZ.setSelectedItem(z);
+        loadCBXQuelleLagertyp(lo);
+
+        this.cbxQuelleLagertyp.setEnabled(false);
+        this.cbxQuelleX.setEnabled(false);
+        this.cbxQuelleY.setEnabled(false);
+        this.cbxQuelleZ.setEnabled(false);
+    
+    }
+   
+   public void setTable(JTable t)
+    {
+        lagerBestandtable = t;
+    }
+   
+   public void initUmlagernObj(int id) throws SQLException
+    {
+        Lagerbestand l = Lagerbestand.loadLagerObjekt(id); 
+        if(l != null){
+            lagerbestandId = id;
+            txfUmzulagerndeMenge.setText(Integer.toString(l.getMenge()));
+        }
+    }
+     //ComboBoxen laden für Hochlager Quelladresse
+      private void loadHlCbx() throws SQLException{
+        cbxQuelleZ.removeAllItems();
+        cbxQuelleX.removeAllItems();
+        cbxQuelleY.removeAllItems();
+
+        Lager hl = Lager.getLager(Lager.Lagerort.hochregal);
+        int x = hl.getHoehe();
+        int y = hl.getBreite();
+        int z = hl.getTiefe();
+        
+        for(int i = 1; i <= x; i++){
+            cbxQuelleZ.addItem(i);
+        }
+        
+        for(int i = 1; i <= y; i++){
+            cbxQuelleX.addItem(i);
+        }
+                
+         for(int i = 1; i <= z; i++){
+            cbxQuelleY.addItem(i);
+        }
+    }
+
+    /*
+     * läd ComboBoxen für Freilagern Quelladresse
+     */
+    public void loadFlCbx() throws SQLException {
+        cbxQuelleZ.removeAllItems();
+        cbxQuelleX.removeAllItems();
+        cbxQuelleY.removeAllItems();
+
+        Lager fl = Lager.getLager(Lager.Lagerort.freilager);
+        int x = fl.getHoehe();
+        int y = fl.getBreite();
+        int z = fl.getTiefe();
+
+        for (int i = 1; i <= x; i++) {
+            cbxQuelleZ.addItem(i);
+        }
+
+        for (int i = 1; i <= y; i++) {
+            cbxQuelleX.addItem(i);
+        }
+
+        for (int i = 1; i <= z; i++) {
+            cbxQuelleY.addItem(i);
+        }
+    }
+
+    //ComboBoxen laden für Hochlager Zieladresse
+      private void loadHlCbxZiel() throws SQLException{
+          cbxZiel0Z.removeAllItems();
+          cbxZiel0X.removeAllItems();
+          cbxZiel0Y.removeAllItems();
+
+        Lager hl = Lager.getLager(Lager.Lagerort.hochregal);
+        int x = hl.getHoehe();
+        int y = hl.getBreite();
+        int z = hl.getTiefe();
+        
+        for(int i = 1; i <= x; i++){
+            cbxZiel0Z.addItem(i);
+        }
+        
+        for(int i = 1; i <= y; i++){
+            cbxZiel0Y.addItem(i);
+        }
+                
+         for(int i = 1; i <= z; i++){
+            cbxZiel0X.addItem(i);
+        }
+    }
+    //ComboBoxen laden für Freiregallager Zieladresse  
+ private void loadFlCbxZiel() throws SQLException {
+        cbxZiel0Z.removeAllItems();
+        cbxZiel0X.removeAllItems();
+        cbxZiel0Y.removeAllItems();
+
+        Lager fl = Lager.getLager(Lager.Lagerort.freilager);
+        int x = fl.getHoehe();
+        int y = fl.getBreite();
+        int z = fl.getTiefe();
+
+        for (int i = 1; i <= x; i++) {
+            cbxZiel0Z.addItem(i);
+        }
+
+        for (int i = 1; i <= y; i++) {
+            cbxZiel0X.addItem(i);
+        }
+
+        for (int i = 1; i <= z; i++) {
+            cbxZiel0Y.addItem(i);
+        }
+    }
+ 
+  private void loadCBXQuelleLagertyp(Lager.Lagerort s){
+       if (s.equals(Lager.Lagerort.freilager)){
+          cbxQuelleLagertyp.setSelectedItem("FL");
+       } 
+       else{
+           cbxQuelleLagertyp.setSelectedItem("HL");
+       }
     }
 
     /**
@@ -101,7 +273,11 @@ public class UmlagernFrame extends javax.swing.JFrame {
 
         lblZiel1.setText("Ziel 1:");
 
-        cbxZ1Lagertyp.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "FL", "RL" }));
+        cbxZ1Lagertyp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxZ1LagertypActionPerformed(evt);
+            }
+        });
 
         cbxZ1X.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
         cbxZ1X.addActionListener(new java.awt.event.ActionListener() {
@@ -204,13 +380,18 @@ public class UmlagernFrame extends javax.swing.JFrame {
 
         lblZielLagerfach.setText("Ziel-Lagerfachadresse nach:");
 
-        cbxZiel0Lagertyp.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "FL", "RL" }));
+        cbxZiel0Lagertyp.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "FL", "HL" }));
+        cbxZiel0Lagertyp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxZiel0LagertypActionPerformed(evt);
+            }
+        });
 
-        cbxZiel0Z.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
+        cbxZiel0Z.setModel(new javax.swing.DefaultComboBoxModel());
 
-        cbxZiel0Y.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
+        cbxZiel0Y.setModel(new javax.swing.DefaultComboBoxModel());
 
-        cbxZiel0X.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
+        cbxZiel0X.setModel(new javax.swing.DefaultComboBoxModel());
         cbxZiel0X.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbxZiel0XActionPerformed(evt);
@@ -249,16 +430,21 @@ public class UmlagernFrame extends javax.swing.JFrame {
                 .addGap(0, 0, 0))
         );
 
-        cbxQuelleY.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
+        cbxQuelleY.setModel(new javax.swing.DefaultComboBoxModel());
 
-        cbxQuelleLagertyp.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "FL", "RL" }));
+        cbxQuelleLagertyp.setModel(new javax.swing.DefaultComboBoxModel());
+        cbxQuelleLagertyp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxQuelleLagertypActionPerformed(evt);
+            }
+        });
 
         lblZ.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         lblZ.setText("z");
 
-        cbxQuelleZ.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
+        cbxQuelleZ.setModel(new javax.swing.DefaultComboBoxModel());
 
-        cbxQuelleX.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
+        cbxQuelleX.setModel(new javax.swing.DefaultComboBoxModel());
         cbxQuelleX.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbxQuelleXActionPerformed(evt);
@@ -389,6 +575,8 @@ public class UmlagernFrame extends javax.swing.JFrame {
 
     private void btnUmlagernActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUmlagernActionPerformed
         this.dispose();
+        
+        
     }//GEN-LAST:event_btnUmlagernActionPerformed
 
     private void cbxZiel0XActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxZiel0XActionPerformed
@@ -402,6 +590,18 @@ public class UmlagernFrame extends javax.swing.JFrame {
     private void cbxZ2XActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxZ2XActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbxZ2XActionPerformed
+
+    private void cbxZ1LagertypActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxZ1LagertypActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbxZ1LagertypActionPerformed
+
+    private void cbxQuelleLagertypActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxQuelleLagertypActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbxQuelleLagertypActionPerformed
+
+    private void cbxZiel0LagertypActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxZiel0LagertypActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbxZiel0LagertypActionPerformed
 
     /**
      * @param args the command line arguments
