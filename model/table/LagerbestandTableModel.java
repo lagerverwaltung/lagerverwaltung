@@ -21,21 +21,12 @@ import model.collection.LagerbestandCollection;
  */
 public class LagerbestandTableModel extends AbstractTableModel {
 
-    //ArrayList<Object[]> lagerbestandRows = new ArrayList();
     LagerbestandCollection<Lagerbestand> lagerbestandRows = new LagerbestandCollection();
     public void setData(LagerbestandCollection<Lagerbestand> arr)
     {
         this.lagerbestandRows = arr;
     }
-    /*ab hier muss Lagerbestandsliste ausgegeben sein
-    public ArrayList<Object[]> dummyArrayList()
-    {
-        ArrayList<Object[]> arr = new ArrayList();
-        String[] row = {"9999","Hochregallager","11","12","1","Schrauben M5","001212", "1000","Bedarf Periode 1"};
-        arr.add(row);
-        return arr;
-    }
-    */
+
     public int getColumnCount() {
         return 9;
     }
@@ -81,7 +72,7 @@ public class LagerbestandTableModel extends AbstractTableModel {
     
         public Object getValueAt(int row, int col) {
             if (getRowCount() != 0){
-                Lagerbestand rowO=null;
+                Lagerbestand rowO = null;
                 rowO = (Lagerbestand) lagerbestandRows.get(row);
                 Lagerfach lf = rowO.getLagerfach();
                 if(lf != null){

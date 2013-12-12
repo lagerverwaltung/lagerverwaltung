@@ -8,10 +8,14 @@ package model;
 
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.stmt.PreparedQuery;
 import com.j256.ormlite.stmt.QueryBuilder;
+import com.j256.ormlite.stmt.SelectArg;
+import com.j256.ormlite.stmt.Where;
 import com.j256.ormlite.table.DatabaseTable;
 import helper.DatabaseManager;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -153,9 +157,31 @@ public class Lagerfach {
     * gibt Lagerfach zur lagerfachadresse aus
     */
     public static Lagerfach getFach(Lager lager, int x, int y, int z) throws SQLException{
+        
+        int lo = 1;
+        if (lager.equals(Lager.Lagerort.freilager)) {
+            lo = 2;
+        }
 
         //hier lager id weg
         Dao<Lagerfach, Integer> lagerfachDao = DatabaseManager.getInstance().getLagerfachDao();
+<<<<<<< HEAD
+        QueryBuilder<Lagerfach, Integer> queryBuilder = lagerfachDao.queryBuilder();
+        queryBuilder.where()
+                .eq("LagerID", lo)
+                .and()
+                .eq("x", x)
+                .and()
+                .eq("y", y)
+                .and()
+                .eq("z", z);
+        PreparedQuery<Lagerfach> preparedQuery = queryBuilder.prepare();
+        List<Lagerfach> l = lagerfachDao.query(preparedQuery);
+
+        //und hier for(l) ifl.get(i).getLagerort == lager.getLagerort ???
+        if (l.size() > 0) {
+            return l.get(0);
+=======
         Dao<Lager, Integer> lagerDao = DatabaseManager.getInstance().getLagerDao();
         
         QueryBuilder<Lager, Integer> lagerQb = lagerDao.queryBuilder();
@@ -168,6 +194,7 @@ public class Lagerfach {
 
         if (results.size() > 0) {
             return results.get(0);
+>>>>>>> 761447f00c79759954974a7e590c949fea32cbcc
         }
         return null;
 }

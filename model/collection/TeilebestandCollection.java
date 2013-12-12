@@ -43,7 +43,11 @@ public class TeilebestandCollection<Teilebestand> extends ArrayList {
     }
     
     public static TeilebestandCollection getInstance(TeilebestandFilterModel tfm) throws SQLException{
-        singleton = TeilebestandCollection.getInstance();
+        
+        if(TeilebestandCollection.singleton == null){
+            singleton = new TeilebestandCollection().addFilter(tfm);
+        }
+        
         return singleton.addFilter(tfm);
     }
    
@@ -70,23 +74,38 @@ public class TeilebestandCollection<Teilebestand> extends ArrayList {
 
         Dao<model.Teilebestand, Integer> teileDao = DatabaseManager.getInstance().getTeilebestandDao();
         QueryBuilder<model.Teilebestand, Integer> queryBuilder = teileDao.queryBuilder();
-        queryBuilder.where()
-                .like("materialgruppe", tfm.getMaterialgruppr())
-                .and()
-                .like("zeichnungsnummer", tfm.getZeichnungsnummer())
-                .and()
-                .between("preis", tfm.getVonPreis(), tfm.getBisPreis())
-                .and()
-                .between("ve", tfm.getVonVe(), tfm.getBisVe());
+
+        if (tfm.getTyp() == null) {
+            queryBuilder.where()
+                    .like("materialgruppe", tfm.getMaterialgruppr())
+                    .and()
+                    .like("zeichnungsnummer", tfm.getZeichnungsnummer())
+                    .and()
+                    .between("preis", tfm.getVonPreis(), tfm.getBisPreis())
+                    .and()
+                    .between("ve", tfm.getVonVe(), tfm.getBisVe());
+
+        } else {
+            queryBuilder.where()
+                    .eq("typ", tfm.getTyp())
+                    .and()
+                    .like("materialgruppe", tfm.getMaterialgruppr())
+                    .and()
+                    .like("zeichnungsnummer", tfm.getZeichnungsnummer())
+                    .and()
+                    .between("preis", tfm.getVonPreis(), tfm.getBisPreis())
+                    .and()
+                    .between("ve", tfm.getVonVe(), tfm.getBisVe());
+
+        }
         PreparedQuery<model.Teilebestand> preparedQuery = queryBuilder.prepare();
         List<model.Teilebestand> list = teileDao.query(preparedQuery);
         for (model.Teilebestand tb1 : list) {
             add(tb1);
         }
         return this;
-
     }
-    
+ 
     public void resetFilters()
     {
         
