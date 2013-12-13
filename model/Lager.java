@@ -109,13 +109,19 @@ public class Lager {
         return lagerort;
     }
     
+    /*
+     * @author unknown
+     * Gibt den Code des Lagortes zurück
+     * HL = Hochregallager
+     * FL = Freilager
+     */
     public String getLagerortCode() {
         String code = "";
         if(lagerort == Lager.Lagerort.freilager){
             code = "FL";
         }
         else {
-            code = "HR";
+            code = "HL";
         }
         return code;
     }
