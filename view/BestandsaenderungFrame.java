@@ -15,7 +15,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.TableColumn;
@@ -83,6 +82,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
                 Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, ex); 
             }
     }
+    
     /**
      * @author smodlich, ssinger
      * @param bestehenderLagerbestand ?
@@ -216,11 +216,12 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
      * übergebenen Lagerbstandes und setzt Enabled(false)
      */
     private void loadQuellComboBoxen(Lagerbestand lagerbestand){
+        
+        this.cbxFachTyp.setSelectedItem(lagerbestand.getLagerfach().getLager().getLagerortCode());
         this.cbxFachX.setSelectedItem(lagerbestand.getLagerfach().getX());
         this.cbxFachY.setSelectedItem(lagerbestand.getLagerfach().getY());
         this.cbxFachZ.setSelectedItem(lagerbestand.getLagerfach().getZ());
-        this.cbxFachTyp.setSelectedItem(lagerbestand.getLagerfach().getLager().getLagerortCode());
-        
+       
         this.cbxFachX.setEnabled(false);
         this.cbxFachY.setEnabled(false);
         this.cbxFachZ.setEnabled(false);
