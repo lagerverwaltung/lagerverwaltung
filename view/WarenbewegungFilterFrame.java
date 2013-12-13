@@ -62,8 +62,6 @@ public class WarenbewegungFilterFrame extends javax.swing.JFrame {
         cbxQuelleZ = new javax.swing.JComboBox();
         cbxZielZ = new javax.swing.JComboBox();
         jSeparator1 = new javax.swing.JSeparator();
-        cbxTeil = new javax.swing.JComboBox();
-        lblTeil = new javax.swing.JLabel();
         cbxQuelleX = new javax.swing.JComboBox();
         lblBewegungsTyp = new javax.swing.JLabel();
         cbxZielLagertyp = new javax.swing.JComboBox();
@@ -81,7 +79,7 @@ public class WarenbewegungFilterFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        cbxQuelleLagertyp.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "FL", "RL" }));
+        cbxQuelleLagertyp.setModel(new javax.swing.DefaultComboBoxModel(new String[] {"", "FL", "RL" }));
 
         lblQuellfach.setText("Quellfachadresse:");
 
@@ -89,19 +87,15 @@ public class WarenbewegungFilterFrame extends javax.swing.JFrame {
 
         lblDatumBis.setText("Datum bis:");
 
-        cbxTeiltyp.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Kaufteile", "Werkzeuge", "unfertige Baugruppe", "Vorratsteile", "Vorrichtungen" }));
+        cbxTeiltyp.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "", "Kaufteile", "Werkzeuge", "unfertige Baugruppe", "Vorratsteile", "Vorrichtungen" }));
 
         lblFilter.setText("Filter:");
 
-        cbxQuelleZ.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
+        cbxQuelleZ.setModel(new javax.swing.DefaultComboBoxModel());
 
-        cbxZielZ.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
+        cbxZielZ.setModel(new javax.swing.DefaultComboBoxModel());
 
-        cbxTeil.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Schrauben", "Tofutierchen", "Item 3", "Item 4" }));
-
-        lblTeil.setText("Bezeichnung:");
-
-        cbxQuelleX.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
+        cbxQuelleX.setModel(new javax.swing.DefaultComboBoxModel());
         cbxQuelleX.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbxQuelleXActionPerformed(evt);
@@ -110,17 +104,17 @@ public class WarenbewegungFilterFrame extends javax.swing.JFrame {
 
         lblBewegungsTyp.setText("Bewegungs-Typ:");
 
-        cbxZielLagertyp.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "FL", "RL" }));
+        cbxZielLagertyp.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "", "FL", "RL" }));
 
         lblVerantwortlicher.setText("Verantwortlicher:");
 
         lblZielfachadresse.setText("Zielfachadresse:");
 
-        cbxQuelleY.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
+        cbxQuelleY.setModel(new javax.swing.DefaultComboBoxModel());
 
         btnFilterAusführen.setText("Filter ausführen");
 
-        cbxZielX.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
+        cbxZielX.setModel(new javax.swing.DefaultComboBoxModel());
         cbxZielX.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbxZielXActionPerformed(evt);
@@ -129,7 +123,7 @@ public class WarenbewegungFilterFrame extends javax.swing.JFrame {
 
         lblDatumVon.setText("Datum von:");
 
-        cbxZielY.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
+        cbxZielY.setModel(new javax.swing.DefaultComboBoxModel());
 
         jList2.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "alle", "Ersteinlagerung", "Einlagerungen", "Auslagerungen", "Splits", " " };
@@ -159,7 +153,6 @@ public class WarenbewegungFilterFrame extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(txfDatumBis))
                             .addComponent(btnFilterAusführen, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblTeil, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(scpBewegungstyp)
                             .addComponent(lblBewegungsTyp, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblVerantwortlicher, javax.swing.GroupLayout.Alignment.LEADING)
@@ -182,8 +175,7 @@ public class WarenbewegungFilterFrame extends javax.swing.JFrame {
                                 .addComponent(cbxZielY, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(cbxZielZ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txfVerantwrotlicher, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cbxTeil, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(txfVerantwrotlicher, javax.swing.GroupLayout.Alignment.LEADING))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -225,17 +217,13 @@ public class WarenbewegungFilterFrame extends javax.swing.JFrame {
                 .addComponent(lblBewegungsTyp)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(scpBewegungstyp, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblTeil)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cbxTeil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblTeiltyp)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cbxTeiltyp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnFilterAusführen)
-                .addGap(0, 18, Short.MAX_VALUE))
+                .addGap(0, 11, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -300,7 +288,6 @@ public class WarenbewegungFilterFrame extends javax.swing.JFrame {
     private javax.swing.JComboBox cbxQuelleX;
     private javax.swing.JComboBox cbxQuelleY;
     private javax.swing.JComboBox cbxQuelleZ;
-    private javax.swing.JComboBox cbxTeil;
     private javax.swing.JComboBox cbxTeiltyp;
     private javax.swing.JComboBox cbxZielLagertyp;
     private javax.swing.JComboBox cbxZielX;
@@ -313,7 +300,6 @@ public class WarenbewegungFilterFrame extends javax.swing.JFrame {
     private javax.swing.JLabel lblDatumVon;
     private javax.swing.JLabel lblFilter;
     private javax.swing.JLabel lblQuellfach;
-    private javax.swing.JLabel lblTeil;
     private javax.swing.JLabel lblTeiltyp;
     private javax.swing.JLabel lblVerantwortlicher;
     private javax.swing.JLabel lblZielfachadresse;

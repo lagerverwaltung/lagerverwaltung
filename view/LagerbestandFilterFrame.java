@@ -299,10 +299,6 @@ public class LagerbestandFilterFrame extends javax.swing.JFrame {
         try{
             LagerbestandCollection lbc = new LagerbestandCollection();
             LagerbestandCollection result = lbc.addFilter(lfm);
-            for(int i = 0; i < result.size(); i++){
-                System.out.println(lbc.addFilter(lfm).get(i).toString());
-            }
-            
         } catch (SQLException ex) {
             Logger.getLogger(LagerbestandFilterFrame.class.getName()).log(Level.SEVERE, null, ex);
         }

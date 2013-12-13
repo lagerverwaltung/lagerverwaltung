@@ -10,12 +10,11 @@ import com.j256.ormlite.stmt.QueryBuilder;
 import helper.DatabaseManager;
 import java.sql.SQLException;
 import java.util.ArrayList; 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.Lager;
-import model.Lagerbestand;
-import model.Lagerfach;
 import model.filter.LagerbestandFilterModel;
 
 /**
@@ -67,10 +66,11 @@ public class LagerbestandCollection<Lagerbestand> extends ArrayList {
     //ab hier 2.Sprint
     public LagerbestandCollection<Lagerbestand> addFilter(LagerbestandFilterModel lfm) throws SQLException{
        
-        List<model.Lagerbestand> result = new ArrayList();
+        Set<model.Lagerbestand> result = new HashSet();
         Dao<model.Lagerbestand, Integer> lagerbestandDao = DatabaseManager.getInstance().getLagerbestandDao();
         List<model.Lagerbestand> lbList = lagerbestandDao.queryForAll();
         
+        System.out.println("lbList-size() "+lbList.size());
         if(lbList.size() > 0){
             for (int i = 0; i < lbList.size(); i++) {
                 if(lbList.get(i).getLagerfach().getX() == lfm.getX()){
@@ -85,12 +85,13 @@ public class LagerbestandCollection<Lagerbestand> extends ArrayList {
                 if (lbList.get(i).getLagerfach().getLager().getLagerort().equals(lfm.getLagerTyp())) {
                     result.add(lbList.get(i));
                 }
-                if (lbList.get(i).getMenge() <= lfm.getVonMenge() 
-                        && lbList.get(i).getMenge() >= lfm.getBisMenge()
+                if ((lbList.get(i).getMenge() >= lfm.getVonMenge() 
+                        && lbList.get(i).getMenge() <= lfm.getBisMenge())
                         && lbList.get(i).getMenge() != 0) {
                     result.add(lbList.get(i));
                 }
-                if (lbList.get(i).getAnschaffungsgrund().contains(lfm.getGrund())) {
+                if ((!lfm.getGrund().equals(""))
+                        && lbList.get(i).getAnschaffungsgrund().contains(lfm.getGrund())) {
                     result.add(lbList.get(i));
                 }
                 
@@ -99,6 +100,7 @@ public class LagerbestandCollection<Lagerbestand> extends ArrayList {
         for(model.Lagerbestand lb1 : result){
             add(lb1);
         }
+        System.out.println("ResultList.size() "+result.size());
         return this;
     }
     

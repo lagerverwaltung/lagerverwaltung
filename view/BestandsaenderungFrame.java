@@ -107,6 +107,32 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         
     }
     
+    
+    
+    BestandsaenderungFrame(boolean auslagern, Lagerbestand lb) {
+        this();
+        this.auslagern = auslagern;
+        lblEinlagern.setText("Teile auslagern");
+        einlagernButton.setText("Teile auslagern");
+        this.txfTeilID.setText("" + lb.getTeil().getIdentnummer());
+        this.txaAnschaffungsgrund.setText(lb.getAnschaffungsgrund());
+        this.txfTeilID.setEditable(false);
+        this.txfTeilID.setEnabled(false);
+        this.txaAnschaffungsgrund.setEditable(true);
+        this.txfHaltbarkeitsdatum.setVisible(false);
+        this.lblHaltbarkeitsdatum.setVisible(false);
+        this.cbxFachTyp.setEnabled(false);
+        this.cbxFachX.setEnabled(false);
+        this.cbxFachY.setEnabled(false);
+        this.cbxFachZ.setEnabled(false);
+        this.cbxFachX.setSelectedItem(lb.getLagerfach().getX());
+        this.cbxFachY.setSelectedItem(lb.getLagerfach().getY());
+        this.cbxFachZ.setSelectedItem(lb.getLagerfach().getZ());
+        this.cbxFachTyp.setSelectedItem(lb.getLagerfach().getLager().getLagerortCode());
+        this.fachid = fachid;
+        this.teilid = lb.getTeil().getIdentnummer();
+        this.lblHinweisDatum.setVisible(false);
+    }
         //Teil auslagern aus der Registerkarte Lagerbestand
 
         BestandsaenderungFrame(boolean auslagern, int id,String anschGr, int x, int y, int z, Lager.Lagerort lo, int fachid, int menge) {

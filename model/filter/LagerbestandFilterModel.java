@@ -27,7 +27,7 @@ public class LagerbestandFilterModel {
         z = 0;
         vonMenge = 0;
         bisMenge = Integer.MAX_VALUE;
-        grund = "";
+        grund = "*";
     }
 
     /**
