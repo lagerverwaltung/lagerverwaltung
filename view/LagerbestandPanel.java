@@ -238,6 +238,7 @@ public class LagerbestandPanel extends javax.swing.JPanel {
     private void btnTeilUmlagernActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTeilUmlagernActionPerformed
         int selectedId;
         if (tabMaintable.getSelectedRow() >= 0) {
+            /*
             selectedId = Integer.parseInt(tabMaintable.getValueAt(tabMaintable.getSelectedRow(), 6).toString());
             Lager.Lagerort lo = (Lager.Lagerort) tabMaintable.getValueAt(tabMaintable.getSelectedRow(), 1);
             int x = Integer.parseInt(tabMaintable.getValueAt(tabMaintable.getSelectedRow(), 2).toString());
@@ -248,22 +249,35 @@ public class LagerbestandPanel extends javax.swing.JPanel {
            
             
             UmlagernFrame umlagernframe = new UmlagernFrame(true, selectedId,x,y,z,lo);
-            umlagernframe.setVisible(true);
+            */
+            int fachId = Integer.parseInt(tabMaintable.getValueAt(tabMaintable.getSelectedRow(), 0).toString());
+            int teilId = Integer.parseInt(tabMaintable.getValueAt(tabMaintable.getSelectedRow(), 6).toString());
+            int lagerbestandId = 0;
+            Lagerbestand lb = new Lagerbestand();
             try {
-                umlagernframe.initUmlagernObj(selectedId);
+                lagerbestandId = Lagerbestand.getLagerbestandID(teilId, fachId);
+                lb = Lagerbestand.getLagerbestand(lagerbestandId);
+            } catch (SQLException ex) {
+                Logger.getLogger(LagerbestandPanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            UmlagernFrame umlagernFrame = new UmlagernFrame(true, lb);
+            umlagernFrame.setVisible(true);
+            try {
+                umlagernFrame.initUmlagernObj(lagerbestandId);
             } catch (SQLException ex) {
                 Misc.printSQLException(mainFrame, ex);
             }
-            umlagernframe.setTable(tabMaintable);
+            umlagernFrame.setTable(tabMaintable);
         } else {
             Misc.createErrorDialog(mainFrame, "Es muss Teil ausgewählt werden");
         }
         
     }//GEN-LAST:event_btnTeilUmlagernActionPerformed
+    
     /**
      * Formulaar Teile Auslager mit Daten()ID,Anschaffungsgrund und Haltbarkeitsdatum befüllenbefüllen
     */
-
     private void btnTeilAuslagernActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTeilAuslagernActionPerformed
 
         if (tabMaintable.getSelectedRow() >= 0) {

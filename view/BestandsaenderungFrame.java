@@ -261,6 +261,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
     }
      
     /*
+     * @author ssinger
     * Läd Comboboxen für Hochlager
     */
     private void loadHlCbx() throws SQLException{
@@ -286,7 +287,8 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         }
     }
 
-    /*
+    /**
+     * @author ssinger
      * läd ComboBoxen für Freilagern
      */
     public void loadFlCbx() throws SQLException {

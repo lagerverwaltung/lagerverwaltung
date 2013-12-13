@@ -5,17 +5,11 @@
 package view;
 
 import java.sql.SQLException;
-import java.text.Format;
-import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JTable;
 import model.Lager;
-//import model.table.LagerbestandTableModel;
-//import model.collection.LagerbestandCollection;
 import model.Lagerbestand;
-import model.Warenbewegung;
-import view.BestandsaenderungFrame;
 
 /**
  *
@@ -27,7 +21,7 @@ public class UmlagernFrame extends javax.swing.JFrame {
     JTable lagerBestandtable;
     int lagerbestandId;
     int fachid;
-    int teilid;
+    int teilId;
 
     /**
      * Creates new form UmlagernFrame
@@ -55,13 +49,44 @@ public class UmlagernFrame extends javax.swing.JFrame {
         
         
     }
+    /**
+     * @author artjom, ssinger
+     * @param split false
+     * @param lb 
+     *  Erzeugt das UmlagernFrame und setzt die
+     *  jeweiligen Formularfelder wie im übergebenen Lagerbestand.
+     */
+    public UmlagernFrame(boolean split, Lagerbestand lb){
+        this();
+        this.split = split;
+        teilId = lb.getTeil().getIdentnummer();
+        String btnText = "Teile Umlagern";
+        lblUmlagern.setText(btnText);
+        btnUmlagern.setText(btnText);
+        txfTeilID.setText(String.valueOf(lb.getTeil().getIdentnummer()));
+        this.txfTeilID.setEditable(false);
+        this.txfTeilID.setEnabled(false);
+       
+        cbxQuelleLagertyp.setSelectedItem(lb.getLagerfach().getLager().getLagerortCode());
+        this.cbxQuelleX.setSelectedItem(lb.getLagerfach().getX());
+        this.cbxQuelleY.setSelectedItem(lb.getLagerfach().getY());
+        this.cbxQuelleZ.setSelectedItem(lb.getLagerfach().getZ());
+       
+        this.cbxQuelleLagertyp.setEnabled(false);
+        this.cbxQuelleX.setEnabled(false);
+        this.cbxQuelleY.setEnabled(false);
+        this.cbxQuelleZ.setEnabled(false);
+    }
     
+    /*
+     * debrecated
+     */
     public UmlagernFrame(boolean split, int id, int x, int y, int z,Lager.Lagerort lo) {
         
         this();
         this.split = split;
       //  this.fachid=fachid;
-        this.teilid=id;
+        this.teilId=id;
         //  panSplitl.setVisible(split);
         //  panUmlagern.setVisible(!split);
         String text = "Teile Umlagern";
@@ -600,7 +625,19 @@ public class UmlagernFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_cbxQuelleLagertypActionPerformed
 
     private void cbxZiel0LagertypActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxZiel0LagertypActionPerformed
-        // TODO add your handling code here:
+        if (cbxZiel0Lagertyp.getSelectedItem().equals("HL")) {
+            try {
+                loadHlCbxZiel();
+            } catch (SQLException ex) {
+                Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            try {
+                loadFlCbxZiel();
+            } catch (SQLException ex) {
+                Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }//GEN-LAST:event_cbxZiel0LagertypActionPerformed
 
     /**
