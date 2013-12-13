@@ -129,7 +129,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         this.cbxFachY.setSelectedItem(lb.getLagerfach().getY());
         this.cbxFachZ.setSelectedItem(lb.getLagerfach().getZ());
         this.cbxFachTyp.setSelectedItem(lb.getLagerfach().getLager().getLagerortCode());
-        this.fachid = fachid;
+        this.fachid = lb.getLagerfach().getFachnummer();
         this.teilid = lb.getTeil().getIdentnummer();
         this.lblHinweisDatum.setVisible(false);
     }
