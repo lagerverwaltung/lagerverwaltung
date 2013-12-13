@@ -65,7 +65,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
     
     
       
-    //Teil einlagern aus der Registerkarte Teilebestand/Lagerbestand
+    //Teil einlagern aus der Registerkarte Teilebestand
     BestandsaenderungFrame(boolean einlagern, int id) {
         this();
         this.einlagern = einlagern;
@@ -128,7 +128,8 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
     /**
      * debrecated
      */
-    BestandsaenderungFrame(boolean einlagern, int id,boolean bestehenderLagerbestand,int x,int y, int z,Lager.Lagerort lo, int fachid,String anschGr) {        this();
+    BestandsaenderungFrame(boolean einlagern, int id,boolean bestehenderLagerbestand,int x,int y, int z,Lager.Lagerort lo, int fachid,String anschGr) {        
+        this();
         this.einlagern = einlagern;
         this.bestehenderLagerbestand=bestehenderLagerbestand;
         this.fachid=fachid;

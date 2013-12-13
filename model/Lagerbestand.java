@@ -105,10 +105,10 @@ public class Lagerbestand {
     public void setAnschaffungsgrund(String anschaffungsgrund) {
         this.anschaffungsgrund = anschaffungsgrund;
     }
-	//ab hier Artjoms Code, angepasst an Lagerfach-Model,Ausgabe Lagebestands
     
-        public static Lagerbestand loadLagerObjekt(int id) throws SQLException{
-            Dao<Lagerbestand,Integer> lagerbestandDao = DatabaseManager.getInstance().getLagerbestandDao();
+
+    public static Lagerbestand loadLagerObjekt(int id) throws SQLException {
+        Dao<Lagerbestand, Integer> lagerbestandDao = DatabaseManager.getInstance().getLagerbestandDao();
         try {
             List<Lagerbestand> lb = lagerbestandDao.queryForEq("lagerbestandID", id);
             if(lb.size()>0){
