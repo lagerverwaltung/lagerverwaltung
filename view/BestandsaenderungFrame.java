@@ -84,7 +84,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
             }
     }
     /**
-     * @author ssinger
+     * @author smodlich, ssinger
      * @param bestehenderLagerbestand ?
      * @param einlagern Vorgang Einlagern
      * @param lagerbestand betroffener Lagerbestand
@@ -105,8 +105,8 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
     }
     
     /**
-     * @author ssinger
-     * @param auslagern Vorgangsrichtung
+     * @author smodlich, ssinger
+     * @param auslagern Vorgang Auslagern
      * @param lagerbestand betroffener Lagerbestand Erzeugt das
      * BestandsänderungFrame als "Auslagern" und setzt die jeweiligen
      * Formularfelder wie im übergebenen Lagerbestand.
@@ -121,6 +121,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         loadTeilIdUndGrund(lagerbestand);
         this.txaAnschaffungsgrund.setEditable(true);        
         loadQuellComboBoxen(lagerbestand);
+        this.fachid = lagerbestand.getLagerfach().getFachnummer();
         this.teilid = lagerbestand.getTeil().getIdentnummer();
         this.lblHinweisDatum.setVisible(false);
     }
@@ -225,6 +226,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         this.cbxFachZ.setEnabled(false);
         this.cbxFachTyp.setEnabled(false);
     }
+    
     //Table setzen
     public void setTable(JTable t)
     {
