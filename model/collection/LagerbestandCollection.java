@@ -82,7 +82,7 @@ public class LagerbestandCollection<Lagerbestand> extends ArrayList {
         List<model.Lagerbestand> resultA = new ArrayList();
         List<model.Lagerbestand> resultB = new ArrayList();
         List<model.Lagerbestand> lbList = lagerbestandDao.queryForAll();
-        resultB = lbList.
+        //resultB = lbList.
         
         System.out.println("lbList-size() "+lbList.size());
         if (lbList.size() > 0) {

@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JTable;
+import model.Teilebestand;
 import model.collection.TeilebestandCollection;
 import model.filter.TeilebestandFilterModel;
 import model.table.TeileTableModel;
