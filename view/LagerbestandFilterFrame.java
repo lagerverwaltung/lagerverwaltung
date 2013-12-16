@@ -83,9 +83,9 @@ public class LagerbestandFilterFrame extends javax.swing.JFrame {
         cbxZ.removeAllItems();
         cbxX.removeAllItems();
         cbxY.removeAllItems();
-        cbxZ.addItem("x");
-        cbxX.addItem("y");
-        cbxY.addItem("z");
+        cbxZ.addItem("z");
+        cbxX.addItem("x");
+        cbxY.addItem("y");
 
         Lager hl = Lager.getLager(Lager.Lagerort.freilager);
         int x = hl.getHoehe();
@@ -294,15 +294,11 @@ public class LagerbestandFilterFrame extends javax.swing.JFrame {
             lfm.setBisMenge(Integer.parseInt(txfMengeBis.getText()));
         }
         if (!txfGrund.getText().isEmpty()) {
-            lfm.setGrund(txfGrund.getSelectedText());
+            lfm.setGrund(txfGrund.getText());
         }
         try{
             LagerbestandCollection lbc = new LagerbestandCollection();
             LagerbestandCollection result = lbc.addFilter(lfm);
-            for(int i = 0; i < result.size(); i++){
-                System.out.println(lbc.addFilter(lfm).get(i).toString());
-            }
-            
         } catch (SQLException ex) {
             Logger.getLogger(LagerbestandFilterFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -313,7 +309,7 @@ public class LagerbestandFilterFrame extends javax.swing.JFrame {
             case "HL":
                 return Lager.Lagerort.hochregal;
             case "FL":
-                return Lager.Lagerort.hochregal;
+                return Lager.Lagerort.freilager;
             default:
                 return null;
         }

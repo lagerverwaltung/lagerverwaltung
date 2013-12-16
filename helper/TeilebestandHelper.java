@@ -40,7 +40,7 @@ public class TeilebestandHelper {
     String EMPTY_ZEICHNUNG_TEXT = "Es muss eine Zeichnungsnummer eingegeben werden.";
 
     int EMPTY_SIZE_ID = 4;
-    String EMPTY_SIZE_TEXT = "Es muss eine Teilröße eingegeben werden.";
+    String EMPTY_SIZE_TEXT = "Es muss eine Teilgröße eingegeben werden.";
 
     int PRICE_NOT_FLOAT_ID = 5;
     String PRICE_NOT_FLOAT_TEXT = "Der Preis muss eine Fließkommazahl sein.";

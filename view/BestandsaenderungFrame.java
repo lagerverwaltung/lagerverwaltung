@@ -15,7 +15,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.TableColumn;
@@ -55,14 +54,18 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
     public BestandsaenderungFrame(){
         initComponents();
         setLocationRelativeTo(null);
+        cbxFachTyp.addItem("HL");
+        cbxFachTyp.addItem("FL");
         try {
             loadHlCbx();
         } catch (SQLException ex) {
             Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, ex); 
         }
     }
+    
+    
       
-    //Teil einlagern aus der Registerkarte Teilebestand/Lagerbestand
+    //Teil einlagern aus der Registerkarte Teilebestand
     BestandsaenderungFrame(boolean einlagern, int id) {
         this();
         this.einlagern = einlagern;
@@ -72,6 +75,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         this.txfTeilID.setEditable(false);
         this.txfTeilID.setEnabled(false);
         
+
             try {
                 loadHlCbx();
             } catch (SQLException ex) {
@@ -79,7 +83,52 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
             }
     }
     
-    BestandsaenderungFrame(boolean einlagern, int id,boolean bestehenderLagerbestand,int x,int y, int z,String lo, int fachid,String anschGr) {
+    /**
+     * @author smodlich, ssinger
+     * @param bestehenderLagerbestand ?
+     * @param einlagern Vorgang Einlagern
+     * @param lagerbestand betroffener Lagerbestand
+     *  Erzeugt das BestandsänderungFrame als "Einlagern" und setzt die
+     *  jeweiligen Formularfelder wie im übergebenen Lagerbestand.
+     */
+    BestandsaenderungFrame(boolean bestehenderLagerbestand, boolean einlagern, Lagerbestand lagerbestand) {
+        this();
+        this.einlagern = einlagern;
+        this.bestehenderLagerbestand = bestehenderLagerbestand;
+        this.fachid = lagerbestand.getLagerfach().getFachnummer();
+        this.teilid = lagerbestand.getTeil().getIdentnummer();
+        lblEinlagern.setText("Teile einlagern");
+        einlagernButton.setText("Teile einlagern");
+        
+        loadTeilIdUndGrund(lagerbestand);
+        loadQuellComboBoxen(lagerbestand);
+    }
+    
+    /**
+     * @author smodlich, ssinger
+     * @param auslagern Vorgang Auslagern
+     * @param lagerbestand betroffener Lagerbestand Erzeugt das
+     * BestandsänderungFrame als "Auslagern" und setzt die jeweiligen
+     * Formularfelder wie im übergebenen Lagerbestand.
+     */
+    public BestandsaenderungFrame(boolean auslagern, Lagerbestand lagerbestand) {
+        this();
+        this.auslagern = auslagern;
+        lblEinlagern.setText("Teile auslagern");
+        einlagernButton.setText("Teile auslagern");
+        this.txfHaltbarkeitsdatum.setVisible(false);
+        this.lblHaltbarkeitsdatum.setVisible(false);
+        loadTeilIdUndGrund(lagerbestand);
+        this.txaAnschaffungsgrund.setEditable(true);        
+        loadQuellComboBoxen(lagerbestand);
+        this.fachid = lagerbestand.getLagerfach().getFachnummer();
+        this.teilid = lagerbestand.getTeil().getIdentnummer();
+        this.lblHinweisDatum.setVisible(false);
+    }
+    /**
+     * debrecated
+     */
+    BestandsaenderungFrame(boolean einlagern, int id,boolean bestehenderLagerbestand,int x,int y, int z,Lager.Lagerort lo, int fachid,String anschGr) {        
         this();
         this.einlagern = einlagern;
         this.bestehenderLagerbestand=bestehenderLagerbestand;
@@ -95,7 +144,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         this.cbxFachX.setSelectedItem(x);
         this.cbxFachY.setSelectedItem(y);
         this.cbxFachZ.setSelectedItem(z);
-        this.cbxFachTyp.setSelectedItem(lo);
+        loadLagerOrtCbx(lo);
         
         this.cbxFachX.setEnabled(false);
         this.cbxFachY.setEnabled(false);
@@ -103,9 +152,12 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         this.cbxFachTyp.setEnabled(false);
         
     }
-    
-        //Teil auslagern aus der Registerkarte Lagerbestand
-        BestandsaenderungFrame(boolean auslagern, int id,String anschGr, int x, int y, int z, String lo, int fachid, int menge) {
+   
+
+    /*
+     * debrecated
+     */
+        BestandsaenderungFrame(boolean auslagern, int id,String anschGr, int x, int y, int z, Lager.Lagerort lo, int fachid, int menge) {
           
             this();
             this.auslagern = auslagern;
@@ -125,7 +177,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
             this.cbxFachX.setSelectedItem(x);
             this.cbxFachY.setSelectedItem(y);
             this.cbxFachZ.setSelectedItem(z);
-            this.cbxFachTyp.setSelectedItem(lo); //Lagerort noch BUGGY!
+            loadLagerOrtCbx(lo); //Lagerort nicht mehr BUGGY!
             this.fachid=fachid;
             this.teilid=id;
             this.lblHinweisDatum.setVisible(false);
@@ -137,11 +189,46 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         this.splitten = splitten;
         lblEinlagern.setText("Teile splitten");
         einlagernButton.setText("Teile splitten");
+
         this.txfTeilID.setEditable(false);
+
         this.txfHaltbarkeitsdatum.setVisible(false);
         this.lblHaltbarkeitsdatum.setVisible(false);
     }
 
+    /**
+     * @author ssinger
+     * @param lagerbestand 
+     * setzt Anschaffungsgrund und TeilID, setzt Textfeld TeilID
+     * Editable(false) und Diabled es
+     */
+    private void loadTeilIdUndGrund(Lagerbestand lagerbestand){
+        this.txaAnschaffungsgrund.setText(lagerbestand.getAnschaffungsgrund());
+        this.txfTeilID.setText("" + lagerbestand.getTeil().getIdentnummer());
+        this.txfTeilID.setEditable(false);
+        this.txfTeilID.setEnabled(false);
+    }
+    
+    
+    /**
+     * @author ssinger
+     * @param lagerbestand 
+     * läd die oberste Reihe der ComboBOxen mit den Daten des
+     * übergebenen Lagerbstandes und setzt Enabled(false)
+     */
+    private void loadQuellComboBoxen(Lagerbestand lagerbestand){
+        
+        this.cbxFachTyp.setSelectedItem(lagerbestand.getLagerfach().getLager().getLagerortCode());
+        this.cbxFachX.setSelectedItem(lagerbestand.getLagerfach().getX());
+        this.cbxFachY.setSelectedItem(lagerbestand.getLagerfach().getY());
+        this.cbxFachZ.setSelectedItem(lagerbestand.getLagerfach().getZ());
+       
+        this.cbxFachX.setEnabled(false);
+        this.cbxFachY.setEnabled(false);
+        this.cbxFachZ.setEnabled(false);
+        this.cbxFachTyp.setEnabled(false);
+    }
+    
     //Table setzen
     public void setTable(JTable t)
     {
@@ -175,6 +262,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
     }
      
     /*
+     * @author ssinger
     * Läd Comboboxen für Hochlager
     */
     private void loadHlCbx() throws SQLException{
@@ -200,7 +288,8 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         }
     }
 
-    /*
+    /**
+     * @author ssinger
      * läd ComboBoxen für Freilagern
      */
     public void loadFlCbx() throws SQLException {
@@ -225,7 +314,18 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
             cbxFachY.addItem(i);
         }
     }
-     
+
+    /*
+     * debrecated
+     */
+    private void loadLagerOrtCbx(Lager.Lagerort s){
+       if (s.equals(Lager.Lagerort.freilager)){
+           cbxFachTyp.setSelectedItem("FL");
+       } 
+       else{
+           cbxFachTyp.setSelectedItem("HL");
+       }
+    }
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -281,7 +381,8 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
             }
         });
 
-        cbxFachTyp.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "HL", "FL"}));
+
+        cbxFachTyp.setModel(new javax.swing.DefaultComboBoxModel());
         cbxFachTyp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbxFachTypActionPerformed(evt);
