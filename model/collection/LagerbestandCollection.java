@@ -10,12 +10,12 @@ import com.j256.ormlite.stmt.QueryBuilder;
 import helper.DatabaseManager;
 import java.sql.SQLException;
 import java.util.ArrayList; 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.Lager;
 import model.Lagerbestand;
-import model.Lagerfach;
 import model.filter.LagerbestandFilterModel;
 
 /**
@@ -64,41 +64,88 @@ public class LagerbestandCollection<Lagerbestand> extends ArrayList {
         }
         return singleton;
     }
-    //ab hier 2.Sprint
+    
+    /**
+     * @author ssinger
+     * @param lfm
+     * @return gefilterte Liste<Lagerbestand>
+     * @throws SQLException 
+     * Nutzt als Ausgangslage eine Liste aller Lagerbestands-Objekte, führt für
+     * die Filterung für jedes LagerbestandFilterModel-Attribut eine Schleife
+     * aus. Die Zwischenspeicherung führt über ein Listen - Ping - Pong
+     * statt. Gibt die gefilterte Collection zurück.
+     */
     public LagerbestandCollection<Lagerbestand> addFilter(LagerbestandFilterModel lfm) throws SQLException{
        
-        List<model.Lagerbestand> result = new ArrayList();
-        Dao<model.Lagerbestand, Integer> lagerbestandDao = DatabaseManager.getInstance().getLagerbestandDao();
-        List<model.Lagerbestand> lbList = lagerbestandDao.queryForAll();
         
-        if(lbList.size() > 0){
+        Dao<model.Lagerbestand, Integer> lagerbestandDao = DatabaseManager.getInstance().getLagerbestandDao();
+        List<model.Lagerbestand> resultA = new ArrayList();
+        List<model.Lagerbestand> resultB = new ArrayList();
+        List<model.Lagerbestand> lbList = lagerbestandDao.queryForAll();
+        //resultB = lbList.
+        
+        System.out.println("lbList-size() "+lbList.size());
+        if (lbList.size() > 0) {
             for (int i = 0; i < lbList.size(); i++) {
-                if(lbList.get(i).getLagerfach().getX() == lfm.getX()){
-                  result.add(lbList.get(i));  
+                if (lbList.get(i).getLagerfach().getX() == lfm.getX()
+                        || lfm.getX() == 0 ) {
+                    resultA.add(lbList.get(i));
                 }
-                if (lbList.get(i).getLagerfach().getY() == lfm.getY()) {
-                    result.add(lbList.get(i));
-                }
-                if (lbList.get(i).getLagerfach().getZ() == lfm.getZ()) {
-                    result.add(lbList.get(i));
-                }
-                if (lbList.get(i).getLagerfach().getLager().getLagerort().equals(lfm.getLagerTyp())) {
-                    result.add(lbList.get(i));
-                }
-                if (lbList.get(i).getMenge() <= lfm.getVonMenge() 
-                        && lbList.get(i).getMenge() >= lfm.getBisMenge()
-                        && lbList.get(i).getMenge() != 0) {
-                    result.add(lbList.get(i));
-                }
-                if (lbList.get(i).getAnschaffungsgrund().contains(lfm.getGrund())) {
-                    result.add(lbList.get(i));
-                }
-                
             }
+            
+            for (int i = 0; i < resultA.size(); i++) {
+                if (resultA.get(i).getLagerfach().getY() == lfm.getY()
+                        || lfm.getY() == 0 ) {
+                    resultB.add(resultA.get(i));
+                }
+            }
+            resultA.clear();
+            
+            for (int i = 0; i < resultB.size(); i++) {
+                if (resultB.get(i).getLagerfach().getZ() == lfm.getZ()
+                        || lfm.getY() == 0 ) {
+                    resultA.add(resultB.get(i));
+                }
+            }
+            resultB.clear();
+            
+            for (int i = 0; i < resultA.size(); i++) {
+                if (resultA.get(i).getLagerfach().getLager().getLagerort().equals(lfm.getLagerTyp())
+                        || lfm.getLagerTyp() == null) {
+                    resultB.add(resultA.get(i));
+                }
+            }
+            resultA.clear();
+            
+            for (int i = 0; i < resultB.size(); i++) {
+                if ((resultB.get(i).getMenge() >= lfm.getVonMenge()
+                        && resultB.get(i).getMenge() <= lfm.getBisMenge())) {
+                    resultA.add(resultB.get(i));
+                }
+            }
+            resultB.clear();
+            
+            for (int i = 0; i < resultA.size(); i++) {
+                if ((lfm.getGrund() == null)
+                        || resultA.get(i).getAnschaffungsgrund().contains(lfm.getGrund())) {
+                    resultB.add(resultA.get(i));
+                }
+            }
+            resultA.clear();
+            
+            for(int i = 0; i < resultB.size(); i++){
+                if(resultB.get(i).getMenge() > 0){
+                    resultA.add(resultB.get(i));
+                }
+            }
+            
+
         }
-        for(model.Lagerbestand lb1 : result){
+
+        for(model.Lagerbestand lb1 : resultA){
             add(lb1);
         }
+        System.out.println("ResultList.size() "+resultA.size());
         return this;
     }
     

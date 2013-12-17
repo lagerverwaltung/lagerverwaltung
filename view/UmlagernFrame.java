@@ -5,17 +5,11 @@
 package view;
 
 import java.sql.SQLException;
-import java.text.Format;
-import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JTable;
 import model.Lager;
-//import model.table.LagerbestandTableModel;
-//import model.collection.LagerbestandCollection;
 import model.Lagerbestand;
-import model.Warenbewegung;
-import view.BestandsaenderungFrame;
 
 /**
  *
@@ -27,7 +21,7 @@ public class UmlagernFrame extends javax.swing.JFrame {
     JTable lagerBestandtable;
     int lagerbestandId;
     int fachid;
-    int teilid;
+    int teilId;
 
     /**
      * Creates new form UmlagernFrame
@@ -35,7 +29,6 @@ public class UmlagernFrame extends javax.swing.JFrame {
     public UmlagernFrame() {
         initComponents();
         setLocationRelativeTo(null);
-        panSplitl.setVisible(false);
         cbxQuelleLagertyp.addItem("HL");
         cbxQuelleLagertyp.addItem("FL");
         try {
@@ -50,18 +43,49 @@ public class UmlagernFrame extends javax.swing.JFrame {
             Logger.getLogger(UmlagernFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        panSplitl.setVisible(false);
+        pnlWeitereZF.setVisible(true);
         
         
         
     }
+    /**
+     * @author artjom, ssinger
+     * @param split false
+     * @param lb 
+     *  Erzeugt das UmlagernFrame und setzt die
+     *  jeweiligen Formularfelder wie im übergebenen Lagerbestand.
+     */
+    public UmlagernFrame(boolean split, Lagerbestand lb){
+        this();
+        this.split = split;
+        teilId = lb.getTeil().getIdentnummer();
+        String btnText = "Teile Umlagern";
+        lblUmlagern.setText(btnText);
+        btnUmlagern.setText(btnText);
+        txfTeilID.setText(String.valueOf(lb.getTeil().getIdentnummer()));
+        this.txfTeilID.setEditable(false);
+        this.txfTeilID.setEnabled(false);
+       
+        cbxQuelleLagertyp.setSelectedItem(lb.getLagerfach().getLager().getLagerortCode());
+        this.cbxQuelleX.setSelectedItem(lb.getLagerfach().getX());
+        this.cbxQuelleY.setSelectedItem(lb.getLagerfach().getY());
+        this.cbxQuelleZ.setSelectedItem(lb.getLagerfach().getZ());
+       
+        this.cbxQuelleLagertyp.setEnabled(false);
+        this.cbxQuelleX.setEnabled(false);
+        this.cbxQuelleY.setEnabled(false);
+        this.cbxQuelleZ.setEnabled(false);
+    }
     
+    /*
+     * debrecated
+     */
     public UmlagernFrame(boolean split, int id, int x, int y, int z,Lager.Lagerort lo) {
         
         this();
         this.split = split;
       //  this.fachid=fachid;
-        this.teilid=id;
+        this.teilId=id;
         //  panSplitl.setVisible(split);
         //  panUmlagern.setVisible(!split);
         String text = "Teile Umlagern";
@@ -218,28 +242,13 @@ public class UmlagernFrame extends javax.swing.JFrame {
         lblQuellfach = new javax.swing.JLabel();
         btnUmlagern = new javax.swing.JButton();
         lblTeilID = new javax.swing.JLabel();
-        panSplitl = new javax.swing.JPanel();
-        btnWeiteresZielhinzufügen = new javax.swing.JButton();
-        lblZiel1 = new javax.swing.JLabel();
-        cbxZ1Lagertyp = new javax.swing.JComboBox();
-        cbxZ1X = new javax.swing.JComboBox();
-        cbxZ1Y = new javax.swing.JComboBox();
-        cbxZ1Z = new javax.swing.JComboBox();
-        cbxZ2Z = new javax.swing.JComboBox();
-        cbxz2Y = new javax.swing.JComboBox();
-        cbxZ2X = new javax.swing.JComboBox();
-        cbxz2Lagertyp = new javax.swing.JComboBox();
-        lblZiel2 = new javax.swing.JLabel();
-        lblZiel1Zielmenge = new javax.swing.JLabel();
-        txfZiel1Zielmenge = new javax.swing.JTextField();
-        lblZiel2Zielmenge = new javax.swing.JLabel();
-        txfZiel2Zielmenge = new javax.swing.JTextField();
         panUmlagern = new javax.swing.JPanel();
         lblZielLagerfach = new javax.swing.JLabel();
         cbxZiel0Lagertyp = new javax.swing.JComboBox();
         cbxZiel0Z = new javax.swing.JComboBox();
         cbxZiel0Y = new javax.swing.JComboBox();
         cbxZiel0X = new javax.swing.JComboBox();
+        panSplitl = new javax.swing.JPanel();
         panQuellFach = new javax.swing.JPanel();
         cbxQuelleY = new javax.swing.JComboBox();
         cbxQuelleLagertyp = new javax.swing.JComboBox();
@@ -250,6 +259,12 @@ public class UmlagernFrame extends javax.swing.JFrame {
         lblY = new javax.swing.JLabel();
         lblLager = new javax.swing.JLabel();
         txfTeilID = new javax.swing.JTextField();
+        pnlWeitereZF = new javax.swing.JPanel();
+        lblWeitereZielFaecher = new javax.swing.JLabel();
+        txfWeitereZF = new javax.swing.JTextField();
+        btnAnzahlOK = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        lblWeitereZF = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -267,116 +282,6 @@ public class UmlagernFrame extends javax.swing.JFrame {
         });
 
         lblTeilID.setText("Teil ID:");
-
-        btnWeiteresZielhinzufügen.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        btnWeiteresZielhinzufügen.setText("Weiteres Ziel hinzufügen");
-
-        lblZiel1.setText("Ziel 1:");
-
-        cbxZ1Lagertyp.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbxZ1LagertypActionPerformed(evt);
-            }
-        });
-
-        cbxZ1X.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
-        cbxZ1X.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbxZ1XActionPerformed(evt);
-            }
-        });
-
-        cbxZ1Y.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
-
-        cbxZ1Z.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
-
-        cbxZ2Z.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
-
-        cbxz2Y.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
-
-        cbxZ2X.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
-        cbxZ2X.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbxZ2XActionPerformed(evt);
-            }
-        });
-
-        cbxz2Lagertyp.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "FL", "RL" }));
-
-        lblZiel2.setText("Ziel 2:");
-
-        lblZiel1Zielmenge.setText("Zielmenge:");
-
-        lblZiel2Zielmenge.setText("Zielmenge:");
-
-        javax.swing.GroupLayout panSplitlLayout = new javax.swing.GroupLayout(panSplitl);
-        panSplitl.setLayout(panSplitlLayout);
-        panSplitlLayout.setHorizontalGroup(
-            panSplitlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panSplitlLayout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addGroup(panSplitlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnWeiteresZielhinzufügen)
-                    .addGroup(panSplitlLayout.createSequentialGroup()
-                        .addGroup(panSplitlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblZiel2)
-                            .addComponent(lblZiel1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(panSplitlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panSplitlLayout.createSequentialGroup()
-                                .addComponent(cbxZ1Lagertyp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cbxZ1X, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cbxZ1Y, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cbxZ1Z, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(panSplitlLayout.createSequentialGroup()
-                                .addComponent(cbxz2Lagertyp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cbxZ2X, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cbxz2Y, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cbxZ2Z, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(29, 29, 29)
-                        .addGroup(panSplitlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lblZiel2Zielmenge, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblZiel1Zielmenge, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGroup(panSplitlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panSplitlLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txfZiel1Zielmenge, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panSplitlLayout.createSequentialGroup()
-                                .addGap(7, 7, 7)
-                                .addComponent(txfZiel2Zielmenge, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(31, 31, Short.MAX_VALUE))
-        );
-        panSplitlLayout.setVerticalGroup(
-            panSplitlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panSplitlLayout.createSequentialGroup()
-                .addGap(1, 1, 1)
-                .addGroup(panSplitlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbxZ1Lagertyp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbxZ1X, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbxZ1Y, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbxZ1Z, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblZiel1)
-                    .addComponent(lblZiel1Zielmenge)
-                    .addComponent(txfZiel1Zielmenge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(panSplitlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbxZ2X, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbxz2Lagertyp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbxz2Y, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbxZ2Z, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblZiel2)
-                    .addComponent(lblZiel2Zielmenge)
-                    .addComponent(txfZiel2Zielmenge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(btnWeiteresZielhinzufügen)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
 
         lblZielLagerfach.setText("Ziel-Lagerfachadresse nach:");
 
@@ -398,21 +303,34 @@ public class UmlagernFrame extends javax.swing.JFrame {
             }
         });
 
+        javax.swing.GroupLayout panSplitlLayout = new javax.swing.GroupLayout(panSplitl);
+        panSplitl.setLayout(panSplitlLayout);
+        panSplitlLayout.setHorizontalGroup(
+            panSplitlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 375, Short.MAX_VALUE)
+        );
+        panSplitlLayout.setVerticalGroup(
+            panSplitlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout panUmlagernLayout = new javax.swing.GroupLayout(panUmlagern);
         panUmlagern.setLayout(panUmlagernLayout);
         panUmlagernLayout.setHorizontalGroup(
             panUmlagernLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panUmlagernLayout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addComponent(lblZielLagerfach)
-                .addGap(18, 18, 18)
-                .addComponent(cbxZiel0Lagertyp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(cbxZiel0X, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cbxZiel0Y, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cbxZiel0Z, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(panUmlagernLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panSplitl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panUmlagernLayout.createSequentialGroup()
+                        .addComponent(lblZielLagerfach)
+                        .addGap(30, 30, 30)
+                        .addComponent(cbxZiel0Lagertyp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbxZiel0X, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbxZiel0Y, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbxZiel0Z, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panUmlagernLayout.setVerticalGroup(
@@ -423,11 +341,11 @@ public class UmlagernFrame extends javax.swing.JFrame {
                     .addGroup(panUmlagernLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(cbxZiel0Z)
                         .addComponent(cbxZiel0Y, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(cbxZiel0X, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panUmlagernLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(lblZielLagerfach)
-                        .addComponent(cbxZiel0Lagertyp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 0, 0))
+                        .addComponent(cbxZiel0X, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cbxZiel0Lagertyp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblZielLagerfach))
+                .addGap(55, 55, 55)
+                .addComponent(panSplitl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         cbxQuelleY.setModel(new javax.swing.DefaultComboBoxModel());
@@ -503,6 +421,42 @@ public class UmlagernFrame extends javax.swing.JFrame {
                     .addComponent(cbxQuelleY, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
+        lblWeitereZielFaecher.setText("Anzahl:");
+
+        btnAnzahlOK.setText("OK");
+        btnAnzahlOK.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAnzahlOKActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnlWeitereZFLayout = new javax.swing.GroupLayout(pnlWeitereZF);
+        pnlWeitereZF.setLayout(pnlWeitereZFLayout);
+        pnlWeitereZFLayout.setHorizontalGroup(
+            pnlWeitereZFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlWeitereZFLayout.createSequentialGroup()
+                .addComponent(lblWeitereZielFaecher)
+                .addGap(33, 33, 33)
+                .addComponent(txfWeitereZF, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addComponent(btnAnzahlOK)
+                .addContainerGap())
+        );
+        pnlWeitereZFLayout.setVerticalGroup(
+            pnlWeitereZFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlWeitereZFLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlWeitereZFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblWeitereZielFaecher)
+                    .addComponent(txfWeitereZF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAnzahlOK))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jLabel1.setText("weitere Ziel-Lagerfachadressen");
+
+        lblWeitereZF.setText("einfügen");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -510,11 +464,6 @@ public class UmlagernFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblUmlagern)
-                            .addComponent(panSplitl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(84, 84, 84))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
@@ -522,20 +471,28 @@ public class UmlagernFrame extends javax.swing.JFrame {
                                 .addComponent(btnUmlagern, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblUmzulagerndeMenge)
+                                    .addComponent(lblQuellfach)
+                                    .addComponent(lblTeilID))
+                                .addGap(47, 47, 47)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(lblUmzulagerndeMenge)
-                                            .addComponent(lblQuellfach)
-                                            .addComponent(lblTeilID))
-                                        .addGap(47, 47, 47)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(panQuellFach, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(txfUmzulagerndeMenge, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txfTeilID)))
-                                    .addComponent(panUmlagern, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addGap(21, 21, 21))))
+                                    .addComponent(panQuellFach, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txfUmzulagerndeMenge, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txfTeilID))
+                                .addGap(0, 153, Short.MAX_VALUE)))
+                        .addGap(21, 21, 21))
+                    .addComponent(panUmlagern, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblWeitereZF)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblUmlagern)
+                            .addComponent(pnlWeitereZF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -544,6 +501,7 @@ public class UmlagernFrame extends javax.swing.JFrame {
                 .addComponent(lblUmlagern)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panQuellFach, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(26, 26, 26)
@@ -555,13 +513,16 @@ public class UmlagernFrame extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblUmzulagerndeMenge)
-                            .addComponent(txfUmzulagerndeMenge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(panUmlagern, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)
-                        .addComponent(panSplitl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(panQuellFach, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txfUmzulagerndeMenge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(27, 27, 27)
+                .addComponent(panUmlagern, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(lblWeitereZF))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnlWeitereZF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 106, Short.MAX_VALUE)
                 .addComponent(btnUmlagern)
                 .addGap(32, 32, 32))
         );
@@ -583,25 +544,29 @@ public class UmlagernFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cbxZiel0XActionPerformed
 
-    private void cbxZ1XActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxZ1XActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbxZ1XActionPerformed
-
-    private void cbxZ2XActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxZ2XActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbxZ2XActionPerformed
-
-    private void cbxZ1LagertypActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxZ1LagertypActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbxZ1LagertypActionPerformed
-
     private void cbxQuelleLagertypActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxQuelleLagertypActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbxQuelleLagertypActionPerformed
 
     private void cbxZiel0LagertypActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxZiel0LagertypActionPerformed
-        // TODO add your handling code here:
+        if (cbxZiel0Lagertyp.getSelectedItem().equals("HL")) {
+            try {
+                loadHlCbxZiel();
+            } catch (SQLException ex) {
+                Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            try {
+                loadFlCbxZiel();
+            } catch (SQLException ex) {
+                Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }//GEN-LAST:event_cbxZiel0LagertypActionPerformed
+
+    private void btnAnzahlOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnzahlOKActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAnzahlOKActionPerformed
 
     /**
      * @param args the command line arguments
@@ -638,44 +603,35 @@ public class UmlagernFrame extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAnzahlOK;
     private javax.swing.JButton btnUmlagern;
-    private javax.swing.JButton btnWeiteresZielhinzufügen;
     private javax.swing.JComboBox cbxQuelleLagertyp;
     private javax.swing.JComboBox cbxQuelleX;
     private javax.swing.JComboBox cbxQuelleY;
     private javax.swing.JComboBox cbxQuelleZ;
-    private javax.swing.JComboBox cbxZ1Lagertyp;
-    private javax.swing.JComboBox cbxZ1X;
-    private javax.swing.JComboBox cbxZ1Y;
-    private javax.swing.JComboBox cbxZ1Z;
-    private javax.swing.JComboBox cbxZ2X;
-    private javax.swing.JComboBox cbxZ2Z;
     private javax.swing.JComboBox cbxZiel0Lagertyp;
     private javax.swing.JComboBox cbxZiel0X;
     private javax.swing.JComboBox cbxZiel0Y;
     private javax.swing.JComboBox cbxZiel0Z;
-    private javax.swing.JComboBox cbxz2Lagertyp;
-    private javax.swing.JComboBox cbxz2Y;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lblLager;
     private javax.swing.JLabel lblQuellfach;
     private javax.swing.JLabel lblTeilID;
     private javax.swing.JLabel lblUmlagern;
     private javax.swing.JLabel lblUmzulagerndeMenge;
+    private javax.swing.JToggleButton lblWeitereZF;
+    private javax.swing.JLabel lblWeitereZielFaecher;
     private javax.swing.JLabel lblX;
     private javax.swing.JLabel lblY;
     private javax.swing.JLabel lblZ;
-    private javax.swing.JLabel lblZiel1;
-    private javax.swing.JLabel lblZiel1Zielmenge;
-    private javax.swing.JLabel lblZiel2;
-    private javax.swing.JLabel lblZiel2Zielmenge;
     private javax.swing.JLabel lblZielLagerfach;
     private javax.swing.JPanel panQuellFach;
     private javax.swing.JPanel panSplitl;
     private javax.swing.JPanel panUmlagern;
+    private javax.swing.JPanel pnlWeitereZF;
     private javax.swing.JTextField txfTeilID;
     private javax.swing.JTextField txfUmzulagerndeMenge;
-    private javax.swing.JTextField txfZiel1Zielmenge;
-    private javax.swing.JTextField txfZiel2Zielmenge;
+    private javax.swing.JTextField txfWeitereZF;
     // End of variables declaration//GEN-END:variables
 }

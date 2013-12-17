@@ -30,6 +30,7 @@ public class LagerbestandHelper {
     int DATE_BEFORE_TODAY=5;
     String DATE_BEFORE_TODAY_TEXT="Das eingegebene Datum liegt vor dem heutigen Datum";
     
+    
     private static LagerbestandHelper singleton;
     public static LagerbestandHelper getInstance()
     {

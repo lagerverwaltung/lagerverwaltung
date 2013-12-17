@@ -87,14 +87,14 @@ public class Lagerfach {
     }
 
     /*
-    * gibt für das übergebene Lagerfach den belegten Platzbedarf in VE zurück
+    * @author ssinger
+    * gibt den belegten Platzbedarf des Fachs in VE zurück
     */
     public int getUsedVe() throws SQLException{
-        int fachId = fachnummer;
         int usedVe = 0;
         Dao<Teilebestand, Integer> teilebestandDao = DatabaseManager.getInstance().getTeilebestandDao();
         Dao<Lagerbestand, Integer> lagerbestandDao = DatabaseManager.getInstance().getLagerbestandDao();
-        List<Lagerbestand> lbList = lagerbestandDao.queryForEq("fachID", fachId);
+        List<Lagerbestand> lbList = lagerbestandDao.queryForEq("fachID", fachnummer);
 
         if (lbList.size() > 0) {
             for (int i = 0; i < lbList.size(); i++) {
@@ -115,6 +115,7 @@ public class Lagerfach {
     }
     
     /*
+     * @author ssinger
      * Gibt die Kapazität des Fachs in VE 
      */
     public int getMaxVe(){
@@ -129,13 +130,17 @@ public class Lagerfach {
         }
         return 0;
     }
-    
+    /*
+    * @author ssinger
+    * gibt die Anzahl der nicht belegten VE's zurück
+    */
     public int getFreeVe() throws SQLException {
         int maxVe = Lagerfach.getLagerfach(fachnummer).getMaxVe();
         int usedVe = Lagerfach.getLagerfach(fachnummer).getUsedVe();
 
         return maxVe - usedVe;
     }
+    
     /*
     * Gibt das Lagerfach mit angegebener id zurück
     */
@@ -147,6 +152,7 @@ public class Lagerfach {
         }
         return null;
     }
+    
     /*
     * @param String ort, x int, y int, z int
     * @return Lagerfach
@@ -171,11 +177,13 @@ public class Lagerfach {
         }
         return null;
 }
-    
-   public void save() throws SQLException{
-       Dao<Lagerfach,Integer> lagerfachDao = DatabaseManager.getInstance().getLagerfachDao();
-       lagerfachDao.createOrUpdate(this);
-   }
+    /*
+    * speichert das Lagerfach
+    */
+    public void save() throws SQLException {
+        Dao<Lagerfach, Integer> lagerfachDao = DatabaseManager.getInstance().getLagerfachDao();
+        lagerfachDao.createOrUpdate(this);
+    }
     /**
      * @param lager the lager to set
      */

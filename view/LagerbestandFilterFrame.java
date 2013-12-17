@@ -33,7 +33,7 @@ public class LagerbestandFilterFrame extends javax.swing.JFrame {
     public LagerbestandFilterFrame() {
         initComponents();
         try{
-            loadHlCbx();
+            loadCbx();
         }catch(SQLException ex){
             System.out.println("error");
         }
@@ -52,8 +52,12 @@ public class LagerbestandFilterFrame extends javax.swing.JFrame {
         int newOrigin = rightBorder -this.getWidth()-9;
         this.setLocation(newOrigin, this.getY()+210);
     }
-
-    private void loadHlCbx() throws SQLException {
+    /**
+     * @author ssinger
+     * @throws SQLException
+     * Füllt die QuellComboBoxen mit den größtmöglichen Werten
+     */
+    private void loadCbx() throws SQLException {
         cbxZ.removeAllItems();
         cbxX.removeAllItems();
         cbxY.removeAllItems();
@@ -61,37 +65,31 @@ public class LagerbestandFilterFrame extends javax.swing.JFrame {
         cbxX.addItem("x");
         cbxY.addItem("y");
 
+        int x = 0;
+        int y = 0;
+        int z = 0;
+        
+        Lager fl = Lager.getLager(Lager.Lagerort.freilager);
         Lager hl = Lager.getLager(Lager.Lagerort.hochregal);
-        int x = hl.getHoehe();
-        int y = hl.getBreite();
-        int z = hl.getTiefe();
-
-        for (int i = 1; i <= x; i++) {
-            cbxZ.addItem(i);
+        
+        if(hl.getHoehe() > fl.getHoehe()){
+            x = hl.getHoehe();
+        }else{
+            x = fl.getHoehe();
         }
-
-        for (int i = 1; i <= y; i++) {
-            cbxX.addItem(i);
+        
+        if(hl.getBreite() > fl.getBreite()){
+            y = hl.getBreite();
+        }else{
+            y = fl.getBreite();
         }
-
-        for (int i = 1; i <= z; i++) {
-            cbxY.addItem(i);
+        
+        if(hl.getTiefe() > fl.getTiefe()){
+            z = hl.getTiefe();
+        }else{
+            z = fl.getTiefe();
         }
-    }
-    
-    private void loadFlCbx() throws SQLException {
-        cbxZ.removeAllItems();
-        cbxX.removeAllItems();
-        cbxY.removeAllItems();
-        cbxZ.addItem("x");
-        cbxX.addItem("y");
-        cbxY.addItem("z");
-
-        Lager hl = Lager.getLager(Lager.Lagerort.freilager);
-        int x = hl.getHoehe();
-        int y = hl.getBreite();
-        int z = hl.getTiefe();
-
+        
         for (int i = 1; i <= x; i++) {
             cbxZ.addItem(i);
         }
@@ -257,19 +255,7 @@ public class LagerbestandFilterFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_cbxXActionPerformed
 
     private void cbxLagertypActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxLagertypActionPerformed
-       if(cbxLagertyp.getSelectedItem().equals("HL")){
-            try {
-                loadHlCbx();
-            } catch (SQLException ex) {
-                Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }else{
-            try {
-                loadFlCbx();
-            } catch (SQLException ex) {
-                Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+
     }//GEN-LAST:event_cbxLagertypActionPerformed
 
     private void executeFilterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_executeFilterButtonActionPerformed
@@ -294,15 +280,11 @@ public class LagerbestandFilterFrame extends javax.swing.JFrame {
             lfm.setBisMenge(Integer.parseInt(txfMengeBis.getText()));
         }
         if (!txfGrund.getText().isEmpty()) {
-            lfm.setGrund(txfGrund.getSelectedText());
+            lfm.setGrund(txfGrund.getText());
         }
         try{
             LagerbestandCollection lbc = new LagerbestandCollection();
             LagerbestandCollection result = lbc.addFilter(lfm);
-            for(int i = 0; i < result.size(); i++){
-                System.out.println(lbc.addFilter(lfm).get(i).toString());
-            }
-            
         } catch (SQLException ex) {
             Logger.getLogger(LagerbestandFilterFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -313,7 +295,7 @@ public class LagerbestandFilterFrame extends javax.swing.JFrame {
             case "HL":
                 return Lager.Lagerort.hochregal;
             case "FL":
-                return Lager.Lagerort.hochregal;
+                return Lager.Lagerort.freilager;
             default:
                 return null;
         }
