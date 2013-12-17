@@ -49,9 +49,18 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
     int teilid;
     
     /**
+     * Konstanten für die verschiendenen Frames
+     */
+    public final static int EINLAGERN_TEILEBESTAND = 1;
+    public final static int EINLAGERN_LAGERBESTAND = 2;
+    public final static int AUSLAGERN = 3;
+    public final static int UMLAGERN = 4;
+    public final static int SPLITTEN = 5;
+    
+    /**
      * Creates new form BestandsaenderungFrame
      */
-    public BestandsaenderungFrame(){
+    private BestandsaenderungFrame(){
         initComponents();
         setLocationRelativeTo(null);
         cbxFachTyp.addItem("HL");
@@ -196,6 +205,128 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         this.lblHaltbarkeitsdatum.setVisible(false);
     }
 
+    /**
+     * Vereinheitlichter Konstruktor für alle Bestandsaenderungsframes
+     * @param code Code der angibt um welche Funktion aus welchem Panel es sich handelt. 
+     * Codedeklaration im Kopf des Bestandsaenderungsframe als Konstanten
+     * @param teilID die TeilID muss aus der Tabelle ausgelesen werden 
+     * @param fachID die FachID muss für die Generierung des Lagerbestandes und die Anzeige des korrekten Faches übergeben werden
+     * falls nötig muss sie konstruiert werden
+     */
+    public BestandsaenderungFrame(int code, int teilID, int fachID) throws SQLException
+    {   
+        this();
+        this.txfTeilID.setText("" + teilID);
+        this.txfTeilID.setEditable(false);
+        this.txfTeilID.setEnabled(false);
+        Lagerbestand lb= Lagerbestand.getLagerbestand(Lagerbestand.getLagerbestandID(teilID, fachID));
+        setGUI(code,lb);
+    
+    
+    
+    
+    }
+    
+    /**
+     * Methode die entscheidet welche GUI erzeugt wird
+     * @param code der Code entsprechend der Variablen im Kopf des Bestandsaenderungsframes auszuwählen
+     */
+    
+    private void setGUI(int code,Lagerbestand lb)
+    {
+        switch (code)
+        {
+            case EINLAGERN_TEILEBESTAND:
+                    setEinlagernTeilebestandGUI();
+                    break;
+            case EINLAGERN_LAGERBESTAND:
+                    setEinlagernLagerbestandGUI(lb);
+                    break;
+            case AUSLAGERN:
+                    setAuslagernGUI(lb);
+                    break;
+            case UMLAGERN:
+                    setUmlagernGUI(lb);
+                    break;
+            case SPLITTEN:
+                    setSplittenGUI(lb);
+                    break;
+        }
+    
+    }
+    
+    private void setEinlagernTeilebestandGUI()
+    {
+        
+    
+    }
+    private void setEinlagernLagerbestandGUI(Lagerbestand lb)
+    {
+            this.cbxFachTyp.setEnabled(false);
+            this.cbxFachX.setEnabled(false);
+            this.cbxFachY.setEnabled(false);
+            this.cbxFachZ.setEnabled(false);
+            
+            int x= lb.getLagerfach().getX();
+            int y= lb.getLagerfach().getY();
+            int z= lb.getLagerfach().getZ();
+            
+            this.txaAnschaffungsgrund.setText(lb.getAnschaffungsgrund());
+            
+            Lager.Lagerort lo= lb.getLagerfach().getLager().getLagerort();
+            
+            this.cbxFachX.setSelectedItem(x);
+            this.cbxFachY.setSelectedItem(y);
+            this.cbxFachZ.setSelectedItem(z);
+            loadLagerOrtCbx(lo);
+    
+    }
+    
+    private void setAuslagernGUI(Lagerbestand lb)
+    {
+            lblEinlagern.setText("Teile auslagern");
+            einlagernButton.setText("Teile auslagern");
+            
+            
+            this.txaAnschaffungsgrund.setEditable(true);
+            this.txfHaltbarkeitsdatum.setVisible(false);
+            this.lblHaltbarkeitsdatum.setVisible(false);
+            this.cbxFachTyp.setEnabled(false);
+            this.cbxFachX.setEnabled(false);
+            this.cbxFachY.setEnabled(false);
+            this.cbxFachZ.setEnabled(false);
+            
+            int x= lb.getLagerfach().getX();
+            int y= lb.getLagerfach().getY();
+            int z= lb.getLagerfach().getZ();
+            
+            this.txaAnschaffungsgrund.setText(lb.getAnschaffungsgrund());
+            
+            Lager.Lagerort lo= lb.getLagerfach().getLager().getLagerort();
+            
+            this.cbxFachX.setSelectedItem(x);
+            this.cbxFachY.setSelectedItem(y);
+            this.cbxFachZ.setSelectedItem(z);
+            loadLagerOrtCbx(lo);
+            this.lblHinweisDatum.setVisible(false);
+    
+    }
+    
+    private void setUmlagernGUI(Lagerbestand lb)
+    {
+    
+    
+    }
+    
+    private void setSplittenGUI(Lagerbestand lb)
+    {
+        lblEinlagern.setText("Teile splitten");
+        einlagernButton.setText("Teile splitten");
+        this.txfTeilID.setEditable(false);
+        this.txfHaltbarkeitsdatum.setVisible(false);
+        this.lblHaltbarkeitsdatum.setVisible(false);
+    
+    }
     /**
      * @author ssinger
      * @param lagerbestand 
