@@ -410,6 +410,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
 //ändern
     private void einlagernButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_einlagernButtonActionPerformed
 
+       
         int x = (int) (cbxFachX.getSelectedItem());
         int y = (int) (cbxFachY.getSelectedItem());
         int z = (int) (cbxFachZ.getSelectedItem());

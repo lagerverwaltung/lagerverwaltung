@@ -39,6 +39,14 @@ public class LagerbestandHelper {
         return singleton;
     }
     
+     /**
+     * Validierungsfunktion für die Lagerdaten
+     * Diese wandelt die Werte selbst in die notwendigen Typen um.
+     * 
+     * @param Alle Parameter werden als String übergeben (Aus der GUI)
+     * @return HashMap<Integer, String> Eine Tabelle mit dem Fehlercode und der
+     * Fehlernachricht
+     */
     public HashMap<Integer,String> validateLagerbestandData(String menge,String datum, String grund)
     {
         HashMap<Integer,String> errors=new HashMap<Integer,String>();
