@@ -257,28 +257,22 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
     
     private void setEinlagernTeilebestandGUI()
     {
-        
+        lblEinlagern.setText("Teile einlagern");
+        einlagernButton.setText("Teile einlagern");
     
     }
     private void setEinlagernLagerbestandGUI(Lagerbestand lb)
     {
+            lblEinlagern.setText("Teile einlagern");
+            einlagernButton.setText("Teile einlagern");
             this.cbxFachTyp.setEnabled(false);
             this.cbxFachX.setEnabled(false);
             this.cbxFachY.setEnabled(false);
             this.cbxFachZ.setEnabled(false);
             
-            int x= lb.getLagerfach().getX();
-            int y= lb.getLagerfach().getY();
-            int z= lb.getLagerfach().getZ();
-            
             this.txaAnschaffungsgrund.setText(lb.getAnschaffungsgrund());
-            
-            Lager.Lagerort lo= lb.getLagerfach().getLager().getLagerort();
-            
-            this.cbxFachX.setSelectedItem(x);
-            this.cbxFachY.setSelectedItem(y);
-            this.cbxFachZ.setSelectedItem(z);
-            loadLagerOrtCbx(lo);
+            this.setVisible(true);
+            loadQuellComboBoxen(lb);
     
     }
     
@@ -291,24 +285,13 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
             this.txaAnschaffungsgrund.setEditable(true);
             this.txfHaltbarkeitsdatum.setVisible(false);
             this.lblHaltbarkeitsdatum.setVisible(false);
-            this.cbxFachTyp.setEnabled(false);
-            this.cbxFachX.setEnabled(false);
-            this.cbxFachY.setEnabled(false);
-            this.cbxFachZ.setEnabled(false);
             
-            int x= lb.getLagerfach().getX();
-            int y= lb.getLagerfach().getY();
-            int z= lb.getLagerfach().getZ();
+            loadQuellComboBoxen(lb);
             
-            this.txaAnschaffungsgrund.setText(lb.getAnschaffungsgrund());
+            this.txaAnschaffungsgrund.setText(lb.getAnschaffungsgrund()); 
             
-            Lager.Lagerort lo= lb.getLagerfach().getLager().getLagerort();
-            
-            this.cbxFachX.setSelectedItem(x);
-            this.cbxFachY.setSelectedItem(y);
-            this.cbxFachZ.setSelectedItem(z);
-            loadLagerOrtCbx(lo);
             this.lblHinweisDatum.setVisible(false);
+            this.setVisible(true);
     
     }
     

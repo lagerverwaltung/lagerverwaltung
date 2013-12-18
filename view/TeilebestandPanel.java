@@ -243,7 +243,17 @@ public class TeilebestandPanel extends javax.swing.JPanel {
         int selectedId;
         if(tblMain.getSelectedRow() >=0){
         selectedId = Integer.parseInt(tblMain.getValueAt(tblMain.getSelectedRow(), 0).toString());
+        
+      // deprecated  
         BestandsaenderungFrame bestandsaenderungFrame = new BestandsaenderungFrame(true,selectedId);
+      /* neue Version!
+        BestandsaenderungFrame bestandsaenderungFrame =null;
+            try {
+                bestandsaenderungFrame = new BestandsaenderungFrame(BestandsaenderungFrame.EINLAGERN_TEILEBESTAND,selectedId,0);
+            } catch (SQLException ex) {
+                Misc.createErrorDialog(mainFrame, "Datenbank Fehler");
+            }
+      */      
         bestandsaenderungFrame.setVisible(true);
         JTable lagerbestand = mainFrame.getPanMain().getLagerbestand().gettabMain();
         JTable warenbewegung = mainFrame.getPanMain().getWarenbewegung().gettabMain();
