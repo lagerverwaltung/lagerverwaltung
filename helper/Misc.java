@@ -72,4 +72,23 @@ public class Misc {
          Misc.createErrorDialog(f, strErrors);
     }
   
+    /**
+     * Parsed String zu einer Währungseinheit mit 2 Nachkommastellen, tauscht
+     * gegebenenfalls "," mit ".".
+     * @author ssinger
+     * @param string
+     * @return float
+     */
+    public static Float parseToCurrency(String string) {
+        float currency = 0;
+        if (string.contains(",")) {
+            currency = Float.parseFloat(string.replace(',', '.'));
+
+        } else {
+            currency = Float.parseFloat(string);
+        }
+        
+        double d = Math.round(currency * 100) /100.0;
+        return (float)d;
+    }
 }

@@ -65,10 +65,8 @@ public class WarenbewegungFilterFrame extends javax.swing.JFrame {
         cbxQuelleX = new javax.swing.JComboBox();
         lblBewegungsTyp = new javax.swing.JLabel();
         cbxZielLagertyp = new javax.swing.JComboBox();
-        lblVerantwortlicher = new javax.swing.JLabel();
         lblZielfachadresse = new javax.swing.JLabel();
         cbxQuelleY = new javax.swing.JComboBox();
-        txfVerantwrotlicher = new javax.swing.JTextField();
         btnFilterAusführen = new javax.swing.JButton();
         cbxZielX = new javax.swing.JComboBox();
         lblDatumVon = new javax.swing.JLabel();
@@ -105,8 +103,6 @@ public class WarenbewegungFilterFrame extends javax.swing.JFrame {
         lblBewegungsTyp.setText("Bewegungs-Typ:");
 
         cbxZielLagertyp.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "", "FL", "RL" }));
-
-        lblVerantwortlicher.setText("Verantwortlicher:");
 
         lblZielfachadresse.setText("Zielfachadresse:");
 
@@ -147,7 +143,7 @@ public class WarenbewegungFilterFrame extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panMainLayout.createSequentialGroup()
                                 .addComponent(lblDatumVon)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txfDatumVon))
+                                .addComponent(txfDatumVon, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panMainLayout.createSequentialGroup()
                                 .addComponent(lblDatumBis)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -155,7 +151,6 @@ public class WarenbewegungFilterFrame extends javax.swing.JFrame {
                             .addComponent(btnFilterAusführen, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(scpBewegungstyp)
                             .addComponent(lblBewegungsTyp, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblVerantwortlicher, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblFilter, javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panMainLayout.createSequentialGroup()
                                 .addComponent(cbxQuelleLagertyp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -174,8 +169,7 @@ public class WarenbewegungFilterFrame extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(cbxZielY, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cbxZielZ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txfVerantwrotlicher, javax.swing.GroupLayout.Alignment.LEADING))
+                                .addComponent(cbxZielZ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -193,11 +187,7 @@ public class WarenbewegungFilterFrame extends javax.swing.JFrame {
                 .addGroup(panMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblDatumBis)
                     .addComponent(txfDatumBis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblVerantwortlicher)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txfVerantwrotlicher, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(8, 8, 8)
                 .addComponent(lblQuellfach)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -301,12 +291,10 @@ public class WarenbewegungFilterFrame extends javax.swing.JFrame {
     private javax.swing.JLabel lblFilter;
     private javax.swing.JLabel lblQuellfach;
     private javax.swing.JLabel lblTeiltyp;
-    private javax.swing.JLabel lblVerantwortlicher;
     private javax.swing.JLabel lblZielfachadresse;
     private javax.swing.JPanel panMain;
     private javax.swing.JScrollPane scpBewegungstyp;
     private javax.swing.JTextField txfDatumBis;
     private javax.swing.JTextField txfDatumVon;
-    private javax.swing.JTextField txfVerantwrotlicher;
     // End of variables declaration//GEN-END:variables
 }

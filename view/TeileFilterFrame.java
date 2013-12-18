@@ -4,8 +4,11 @@
  */
 package view;
 
+import helper.FilterUiHelper;
+import helper.Misc;
 import java.awt.Component;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JTable;
@@ -225,28 +228,26 @@ public class TeileFilterFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_txfVeBisActionPerformed
 
     private void btnExecuteFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExecuteFilterActionPerformed
-        TeilebestandFilterModel tfm = new TeilebestandFilterModel();
-
-        tfm.setTyp(getComboTyp(cbxTeiltyp.getSelectedItem().toString()));
+        HashMap<Integer, String> errors = FilterUiHelper.getInstance().validateTeileFilter(
+                txfPreisVon.getText(),
+                txfPreisBis.getText(),
+                txfVeVon.getText(),
+                txfVeBis.getText()
+                );
         
-        if (!txfMaterialgruppe.getText().isEmpty()) {
-            tfm.setMaterialgruppe(txfMaterialgruppe.getText());
+        if (Misc.createErrorDialog(this, errors) == true) {
+            return;
         }
-        if (!txfZeichnungsnummer.getText().isEmpty()) {
-            tfm.setZeichnungsnummer(txfZeichnungsnummer.getText());
-        }
-        if (!txfPreisVon.getText().isEmpty()) {
-            tfm.setVonPreis(Float.parseFloat(txfPreisVon.getText()));
-        }
-        if (!txfPreisBis.getText().isEmpty()) {
-            tfm.setBisPreis(Float.parseFloat(txfPreisBis.getText()));
-        }
-        if (!txfVeVon.getText().isEmpty()) {
-            tfm.setVonVe(Integer.parseInt(txfVeVon.getText()));
-        }
-        if (!txfVeBis.getText().isEmpty()) {
-            tfm.setBisVe(Integer.parseInt(txfVeBis.getText()));
-        }
+        
+        TeilebestandFilterModel tfm = FilterUiHelper.createTFM(
+                cbxTeiltyp.getSelectedItem().toString(),
+                txfMaterialgruppe.getText(),
+                txfZeichnungsnummer.getText(),
+                txfPreisVon.getText(),
+                txfPreisBis.getText(),
+                txfVeVon.getText(),
+                txfVeBis.getText());
+                
         try {
             refreshTeilebestandTableModel(tfm);
         } catch (SQLException ex) {
@@ -262,21 +263,7 @@ public class TeileFilterFrame extends javax.swing.JFrame {
         teileBestandTable.setModel(tm);
     }
 
-    public static Teilebestand.Typ getComboTyp(String s){
-        switch (s) {
-            case "Kaufteile":
-                return Teilebestand.Typ.kaufteile;
-            case "Werkzeuge":
-                return Teilebestand.Typ.werkzeuge;
-            case "Vorratsteile":
-                return Teilebestand.Typ.vorratsteile;
-            case "Vorrichtungen":
-                return Teilebestand.Typ.vorrichtungen;
-            case "unfertige Baugruppe":
-                return Teilebestand.Typ.unfertigeBaugruppen;
-        }
-        return null;
-    }
+
     /**
      * @param args the command line arguments
      */

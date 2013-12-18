@@ -4,8 +4,11 @@
  */
 package view;
 
+import helper.FilterUiHelper;
+import helper.Misc;
 import java.awt.Component;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Lager;
@@ -259,29 +262,23 @@ public class LagerbestandFilterFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_cbxLagertypActionPerformed
 
     private void executeFilterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_executeFilterButtonActionPerformed
-        LagerbestandFilterModel lfm = new LagerbestandFilterModel();
-        if (cbxLagertyp.getSelectedItem().toString().length() > 1) {
-            lfm.setLagerTyp(getComboLager(cbxLagertyp.getSelectedItem().toString()));
+        
+        HashMap<Integer, String> errors = FilterUiHelper.getInstance().validateLagerFilter(
+                txfMengeVon.getText(),
+                txfMengeBis.getText()
+                );
+        if(Misc.createErrorDialog(this, errors) == true){
+            return;
         }
-        if (!cbxX.getSelectedItem().toString().equals("x")) {
-            lfm.setX((int) cbxX.getSelectedItem());
-        }
-        if (!cbxY.getSelectedItem().toString().equals("y")) {
-            lfm.setY((int) cbxY.getSelectedItem());
-        }
-        if (!cbxZ.getSelectedItem().toString().equals("z")) {
-            lfm.setZ((int) cbxZ.getSelectedItem());
-        }
+        LagerbestandFilterModel lfm = FilterUiHelper.createLFM(
+                cbxLagertyp.getSelectedItem().toString(),
+                cbxX.getSelectedItem().toString(),
+                cbxY.getSelectedItem().toString(),
+                cbxZ.getSelectedItem().toString(),
+                txfMengeVon.getText(),
+                txfMengeBis.getText(),
+                txfGrund.getText());
 
-        if (!txfMengeVon.getText().isEmpty()) {
-            lfm.setVonMenge(Integer.parseInt(txfMengeVon.getText()));
-        }
-        if (!txfMengeBis.getText().isEmpty()) {
-            lfm.setBisMenge(Integer.parseInt(txfMengeBis.getText()));
-        }
-        if (!txfGrund.getText().isEmpty()) {
-            lfm.setGrund(txfGrund.getText());
-        }
         try{
             LagerbestandCollection lbc = new LagerbestandCollection();
             LagerbestandCollection result = lbc.addFilter(lfm);
@@ -290,16 +287,6 @@ public class LagerbestandFilterFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_executeFilterButtonActionPerformed
 
-    public static Lager.Lagerort getComboLager(String s){
-        switch(s){
-            case "HL":
-                return Lager.Lagerort.hochregal;
-            case "FL":
-                return Lager.Lagerort.freilager;
-            default:
-                return null;
-        }
-    }
     
     /**
      * @param args the command line arguments
