@@ -571,7 +571,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
 //ändern 
     private void einlagernButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_einlagernButtonActionPerformed
 
-       
+        HashMap<Integer,String> errors =help.validateLagerbestandData(txfMenge.getText(), txfHaltbarkeitsdatum.getText(), txaAnschaffungsgrund.getText());
         
         if (code!=SPLITTEN)
         {
@@ -587,7 +587,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         
         
        
-        HashMap<Integer,String> errors =help.validateLagerbestandData(txfMenge.getText(), txfHaltbarkeitsdatum.getText(), txaAnschaffungsgrund.getText());
+        
         if (errors.size()>0)
         {
              Misc.createErrorDialog(this, errors);
