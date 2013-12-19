@@ -5,12 +5,14 @@
 package model.collection;
 
 import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.stmt.QueryBuilder;
 import helper.DatabaseManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.filter.WarenbewegungFilterModel;
 
 
 /**
@@ -54,8 +56,18 @@ public class WarenbewegungCollection<Warenbewegung> extends ArrayList {
         return singleton;
     }
     
-    public void addFilter(String attributeName, String attributeValue){
+    public WarenbewegungCollection<Warenbewegung> addFilter(WarenbewegungFilterModel wfm) throws SQLException{
+        Dao<model.Warenbewegung, Integer> warenbewegungDao = DatabaseManager.getInstance().getWarenbewegungDao();
+        Dao<model.ZielPosition, Integer> zielPositionDao = DatabaseManager.getInstance().getZielpositionDao();
         
+        QueryBuilder<model.Warenbewegung, Integer> warenQb = warenbewegungDao.queryBuilder();
+        QueryBuilder<model.ZielPosition, Integer> zielQb = zielPositionDao.queryBuilder();
+
+        //warenQb.where().eq
+        //List<model.Warenbewegung> wbList = warenbewegungDao.queryForAll();
+        
+        
+        return this;
     }
     
     public void resetFilters()

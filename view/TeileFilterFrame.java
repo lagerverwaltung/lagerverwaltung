@@ -84,6 +84,8 @@ public class TeileFilterFrame extends javax.swing.JFrame {
         txfZeichnungsnummer = new javax.swing.JTextField();
         lblPreisBis = new javax.swing.JLabel();
         txfPreisBis = new javax.swing.JTextField();
+        lblBezeichnung = new javax.swing.JLabel();
+        txfBezeichnung = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -120,6 +122,14 @@ public class TeileFilterFrame extends javax.swing.JFrame {
 
         lblPreisBis.setText("Preis bis:");
 
+        lblBezeichnung.setText("Bezeichnung:");
+
+        txfBezeichnung.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txfBezeichnungActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panMainLayout = new javax.swing.GroupLayout(panMain);
         panMain.setLayout(panMainLayout);
         panMainLayout.setHorizontalGroup(
@@ -127,19 +137,21 @@ public class TeileFilterFrame extends javax.swing.JFrame {
             .addGroup(panMainLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panMainLayout.createSequentialGroup()
+                        .addComponent(jSeparator2)
+                        .addGap(108, 108, 108))
                     .addGroup(panMainLayout.createSequentialGroup()
                         .addGroup(panMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblTeiltyp)
                             .addComponent(lblFilter)
                             .addComponent(lblMaterialgruppe)
                             .addComponent(lblZeichnungsnummer)
-                            .addComponent(lblVolumeneinheiten))
-                        .addGap(0, 26, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panMainLayout.createSequentialGroup()
-                        .addComponent(jSeparator2)
-                        .addGap(108, 108, 108))
+                            .addComponent(lblVolumeneinheiten)
+                            .addComponent(lblBezeichnung))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(panMainLayout.createSequentialGroup()
                         .addGroup(panMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(txfBezeichnung, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnExecuteFilter, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txfZeichnungsnummer, javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panMainLayout.createSequentialGroup()
@@ -172,11 +184,19 @@ public class TeileFilterFrame extends javax.swing.JFrame {
                 .addComponent(lblTeiltyp)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cbxTeiltyp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblBezeichnung)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txfBezeichnung, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblMaterialgruppe)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txfMaterialgruppe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblZeichnungsnummer)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txfZeichnungsnummer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblVolumeneinheiten)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -194,11 +214,7 @@ public class TeileFilterFrame extends javax.swing.JFrame {
                 .addGroup(panMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txfPreisBis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblPreisBis))
-                .addGap(18, 18, 18)
-                .addComponent(lblZeichnungsnummer)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txfZeichnungsnummer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnExecuteFilter)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -214,10 +230,9 @@ public class TeileFilterFrame extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(panMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(panMain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -241,6 +256,7 @@ public class TeileFilterFrame extends javax.swing.JFrame {
         
         TeilebestandFilterModel tfm = FilterUiHelper.createTFM(
                 cbxTeiltyp.getSelectedItem().toString(),
+                txfBezeichnung.getText(),
                 txfMaterialgruppe.getText(),
                 txfZeichnungsnummer.getText(),
                 txfPreisVon.getText(),
@@ -251,13 +267,17 @@ public class TeileFilterFrame extends javax.swing.JFrame {
         try {
             refreshTeilebestandTableModel(tfm);
         } catch (SQLException ex) {
-            Logger.getLogger(TeileFilterFrame.class.getName()).log(Level.SEVERE, null, ex);
+            Misc.printSQLException(this, ex);
         }
         this.dispose();
     }//GEN-LAST:event_btnExecuteFilterActionPerformed
 
+    private void txfBezeichnungActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfBezeichnungActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txfBezeichnungActionPerformed
+
     private void refreshTeilebestandTableModel(TeilebestandFilterModel tfm) throws SQLException{
-        TeilebestandCollection tc = TeilebestandCollection.getInstance(tfm);
+        TeilebestandCollection tc = TeilebestandCollection.getInstance().applyFilter(tfm);
         TeileTableModel tm = new TeileTableModel();     
         tm.setData(tc);
         teileBestandTable.setModel(tm);
@@ -302,6 +322,7 @@ public class TeileFilterFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnExecuteFilter;
     private javax.swing.JComboBox cbxTeiltyp;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JLabel lblBezeichnung;
     private javax.swing.JLabel lblFilter;
     private javax.swing.JLabel lblMaterialgruppe;
     private javax.swing.JLabel lblPreisBis;
@@ -312,6 +333,7 @@ public class TeileFilterFrame extends javax.swing.JFrame {
     private javax.swing.JLabel lblVolumeneinheiten;
     private javax.swing.JLabel lblZeichnungsnummer;
     private javax.swing.JPanel panMain;
+    private javax.swing.JTextField txfBezeichnung;
     private javax.swing.JTextField txfMaterialgruppe;
     private javax.swing.JTextField txfPreisBis;
     private javax.swing.JTextField txfPreisVon;

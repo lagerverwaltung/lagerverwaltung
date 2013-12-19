@@ -63,10 +63,7 @@ public class LagerbestandPanel extends javax.swing.JPanel {
         tabMaintable = new javax.swing.JTable();
         lblLagerbestand = new javax.swing.JLabel();
         btnteilEinlagern = new javax.swing.JButton();
-        btnSuche = new javax.swing.JButton();
         btnTeilUmlagern = new javax.swing.JButton();
-        lblFreitextSuche = new javax.swing.JLabel();
-        txfFreitextSuche = new javax.swing.JTextField();
         btnFilterZuruecksetzen = new javax.swing.JButton();
         btnTeilAuslagern = new javax.swing.JButton();
         btnTeilSplitten = new javax.swing.JButton();
@@ -92,21 +89,12 @@ public class LagerbestandPanel extends javax.swing.JPanel {
             }
         });
 
-        btnSuche.setText("suchen");
-        btnSuche.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSucheActionPerformed(evt);
-            }
-        });
-
         btnTeilUmlagern.setText("Teile umlagern");
         btnTeilUmlagern.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTeilUmlagernActionPerformed(evt);
             }
         });
-
-        lblFreitextSuche.setText("Freitextsuche:");
 
         btnFilterZuruecksetzen.setText("Filter zurücksetzen");
 
@@ -148,12 +136,7 @@ public class LagerbestandPanel extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnTeilSplitten, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblFreitextSuche)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txfFreitextSuche, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnSuche, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(291, 291, 291)
+                        .addGap(695, 695, 695)
                         .addComponent(btnFiltern)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnFilterZuruecksetzen))
@@ -166,13 +149,9 @@ public class LagerbestandPanel extends javax.swing.JPanel {
                 .addGap(37, 37, 37)
                 .addComponent(lblLagerbestand, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txfFreitextSuche, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnSuche)
-                        .addComponent(lblFreitextSuche)
-                        .addComponent(btnFilterZuruecksetzen, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnFiltern)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnFilterZuruecksetzen, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnFiltern))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(scpMainPane, javax.swing.GroupLayout.PREFERRED_SIZE, 470, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
@@ -242,10 +221,6 @@ public class LagerbestandPanel extends javax.swing.JPanel {
                     + "Liste gewählt werden!");
         }
     }//GEN-LAST:event_btnteilEinlagernActionPerformed
-
-    private void btnSucheActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSucheActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnSucheActionPerformed
 
     private void btnTeilUmlagernActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTeilUmlagernActionPerformed
         int selectedId;
@@ -363,15 +338,12 @@ public class LagerbestandPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnFilterZuruecksetzen;
     private javax.swing.JButton btnFiltern;
-    private javax.swing.JButton btnSuche;
     private javax.swing.JButton btnTeilAuslagern;
     private javax.swing.JButton btnTeilSplitten;
     private javax.swing.JButton btnTeilUmlagern;
     private javax.swing.JButton btnteilEinlagern;
-    private javax.swing.JLabel lblFreitextSuche;
     private javax.swing.JLabel lblLagerbestand;
     private javax.swing.JScrollPane scpMainPane;
     private javax.swing.JTable tabMaintable;
-    private javax.swing.JTextField txfFreitextSuche;
     // End of variables declaration//GEN-END:variables
 }

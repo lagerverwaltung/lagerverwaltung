@@ -6,7 +6,9 @@ package model.collection;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.stmt.PreparedQuery;
 import com.j256.ormlite.stmt.QueryBuilder;
+import com.j256.ormlite.stmt.Where;
 import helper.DatabaseManager;
+import helper.Misc;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,14 +44,6 @@ public class TeilebestandCollection<Teilebestand> extends ArrayList {
          return singleton.loadCollection();
     }
     
-    public static TeilebestandCollection getInstance(TeilebestandFilterModel tfm) throws SQLException{
-        
-        if(TeilebestandCollection.singleton == null){
-            singleton = new TeilebestandCollection().addFilter(tfm);
-        }
-        
-        return singleton.addFilter(tfm);
-    }
    
     public TeilebestandCollection<Teilebestand> loadCollection()
     { 
@@ -62,44 +56,44 @@ public class TeilebestandCollection<Teilebestand> extends ArrayList {
             }
             return this;
         } catch (SQLException ex) {
-            Logger.getLogger(TeilebestandCollection.class.getName()).log(Level.SEVERE, null, ex);
+            Misc.printSQLException(null, ex);
         }
         return singleton;
     }
     
-    /*
-     * @param TeilebestandFilterModel welches angewand werden sollen
+    /**
+     * Grenzt die Collection nach der im TeileFilterModel-Objekt
+     * angegebenen Attributen ein
+     * @author ssinger
+     * @param tfm
+     * @return TeilebestandCollection
+     * @throws SQLException
      */
-    public TeilebestandCollection<Teilebestand> addFilter(TeilebestandFilterModel tfm) throws SQLException {
+    public TeilebestandCollection<Teilebestand> applyFilter(TeilebestandFilterModel tfm) throws SQLException {
 
         Dao<model.Teilebestand, Integer> teileDao = DatabaseManager.getInstance().getTeilebestandDao();
         QueryBuilder<model.Teilebestand, Integer> queryBuilder = teileDao.queryBuilder();
 
-        if (tfm.getTyp() == null) {
-            queryBuilder.where()
-                    .like("materialgruppe", tfm.getMaterialgruppr())
-                    .and()
-                    .like("zeichnungsnummer", tfm.getZeichnungsnummer())
-                    .and()
-                    .between("preis", tfm.getVonPreis(), tfm.getBisPreis())
-                    .and()
-                    .between("ve", tfm.getVonVe(), tfm.getBisVe());
+        Where<model.Teilebestand, Integer> where = queryBuilder.where();
 
-        } else {
-            queryBuilder.where()
-                    .eq("typ", tfm.getTyp())
-                    .and()
-                    .like("materialgruppe", tfm.getMaterialgruppr())
-                    .and()
-                    .like("zeichnungsnummer", tfm.getZeichnungsnummer())
-                    .and()
-                    .between("preis", tfm.getVonPreis(), tfm.getBisPreis())
-                    .and()
-                    .between("ve", tfm.getVonVe(), tfm.getBisVe());
+        where.like("materialgruppe", tfm.getMaterialgruppr())
+                .and()
+                .like("zeichnungsnummer", tfm.getZeichnungsnummer())
+                .and()
+                .between("preis", tfm.getVonPreis(), tfm.getBisPreis())
+                .and()
+                .between("ve", tfm.getVonVe(), tfm.getBisVe())
+                .and()
+                .like("bezeichnung", tfm.getBezeichnung());
 
+        if (tfm.getTyp() != null) {
+            where.and().eq("typ", tfm.getTyp());
         }
+
         PreparedQuery<model.Teilebestand> preparedQuery = queryBuilder.prepare();
+
         List<model.Teilebestand> list = teileDao.query(preparedQuery);
+        this.clear();
         for (model.Teilebestand tb1 : list) {
             add(tb1);
         }

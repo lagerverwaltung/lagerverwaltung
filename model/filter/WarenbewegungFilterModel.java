@@ -8,8 +8,6 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import model.Lager;
 import model.Teilebestand;
 
@@ -18,9 +16,10 @@ import model.Teilebestand;
  * @author ssinger
  */
 public class WarenbewegungFilterModel {
-    private Date vonHaltbarkeit;
-    private Date bisHaltbarkeit;
-    private String verantwortlicher;
+    private Date haltbarVon;
+    private Date haltbarBis;
+    private Date datumVon;
+    private Date datumBis;
     private Lager.Lagerort qLagerort;
     private int qZ;
     private int qX;
@@ -35,13 +34,13 @@ public class WarenbewegungFilterModel {
     public WarenbewegungFilterModel(){
         try {
             DateFormat f = new SimpleDateFormat("dd.MM.YYYY");
-            vonHaltbarkeit = f.parse("01.01.1969");
-            bisHaltbarkeit = f.parse("01.01.2542");
+            haltbarVon = f.parse("01.01.1969");
+            haltbarBis = f.parse("01.01.2542");
+            datumVon = haltbarVon;
+            datumBis = haltbarBis;
         } catch (ParseException ex) {
             System.out.println("Nothing to Catch");
-            
         }
-        verantwortlicher = "Lagerverwalter";
         qZ = 0;
         qX = 0;
         qY = 0;
@@ -56,42 +55,28 @@ public class WarenbewegungFilterModel {
      * @return the vonHaltbarkeit
      */
     public Date getVonHaltbarkeit() {
-        return vonHaltbarkeit;
+        return getHaltbarVon();
     }
 
     /**
      * @param vonHaltbarkeit the vonHaltbarkeit to set
      */
     public void setVonHaltbarkeit(Date vonHaltbarkeit) {
-        this.vonHaltbarkeit = vonHaltbarkeit;
+        this.setHaltbarVon(vonHaltbarkeit);
     }
 
     /**
      * @return the bisHaltbarkeit
      */
     public Date getBisHaltbarkeit() {
-        return bisHaltbarkeit;
+        return getHaltbarBis();
     }
 
     /**
      * @param bisHaltbarkeit the bisHaltbarkeit to set
      */
     public void setBisHaltbarkeit(Date bisHaltbarkeit) {
-        this.bisHaltbarkeit = bisHaltbarkeit;
-    }
-
-    /**
-     * @return the verantwortlicher
-     */
-    public String getVerantwortlicher() {
-        return verantwortlicher;
-    }
-
-    /**
-     * @param verantwortlicher the verantwortlicher to set
-     */
-    public void setVerantwortlicher(String verantwortlicher) {
-        this.verantwortlicher = verantwortlicher;
+        this.setHaltbarBis(bisHaltbarkeit);
     }
 
     /**
@@ -232,5 +217,61 @@ public class WarenbewegungFilterModel {
      */
     public void setTyp(Teilebestand.Typ typ) {
         this.typ = typ;
+    }
+
+    /**
+     * @return the haltbarVon
+     */
+    public Date getHaltbarVon() {
+        return haltbarVon;
+    }
+
+    /**
+     * @param haltbarVon the haltbarVon to set
+     */
+    public void setHaltbarVon(Date haltbarVon) {
+        this.haltbarVon = haltbarVon;
+    }
+
+    /**
+     * @return the haltbarBis
+     */
+    public Date getHaltbarBis() {
+        return haltbarBis;
+    }
+
+    /**
+     * @param haltbarBis the haltbarBis to set
+     */
+    public void setHaltbarBis(Date haltbarBis) {
+        this.haltbarBis = haltbarBis;
+    }
+
+    /**
+     * @return the datumVon
+     */
+    public Date getDatumVon() {
+        return datumVon;
+    }
+
+    /**
+     * @param datumVon the datumVon to set
+     */
+    public void setDatumVon(Date datumVon) {
+        this.datumVon = datumVon;
+    }
+
+    /**
+     * @return the datumBis
+     */
+    public Date getDatumBis() {
+        return datumBis;
+    }
+
+    /**
+     * @param datumBis the datumBis to set
+     */
+    public void setDatumBis(Date datumBis) {
+        this.datumBis = datumBis;
     }
 }

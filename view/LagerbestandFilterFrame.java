@@ -11,9 +11,11 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JTable;
 import model.Lager;
 import model.collection.LagerbestandCollection;
 import model.filter.LagerbestandFilterModel;
+import model.table.LagerbestandTableModel;
 
 /**
  *
@@ -21,6 +23,7 @@ import model.filter.LagerbestandFilterModel;
  */
 public class LagerbestandFilterFrame extends javax.swing.JFrame {
     private static LagerbestandFilterFrame singleton;
+    JTable lagerBestandTable;
     
     public static LagerbestandFilterFrame getInstance(Component mainFrame)
     {
@@ -38,7 +41,7 @@ public class LagerbestandFilterFrame extends javax.swing.JFrame {
         try{
             loadCbx();
         }catch(SQLException ex){
-            System.out.println("error");
+            Misc.printSQLException(this, ex);
         }
     }
     
@@ -55,6 +58,7 @@ public class LagerbestandFilterFrame extends javax.swing.JFrame {
         int newOrigin = rightBorder -this.getWidth()-9;
         this.setLocation(newOrigin, this.getY()+210);
     }
+    
     /**
      * @author ssinger
      * @throws SQLException
@@ -130,6 +134,8 @@ public class LagerbestandFilterFrame extends javax.swing.JFrame {
         txfMengeBis = new javax.swing.JTextField();
         jSeparator2 = new javax.swing.JSeparator();
         txfGrund = new javax.swing.JTextField();
+        lblBezeichnung = new javax.swing.JLabel();
+        txfBezeichnung = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -168,6 +174,14 @@ public class LagerbestandFilterFrame extends javax.swing.JFrame {
 
         lblMengeBis.setText("Menge bis:");
 
+        lblBezeichnung.setText("Bezeichnung:");
+
+        txfBezeichnung.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txfBezeichnungActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panMainLayout = new javax.swing.GroupLayout(panMain);
         panMain.setLayout(panMainLayout);
         panMainLayout.setHorizontalGroup(
@@ -175,10 +189,6 @@ public class LagerbestandFilterFrame extends javax.swing.JFrame {
             .addGroup(panMainLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panMainLayout.createSequentialGroup()
-                        .addComponent(lblGrund)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txfGrund))
                     .addComponent(jSeparator2)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panMainLayout.createSequentialGroup()
                         .addComponent(lblMengeBis)
@@ -188,11 +198,6 @@ public class LagerbestandFilterFrame extends javax.swing.JFrame {
                         .addComponent(lblMengeVon)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(txfMengeVon, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panMainLayout.createSequentialGroup()
-                        .addGroup(panMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblFachadresse, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblFilter, javax.swing.GroupLayout.Alignment.LEADING))
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(executeFilterButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panMainLayout.createSequentialGroup()
                         .addGap(0, 33, Short.MAX_VALUE)
@@ -202,8 +207,20 @@ public class LagerbestandFilterFrame extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cbxY, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbxZ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)))
+                        .addComponent(cbxZ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panMainLayout.createSequentialGroup()
+                        .addComponent(lblGrund)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txfGrund, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panMainLayout.createSequentialGroup()
+                        .addGroup(panMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblFachadresse)
+                            .addComponent(lblFilter))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(panMainLayout.createSequentialGroup()
+                        .addComponent(lblBezeichnung)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txfBezeichnung, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(25, 25, 25))
         );
         panMainLayout.setVerticalGroup(
@@ -221,19 +238,26 @@ public class LagerbestandFilterFrame extends javax.swing.JFrame {
                     .addComponent(cbxY, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbxZ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(panMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblMengeVon)
-                    .addComponent(txfMengeVon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(panMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblMengeBis)
-                    .addComponent(txfMengeBis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(panMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblGrund)
-                    .addComponent(txfGrund, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, Short.MAX_VALUE)
-                .addComponent(executeFilterButton)
+                .addGroup(panMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panMainLayout.createSequentialGroup()
+                        .addComponent(lblBezeichnung)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(panMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblGrund)
+                            .addComponent(txfGrund, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(panMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblMengeVon)
+                            .addComponent(txfMengeVon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(panMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblMengeBis)
+                            .addComponent(txfMengeBis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(executeFilterButton))
+                    .addGroup(panMainLayout.createSequentialGroup()
+                        .addComponent(txfBezeichnung, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -247,7 +271,7 @@ public class LagerbestandFilterFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(panMain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 6, Short.MAX_VALUE))
         );
 
         pack();
@@ -277,16 +301,26 @@ public class LagerbestandFilterFrame extends javax.swing.JFrame {
                 cbxZ.getSelectedItem().toString(),
                 txfMengeVon.getText(),
                 txfMengeBis.getText(),
-                txfGrund.getText());
+                txfGrund.getText(),
+                txfBezeichnung.getText());
 
         try{
-            LagerbestandCollection lbc = new LagerbestandCollection();
-            LagerbestandCollection result = lbc.addFilter(lfm);
+           refreshLagerbestandTableModel(lfm);
         } catch (SQLException ex) {
-            Logger.getLogger(LagerbestandFilterFrame.class.getName()).log(Level.SEVERE, null, ex);
+            Misc.printSQLException(this, ex);
         }
     }//GEN-LAST:event_executeFilterButtonActionPerformed
 
+    private void txfBezeichnungActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfBezeichnungActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txfBezeichnungActionPerformed
+
+    private void refreshLagerbestandTableModel(LagerbestandFilterModel lfm) throws SQLException {
+        LagerbestandCollection lc = LagerbestandCollection.getInstance().applyFilter(lfm);
+        LagerbestandTableModel lm = new LagerbestandTableModel();
+        lm.setData(lc);
+        lagerBestandTable.setModel(lm);
+    }
     
     /**
      * @param args the command line arguments
@@ -329,12 +363,14 @@ public class LagerbestandFilterFrame extends javax.swing.JFrame {
     private javax.swing.JComboBox cbxZ;
     private javax.swing.JButton executeFilterButton;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JLabel lblBezeichnung;
     private javax.swing.JLabel lblFachadresse;
     private javax.swing.JLabel lblFilter;
     private javax.swing.JLabel lblGrund;
     private javax.swing.JLabel lblMengeBis;
     private javax.swing.JLabel lblMengeVon;
     private javax.swing.JPanel panMain;
+    private javax.swing.JTextField txfBezeichnung;
     private javax.swing.JTextField txfGrund;
     private javax.swing.JTextField txfMengeBis;
     private javax.swing.JTextField txfMengeVon;

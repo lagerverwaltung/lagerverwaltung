@@ -8,7 +8,7 @@ import model.Lager;
 
 
 /**
- *
+ * StandardContainer für LagerbestandFilter-Attribute
  * @author ssinger
  */
 public class LagerbestandFilterModel {
@@ -19,8 +19,11 @@ public class LagerbestandFilterModel {
     private int vonMenge;
     private int bisMenge;
     private String grund;
+    private String bezeichnung;
     
-    
+    /**
+     * erstellet ein standard LagerbestandFilter Objekt
+     */
     public LagerbestandFilterModel(){
         x = 0;
         y = 0;
@@ -28,6 +31,7 @@ public class LagerbestandFilterModel {
         vonMenge = 0;
         bisMenge = Integer.MAX_VALUE;
         grund = null;
+        bezeichnung = null;
     }
 
     /**
@@ -126,5 +130,19 @@ public class LagerbestandFilterModel {
      */
     public void setLagerTyp(Lager.Lagerort lagerTyp) {
         this.lagerTyp = lagerTyp;
+    }
+
+    /**
+     * @return the bezeichnung
+     */
+    public String getBezeichnung() {
+        return bezeichnung;
+    }
+
+    /**
+     * @param bezeichnung the bezeichnung to set
+     */
+    public void setBezeichnung(String bezeichnung) {
+        this.bezeichnung = bezeichnung;
     }
 }

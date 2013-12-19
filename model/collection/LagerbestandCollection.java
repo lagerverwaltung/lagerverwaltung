@@ -10,12 +10,9 @@ import com.j256.ormlite.stmt.QueryBuilder;
 import helper.DatabaseManager;
 import java.sql.SQLException;
 import java.util.ArrayList; 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.Lagerbestand;
 import model.filter.LagerbestandFilterModel;
 
 /**
@@ -54,7 +51,7 @@ public class LagerbestandCollection<Lagerbestand> extends ArrayList {
             PreparedQuery<model.Lagerbestand> preparedQuery = queryBuilder.prepare();
             List<Lagerbestand> list = (List<Lagerbestand>) lagerbestandDao.query(preparedQuery);
         
-            clear();
+            this.clear();
             for (Lagerbestand lb1 : list) {
                 add(lb1);
             }
@@ -75,14 +72,13 @@ public class LagerbestandCollection<Lagerbestand> extends ArrayList {
      * aus. Die Zwischenspeicherung führt über ein Listen - Ping - Pong
      * statt. Gibt die gefilterte Collection zurück.
      */
-    public LagerbestandCollection<Lagerbestand> addFilter(LagerbestandFilterModel lfm) throws SQLException{
+    public LagerbestandCollection<Lagerbestand> applyFilter(LagerbestandFilterModel lfm) throws SQLException{
        
         
         Dao<model.Lagerbestand, Integer> lagerbestandDao = DatabaseManager.getInstance().getLagerbestandDao();
         List<model.Lagerbestand> resultA = new ArrayList();
         List<model.Lagerbestand> resultB = new ArrayList();
         List<model.Lagerbestand> lbList = lagerbestandDao.queryForAll();
-        //resultB = lbList.
         
         System.out.println("lbList-size() "+lbList.size());
         if (lbList.size() > 0) {
@@ -138,14 +134,20 @@ public class LagerbestandCollection<Lagerbestand> extends ArrayList {
                     resultA.add(resultB.get(i));
                 }
             }
+            resultB.clear();
             
-
+            for(int i = 0; i < resultA.size(); i++){
+                if((lfm.getBezeichnung() == null)
+                        || resultA.get(i).getTeil().getBezeichnung().contains(lfm.getBezeichnung())){
+                    resultA.add(resultB.get(i));
+                }
+            }
         }
 
-        for(model.Lagerbestand lb1 : resultA){
+        for(model.Lagerbestand lb1 : resultB){
             add(lb1);
         }
-        System.out.println("ResultList.size() "+resultA.size());
+        System.out.println("ResultList.size() "+resultB.size());
         return this;
     }
     

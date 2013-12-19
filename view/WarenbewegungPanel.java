@@ -58,9 +58,6 @@ public class WarenbewegungPanel extends javax.swing.JPanel {
         panMain = new javax.swing.JPanel();
         scpMain = new javax.swing.JScrollPane();
         tblMain = new javax.swing.JTable();
-        btnSuchen = new javax.swing.JButton();
-        txfFreitextsuche = new javax.swing.JTextField();
-        lblFreitextsuche = new javax.swing.JLabel();
         btnFilterzurücksetzen = new javax.swing.JButton();
         btnFilter = new javax.swing.JButton();
 
@@ -79,15 +76,6 @@ public class WarenbewegungPanel extends javax.swing.JPanel {
         tblMain.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         scpMain.setViewportView(tblMain);
 
-        btnSuchen.setText("suchen");
-        btnSuchen.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSuchenActionPerformed(evt);
-            }
-        });
-
-        lblFreitextsuche.setText("Freitextsuche:");
-
         btnFilterzurücksetzen.setText("Filter zurücksetzen");
 
         btnFilter.setText("Filtern");
@@ -105,12 +93,7 @@ public class WarenbewegungPanel extends javax.swing.JPanel {
                 .addGroup(panMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(scpMain, javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panMainLayout.createSequentialGroup()
-                        .addComponent(lblFreitextsuche)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txfFreitextsuche, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnSuchen, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(291, 291, 291)
+                        .addGap(695, 695, 695)
                         .addComponent(btnFilter)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnFilterzurücksetzen)))
@@ -121,9 +104,6 @@ public class WarenbewegungPanel extends javax.swing.JPanel {
             .addGroup(panMainLayout.createSequentialGroup()
                 .addGap(0, 0, 0)
                 .addGroup(panMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSuchen)
-                    .addComponent(txfFreitextsuche, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblFreitextsuche)
                     .addComponent(btnFilterzurücksetzen, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnFilter))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -152,10 +132,6 @@ public class WarenbewegungPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnSuchenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuchenActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnSuchenActionPerformed
-
     private void btnFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFilterActionPerformed
        WarenbewegungFilterFrame.getInstance(mainFrame);
     }//GEN-LAST:event_btnFilterActionPerformed
@@ -163,12 +139,9 @@ public class WarenbewegungPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnFilter;
     private javax.swing.JButton btnFilterzurücksetzen;
-    private javax.swing.JButton btnSuchen;
-    private javax.swing.JLabel lblFreitextsuche;
     private javax.swing.JLabel lblWarenbewegung;
     private javax.swing.JPanel panMain;
     private javax.swing.JScrollPane scpMain;
     private javax.swing.JTable tblMain;
-    private javax.swing.JTextField txfFreitextsuche;
     // End of variables declaration//GEN-END:variables
 }

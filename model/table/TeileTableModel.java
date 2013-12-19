@@ -4,7 +4,6 @@
  */
 package model.table;
 
-import java.util.List;
 import javax.swing.table.AbstractTableModel;
 import model.Teilebestand;
 import model.collection.TeilebestandCollection;

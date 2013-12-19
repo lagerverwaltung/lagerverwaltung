@@ -30,12 +30,7 @@
                       <Component id="btnTeilSplitten" min="-2" pref="180" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="lblFreitextSuche" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="txfFreitextSuche" min="-2" pref="196" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="btnSuche" min="-2" pref="118" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="291" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="695" max="-2" attributes="0"/>
                       <Component id="btnFiltern" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="btnFilterZuruecksetzen" min="-2" max="-2" attributes="0"/>
@@ -52,14 +47,9 @@
               <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
               <Component id="lblLagerbestand" min="-2" pref="25" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="txfFreitextSuche" alignment="1" min="-2" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="btnSuche" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="lblFreitextSuche" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="btnFilterZuruecksetzen" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                      <Component id="btnFiltern" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="btnFilterZuruecksetzen" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                  <Component id="btnFiltern" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="scpMainPane" min="-2" pref="470" max="-2" attributes="0"/>
@@ -117,14 +107,6 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnteilEinlagernActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btnSuche">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="suchen"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSucheActionPerformed"/>
-      </Events>
-    </Component>
     <Component class="javax.swing.JButton" name="btnTeilUmlagern">
       <Properties>
         <Property name="text" type="java.lang.String" value="Teile umlagern"/>
@@ -132,13 +114,6 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTeilUmlagernActionPerformed"/>
       </Events>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblFreitextSuche">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Freitextsuche:"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="txfFreitextSuche">
     </Component>
     <Component class="javax.swing.JButton" name="btnFilterZuruecksetzen">
       <Properties>

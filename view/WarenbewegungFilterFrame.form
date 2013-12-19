@@ -23,7 +23,10 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="panMain" min="-2" max="-2" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <Component id="panMain" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -44,44 +47,64 @@
                       <Component id="jSeparator1" alignment="0" max="32767" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="cbxTeiltyp" alignment="1" max="32767" attributes="0"/>
-                              <Component id="lblTeiltyp" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="lblDatumVon" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="txfDatumVon" min="-2" pref="70" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="lblDatumBis" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="txfDatumBis" max="32767" attributes="0"/>
-                              </Group>
-                              <Component id="btnFilterAusführen" alignment="0" max="32767" attributes="0"/>
-                              <Component id="scpBewegungstyp" alignment="1" max="32767" attributes="0"/>
-                              <Component id="lblBewegungsTyp" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblFilter" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="cbxQuelleLagertyp" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="cbxQuelleX" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="cbxQuelleY" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="cbxQuelleZ" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <Component id="lblQuellfach" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblZielfachadresse" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="cbxZielLagertyp" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="cbxZielX" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="cbxZielY" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="cbxZielZ" min="-2" max="-2" attributes="0"/>
+                              <Component id="txfBezeichnung" alignment="0" max="32767" attributes="0"/>
+                              <Component id="cbxBewegungsTyp" alignment="0" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="cbxTeiltyp" alignment="1" max="32767" attributes="0"/>
+                                      <Component id="lblTeiltyp" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="btnFilterAusführen" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="lblBewegungsTyp" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lblFilter" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="cbxQuelleLagertyp" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="cbxQuelleX" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="cbxQuelleY" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="cbxQuelleZ" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Component id="lblQuellfach" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lblZielfachadresse" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="cbxZielLagertyp" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="cbxZielX" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="cbxZielY" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="cbxZielZ" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="lblDatumVon" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="lblDatumBis" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace max="32767" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                              <Component id="txfDatumBis" pref="70" max="32767" attributes="0"/>
+                                              <Component id="txfDatumVon" max="32767" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <Component id="lblBewegungsDatum" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lblHaltbarkeitsdatum" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="lblhaltbarVon" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="lblHaltbarBis" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace max="32767" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                              <Component id="txfHaltbarVon" max="32767" attributes="0"/>
+                                              <Component id="txfHaltbarBis" pref="70" max="32767" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                  </Group>
+                                  <Component id="lblBezeichnung" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="14" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -94,7 +117,25 @@
                   <Component id="lblFilter" min="-2" pref="23" max="-2" attributes="0"/>
                   <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Component id="jSeparator1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="lblBezeichnung" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="txfBezeichnung" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblHaltbarkeitsdatum" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="lblhaltbarVon" min="-2" max="-2" attributes="0"/>
+                      <Component id="txfHaltbarVon" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="lblHaltbarBis" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="txfHaltbarBis" alignment="0" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace pref="12" max="32767" attributes="0"/>
+                  <Component id="lblBewegungsDatum" min="-2" pref="14" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="lblDatumVon" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txfDatumVon" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -124,9 +165,9 @@
                   </Group>
                   <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
                   <Component id="lblBewegungsTyp" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="scpBewegungstyp" min="-2" pref="102" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="32767" attributes="0"/>
+                  <Component id="cbxBewegungsTyp" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="lblTeiltyp" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="cbxTeiltyp" min="-2" max="-2" attributes="0"/>
@@ -154,12 +195,12 @@
         </Component>
         <Component class="javax.swing.JLabel" name="lblTeiltyp">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Typ:"/>
+            <Property name="text" type="java.lang.String" value="Lagertyp:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lblDatumBis">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Datum bis:"/>
+            <Property name="text" type="java.lang.String" value=" bis:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JComboBox" name="cbxTeiltyp">
@@ -228,6 +269,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Filter ausf&#xfc;hren"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnFilterAusf&#xfc;hrenActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JComboBox" name="cbxZielX">
           <Properties>
@@ -241,7 +285,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="lblDatumVon">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Datum von:"/>
+            <Property name="text" type="java.lang.String" value="von:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JComboBox" name="cbxZielY">
@@ -251,30 +295,48 @@
             </Property>
           </Properties>
         </Component>
-        <Container class="javax.swing.JScrollPane" name="scpBewegungstyp">
-          <AuxValues>
-            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
-          </AuxValues>
-
-          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
-          <SubComponents>
-            <Component class="javax.swing.JList" name="jList2">
-              <Properties>
-                <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
-                  <StringArray count="6">
-                    <StringItem index="0" value="alle"/>
-                    <StringItem index="1" value="Ersteinlagerung"/>
-                    <StringItem index="2" value="Einlagerungen"/>
-                    <StringItem index="3" value="Auslagerungen"/>
-                    <StringItem index="4" value="Splits"/>
-                    <StringItem index="5" value=" "/>
-                  </StringArray>
-                </Property>
-              </Properties>
-            </Component>
-          </SubComponents>
-        </Container>
         <Component class="javax.swing.JTextField" name="txfDatumVon">
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblBewegungsDatum">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Bewegungsdatum:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblHaltbarkeitsdatum">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Haltbarkeitsdatum:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblhaltbarVon">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="von:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblHaltbarBis">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="bis:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txfHaltbarVon">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txfHaltbarVonActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txfHaltbarBis">
+        </Component>
+        <Component class="javax.swing.JComboBox" name="cbxBewegungsTyp">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new javax.swing.DefaultComboBoxModel(new String[] { &quot;&quot; })" type="code"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblBezeichnung">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Bezeichnung:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txfBezeichnung">
         </Component>
       </SubComponents>
     </Container>

@@ -4,14 +4,13 @@
  */
 package model.filter;
 
+import helper.Misc;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import model.Lager;
 import model.Teilebestand;
 
 /**
- *
+ * StandardContainer für TeilebestandFilter-Werte
  * @author ssinger
  */
 public class TeilebestandFilterModel {
@@ -23,9 +22,11 @@ public class TeilebestandFilterModel {
     private float vonPreis;
     private float bisPreis;
     private String zeichnungsnummer;
+    private String bezeichnung;
     
-    /*
-     * Initialisiert den Filter in Grundeinstellungen
+    /**
+     * Erstellt ein standardFilterModel Objekt mit maximalen Schranken
+     * @author ssinger
      */
     public TeilebestandFilterModel(){
         typ = null;
@@ -38,11 +39,12 @@ public class TeilebestandFilterModel {
                 bisVe = Lager.getLager(Lager.Lagerort.freilager).getGrossVE();
             }
         } catch (SQLException ex) {
-            Logger.getLogger(TeilebestandFilterModel.class.getName()).log(Level.SEVERE, null, ex);
+            Misc.printSQLException(null, ex);
         }
         vonPreis = 0;
         bisPreis = Float.MAX_VALUE;
         zeichnungsnummer = "%%";
+        bezeichnung = "%%";
     }
 
     /**
@@ -141,5 +143,19 @@ public class TeilebestandFilterModel {
      */
     public void setTyp(Teilebestand.Typ typ) {
         this.typ = typ;
+    }
+
+    /**
+     * @return the bezeichnung
+     */
+    public String getBezeichnung() {
+        return bezeichnung;
+    }
+
+    /**
+     * @param bezeichnung the bezeichnung to set
+     */
+    public void setBezeichnung(String bezeichnung) {
+        this.bezeichnung = "%"+bezeichnung+"%";
     }
 }

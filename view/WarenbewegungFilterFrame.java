@@ -4,7 +4,14 @@
  */
 package view;
 
+import helper.FilterUiHelper;
+import helper.Misc;
 import java.awt.Component;
+import java.sql.SQLException;
+import java.util.HashMap;
+import model.Lager;
+import model.collection.WarenbewegungCollection;
+import model.filter.WarenbewegungFilterModel;
 
 /**
  *
@@ -26,6 +33,11 @@ public class WarenbewegungFilterFrame extends javax.swing.JFrame {
      */
     public WarenbewegungFilterFrame() {
         initComponents();
+        try{
+            loadCbx();
+        }catch(SQLException ex){
+            System.out.println("error");
+        }
     }
 
     public WarenbewegungFilterFrame(Component c) {
@@ -40,6 +52,67 @@ public class WarenbewegungFilterFrame extends javax.swing.JFrame {
         int rightBorder = x+width;
         int newOrigin = rightBorder -this.getWidth()-9;
         this.setLocation(newOrigin, this.getY()+210);
+    }
+    
+    
+    /**
+     * Läd Quell und ZielComboBoxen mit den größtmöglichen Werten
+     * @author ssinger
+     * @throws SQLException 
+     */
+    private void loadCbx() throws SQLException {
+        cbxQuelleZ.removeAllItems();
+        cbxQuelleX.removeAllItems();
+        cbxQuelleY.removeAllItems();
+        cbxZielZ.removeAllItems();
+        cbxZielX.removeAllItems();
+        cbxZielY.removeAllItems();
+        cbxQuelleZ.addItem("z");
+        cbxQuelleX.addItem("x");
+        cbxQuelleY.addItem("y");
+        cbxZielZ.addItem("z");
+        cbxZielX.addItem("x");
+        cbxZielY.addItem("y");
+
+        int x = 0;
+        int y = 0;
+        int z = 0;
+
+        Lager fl = Lager.getLager(Lager.Lagerort.freilager);
+        Lager hl = Lager.getLager(Lager.Lagerort.hochregal);
+
+        if (hl.getHoehe() > fl.getHoehe()) {
+            x = hl.getHoehe();
+        } else {
+            x = fl.getHoehe();
+        }
+
+        if (hl.getBreite() > fl.getBreite()) {
+            y = hl.getBreite();
+        } else {
+            y = fl.getBreite();
+        }
+
+        if (hl.getTiefe() > fl.getTiefe()) {
+            z = hl.getTiefe();
+        } else {
+            z = fl.getTiefe();
+        }
+
+        for (int i = 1; i <= x; i++) {
+            cbxQuelleZ.addItem(i);
+            cbxZielZ.addItem(i);
+        }
+
+        for (int i = 1; i <= y; i++) {
+            cbxQuelleX.addItem(i);
+            cbxZielX.addItem(i);
+        }
+
+        for (int i = 1; i <= z; i++) {
+            cbxQuelleY.addItem(i);
+            cbxZielY.addItem(i);
+        }
     }
     
     /**
@@ -71,9 +144,16 @@ public class WarenbewegungFilterFrame extends javax.swing.JFrame {
         cbxZielX = new javax.swing.JComboBox();
         lblDatumVon = new javax.swing.JLabel();
         cbxZielY = new javax.swing.JComboBox();
-        scpBewegungstyp = new javax.swing.JScrollPane();
-        jList2 = new javax.swing.JList();
         txfDatumVon = new javax.swing.JTextField();
+        lblBewegungsDatum = new javax.swing.JLabel();
+        lblHaltbarkeitsdatum = new javax.swing.JLabel();
+        lblhaltbarVon = new javax.swing.JLabel();
+        lblHaltbarBis = new javax.swing.JLabel();
+        txfHaltbarVon = new javax.swing.JTextField();
+        txfHaltbarBis = new javax.swing.JTextField();
+        cbxBewegungsTyp = new javax.swing.JComboBox();
+        lblBezeichnung = new javax.swing.JLabel();
+        txfBezeichnung = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -81,9 +161,9 @@ public class WarenbewegungFilterFrame extends javax.swing.JFrame {
 
         lblQuellfach.setText("Quellfachadresse:");
 
-        lblTeiltyp.setText("Typ:");
+        lblTeiltyp.setText("Lagertyp:");
 
-        lblDatumBis.setText("Datum bis:");
+        lblDatumBis.setText(" bis:");
 
         cbxTeiltyp.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "", "Kaufteile", "Werkzeuge", "unfertige Baugruppe", "Vorratsteile", "Vorrichtungen" }));
 
@@ -109,6 +189,11 @@ public class WarenbewegungFilterFrame extends javax.swing.JFrame {
         cbxQuelleY.setModel(new javax.swing.DefaultComboBoxModel());
 
         btnFilterAusführen.setText("Filter ausführen");
+        btnFilterAusführen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFilterAusführenActionPerformed(evt);
+            }
+        });
 
         cbxZielX.setModel(new javax.swing.DefaultComboBoxModel());
         cbxZielX.addActionListener(new java.awt.event.ActionListener() {
@@ -117,16 +202,27 @@ public class WarenbewegungFilterFrame extends javax.swing.JFrame {
             }
         });
 
-        lblDatumVon.setText("Datum von:");
+        lblDatumVon.setText("von:");
 
         cbxZielY.setModel(new javax.swing.DefaultComboBoxModel());
 
-        jList2.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "alle", "Ersteinlagerung", "Einlagerungen", "Auslagerungen", "Splits", " " };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
+        lblBewegungsDatum.setText("Bewegungsdatum:");
+
+        lblHaltbarkeitsdatum.setText("Haltbarkeitsdatum:");
+
+        lblhaltbarVon.setText("von:");
+
+        lblHaltbarBis.setText("bis:");
+
+        txfHaltbarVon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txfHaltbarVonActionPerformed(evt);
+            }
         });
-        scpBewegungstyp.setViewportView(jList2);
+
+        cbxBewegungsTyp.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "" }));
+
+        lblBezeichnung.setText("Bezeichnung:");
 
         javax.swing.GroupLayout panMainLayout = new javax.swing.GroupLayout(panMain);
         panMain.setLayout(panMainLayout);
@@ -138,39 +234,53 @@ public class WarenbewegungFilterFrame extends javax.swing.JFrame {
                     .addComponent(jSeparator1)
                     .addGroup(panMainLayout.createSequentialGroup()
                         .addGroup(panMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(cbxTeiltyp, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblTeiltyp, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panMainLayout.createSequentialGroup()
-                                .addComponent(lblDatumVon)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txfDatumVon, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panMainLayout.createSequentialGroup()
-                                .addComponent(lblDatumBis)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txfDatumBis))
-                            .addComponent(btnFilterAusführen, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(scpBewegungstyp)
-                            .addComponent(lblBewegungsTyp, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblFilter, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panMainLayout.createSequentialGroup()
-                                .addComponent(cbxQuelleLagertyp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cbxQuelleX, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cbxQuelleY, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cbxQuelleZ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(lblQuellfach, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblZielfachadresse, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panMainLayout.createSequentialGroup()
-                                .addComponent(cbxZielLagertyp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cbxZielX, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cbxZielY, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cbxZielZ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                            .addComponent(txfBezeichnung, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cbxBewegungsTyp, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(panMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(panMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(cbxTeiltyp, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lblTeiltyp)
+                                    .addComponent(btnFilterAusführen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lblBewegungsTyp)
+                                    .addComponent(lblFilter)
+                                    .addGroup(panMainLayout.createSequentialGroup()
+                                        .addComponent(cbxQuelleLagertyp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(cbxQuelleX, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(cbxQuelleY, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(cbxQuelleZ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(lblQuellfach)
+                                    .addComponent(lblZielfachadresse)
+                                    .addGroup(panMainLayout.createSequentialGroup()
+                                        .addComponent(cbxZielLagertyp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(cbxZielX, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(cbxZielY, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(cbxZielZ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panMainLayout.createSequentialGroup()
+                                        .addGroup(panMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(lblDatumVon)
+                                            .addComponent(lblDatumBis))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGroup(panMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(txfDatumBis, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
+                                            .addComponent(txfDatumVon)))
+                                    .addComponent(lblBewegungsDatum)
+                                    .addComponent(lblHaltbarkeitsdatum)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panMainLayout.createSequentialGroup()
+                                        .addGroup(panMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(lblhaltbarVon)
+                                            .addComponent(lblHaltbarBis))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGroup(panMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(txfHaltbarVon)
+                                            .addComponent(txfHaltbarBis, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE))))
+                                .addComponent(lblBezeichnung)))
+                        .addGap(0, 14, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         panMainLayout.setVerticalGroup(
@@ -179,7 +289,23 @@ public class WarenbewegungFilterFrame extends javax.swing.JFrame {
                 .addComponent(lblFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(9, 9, 9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblBezeichnung)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txfBezeichnung, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblHaltbarkeitsdatum)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblhaltbarVon)
+                    .addComponent(txfHaltbarVon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblHaltbarBis)
+                    .addComponent(txfHaltbarBis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addComponent(lblBewegungsDatum, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblDatumVon)
                     .addComponent(txfDatumVon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -205,9 +331,9 @@ public class WarenbewegungFilterFrame extends javax.swing.JFrame {
                     .addComponent(cbxZielY, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblBewegungsTyp)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scpBewegungstyp, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(cbxBewegungsTyp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblTeiltyp)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cbxTeiltyp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -220,7 +346,9 @@ public class WarenbewegungFilterFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panMain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(panMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -237,6 +365,46 @@ public class WarenbewegungFilterFrame extends javax.swing.JFrame {
     private void cbxZielXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxZielXActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbxZielXActionPerformed
+
+    private void btnFilterAusführenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFilterAusführenActionPerformed
+        HashMap<Integer, String> errors = FilterUiHelper.getInstance().validateWarenbewegungFilter(
+                txfDatumVon.getText(),
+                txfDatumBis.getText(),
+                txfHaltbarVon.getText(),
+                txfHaltbarBis.getText());
+        
+        if (Misc.createErrorDialog(this, errors) == true) {
+            return;
+        }
+        
+        WarenbewegungFilterModel wfm = FilterUiHelper.createWFM(
+               txfBezeichnung.getText(),
+               txfHaltbarVon.getText(),
+               txfHaltbarBis.getText(),
+               cbxQuelleLagertyp.getSelectedItem().toString(),
+               cbxBewegungsTyp.getSelectedItem().toString(),
+               cbxQuelleX.getSelectedItem().toString(),
+               cbxQuelleY.getSelectedItem().toString(),
+               cbxQuelleZ.getSelectedItem().toString(),
+               cbxTeiltyp.getSelectedItem().toString(),
+               cbxZielLagertyp.getSelectedItem().toString(),
+               cbxZielX.getSelectedItem().toString(),
+               cbxZielY.getSelectedItem().toString(),
+               cbxZielZ.getSelectedItem().toString(),
+               txfDatumVon.getText(),
+               txfDatumBis.getText());
+        
+        try{
+            WarenbewegungCollection wbc = new WarenbewegungCollection();
+            WarenbewegungCollection result = wbc.addFilter(wfm);
+        }catch (SQLException e){
+            System.out.println("SQLException");
+        }
+    }//GEN-LAST:event_btnFilterAusführenActionPerformed
+
+    private void txfHaltbarVonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfHaltbarVonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txfHaltbarVonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -274,6 +442,7 @@ public class WarenbewegungFilterFrame extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnFilterAusführen;
+    private javax.swing.JComboBox cbxBewegungsTyp;
     private javax.swing.JComboBox cbxQuelleLagertyp;
     private javax.swing.JComboBox cbxQuelleX;
     private javax.swing.JComboBox cbxQuelleY;
@@ -283,18 +452,24 @@ public class WarenbewegungFilterFrame extends javax.swing.JFrame {
     private javax.swing.JComboBox cbxZielX;
     private javax.swing.JComboBox cbxZielY;
     private javax.swing.JComboBox cbxZielZ;
-    private javax.swing.JList jList2;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JLabel lblBewegungsDatum;
     private javax.swing.JLabel lblBewegungsTyp;
+    private javax.swing.JLabel lblBezeichnung;
     private javax.swing.JLabel lblDatumBis;
     private javax.swing.JLabel lblDatumVon;
     private javax.swing.JLabel lblFilter;
+    private javax.swing.JLabel lblHaltbarBis;
+    private javax.swing.JLabel lblHaltbarkeitsdatum;
     private javax.swing.JLabel lblQuellfach;
     private javax.swing.JLabel lblTeiltyp;
     private javax.swing.JLabel lblZielfachadresse;
+    private javax.swing.JLabel lblhaltbarVon;
     private javax.swing.JPanel panMain;
-    private javax.swing.JScrollPane scpBewegungstyp;
+    private javax.swing.JTextField txfBezeichnung;
     private javax.swing.JTextField txfDatumBis;
     private javax.swing.JTextField txfDatumVon;
+    private javax.swing.JTextField txfHaltbarBis;
+    private javax.swing.JTextField txfHaltbarVon;
     // End of variables declaration//GEN-END:variables
 }

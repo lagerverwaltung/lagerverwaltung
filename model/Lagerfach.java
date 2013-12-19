@@ -130,6 +130,7 @@ public class Lagerfach {
         }
         return 0;
     }
+    
     /*
     * @author ssinger
     * gibt die Anzahl der nicht belegten VE's zurück
@@ -154,13 +155,13 @@ public class Lagerfach {
     }
     
     /*
+     *  gibt Lagerfach zur lagerfachadresse aus
+     * @author ssinger
     * @param String ort, x int, y int, z int
     * @return Lagerfach
-    * gibt Lagerfach zur lagerfachadresse aus
     */
     public static Lagerfach getFach(Lager lager, int x, int y, int z) throws SQLException{
 
-        //hier lager id weg
         Dao<Lagerfach, Integer> lagerfachDao = DatabaseManager.getInstance().getLagerfachDao();
         Dao<Lager, Integer> lagerDao = DatabaseManager.getInstance().getLagerDao();
         
