@@ -6,6 +6,7 @@ package view;
 
 import com.j256.ormlite.dao.Dao;
 import helper.DatabaseManager;
+import helper.LagerbestandHelper;
 import helper.Misc;
 import java.sql.SQLException;
 import java.text.DateFormat;
@@ -13,12 +14,14 @@ import java.text.Format;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.TableColumn;
 import model.Lager;
+import model.Lager.Lagerort;
 import model.Lagerbestand;
 import model.Lagerfach;
 import model.Teilebestand;
@@ -56,6 +59,9 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
     public final static int AUSLAGERN = 3;
     public final static int UMLAGERN = 4;
     public final static int SPLITTEN = 5;
+    
+    int code;
+    BestandsGUIHelper help;
     
     /**
      * Creates new form BestandsaenderungFrame
@@ -134,64 +140,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         this.teilid = lagerbestand.getTeil().getIdentnummer();
         this.lblHinweisDatum.setVisible(false);
     }
-    /**
-     * debrecated
-     */
-    BestandsaenderungFrame(boolean einlagern, int id,boolean bestehenderLagerbestand,int x,int y, int z,Lager.Lagerort lo, int fachid,String anschGr) {        
-        this();
-        this.einlagern = einlagern;
-        this.bestehenderLagerbestand=bestehenderLagerbestand;
-        this.fachid=fachid;
-        this.teilid=id;
-        lblEinlagern.setText("Teile einlagern");
-        einlagernButton.setText("Teile einlagern");
-        this.txfTeilID.setText(""+id);
-        this.txaAnschaffungsgrund.setText(anschGr);
-        this.txfTeilID.setEditable(false);
-        this.txfTeilID.setEnabled(false);
-        
-        this.cbxFachX.setSelectedItem(x);
-        this.cbxFachY.setSelectedItem(y);
-        this.cbxFachZ.setSelectedItem(z);
-        loadLagerOrtCbx(lo);
-        
-        this.cbxFachX.setEnabled(false);
-        this.cbxFachY.setEnabled(false);
-        this.cbxFachZ.setEnabled(false);
-        this.cbxFachTyp.setEnabled(false);
-        
-    }
-   
-
-    /*
-     * debrecated
-     */
-        BestandsaenderungFrame(boolean auslagern, int id,String anschGr, int x, int y, int z, Lager.Lagerort lo, int fachid, int menge) {
-          
-            this();
-            this.auslagern = auslagern;
-            lblEinlagern.setText("Teile auslagern");
-            einlagernButton.setText("Teile auslagern");
-            this.txfTeilID.setText("" + id);
-            this.txaAnschaffungsgrund.setText(anschGr);
-            this.txfTeilID.setEditable(false);
-            this.txfTeilID.setEnabled(false);
-            this.txaAnschaffungsgrund.setEditable(true);
-            this.txfHaltbarkeitsdatum.setVisible(false);
-            this.lblHaltbarkeitsdatum.setVisible(false);
-            this.cbxFachTyp.setEnabled(false);
-            this.cbxFachX.setEnabled(false);
-            this.cbxFachY.setEnabled(false);
-            this.cbxFachZ.setEnabled(false);
-            this.cbxFachX.setSelectedItem(x);
-            this.cbxFachY.setSelectedItem(y);
-            this.cbxFachZ.setSelectedItem(z);
-            loadLagerOrtCbx(lo); //Lagerort nicht mehr BUGGY!
-            this.fachid=fachid;
-            this.teilid=id;
-            this.lblHinweisDatum.setVisible(false);
-
-        }
+    
         
     BestandsaenderungFrame(boolean splitten) {
         this();
@@ -221,6 +170,18 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         this.txfTeilID.setEnabled(false);
         Lagerbestand lb= Lagerbestand.getLagerbestand(Lagerbestand.getLagerbestandID(teilID, fachID));
         setGUI(code,lb);
+        loadTeilIdUndGrund(lb);
+        
+        this.code=code;
+        
+        help= new BestandsGUIHelper();
+        
+        help.setquellFachID(fachID);
+        help.setTeilID(this.txfTeilID.getText());
+        
+        
+        
+        
     
     
     
@@ -607,9 +568,57 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-//ändern
+//ändern 
     private void einlagernButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_einlagernButtonActionPerformed
 
+       
+        
+        if (code!=SPLITTEN)
+        {
+        
+            try {
+            Lagerfach[] faecher= new Lagerfach[1];
+            faecher[0] = help.generateFach((int)cbxFachX.getSelectedItem(), (int)cbxFachY.getSelectedItem(), (int)cbxFachZ.getSelectedItem(), cbxFachTyp.getSelectedItem().toString());
+            help.setFaecher(faecher);
+        } catch (Exception ex) {
+            Misc.createErrorDialog(this, "Fehler bei der Fach Generierung");
+            return;
+        }
+        
+        
+       
+        HashMap<Integer,String> errors =help.validateLagerbestandData(txfMenge.getText(), txfHaltbarkeitsdatum.getText(), txaAnschaffungsgrund.getText());
+        if (errors.size()>0)
+        {
+             Misc.createErrorDialog(this, errors);
+             return;
+        }
+        
+        }
+        
+        
+        else
+        {
+        
+        
+        
+        }
+        
+        
+        
+        bestandsAenderung(help);
+    }//GEN-LAST:event_einlagernButtonActionPerformed
+   
+    
+    public void bestandsAenderung(BestandsGUIHelper help)
+    {
+    
+    
+    
+    }
+    private void einlagernButtonActionPerformedOLD(java.awt.event.ActionEvent evt)
+    {
+    
        
         int x = (int) (cbxFachX.getSelectedItem());
         int y = (int) (cbxFachY.getSelectedItem());
@@ -865,7 +874,9 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_einlagernButtonActionPerformed
+                    
+    
+    }
     private void refreshLagerbestandTableModel(){
         LagerbestandCollection lc = LagerbestandCollection.getInstance(true);
         LagerbestandTableModel lm = new LagerbestandTableModel();
