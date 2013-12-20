@@ -22,7 +22,7 @@ import model.Lagerfach;
 public class BestandsGUIHelper {
     
     int quellFachID;
-    int menge;
+    int mengen[];
     Date hbDatum;
     String grund;
     Lagerfach[] faecher;
@@ -50,14 +50,19 @@ public class BestandsGUIHelper {
     String NO_GRUND_TEXT="Es wurde kein Grund eingegeben!";
     
     
-    public int getMenge()
+    public int[] getMengen()
     {
-        return menge;
+        return mengen;
     }
     
     public void setTeilID(int teilID)
     {
         this.teilID=teilID;
+    }
+    
+    public int getTeilID()
+    {
+        return teilID;
     }
     
     public void setquellFachID(int quellFachId)
@@ -107,24 +112,29 @@ public class BestandsGUIHelper {
     }
     
     
-    public HashMap<Integer,String> validateLagerbestandData(int code,String mengeE,String datumE, String grundE)
+    public HashMap<Integer,String> validateLagerbestandData(int code,String mengenE[],String datumE, String grundE)
     {
         HashMap<Integer,String> errors=new HashMap<Integer,String>();
         
         try {
-        menge=Integer.parseInt(mengeE);
+            for (int i=0;i<mengenE.length;i++)
+            {
+                mengen[i]=Integer.parseInt(mengenE[i]);
+            }
+        
         }
         catch(NumberFormatException e)
         {
         errors.put(MENGE_NOT_INTEGER, MENGE_NOT_INTEGER_TEXT);
         }
         
-        if(menge<1)
+        for(int i=0;i<mengen.length;i++)
+        {
+        if(mengen[i]<1)
             errors.put(MENGE_NOT_GREATER_ZERO,MENGE_NOT_GREATER_ZERO_TEXT);
+        }
         
-/*        if(Character.isSpaceChar(grundE.charAt(0)))
-            errors.put(GRUND_SPACE, GRUND_SPACE_TEXT);
-        */
+        
         if(grundE!=null)
         {grund=grundE;}
         else

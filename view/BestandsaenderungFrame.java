@@ -574,10 +574,14 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
 //ändern 
     private void einlagernButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_einlagernButtonActionPerformed
 
-        HashMap<Integer,String> errors =help.validateLagerbestandData(code,txfMenge.getText(), txfHaltbarkeitsdatum.getText(), txaAnschaffungsgrund.getText());
+        
         
         if (code!=SPLITTEN)
         {
+            String[] menge={txfMenge.getText()};
+            HashMap<Integer,String> errors =help.validateLagerbestandData
+        (code,menge, txfHaltbarkeitsdatum.getText(), 
+                txaAnschaffungsgrund.getText());
         
             try {
             Lagerfach[] faecher= new Lagerfach[1];
@@ -606,16 +610,40 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         
         
         }
-        
-        
-        
-        bestandsAenderung(help);
+        try {
+            bestandsAenderung(code,help);
+        } catch (SQLException ex) {
+           System.out.println("SQL Exception");
+        }
+        this.dispose();
     }//GEN-LAST:event_einlagernButtonActionPerformed
    
     
-    public void bestandsAenderung(BestandsGUIHelper help)
+    public void bestandsAenderung(int code,BestandsGUIHelper help) throws SQLException
     {
-    
+        int quellLbID= Lagerbestand.getLagerbestandID(help.getTeilID(), help.getquellFachID());
+        
+        Lagerbestand quellLb= Lagerbestand.getLagerbestand(quellLbID);
+        ZielPosition[] zielPos= new ZielPosition[help.getMengen().length];
+        
+        switch(code)
+        {
+            case EINLAGERN_TEILEBESTAND:
+                    ;
+                    break;
+            case EINLAGERN_LAGERBESTAND:
+                    ;
+                    break;
+            case AUSLAGERN:
+                    ;
+                    break;
+            case UMLAGERN:
+                    ;
+                    break;
+            case SPLITTEN:
+                    ;
+                    break;
+        }
     
     
     }
