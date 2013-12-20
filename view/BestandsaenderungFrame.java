@@ -177,7 +177,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         help= new BestandsGUIHelper();
         
         help.setquellFachID(fachID);
-        help.setTeilID(this.txfTeilID.getText());
+        help.setTeilID(teilID);
         
         
         
@@ -278,10 +278,13 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
      * Editable(false) und Diabled es
      */
     private void loadTeilIdUndGrund(Lagerbestand lagerbestand){
+        if(lagerbestand!=null)
+        {
         this.txaAnschaffungsgrund.setText(lagerbestand.getAnschaffungsgrund());
         this.txfTeilID.setText("" + lagerbestand.getTeil().getIdentnummer());
         this.txfTeilID.setEditable(false);
         this.txfTeilID.setEnabled(false);
+        }
     }
     
     
@@ -571,7 +574,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
 //ändern 
     private void einlagernButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_einlagernButtonActionPerformed
 
-        HashMap<Integer,String> errors =help.validateLagerbestandData(txfMenge.getText(), txfHaltbarkeitsdatum.getText(), txaAnschaffungsgrund.getText());
+        HashMap<Integer,String> errors =help.validateLagerbestandData(code,txfMenge.getText(), txfHaltbarkeitsdatum.getText(), txaAnschaffungsgrund.getText());
         
         if (code!=SPLITTEN)
         {

@@ -15,21 +15,21 @@ import java.text.ParseException;
  * @author simon
  */
 public class LagerbestandHelper {
-    int MENGE_NOT_INTEGER=1;
-    String MENGE_NOT_INTEGER_TEXT="Menge muss eine Zahl sein.";
-    
-    int MENGE_NOT_GREATER_ZERO=2;
-    String MENGE_NOT_GREATER_ZERO_TEXT="Menge muss größer als 0 sein!";
-    
-    int GRUND_SPACE=3;
-    String GRUND_SPACE_TEXT="Grund darf nicht mit einem Leerzeichen beginnen!";
-   
-    int DATE_NOT_VALID=4;
-    String DATE_NOT_VALID_TEXT="Bitte valides Datumsformat tt.mm.yyyy eingeben!";
-    
-    int DATE_BEFORE_TODAY=5;
-    String DATE_BEFORE_TODAY_TEXT="Das eingegebene Datum liegt vor dem heutigen Datum";
-    
+    int MENGE_NOT_INTEGER = 1;
+    String MENGE_NOT_INTEGER_TEXT = "Menge muss eine Zahl sein.";
+
+    int MENGE_NOT_GREATER_ZERO = 2;
+    String MENGE_NOT_GREATER_ZERO_TEXT = "Menge muss größer als 0 sein!";
+
+    int GRUND_SPACE = 3;
+    String GRUND_SPACE_TEXT = "Grund darf nicht mit einem Leerzeichen beginnen!";
+
+    int DATE_NOT_VALID = 4;
+    String DATE_NOT_VALID_TEXT = "Bitte valides Datumsformat tt.mm.yyyy eingeben!";
+
+    int DATE_BEFORE_TODAY = 5;
+    String DATE_BEFORE_TODAY_TEXT = "Das eingegebene Datum liegt vor dem heutigen Datum";
+
     
     private static LagerbestandHelper singleton;
     public static LagerbestandHelper getInstance()

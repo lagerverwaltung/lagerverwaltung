@@ -189,7 +189,7 @@ public class LagerbestandPanel extends javax.swing.JPanel {
             int teilId = Integer.parseInt(tabMaintable.getValueAt(tabMaintable.getSelectedRow(), 6).toString());
        
             // Deprecated
-            
+            /*
             int lagerbestandId = 0;
             Lagerbestand lagerbestand = new Lagerbestand();
             try {
@@ -206,8 +206,8 @@ public class LagerbestandPanel extends javax.swing.JPanel {
             } catch (SQLException ex) {
                 Misc.printSQLException(mainFrame, ex);
             }
+            */
             
-            /* new
             BestandsaenderungFrame bestandsaenderungFrame =null;
             try {
                 bestandsaenderungFrame = new BestandsaenderungFrame(BestandsaenderungFrame.EINLAGERN_LAGERBESTAND,teilId,fachId);
@@ -215,7 +215,7 @@ public class LagerbestandPanel extends javax.swing.JPanel {
                 Misc.createErrorDialog(mainFrame, "DB Fehler");
             }
             bestandsaenderungFrame.setTable(tabMaintable);
-            */
+            
         } else {
             Misc.createErrorDialog(mainFrame, "Es muss erst ein Teil zum Einlagern aus der "
                     + "Liste gewählt werden!");
@@ -273,6 +273,7 @@ public class LagerbestandPanel extends javax.swing.JPanel {
             int teilId = Integer.parseInt(tabMaintable.getValueAt(tabMaintable.getSelectedRow(), 6).toString());
            
             // Deprecated
+            /*
             int lagerbestandId = 0;
             Lagerbestand lb = new Lagerbestand();
             try {
@@ -289,16 +290,17 @@ public class LagerbestandPanel extends javax.swing.JPanel {
             } catch (SQLException ex) {
                 Misc.printSQLException(mainFrame, ex);
             }
+            */
             
             
-            /* new
+            // new
             BestandsaenderungFrame bestandsaenderungFrame =null;
             try {
                 bestandsaenderungFrame = new BestandsaenderungFrame(BestandsaenderungFrame.AUSLAGERN,teilId,fachId);
             } catch (SQLException ex) {
                 Misc.createErrorDialog(mainFrame, "DB Fehler");
             }
-            */
+            
             bestandsaenderungFrame.setTable(tabMaintable);
             JTable teileTable = mainFrame.getPanMain().getTeilebestand().getTeileTable();
             bestandsaenderungFrame.setTeileTable(teileTable);

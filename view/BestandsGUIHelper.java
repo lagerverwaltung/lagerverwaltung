@@ -43,15 +43,21 @@ public class BestandsGUIHelper {
     int DATE_BEFORE_TODAY=5;
     String DATE_BEFORE_TODAY_TEXT="Das eingegebene Datum liegt vor dem heutigen Datum";
     
+    int NO_DATE=6;
+    String NO_DATE_TEXT="Es wurde kein Datum eingegeben!";
+    
+    int NO_GRUND=7;
+    String NO_GRUND_TEXT="Es wurde kein Grund eingegeben!";
+    
     
     public int getMenge()
     {
         return menge;
     }
     
-    public void setTeilID(String teilID)
+    public void setTeilID(int teilID)
     {
-        this.teilID=Integer.parseInt(teilID);
+        this.teilID=teilID;
     }
     
     public void setquellFachID(int quellFachId)
@@ -76,7 +82,16 @@ public class BestandsGUIHelper {
     
     public Lagerfach generateFach(int x,int y,int z, String lo) throws Exception
     {
-        return (Lagerfach.getFach(Lager.getLager(Lagerort.valueOf(lo)),x ,y,z));
+        Lagerort l;
+        
+        if (lo.equals("FL")) {
+
+            l=Lager.Lagerort.freilager;
+        } else {
+            l=Lager.Lagerort.hochregal;
+        }
+        
+        return (Lagerfach.getFach(Lager.getLager(l),x ,y,z));
         
     }
     
@@ -92,11 +107,9 @@ public class BestandsGUIHelper {
     }
     
     
-    public HashMap<Integer,String> validateLagerbestandData(String mengeE,String datumE, String grundE)
+    public HashMap<Integer,String> validateLagerbestandData(int code,String mengeE,String datumE, String grundE)
     {
         HashMap<Integer,String> errors=new HashMap<Integer,String>();
-        
-        
         
         try {
         menge=Integer.parseInt(mengeE);
@@ -109,10 +122,17 @@ public class BestandsGUIHelper {
         if(menge<1)
             errors.put(MENGE_NOT_GREATER_ZERO,MENGE_NOT_GREATER_ZERO_TEXT);
         
-        if(Character.isSpaceChar(grundE.charAt(0)))
+/*        if(Character.isSpaceChar(grundE.charAt(0)))
             errors.put(GRUND_SPACE, GRUND_SPACE_TEXT);
-        grund=grundE;
-        
+        */
+        if(grundE!=null)
+        {grund=grundE;}
+        else
+        {
+           errors.put(NO_GRUND, NO_GRUND_TEXT);
+        }
+        if (code==BestandsaenderungFrame.EINLAGERN_LAGERBESTAND || code==BestandsaenderungFrame.EINLAGERN_TEILEBESTAND)
+        {
         try{
             DateFormat d= new SimpleDateFormat("dd.MM.yyyy");
             hbDatum=d.parse(datumE);
@@ -123,11 +143,18 @@ public class BestandsGUIHelper {
         }
         Date today=new Date();
         
-        if(hbDatum.before(today))
-            errors.put(DATE_BEFORE_TODAY, DATE_BEFORE_TODAY_TEXT);
-            
         
-        
+            if(hbDatum!=null)
+            {
+                if(hbDatum.before(today))
+                    errors.put(DATE_BEFORE_TODAY, DATE_BEFORE_TODAY_TEXT);
+           
+            }
+            else
+            {
+                errors.put(NO_DATE, NO_DATE_TEXT);
+            }
+        } 
         return errors;
     }
     
