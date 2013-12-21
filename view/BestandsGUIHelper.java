@@ -80,6 +80,11 @@ public class BestandsGUIHelper {
         return faecher[0];
     }
     
+    public int getEineMenge()
+    {
+        return mengen[0];
+    }
+    
     public Lagerfach[] getFaecher()
     {
         return faecher;

@@ -178,14 +178,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         
         help.setquellFachID(fachID);
         help.setTeilID(teilID);
-        
-        
-        
-        
-    
-    
-    
-    
+
     }
     
     /**
@@ -587,6 +580,11 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
             Lagerfach[] faecher= new Lagerfach[1];
             faecher[0] = help.generateFach((int)cbxFachX.getSelectedItem(), (int)cbxFachY.getSelectedItem(), (int)cbxFachZ.getSelectedItem(), cbxFachTyp.getSelectedItem().toString());
             help.setFaecher(faecher);
+            
+            if(code==EINLAGERN_TEILEBESTAND)
+            help.setquellFachID(help.getEinLagerfach().getFachnummer());
+            
+            
         } catch (Exception ex) {
             Misc.createErrorDialog(this, "Fehler bei der Fach Generierung");
             return;
@@ -627,10 +625,8 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
     {
         int quellLbID= Lagerbestand.getLagerbestandID(help.getTeilID(), help.getquellFachID());
         
+        
         Lagerbestand quellLb= Lagerbestand.getLagerbestand(quellLbID);
-     /*   ZielPosition[] zielPos= new ZielPosition[help.getMengen().length];
-        Warenbewegung[] wBewegungen = new Warenbewegung[help.getMengen().length];
-        */
         int mengeOld=0;
         
         if(quellLb!=null)
@@ -658,8 +654,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
             case EINLAGERN_TEILEBESTAND:
                     if(quellLb==null)
                     {
-                    
-                    
+                        neuerLagerbestand(teil,help.getEinLagerfach(),help.getGrund(),help.getEineMenge());
                     
                     }            
                     else
@@ -669,22 +664,41 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
                         
                         
                     break;
+                
             case EINLAGERN_LAGERBESTAND:
                 if(quellLb!=null)
-                    quellLb.setMenge(mengeOld+help.getMengen()[0]);;
+                    quellLb.setMenge(mengeOld + help.getEineMenge());
                     break;
+                
             case AUSLAGERN:
-                    ;
+                    
+                    quellLb.setMenge(mengeOld + help.getEineMenge());
+                    
+                    if(quellLb.getMenge()==0 && Lagerbestand.isLastTeil(quellLb, quellLb.getMenge()))
+                    {
+                        int option = JOptionPane.showConfirmDialog(this, "Soll das zugehörige Teil aus dem Teilebestand gelöscht werden ?");
+
+                        if (option == JOptionPane.YES_OPTION) {
+                            
+                            Dao<Teilebestand, Integer> teilebestandDao = DatabaseManager.getInstance().getTeilebestandDao();
+                            teilebestandDao.deleteById(help.getTeilID());
+                            refreshTeilebestandTableModel();
+                            }
+                    }
                     break;
+                
             case UMLAGERN:
                     ;
                     break;
+                
             case SPLITTEN:
                     ;
                     break;
         }
         
+    if(quellLb!=null)    
         quellLb.save();
+    
         this.dispose();
     
     
@@ -700,8 +714,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         for(int i=0;i<faecher.length;i++)
         {
            int freeVE=faecher[i].getFreeVe();
-           int usedVE=faecher[i].getUsedVe();
-           int maxVE=faecher[i].getMaxVe();
+           
            
            
            
@@ -724,6 +737,18 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         }
     
         return errors;
+    }
+    
+    public void neuerLagerbestand(Teilebestand tb,Lagerfach lf,String grund, int menge) throws SQLException
+    {
+                Lagerbestand lb = new Lagerbestand();
+                lb.setTeil(tb);
+                lb.setLagerfach(lf);
+                lb.setAnschaffungsgrund(grund);
+                lb.setMenge(menge);
+
+               
+                lb.save();
     }
     
     private void einlagernButtonActionPerformedOLD(java.awt.event.ActionEvent evt)
