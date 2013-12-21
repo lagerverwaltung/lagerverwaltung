@@ -155,6 +155,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
     }
 
     /**
+     * @author smodlich
      * Vereinheitlichter Konstruktor für alle Bestandsaenderungsframes
      * @param code Code der angibt um welche Funktion aus welchem Panel es sich handelt. 
      * Codedeklaration im Kopf des Bestandsaenderungsframe als Konstanten
@@ -182,6 +183,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
     }
     
     /**
+     * @author smodlich
      * Methode die entscheidet welche GUI erzeugt wird
      * @param code der Code entsprechend der Variablen im Kopf des Bestandsaenderungsframes auszuwählen
      */
@@ -208,6 +210,11 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         }
     
     }
+    /**
+     * @author smodlich
+     * Erstellen der Einlagern Teilebstand GUI und setzen der entsprechenden Elemente
+     * 
+     */
     
     private void setEinlagernTeilebestandGUI()
     {
@@ -215,6 +222,13 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         einlagernButton.setText("Teile einlagern");
     
     }
+    
+    /**
+     * @author smodlich
+     * Erstellen der Einlagern Lagerbestand GUI und setzen der entsprechenden Elemente
+     * 
+     */
+    
     private void setEinlagernLagerbestandGUI(Lagerbestand lb)
     {
             lblEinlagern.setText("Teile einlagern");
@@ -229,7 +243,11 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
             loadQuellComboBoxen(lb);
     
     }
-    
+    /**
+     * @author smodlich
+     * Erstellen der Auslagern GUI und setzen der entsprechenden Elemente
+     * 
+     */
     private void setAuslagernGUI(Lagerbestand lb)
     {
             lblEinlagern.setText("Teile auslagern");
@@ -248,13 +266,19 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
             this.setVisible(true);
     
     }
-    
+    /**
+     * Erstellen der Umlagern GUI und setzen der entsprechenden Elemente
+     * 
+     */
     private void setUmlagernGUI(Lagerbestand lb)
     {
     
     
     }
-    
+    /**
+     * Erstellen der Splitten GUI und setzen der entsprechenden Elemente
+     * 
+     */
     private void setSplittenGUI(Lagerbestand lb)
     {
         lblEinlagern.setText("Teile splitten");
@@ -620,7 +644,13 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         refreshWarenbestandTableModel();*/
     }//GEN-LAST:event_einlagernButtonActionPerformed
    
-    
+    /**
+     * Methode zur Bestandsänderung
+     * @author smodlich
+     * @param code Der entsprechende Code (nach den Konstanten in dieser Klasse)
+     * @param help das BestandsGUIHelper Objekt das die ausgelesenen Variablen enthält
+     * @throws SQLException 
+     */
     public void bestandsAenderung(int code,BestandsGUIHelper help) throws SQLException
     {
         int quellLbID= Lagerbestand.getLagerbestandID(help.getTeilID(), help.getquellFachID());
@@ -704,6 +734,16 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
     
     }
     
+    /**
+     * @author smodlich
+     * generischer Kapazitätstest für alle Bestandsaenderungen
+     * @param faecher Faecher Array ausgelesen aus BestandsGUIHelper Objekt
+     * @param teil Teilebestand
+     * @param mengen
+     * @param mengeOld
+     * @return
+     * @throws SQLException 
+     */
     public HashMap<Integer,String> kapazitaetsTest(Lagerfach[] faecher,Teilebestand teil,int[] mengen,int mengeOld) throws SQLException
     {
         HashMap<Integer,String> errors = new HashMap<Integer,String>();
@@ -739,6 +779,15 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         return errors;
     }
     
+    /**
+     * @author smodlich 
+     * Erstellt einen neuen lagerbestand anhand der Eingabedaten
+     * @param tb Teilebestand
+     * @param lf Lagerfach
+     * @param grund Grund für den neuen bestand
+     * @param menge die Menge die der neue Bestand enthalten soll
+     * @throws SQLException 
+     */
     public void neuerLagerbestand(Teilebestand tb,Lagerfach lf,String grund, int menge) throws SQLException
     {
                 Lagerbestand lb = new Lagerbestand();
@@ -750,6 +799,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
                
                 lb.save();
     }
+    
     
     private void einlagernButtonActionPerformedOLD(java.awt.event.ActionEvent evt)
     {
