@@ -706,7 +706,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
                     
                     if(quellLb.getMenge()==0 && Lagerbestand.isLastTeil(quellLb, quellLb.getMenge()))
                     {
-                        int option = JOptionPane.showConfirmDialog(this, "Soll das zugehörige Teil aus dem Teilebestand gelöscht werden ?");
+                        int option = JOptionPane.showConfirmDialog(this, "Soll das zugehörige Teil aus dem Teilebestand gelöscht werden ?","Zugehöriges Teil löschen?",JOptionPane.YES_NO_OPTION);
 
                         if (option == JOptionPane.YES_OPTION) {
                             
@@ -714,6 +714,8 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
                             teilebestandDao.deleteById(help.getTeilID());
                             refreshTeilebestandTableModel();
                             }
+                        
+                       
                     }
                     break;
                 
