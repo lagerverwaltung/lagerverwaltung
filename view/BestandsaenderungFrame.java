@@ -604,6 +604,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         }
         
         
+        // Splitten ergänzen
         else
         {
         
@@ -615,7 +616,10 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         } catch (SQLException ex) {
            System.out.println("SQL Exception");
         }
-        this.dispose();
+        
+        refreshLagerbestandTableModel();
+        /*refreshTeilebestandTableModel();
+        refreshWarenbestandTableModel();*/
     }//GEN-LAST:event_einlagernButtonActionPerformed
    
     
@@ -624,15 +628,45 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         int quellLbID= Lagerbestand.getLagerbestandID(help.getTeilID(), help.getquellFachID());
         
         Lagerbestand quellLb= Lagerbestand.getLagerbestand(quellLbID);
-        ZielPosition[] zielPos= new ZielPosition[help.getMengen().length];
+     /*   ZielPosition[] zielPos= new ZielPosition[help.getMengen().length];
+        Warenbewegung[] wBewegungen = new Warenbewegung[help.getMengen().length];
+        */
+        int mengeOld=quellLb.getMenge();
+        Teilebestand teil=Teilebestand.loadTeil(help.getTeilID());
+        
+        if(code==AUSLAGERN || code==UMLAGERN || code==SPLITTEN)
+        {
+            help.getMengen()[0]= - help.getMengen()[0];
+        }
+        
+        HashMap<Integer,String> errors=kapazitaetsTest(help.getFaecher(),teil,help.getMengen(),mengeOld);
+        
+        if(errors.size()>0)
+        { 
+            Misc.createErrorDialog(this, errors);
+            System.out.println(errors.toString());
+            return;
+        }
         
         switch(code)
         {
             case EINLAGERN_TEILEBESTAND:
-                    ;
+                    if(quellLb==null)
+                    {
+                    
+                    
+                    
+                    }            
+                    else
+                    {
+                        quellLb.setMenge(mengeOld+help.getMengen()[0]);
+                    }
+                        
+                        
                     break;
             case EINLAGERN_LAGERBESTAND:
-                    ;
+                if(quellLb!=null)
+                    quellLb.setMenge(mengeOld+help.getMengen()[0]);;
                     break;
             case AUSLAGERN:
                     ;
@@ -644,9 +678,49 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
                     ;
                     break;
         }
+        
+        quellLb.save();
+        this.dispose();
     
     
     }
+    
+    public HashMap<Integer,String> kapazitaetsTest(Lagerfach[] faecher,Teilebestand teil,int[] mengen,int mengeOld) throws SQLException
+    {
+        HashMap<Integer,String> errors = new HashMap<Integer,String>();
+        int groesse= teil.getVe();
+        
+        int errorIndex=0;
+        
+        for(int i=0;i<faecher.length;i++)
+        {
+           int freeVE=faecher[i].getFreeVe();
+           int usedVE=faecher[i].getUsedVe();
+           int maxVE=faecher[i].getMaxVe();
+           
+           
+           
+           if((mengen[i]*groesse)>freeVE)
+           {
+               errorIndex++;
+               errors.put(errorIndex,"Die Kapazitaet im Fach X:"+ faecher[i].getX()+" Y:"+faecher[i].getY() +" Z:"+ 
+                       faecher[i].getZ()+ " ist nicht ausreichend. Es sind noch " + freeVE + " VE frei.Aber es werden" + 
+                       mengen[i]*groesse+ " VE benötigt.");
+               
+               
+           }
+           
+        
+        }
+        if((mengen[0]+mengeOld)<0)
+        {
+            errorIndex++;
+            errors.put(errorIndex, "Keine ausreichende Menge im Quellfach vorhanden!");
+        }
+    
+        return errors;
+    }
+    
     private void einlagernButtonActionPerformedOLD(java.awt.event.ActionEvent evt)
     {
     

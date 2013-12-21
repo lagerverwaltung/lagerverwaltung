@@ -80,6 +80,11 @@ public class BestandsGUIHelper {
         return faecher[0];
     }
     
+    public Lagerfach[] getFaecher()
+    {
+        return faecher;
+    }
+    
     public String getGrund()
     {
         return grund;
@@ -115,6 +120,8 @@ public class BestandsGUIHelper {
     public HashMap<Integer,String> validateLagerbestandData(int code,String mengenE[],String datumE, String grundE)
     {
         HashMap<Integer,String> errors=new HashMap<Integer,String>();
+        
+        mengen=new int[mengenE.length];
         
         try {
             for (int i=0;i<mengenE.length;i++)
