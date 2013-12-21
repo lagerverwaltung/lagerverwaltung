@@ -631,13 +631,18 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
      /*   ZielPosition[] zielPos= new ZielPosition[help.getMengen().length];
         Warenbewegung[] wBewegungen = new Warenbewegung[help.getMengen().length];
         */
-        int mengeOld=quellLb.getMenge();
+        int mengeOld=0;
+        
+        if(quellLb!=null)
+         mengeOld=quellLb.getMenge();
+        
         Teilebestand teil=Teilebestand.loadTeil(help.getTeilID());
         
         if(code==AUSLAGERN || code==UMLAGERN || code==SPLITTEN)
         {
             help.getMengen()[0]= - help.getMengen()[0];
         }
+        
         
         HashMap<Integer,String> errors=kapazitaetsTest(help.getFaecher(),teil,help.getMengen(),mengeOld);
         
@@ -704,7 +709,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
            {
                errorIndex++;
                errors.put(errorIndex,"Die Kapazitaet im Fach X:"+ faecher[i].getX()+" Y:"+faecher[i].getY() +" Z:"+ 
-                       faecher[i].getZ()+ " ist nicht ausreichend. Es sind noch " + freeVE + " VE frei.Aber es werden" + 
+                       faecher[i].getZ()+ " ist nicht ausreichend. Es sind noch " + freeVE + " VE frei.Aber es werden " + 
                        mengen[i]*groesse+ " VE benötigt.");
                
                
