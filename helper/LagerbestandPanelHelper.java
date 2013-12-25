@@ -16,7 +16,7 @@ import view.LagerbestandPanel;
  * @author ssinger
  */
 public class LagerbestandPanelHelper {
-    
+    /*
     
     public view.BestandsaenderungFrame teilAuslagernAction(int fachId, int teilId) {
         int lagerbestandId = 0;
@@ -32,4 +32,5 @@ public class LagerbestandPanelHelper {
         return bestandsaenderungFrame;
 
     }
+    */
 }

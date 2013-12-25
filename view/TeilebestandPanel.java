@@ -220,22 +220,21 @@ public class TeilebestandPanel extends javax.swing.JPanel {
         if(tblMain.getSelectedRow() >=0){
         selectedId = Integer.parseInt(tblMain.getValueAt(tblMain.getSelectedRow(), 0).toString());
         
-      // deprecated  
-      //  BestandsaenderungFrame bestandsaenderungFrame = new BestandsaenderungFrame(true,selectedId);
-       //neue Version!
-        BestandsaenderungFrame bestandsaenderungFrame =null;
+        
             try {
-                bestandsaenderungFrame = new BestandsaenderungFrame(BestandsaenderungFrame.EINLAGERN_TEILEBESTAND,selectedId,0);
-            } catch (SQLException ex) {
-                Misc.createErrorDialog(mainFrame, "Datenbank Fehler");
-            }
-          
+        BestandsaenderungFrame bestandsaenderungFrame = new BestandsaenderungFrame(
+                        BestandsaenderungFrame.EINLAGERN_TEILEBESTAND,selectedId,0);
         bestandsaenderungFrame.setVisible(true);
         JTable lagerbestand = mainFrame.getPanMain().getLagerbestand().gettabMain();
         JTable warenbewegung = mainFrame.getPanMain().getWarenbewegung().gettabMain();
         
         bestandsaenderungFrame.setTable(lagerbestand);
         bestandsaenderungFrame.setWarenBewegungTable(warenbewegung);
+            } catch (SQLException ex) {
+                System.out.println(ex.toString());
+            }
+          
+        
         }
         else{
             Misc.createErrorDialog(mainFrame, "Es muss erst ein Teil zum Einlagern aus der "
