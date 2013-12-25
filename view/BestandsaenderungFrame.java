@@ -55,6 +55,10 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
     public final static int UMLAGERN = 4;
     public final static int SPLITTEN = 5;
     
+    /**
+     * code der anzeigt um welchen Frame es sich handelt
+     * BestandsGUIHelper zum auslesen und validieren der GUI
+     */
     int code;
     BestandsGUIHelper help;
     
@@ -315,18 +319,6 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
             cbxFachY.addItem(i);
         }
     }
-
-    /*
-     * debrecated
-     */
-    private void loadLagerOrtCbx(Lager.Lagerort s){
-       if (s.equals(Lager.Lagerort.freilager)){
-           cbxFachTyp.setSelectedItem("FL");
-       } 
-       else{
-           cbxFachTyp.setSelectedItem("HL");
-       }
-    }
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -494,7 +486,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-//ändern 
+
     private void einlagernButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_einlagernButtonActionPerformed
 
         
@@ -560,8 +552,6 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
     public void bestandsAenderung(int code,BestandsGUIHelper help) throws SQLException
     {
         int quellLbID= Lagerbestand.getLagerbestandID(help.getTeilID(), help.getquellFachID());
-        
-        
         Lagerbestand quellLb= Lagerbestand.getLagerbestand(quellLbID);
         int mengeOld=0;
         
@@ -597,8 +587,6 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
                     {
                         quellLb.setMenge(mengeOld+help.getMengen()[0]);
                     }
-                        
-                        
                     break;
                 
             case EINLAGERN_LAGERBESTAND:
@@ -638,8 +626,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         quellLb.save();
     
         this.dispose();
-    
-    
+        
     }
     
     /**
@@ -663,17 +650,12 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         {
            int freeVE=faecher[i].getFreeVe();
            
-           
-           
-           
            if((mengen[i]*groesse)>freeVE)
            {
                errorIndex++;
                errors.put(errorIndex,"Die Kapazitaet im Fach X:"+ faecher[i].getX()+" Y:"+faecher[i].getY() +" Z:"+ 
                        faecher[i].getZ()+ " ist nicht ausreichend. Es sind noch " + freeVE + " VE frei.Aber es werden " + 
-                       mengen[i]*groesse+ " VE benötigt.");
-               
-               
+                       mengen[i]*groesse+ " VE benötigt.");               
            }
            
         
