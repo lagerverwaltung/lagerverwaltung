@@ -9,10 +9,7 @@ import helper.Misc;
 import java.awt.Component;
 import java.sql.SQLException;
 import java.util.HashMap;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JTable;
-import model.Teilebestand;
 import model.collection.TeilebestandCollection;
 import model.filter.TeilebestandFilterModel;
 import model.table.TeileTableModel;
@@ -242,6 +239,11 @@ public class TeileFilterFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txfVeBisActionPerformed
 
+    /**
+     * Validiert die Eingabe, erzeugt ein neues TeilebestandFilterModel und
+     * refresched die Teilebestandstabelle
+     * @param evt 
+     */
     private void btnExecuteFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExecuteFilterActionPerformed
         HashMap<Integer, String> errors = FilterUiHelper.getInstance().validateTeileFilter(
                 txfPreisVon.getText(),
@@ -276,14 +278,19 @@ public class TeileFilterFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txfBezeichnungActionPerformed
 
+    /**
+     * läd die Teilebestandtabelle mit Filtereinstellungen neu
+     * @author ssinger
+     * @param tfm
+     * @throws SQLException 
+     */
     private void refreshTeilebestandTableModel(TeilebestandFilterModel tfm) throws SQLException{
         TeilebestandCollection tc = TeilebestandCollection.getInstance().applyFilter(tfm);
         TeileTableModel tm = new TeileTableModel();     
         tm.setData(tc);
         teileBestandTable.setModel(tm);
     }
-
-
+    
     /**
      * @param args the command line arguments
      */

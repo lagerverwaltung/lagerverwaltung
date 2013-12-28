@@ -161,29 +161,39 @@ public class FilterUiHelper {
 
         HashMap<Integer, String> errors = new HashMap();
         
-        try {
-            datumVonS = d.parse(datumVon);
-        } catch (ParseException ex) {
-            errors.put(DATE_NOT_VALID, DATE_NOT_VALID_TEXT);
+        if(datumVon.length() > 0){
+            try {
+                datumVonS = d.parse(datumVon);
+            } catch (ParseException ex) {
+                errors.put(DATE_NOT_VALID, DATE_NOT_VALID_TEXT);
+            } 
         }
-        
-        try {
-            datumBisS = d.parse(datumBis);
-        } catch (ParseException ex) {
-            errors.put(DATE_NOT_VALID, DATE_NOT_VALID_TEXT);
+      
+        if(datumBis.length() > 0){
+            try {
+                datumBisS = d.parse(datumBis);
+            } catch (ParseException ex) {
+                errors.put(DATE_NOT_VALID, DATE_NOT_VALID_TEXT);
+            }  
         }
-        
-        try {
-            haltbarVonS = d.parse(haltbarVon);
-        } catch (ParseException ex) {
-            errors.put(DATE_NOT_VALID, DATE_NOT_VALID_TEXT);
+
+        if(haltbarVon.length() > 0 ){
+            try {
+                haltbarVonS = d.parse(haltbarVon);
+            } catch (ParseException ex) {
+                errors.put(DATE_NOT_VALID, DATE_NOT_VALID_TEXT);
+            }
+
         }
-        
-        try {
-            haltbarBisS = d.parse(haltbarBis);
-        } catch (ParseException ex) {
-            errors.put(DATE_NOT_VALID, DATE_NOT_VALID_TEXT);
+
+        if(haltbarBis.length() > 0){
+            try {
+                haltbarBisS = d.parse(haltbarBis);
+            } catch (ParseException ex) {
+                errors.put(DATE_NOT_VALID, DATE_NOT_VALID_TEXT);
+            }
         }
+     
         return errors;
     }
     
@@ -295,13 +305,13 @@ public class FilterUiHelper {
         if(qLagertyp.length() > 0){
             wfm.setqLagerort(FilterUiHelper.getComboLager(qLagertyp));
         }
-        if (qx.length() > 0) {
+        if (!qx.equals("x")) {
             wfm.setqX(Integer.parseInt(qx));
         }
-        if (qy.length() > 0) {
+        if (!qy.equals("y")) {
             wfm.setqY(Integer.parseInt(qy));
         }
-        if (qz.length() > 0) {
+        if (!qz.equals("z")) {
             wfm.setqZ(Integer.parseInt(qz));
         }
         if (teiltyp.length() > 0) {
@@ -310,13 +320,13 @@ public class FilterUiHelper {
         if (zLagertyp.length() > 0) {
             wfm.setzLagerort(FilterUiHelper.getComboLager(zLagertyp));
         }
-        if (zx.length() > 0) {
+        if (!zx.equals("x")) {
             wfm.setzX(Integer.parseInt(zx));
         }
-        if (zy.length() > 0) {
+        if (!"y".equals(zy)) {
             wfm.setzY(Integer.parseInt(zy));
         }
-        if (zz.length() > 0) {
+        if (!"z".equals(zz)) {
             wfm.setzZ(Integer.parseInt(zz));
         }
         try {
@@ -360,5 +370,7 @@ public class FilterUiHelper {
         }
         return null;
     }
+    
+    
 }
 

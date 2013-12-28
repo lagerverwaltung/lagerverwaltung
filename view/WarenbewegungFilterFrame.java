@@ -9,9 +9,11 @@ import helper.Misc;
 import java.awt.Component;
 import java.sql.SQLException;
 import java.util.HashMap;
+import javax.swing.JTable;
 import model.Lager;
 import model.collection.WarenbewegungCollection;
 import model.filter.WarenbewegungFilterModel;
+import model.table.WarenbewegungTableModel;
 
 /**
  *
@@ -19,11 +21,12 @@ import model.filter.WarenbewegungFilterModel;
  */
 public class WarenbewegungFilterFrame extends javax.swing.JFrame {
     private static WarenbewegungFilterFrame singleton;
+    JTable warenbewegungTable;
     
-    public static WarenbewegungFilterFrame getInstance(Component mainFrame)
+    public static WarenbewegungFilterFrame getInstance(Component mainFrame, JTable jtable)
     {
         if (WarenbewegungFilterFrame.singleton == null){
-            singleton = new WarenbewegungFilterFrame(mainFrame);
+            singleton = new WarenbewegungFilterFrame(mainFrame, jtable);
         }
         singleton.setVisible(true);
         return singleton;
@@ -40,9 +43,10 @@ public class WarenbewegungFilterFrame extends javax.swing.JFrame {
         }
     }
 
-    public WarenbewegungFilterFrame(Component c) {
+    public WarenbewegungFilterFrame(Component c, JTable jtable) {
         this();
         alignFilterMenu(c);
+        warenbewegungTable = jtable;
     }
     
     public void alignFilterMenu(Component main)
@@ -366,6 +370,10 @@ public class WarenbewegungFilterFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cbxZielXActionPerformed
 
+    /**
+     * Validiert die Eingabe, erzeugt ein neues LagerbestandFilterModel und
+     * refreshed die Lagerbestandstabelle 
+     */
     private void btnFilterAusführenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFilterAusführenActionPerformed
         HashMap<Integer, String> errors = FilterUiHelper.getInstance().validateWarenbewegungFilter(
                 txfDatumVon.getText(),
@@ -395,13 +403,20 @@ public class WarenbewegungFilterFrame extends javax.swing.JFrame {
                txfDatumBis.getText());
         
         try{
-            WarenbewegungCollection wbc = new WarenbewegungCollection();
-            WarenbewegungCollection result = wbc.addFilter(wfm);
+           refreshWarenbewegungTableModel(wfm);
         }catch (SQLException e){
-            System.out.println("SQLException");
+          Misc.printSQLException(this, e);
         }
+        this.dispose();
     }//GEN-LAST:event_btnFilterAusführenActionPerformed
 
+    private void refreshWarenbewegungTableModel(WarenbewegungFilterModel wfm) throws SQLException{
+        WarenbewegungCollection wc = WarenbewegungCollection.getInstance().applyFilter(wfm);
+        WarenbewegungTableModel wm = new WarenbewegungTableModel();
+        wm.setData(wc);
+        warenbewegungTable.setModel(wm);
+    }
+    
     private void txfHaltbarVonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfHaltbarVonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txfHaltbarVonActionPerformed

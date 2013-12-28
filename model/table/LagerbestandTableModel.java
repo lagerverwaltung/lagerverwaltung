@@ -4,10 +4,7 @@
  */
 package model.table;
 
-//import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
-//import Modellklassen
-import java.util.List;
 import model.Lager;
 import model.Lagerbestand;
 import model.Lagerfach;
@@ -20,8 +17,8 @@ import model.collection.LagerbestandCollection;
  * @author artjom,simon?
  */
 public class LagerbestandTableModel extends AbstractTableModel {
-
     LagerbestandCollection<Lagerbestand> lagerbestandRows = new LagerbestandCollection();
+    
     public void setData(LagerbestandCollection<Lagerbestand> arr)
     {
         this.lagerbestandRows = arr;
