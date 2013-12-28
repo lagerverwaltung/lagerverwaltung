@@ -9,8 +9,6 @@ import helper.Misc;
 import java.awt.Component;
 import java.sql.SQLException;
 import java.util.HashMap;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JTable;
 import model.Lager;
 import model.collection.LagerbestandCollection;
@@ -25,10 +23,10 @@ public class LagerbestandFilterFrame extends javax.swing.JFrame {
     private static LagerbestandFilterFrame singleton;
     JTable lagerBestandTable;
     
-    public static LagerbestandFilterFrame getInstance(Component mainFrame)
+    public static LagerbestandFilterFrame getInstance(Component mainFrame, JTable jtable)
     {
         if (LagerbestandFilterFrame.singleton == null){
-            singleton = new LagerbestandFilterFrame(mainFrame);
+            singleton = new LagerbestandFilterFrame(mainFrame, jtable);
         }
         singleton.setVisible(true);
         return singleton;
@@ -45,9 +43,10 @@ public class LagerbestandFilterFrame extends javax.swing.JFrame {
         }
     }
     
-    public LagerbestandFilterFrame(Component c) {
+    public LagerbestandFilterFrame(Component c, JTable jtable) {
         this();
         alignFilterMenu(c);
+        lagerBestandTable = jtable;
     }
     
     public void alignFilterMenu(Component main)
@@ -284,16 +283,22 @@ public class LagerbestandFilterFrame extends javax.swing.JFrame {
     private void cbxLagertypActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxLagertypActionPerformed
 
     }//GEN-LAST:event_cbxLagertypActionPerformed
-
+    /**
+     * Validiert die Eingabe, erzeugt ein neues LagerbestandFilterModel und
+     * refreshed die Lagerbestandstabelle
+     * @param evt 
+     */
     private void executeFilterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_executeFilterButtonActionPerformed
         
         HashMap<Integer, String> errors = FilterUiHelper.getInstance().validateLagerFilter(
                 txfMengeVon.getText(),
                 txfMengeBis.getText()
                 );
+        
         if(Misc.createErrorDialog(this, errors) == true){
             return;
         }
+        
         LagerbestandFilterModel lfm = FilterUiHelper.createLFM(
                 cbxLagertyp.getSelectedItem().toString(),
                 cbxX.getSelectedItem().toString(),
@@ -309,6 +314,7 @@ public class LagerbestandFilterFrame extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Misc.printSQLException(this, ex);
         }
+        this.dispose();
     }//GEN-LAST:event_executeFilterButtonActionPerformed
 
     private void txfBezeichnungActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfBezeichnungActionPerformed

@@ -77,6 +77,11 @@ public class WarenbewegungPanel extends javax.swing.JPanel {
         scpMain.setViewportView(tblMain);
 
         btnFilterzurücksetzen.setText("Filter zurücksetzen");
+        btnFilterzurücksetzen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFilterzurücksetzenActionPerformed(evt);
+            }
+        });
 
         btnFilter.setText("Filtern");
         btnFilter.addActionListener(new java.awt.event.ActionListener() {
@@ -133,9 +138,23 @@ public class WarenbewegungPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFilterActionPerformed
-       WarenbewegungFilterFrame.getInstance(mainFrame);
+       WarenbewegungFilterFrame.getInstance(mainFrame, tblMain);
     }//GEN-LAST:event_btnFilterActionPerformed
 
+    private void btnFilterzurücksetzenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFilterzurücksetzenActionPerformed
+        refreshWarenbewegungTableModel();
+    }//GEN-LAST:event_btnFilterzurücksetzenActionPerformed
+
+    /**
+     * läd die Warenbewegungstablle nach
+     */
+    private void refreshWarenbewegungTableModel(){
+           WarenbewegungCollection wc = WarenbewegungCollection.getInstance(true);
+           WarenbewegungTableModel wm = new WarenbewegungTableModel();
+           wm.setData(wc);
+           tblMain.setModel(wm);
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnFilter;
     private javax.swing.JButton btnFilterzurücksetzen;

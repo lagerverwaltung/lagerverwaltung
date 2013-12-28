@@ -2,18 +2,12 @@ package view;
 
 import helper.Misc;
 import java.sql.SQLException;
-import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JTable;
 import javax.swing.table.TableColumn;
 import javax.swing.ListSelectionModel;
-import model.Lager;
 import model.Lagerbestand;
 import model.table.LagerbestandTableModel;
-import model.table.TeileTableModel;
 import model.collection.LagerbestandCollection;
-// import model.table.WarenbewegungTableModel;
 
 
 /**
@@ -97,6 +91,11 @@ public class LagerbestandPanel extends javax.swing.JPanel {
         });
 
         btnFilterZuruecksetzen.setText("Filter zurücksetzen");
+        btnFilterZuruecksetzen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFilterZuruecksetzenActionPerformed(evt);
+            }
+        });
 
         btnTeilAuslagern.setText("Teile auslagern");
         btnTeilAuslagern.addActionListener(new java.awt.event.ActionListener() {
@@ -189,20 +188,7 @@ public class LagerbestandPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnteilEinlagernActionPerformed
 
     private void btnTeilUmlagernActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTeilUmlagernActionPerformed
-        int selectedId;
         if (tabMaintable.getSelectedRow() >= 0) {
-            /*
-            selectedId = Integer.parseInt(tabMaintable.getValueAt(tabMaintable.getSelectedRow(), 6).toString());
-            Lager.Lagerort lo = (Lager.Lagerort) tabMaintable.getValueAt(tabMaintable.getSelectedRow(), 1);
-            int x = Integer.parseInt(tabMaintable.getValueAt(tabMaintable.getSelectedRow(), 2).toString());
-            int y = Integer.parseInt(tabMaintable.getValueAt(tabMaintable.getSelectedRow(), 3).toString());
-            int z = Integer.parseInt(tabMaintable.getValueAt(tabMaintable.getSelectedRow(), 4).toString());
-           
-           // int fachid = Integer.parseInt(tabMaintable.getValueAt(tabMaintable.getSelectedRow(), 0).toString());
-           
-            
-            UmlagernFrame umlagernframe = new UmlagernFrame(true, selectedId,x,y,z,lo);
-            */
             int fachId = Integer.parseInt(tabMaintable.getValueAt(tabMaintable.getSelectedRow(), 0).toString());
             int teilId = Integer.parseInt(tabMaintable.getValueAt(tabMaintable.getSelectedRow(), 6).toString());
             int lagerbestandId = 0;
@@ -211,7 +197,7 @@ public class LagerbestandPanel extends javax.swing.JPanel {
                 lagerbestandId = Lagerbestand.getLagerbestandID(teilId, fachId);
                 lb = Lagerbestand.getLagerbestand(lagerbestandId);
             } catch (SQLException ex) {
-                Logger.getLogger(LagerbestandPanel.class.getName()).log(Level.SEVERE, null, ex);
+                Misc.printSQLException(mainFrame, ex);
             }
 
             UmlagernFrame umlagernFrame = new UmlagernFrame(true, lb);
@@ -237,46 +223,39 @@ public class LagerbestandPanel extends javax.swing.JPanel {
 
             int fachId = Integer.parseInt(tabMaintable.getValueAt(tabMaintable.getSelectedRow(), 0).toString());
             int teilId = Integer.parseInt(tabMaintable.getValueAt(tabMaintable.getSelectedRow(), 6).toString());
-      
-            
+
             try {
-               
-                BestandsaenderungFrame 
-                    bestandsaenderungFrame = new BestandsaenderungFrame(
-                            BestandsaenderungFrame.AUSLAGERN,teilId,fachId);
-                
-                    bestandsaenderungFrame.setTable(tabMaintable);
-                    JTable teileTable = mainFrame.getPanMain().getTeilebestand().getTeileTable();
-                    bestandsaenderungFrame.setTeileTable(teileTable);
+
+                BestandsaenderungFrame bestandsaenderungFrame = new BestandsaenderungFrame(
+                        BestandsaenderungFrame.AUSLAGERN, teilId, fachId);
+
+                bestandsaenderungFrame.setTable(tabMaintable);
+                JTable teileTable = mainFrame.getPanMain().getTeilebestand().getTeileTable();
+                bestandsaenderungFrame.setTeileTable(teileTable);
             } catch (SQLException ex) {
-                System.out.println(ex.toString());
+                Misc.printSQLException(mainFrame, ex);
             }
-            
-           
+
         } else {
             Misc.createErrorDialog(mainFrame, "Es muss erst ein Teil zum Auslagern aus der "
                     + "Liste gewählt werden!");
         }
-                          
+                 
     }//GEN-LAST:event_btnTeilAuslagernActionPerformed
 
     private void btnTeilSplittenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTeilSplittenActionPerformed
 
-        if(tabMaintable.getSelectedRow() >=0){
-             int fachId = Integer.parseInt(tabMaintable.getValueAt(tabMaintable.getSelectedRow(), 0).toString());
-             int teilId = Integer.parseInt(tabMaintable.getValueAt(tabMaintable.getSelectedRow(), 6).toString());
-         
-         try{
-        BestandsaenderungFrame bestandsaenderungFrame = new BestandsaenderungFrame(BestandsaenderungFrame.SPLITTEN
-        ,teilId,fachId);
-         bestandsaenderungFrame.setVisible(true);
-        bestandsaenderungFrame.setTable(tabMaintable);
-         }
-         catch(SQLException e)
-         {
-         System.out.println(e.toString());
-         }
-       
+        if (tabMaintable.getSelectedRow() >= 0) {
+            int fachId = Integer.parseInt(tabMaintable.getValueAt(tabMaintable.getSelectedRow(), 0).toString());
+            int teilId = Integer.parseInt(tabMaintable.getValueAt(tabMaintable.getSelectedRow(), 6).toString());
+
+            try {
+                BestandsaenderungFrame bestandsaenderungFrame = new BestandsaenderungFrame(BestandsaenderungFrame.SPLITTEN, teilId, fachId);
+                bestandsaenderungFrame.setVisible(true);
+                bestandsaenderungFrame.setTable(tabMaintable);
+            } catch (SQLException e) {
+                Misc.printSQLException(mainFrame, e);
+            }
         }
         else{
             Misc.createErrorDialog(mainFrame, "Es muss erst ein Teil zum Splitten aus der "
@@ -285,9 +264,23 @@ public class LagerbestandPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnTeilSplittenActionPerformed
 
     private void btnFilternActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFilternActionPerformed
-        LagerbestandFilterFrame.getInstance(mainFrame);
+        LagerbestandFilterFrame.getInstance(mainFrame, tabMaintable);
     }//GEN-LAST:event_btnFilternActionPerformed
-//ich brauch hier neue Variable JTable Warnebewegungstable
+
+    private void btnFilterZuruecksetzenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFilterZuruecksetzenActionPerformed
+        refreshLagerbestandTableModel();
+    }//GEN-LAST:event_btnFilterZuruecksetzenActionPerformed
+
+    /**
+     * läd die Lagerbestandstabelle nach
+     */
+    private void refreshLagerbestandTableModel() {
+        LagerbestandCollection lc = LagerbestandCollection.getInstance(true);
+        LagerbestandTableModel lm = new LagerbestandTableModel();
+        lm.setData(lc);
+        tabMaintable.setModel(lm);
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnFilterZuruecksetzen;
     private javax.swing.JButton btnFiltern;

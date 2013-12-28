@@ -2,8 +2,6 @@ package view;
 
 import helper.Misc;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.TableColumn;
@@ -243,9 +241,20 @@ public class TeilebestandPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnteilEinlagernActionPerformed
 
     private void btnFilterZurücksetzenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFilterZurücksetzenActionPerformed
-        // TODO add your handling code here:
+        refreshTeilebestandTableModel();
     }//GEN-LAST:event_btnFilterZurücksetzenActionPerformed
 
+    /**
+     * läd die Teilebestandtabelle neu
+     */
+    private void refreshTeilebestandTableModel() {
+        TeilebestandCollection tc = TeilebestandCollection.getInstance(true);
+        TeileTableModel tm = new TeileTableModel();
+        tm.setData(tc);
+        tblMain.setModel(tm);
+    }
+
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnFilterZurücksetzen;
     private javax.swing.JButton btnFiltern;

@@ -118,6 +118,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Filter zur&#xfc;cksetzen"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnFilterzur&#xfc;cksetzenActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnFilter">
           <Properties>

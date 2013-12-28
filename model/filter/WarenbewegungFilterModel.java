@@ -12,7 +12,7 @@ import model.Lager;
 import model.Teilebestand;
 
 /**
- *
+ * StandardContainer für WarenbewegungFilter-Werte
  * @author ssinger
  */
 public class WarenbewegungFilterModel {
@@ -31,6 +31,9 @@ public class WarenbewegungFilterModel {
     private String bezeichnung;
     private Teilebestand.Typ typ;
     
+    /**
+     * erzeugt ein standard Filter Objekt mit maximalen Schranken
+     */
     public WarenbewegungFilterModel(){
         try {
             DateFormat f = new SimpleDateFormat("dd.MM.YYYY");
