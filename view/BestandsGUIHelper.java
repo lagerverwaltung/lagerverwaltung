@@ -24,6 +24,8 @@ public class BestandsGUIHelper {
     int quellFachID;
     int mengen[];
     Date hbDatum;
+
+   
     String grund;
     Lagerfach[] faecher;
     int teilID;
@@ -65,7 +67,7 @@ public class BestandsGUIHelper {
         return teilID;
     }
     
-    public void setquellFachID(int quellFachId)
+    public void setQuellFachID(int quellFachId)
     {
       this.quellFachID=quellFachId;
     }
@@ -98,16 +100,13 @@ public class BestandsGUIHelper {
     public Lagerfach generateFach(int x,int y,int z, String lo) throws Exception
     {
         Lagerort l;
-        
         if (lo.equals("FL")) {
 
             l=Lager.Lagerort.freilager;
         } else {
             l=Lager.Lagerort.hochregal;
         }
-        
         return (Lagerfach.getFach(Lager.getLager(l),x ,y,z));
-        
     }
     
     
@@ -121,6 +120,13 @@ public class BestandsGUIHelper {
         faecher[0]=l;
     }
     
+     public Date getHbDatum() {
+        return hbDatum;
+    }
+
+    public void setHbDatum(Date hbDatum) {
+        this.hbDatum = hbDatum;
+    }
     
     public HashMap<Integer,String> validateLagerbestandData(int code,String mengenE[],String datumE, String grundE)
     {

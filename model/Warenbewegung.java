@@ -13,6 +13,8 @@ import com.j256.ormlite.field.ForeignCollectionField;
 import com.j256.ormlite.table.DatabaseTable;
 import helper.DatabaseManager;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -33,8 +35,8 @@ public class Warenbewegung {
     @DatabaseField()
     private String verantwortlicher;
     
-    @DatabaseField(columnName = "fachID", foreign = true, foreignAutoRefresh=true)
-    private Lagerfach quellFach;
+    @DatabaseField()
+    private int actionCode;
     
     @DatabaseField(columnName = "lagerbestandID", foreign = true, foreignAutoRefresh=true)
     private Lagerbestand lagerbestand;
@@ -48,21 +50,11 @@ public class Warenbewegung {
     @DatabaseField(columnName = "anschaffg")
     private String anschaffungsgrund;
 
- 
-    
     /**
      * @return the arrZielPosition
      */
     public ForeignCollection<ZielPosition> getArrZielPosition() {
         return arrZielPosition;
-    }
-
-    public Lagerfach getQuellFach() {
-        return quellFach;
-    }
-
-    public void setQuellFach(Lagerfach quellFach) {
-        this.quellFach = quellFach;
     }
     
     /**
@@ -127,6 +119,14 @@ public class Warenbewegung {
     public void setDatum(java.util.Date datum) {
         this.datum = datum;
     }
+    
+    public int getActionCode() {
+        return actionCode;
+    }
+
+    public void setActionCode(int actionCode) {
+        this.actionCode = actionCode;
+    }
 
     /**
      * @return the haltbarkeitsDatum
@@ -168,4 +168,20 @@ public class Warenbewegung {
        Dao<Warenbewegung,Integer> warenbewegungDao = DatabaseManager.getInstance().getWarenbewegungDao();
        warenbewegungDao.createOrUpdate(this);
    }
+
+    public void logWarenbewegung( Lagerbestand lagerbestand, int actionCode, String grund, Date datum, 
+                                Date haltbarkeitsDatum, String verantwortlicher, 
+                                ArrayList<ZielPosition> zp) throws SQLException {
+        this.setActionCode(actionCode);
+        this.setAnschaffungsgrund(grund);
+        this.setLagerbestand(lagerbestand);
+        this.setDatum(datum);
+        this.setHaltbarkeitsDatum(haltbarkeitsDatum);
+        this.setVerantwortlicher(verantwortlicher);
+        this.save();
+        for (ZielPosition z : zp) {
+            z.setWarenbewegung(this);
+            z.save();
+        }
+    }
 }

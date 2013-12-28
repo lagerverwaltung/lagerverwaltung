@@ -26,7 +26,7 @@ public class Misc {
      * @return ob Fehler aufgetreten sind
      */
     public static boolean createErrorDialog(Frame frame, String error){
-       JOptionPane.showMessageDialog(frame, "Achtung diesen Dialog nicht mehr Verwenden, nur für einzelne Fehlermeldungen! Stattdessen HashMap<Integer,String>\n"+error);
+       JOptionPane.showMessageDialog(frame, error);
        return false;
     }
     
