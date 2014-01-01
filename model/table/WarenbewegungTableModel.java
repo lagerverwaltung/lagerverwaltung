@@ -27,7 +27,7 @@ public class WarenbewegungTableModel extends AbstractTableModel{
     
     public void setData(WarenbewegungCollection<Warenbewegung> arr)
     {
-        this.warenRowsArr = arr;
+        this.warenRows = arr;
     }
     
     @Override

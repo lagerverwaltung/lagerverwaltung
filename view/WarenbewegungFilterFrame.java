@@ -31,6 +31,7 @@ public class WarenbewegungFilterFrame extends javax.swing.JFrame {
         singleton.setVisible(true);
         return singleton;
     }
+    
     /**
      * Creates new form WarenbewegungFilterFrame
      */
@@ -39,7 +40,7 @@ public class WarenbewegungFilterFrame extends javax.swing.JFrame {
         try{
             loadCbx();
         }catch(SQLException ex){
-            System.out.println("error");
+            Misc.printSQLException(this, ex);
         }
     }
 
@@ -161,7 +162,7 @@ public class WarenbewegungFilterFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        cbxQuelleLagertyp.setModel(new javax.swing.DefaultComboBoxModel(new String[] {"", "FL", "RL" }));
+        cbxQuelleLagertyp.setModel(new javax.swing.DefaultComboBoxModel(new String[] {"", "FL", "HL" }));
 
         lblQuellfach.setText("Quellfachadresse:");
 
@@ -186,7 +187,7 @@ public class WarenbewegungFilterFrame extends javax.swing.JFrame {
 
         lblBewegungsTyp.setText("Bewegungs-Typ:");
 
-        cbxZielLagertyp.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "", "FL", "RL" }));
+        cbxZielLagertyp.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "", "FL", "HL" }));
 
         lblZielfachadresse.setText("Zielfachadresse:");
 
@@ -410,6 +411,12 @@ public class WarenbewegungFilterFrame extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnFilterAusführenActionPerformed
 
+    /**
+     * Läd die Warenbewegungstabelle mit den übergebenen Filtereinstellungen
+     * nach
+     * @param wfm
+     * @throws SQLException 
+     */
     private void refreshWarenbewegungTableModel(WarenbewegungFilterModel wfm) throws SQLException{
         WarenbewegungCollection wc = WarenbewegungCollection.getInstance().applyFilter(wfm);
         WarenbewegungTableModel wm = new WarenbewegungTableModel();

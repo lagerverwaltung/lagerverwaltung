@@ -32,15 +32,7 @@ public class TeilebestandFilterModel {
         typ = null;
         materialgruppe = "%%";
         vonVe = 0;
-        try {
-            if (Lager.getLager(Lager.Lagerort.hochregal).getGrossVE() > Lager.getLager(Lager.Lagerort.freilager).getGrossVE()) {
-                bisVe = Lager.getLager(Lager.Lagerort.hochregal).getGrossVE();
-            } else {
-                bisVe = Lager.getLager(Lager.Lagerort.freilager).getGrossVE();
-            }
-        } catch (SQLException ex) {
-            Misc.printSQLException(null, ex);
-        }
+        bisVe = Integer.MAX_VALUE;
         vonPreis = 0;
         bisPreis = Float.MAX_VALUE;
         zeichnungsnummer = "%%";

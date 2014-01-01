@@ -69,7 +69,7 @@ public class WarenbewegungCollection<Warenbewegung> extends ArrayList {
             for(int i = 0; i < resultA.size(); i++){
                 if(resultA.get(i).getHaltbarkeitsDatum().after(wfm.getHaltbarVon())
                         || resultA.get(i).getHaltbarkeitsDatum().before(wfm.getBisHaltbarkeit())){
-                    resultB.add(resultB.get(i));
+                    resultB.add(resultA.get(i));
                 }
             }
             resultA.clear();
@@ -83,28 +83,32 @@ public class WarenbewegungCollection<Warenbewegung> extends ArrayList {
             resultB.clear();
             
             for (int i = 0; i < resultA.size(); i++) {
-                if (resultA.get(i).getQuellFach().getLager().getLagerort().equals(wfm.getqLagerort())) {
-                    resultB.add(resultB.get(i));
+                if ((resultA.get(i).getLagerbestand().getLagerfach().getLager().getLagerort().equals(wfm.getqLagerort()))
+                         || (wfm.getqLagerort() == null)) {
+                    resultB.add(resultA.get(i));
                 }
             }
             resultA.clear();
 
             for (int i = 0; i < resultB.size(); i++) {
-                if (resultB.get(i).getQuellFach().getX() == wfm.getqX()) {
+                if ((wfm.getqX() == 0) 
+                        || resultB.get(i).getLagerbestand().getLagerfach().getX() == wfm.getqX()) {
                     resultA.add(resultB.get(i));
                 }
             }
             resultB.clear();
             
             for (int i = 0; i < resultA.size(); i++) {
-                if (resultA.get(i).getQuellFach().getY() == wfm.getqY()) {
-                    resultB.add(resultB.get(i));
+                if ((wfm.getqY() == 0)
+                        || resultA.get(i).getLagerbestand().getLagerfach().getY() == wfm.getqY()) {
+                    resultB.add(resultA.get(i));
                 }
             }
             resultA.clear();
 
             for (int i = 0; i < resultB.size(); i++) {
-                if (resultB.get(i).getQuellFach().getZ() == wfm.getqZ()) {
+                if ((wfm.getqZ() == 0)
+                        || resultB.get(i).getLagerbestand().getLagerfach().getZ() == wfm.getqZ()) {
                     resultA.add(resultB.get(i));
                 }
             }
@@ -113,7 +117,8 @@ public class WarenbewegungCollection<Warenbewegung> extends ArrayList {
             for (int i = 0; i < resultA.size(); i++) {
                 fc = resultA.get(i).getArrZielPosition();
                 for (ZielPosition zp : fc) {
-                    if (zp.getLagerfach().getLager().getLagerort().equals(wfm.getzLagerort())) {
+                    if (zp.getLagerfach().getLager().getLagerort().equals(wfm.getzLagerort())
+                            || (wfm.getqLagerort() == null)) {
                         resultB.add(resultA.get(i));
                     }
                 }
@@ -123,7 +128,8 @@ public class WarenbewegungCollection<Warenbewegung> extends ArrayList {
             for (int i = 0; i < resultB.size(); i++) {
                 fc = resultB.get(i).getArrZielPosition();
                 for (ZielPosition zp : fc) {
-                    if (zp.getLagerfach().getX() == wfm.getzX()) {
+                    if ((wfm.getzX() == 0)
+                            || zp.getLagerfach().getX() == wfm.getzX()) {
                         resultA.add(resultB.get(i));
                     }
                 }
@@ -133,7 +139,8 @@ public class WarenbewegungCollection<Warenbewegung> extends ArrayList {
             for (int i = 0; i < resultA.size(); i++) {
                 fc = resultA.get(i).getArrZielPosition();
                 for (ZielPosition zp : fc) {
-                    if (zp.getLagerfach().getY() == wfm.getzY()) {
+                    if ((wfm.getzY() == 0)
+                            || zp.getLagerfach().getY() == wfm.getzY()) {
                         resultB.add(resultA.get(i));
                     }
                 }
@@ -143,7 +150,8 @@ public class WarenbewegungCollection<Warenbewegung> extends ArrayList {
             for (int i = 0; i < resultB.size(); i++) {
                 fc = resultB.get(i).getArrZielPosition();
                 for (ZielPosition zp : fc) {
-                    if (zp.getLagerfach().getZ() == wfm.getzZ()) {
+                    if ((wfm.getzZ() == 0)
+                        || zp.getLagerfach().getZ() == wfm.getzZ()) {
                         resultA.add(resultB.get(i));
                     }
                 }
@@ -151,14 +159,16 @@ public class WarenbewegungCollection<Warenbewegung> extends ArrayList {
             resultB.clear();
             
             for (int i = 0; i < resultA.size(); i++) {
-                if (resultA.get(i).getLagerbestand().getTeil().getBezeichnung().contains(wfm.getBezeichnung())) {
-                    resultB.add(resultB.get(i));
+                if ((wfm.getBezeichnung() == null)
+                        ||resultA.get(i).getLagerbestand().getTeil().getBezeichnung().contains(wfm.getBezeichnung())) {
+                    resultB.add(resultA.get(i));
                 }
             }
             resultA.clear();
 
             for (int i = 0; i < resultB.size(); i++) {
-                if (resultB.get(i).getLagerbestand().getTeil().getTyp().equals(wfm.getTyp())) {
+                if ((wfm.getTyp() == null)
+                        ||resultB.get(i).getLagerbestand().getTeil().getTyp().equals(wfm.getTyp())) {
                     resultA.add(resultB.get(i));
                 }
             }

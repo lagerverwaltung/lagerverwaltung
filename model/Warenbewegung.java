@@ -12,12 +12,11 @@ import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.field.ForeignCollectionField;
 import com.j256.ormlite.table.DatabaseTable;
 import helper.DatabaseManager;
+import helper.Misc;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -159,7 +158,7 @@ public class Warenbewegung {
                 return lt.get(0);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(Warenbewegung.class.getName()).log(Level.SEVERE, null, ex);
+            Misc.printSQLException(null, ex);
         }
         return null;
     }

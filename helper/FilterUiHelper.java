@@ -302,7 +302,7 @@ public class FilterUiHelper {
         if(bezeichnung.length() > 0){
             wfm.setBezeichnung(bezeichnung);
         }
-        if(qLagertyp.length() > 0){
+        if(qLagertyp.length() > 1){
             wfm.setqLagerort(FilterUiHelper.getComboLager(qLagertyp));
         }
         if (!qx.equals("x")) {
@@ -317,7 +317,7 @@ public class FilterUiHelper {
         if (teiltyp.length() > 0) {
             wfm.setTyp(getComboTyp(teiltyp));
         }
-        if (zLagertyp.length() > 0) {
+        if (zLagertyp.length() > 1) {
             wfm.setzLagerort(FilterUiHelper.getComboLager(zLagertyp));
         }
         if (!zx.equals("x")) {

@@ -97,7 +97,7 @@ public class LagerbestandCollection<Lagerbestand> extends ArrayList {
             
             for (int i = 0; i < resultB.size(); i++) {
                 if ((resultB.get(i).getLagerfach().getZ() == lfm.getZ())
-                        || (lfm.getY() == 0 )) {
+                        || (lfm.getZ() == 0 )) {
                     resultA.add(resultB.get(i));
                 }
             }

@@ -31,6 +31,7 @@ public class LagerbestandFilterFrame extends javax.swing.JFrame {
         singleton.setVisible(true);
         return singleton;
     }
+    
     /**
      * Creates new form LagerBestandFilterFrame
      */
@@ -59,9 +60,9 @@ public class LagerbestandFilterFrame extends javax.swing.JFrame {
     }
     
     /**
+     * Füllt die QuellComboBoxen mit den größtmöglichen Werten
      * @author ssinger
      * @throws SQLException
-     * Füllt die QuellComboBoxen mit den größtmöglichen Werten
      */
     private void loadCbx() throws SQLException {
         cbxZ.removeAllItems();
@@ -321,6 +322,10 @@ public class LagerbestandFilterFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txfBezeichnungActionPerformed
 
+    /**
+     * Läd die Lagerbestandstabelle mit den übergenenen Filtereinstellungen
+     * nach
+     */ 
     private void refreshLagerbestandTableModel(LagerbestandFilterModel lfm) throws SQLException {
         LagerbestandCollection lc = LagerbestandCollection.getInstance().applyFilter(lfm);
         LagerbestandTableModel lm = new LagerbestandTableModel();
