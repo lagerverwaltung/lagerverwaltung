@@ -8,13 +8,9 @@ import helper.Misc;
 import helper.TeilebestandHelper;
 import java.sql.SQLException;
 import java.util.HashMap;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JTable;
 import model.Teilebestand;
 import model.Teilebestand.Typ;
-import model.collection.TeilebestandCollection;
-import model.table.TeileTableModel;
 
 /**
  *

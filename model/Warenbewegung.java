@@ -37,7 +37,7 @@ public class Warenbewegung {
     @DatabaseField()
     private int actionCode;
     
-    @DatabaseField(columnName = "lagerbestandID", foreign = true, foreignAutoRefresh=true)
+    @DatabaseField(columnName = "lagerbestandID", foreign = true, foreignAutoRefresh=true, maxForeignAutoRefreshLevel=4)
     private Lagerbestand lagerbestand;
     
     @DatabaseField()

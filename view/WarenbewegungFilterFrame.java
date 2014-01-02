@@ -404,7 +404,9 @@ public class WarenbewegungFilterFrame extends javax.swing.JFrame {
                txfDatumBis.getText());
         
         try{
+           System.out.println("läuft");  
            refreshWarenbewegungTableModel(wfm);
+          
         }catch (SQLException e){
           Misc.printSQLException(this, e);
         }

@@ -713,13 +713,12 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
             try {
                 loadHlCbx();
             } catch (SQLException ex) {
-                Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, ex);
-            }
+                Misc.printSQLException(this, ex);            }
         }else{
             try {
                 loadFlCbx();
             } catch (SQLException ex) {
-                Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, ex);
+                Misc.printSQLException(this, ex);
             }
         }
     }//GEN-LAST:event_cbxFachTypActionPerformed

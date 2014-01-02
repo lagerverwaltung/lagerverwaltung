@@ -111,21 +111,21 @@ public class Lagerbestand {
         Dao<Lagerbestand, Integer> lagerbestandDao = DatabaseManager.getInstance().getLagerbestandDao();
         try {
             List<Lagerbestand> lb = lagerbestandDao.queryForEq("lagerbestandID", id);
-            if(lb.size()>0){
+            if (lb.size() > 0) {
                 return lb.get(0);
             }
         } catch (SQLException ex) {
             Logger.getLogger(Lagerbestand.class.getName()).log(Level.SEVERE, null, ex);
         }
-            return null;
-        }
+        return null;
+    }
         
         
         
-	public static Lagerbestand getLagerbestand(int id) throws SQLException{
-        Dao<Lagerbestand,Integer> LagerbestandDao = DatabaseManager.getInstance().getLagerbestandDao();
+    public static Lagerbestand getLagerbestand(int id) throws SQLException {
+        Dao<Lagerbestand, Integer> LagerbestandDao = DatabaseManager.getInstance().getLagerbestandDao();
         List<Lagerbestand> lb = LagerbestandDao.queryForEq("lagerbestandID", id);
-        if(lb.size()>0){
+        if (lb.size() > 0) {
             return lb.get(0);
         }
         return null;
@@ -135,19 +135,19 @@ public class Lagerbestand {
        int quellLbID = Lagerbestand.getLagerbestandID(teilid, fachid);
        return Lagerbestand.getLagerbestand(quellLbID);
     }
-        /*
-        * @param teilID, fachID
-        */
-   public static int getLagerbestandID(int teilid,int fachid) throws SQLException
-   {
-      
+    
+    /*
+     * @param teilID, fachID
+     */
+    public static int getLagerbestandID(int teilid, int fachid) throws SQLException {
+
         Dao<Lagerbestand, Integer> lagerbestandDao = DatabaseManager.getInstance().getLagerbestandDao();
         QueryBuilder<Lagerbestand, Integer> queryBuilder = lagerbestandDao.queryBuilder();
         queryBuilder.where()
                 .eq("teilID", teilid)
                 .and()
-                .eq("fachID",fachid);
-                
+                .eq("fachID", fachid);
+
         PreparedQuery<Lagerbestand> preparedQuery = queryBuilder.prepare();
         List<Lagerbestand> l = lagerbestandDao.query(preparedQuery);
 
@@ -155,8 +155,8 @@ public class Lagerbestand {
             return l.get(0).getLagerbestandsnummer();
         }
         return 0;
-   
-   }
+
+    }
 
    /*
     * @param Lagerbestand
@@ -181,7 +181,29 @@ public class Lagerbestand {
         } else {
             return false;
         }
+    }
+    
+    /**
+     * true, wenn der Lagerbestand <= Menge ist
+     * @author ssinger
+     * @param menge die geprüft werden soll
+     * @return 
+     */
+    public boolean enoughLagerbestandCapacity(int menge) {
+        if (this.getMenge() <= menge) {
+            return true;
+        }
+        return false;
+    }
+    
+    public Warenbewegung getWarenbewegung() throws SQLException{
+        Dao<model.Warenbewegung, Integer> warenbewegungDao = DatabaseManager.getInstance().getWarenbewegungDao();
+        List<model.Warenbewegung> wbList = warenbewegungDao.queryForEq("lagerbestandID", this.getLagerbestandsnummer());
 
+        if(wbList.size() > 0){
+            return wbList.get(0);
+        }
+        return null;
     }
 
     //Speichern Lagerbestand

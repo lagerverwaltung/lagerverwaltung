@@ -4,11 +4,17 @@
  */
 package helper;
 
+import com.j256.ormlite.dao.ForeignCollection;
+import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.text.ParseException;
+import model.Lagerbestand;
+import model.Lagerfach;
+import model.Warenbewegung;
+import model.ZielPosition;
 
 /**
  *
@@ -84,5 +90,66 @@ public class LagerbestandHelper {
             errors.put(DATE_BEFORE_TODAY, DATE_BEFORE_TODAY_TEXT);
             
         return errors;
+    }
+
+    /**
+     * validiert die Eingabedatuen für Umlagern
+     * @author ssinger
+     * @param menge
+     * @return 
+     */
+    public HashMap<Integer, String> validateUmlagern(String menge) {
+        HashMap<Integer, String> errors = new HashMap();
+        int mengeS = 0;
+        
+        try{
+            mengeS = Integer.parseInt(menge);
+        } catch (NumberFormatException e){
+            errors.put(MENGE_NOT_INTEGER, MENGE_NOT_INTEGER_TEXT);
+        }
+        
+        if(mengeS < 1){
+            errors.put(MENGE_NOT_GREATER_ZERO, MENGE_NOT_GREATER_ZERO_TEXT);
+        }
+        return errors;
+    }
+    
+    /**
+     * speichert den Vorgang "Umlagern"
+     * @author ssinger
+     * @param quellLagerbestand 
+     * @param zielfach 
+     * @param menge umzulagernde Menge
+     * @throws SQLException 
+     */
+    public void saveUmlagern(Lagerbestand quellLagerbestand, Lagerfach zielfach, int menge) throws SQLException{
+  
+        int subMenge = quellLagerbestand.getMenge() - menge;
+        if(subMenge <= 0){
+            
+            Lagerbestand lb = new Lagerbestand();
+            quellLagerbestand.setMenge(subMenge);
+            quellLagerbestand.save();
+            
+            lb.setAnschaffungsgrund(quellLagerbestand.getAnschaffungsgrund());
+            lb.setTeil(quellLagerbestand.getTeil());
+            lb.setLagerfach(zielfach);
+            lb.setMenge(menge);
+            lb.save();
+            
+            Warenbewegung wb = new Warenbewegung();
+            wb.setAnschaffungsgrund(quellLagerbestand.getAnschaffungsgrund());
+            wb.setDatum(new Date());
+            wb.setHaltbarkeitsDatum(quellLagerbestand.getWarenbewegung().getHaltbarkeitsDatum());
+            wb.setLagerbestand(lb);
+            wb.setVerantwortlicher("Lagerverwalter");
+            wb.save();
+            
+            ZielPosition zp = new ZielPosition();
+            zp.setLagerfach(zielfach);
+            zp.setWarenbewegung(wb);
+            zp.save();
+        }
+        
     }
 }

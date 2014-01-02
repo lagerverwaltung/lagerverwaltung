@@ -4,7 +4,10 @@
  */
 package view;
 
+import helper.LagerbestandHelper;
+import helper.Misc;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JTable;
@@ -535,6 +538,16 @@ public class UmlagernFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_cbxQuelleXActionPerformed
 
     private void btnUmlagernActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUmlagernActionPerformed
+        
+        HashMap<Integer, String> errors = LagerbestandHelper.getInstance().validateUmlagern(
+                txfUmzulagerndeMenge.getText());
+        
+        if (Misc.createErrorDialog(this, errors) == true) {
+            return;
+        }
+        
+        //saveUmlagern();
+        
         this.dispose();
         
         
@@ -553,13 +566,13 @@ public class UmlagernFrame extends javax.swing.JFrame {
             try {
                 loadHlCbxZiel();
             } catch (SQLException ex) {
-                Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, ex);
+                Misc.printSQLException(this, ex);
             }
         } else {
             try {
                 loadFlCbxZiel();
             } catch (SQLException ex) {
-                Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, ex);
+                Misc.printSQLException(this, ex);
             }
         }
     }//GEN-LAST:event_cbxZiel0LagertypActionPerformed

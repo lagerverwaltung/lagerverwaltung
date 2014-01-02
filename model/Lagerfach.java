@@ -35,7 +35,7 @@ public class Lagerfach {
     @DatabaseField()
     private Groesse groesse;
     
-    @DatabaseField(columnName = "lagerID", canBeNull = false, foreign = true,foreignAutoRefresh=true)
+    @DatabaseField(columnName = "lagerID", canBeNull = false, foreign = true, foreignAutoRefresh=true)
     private Lager lager;
     /**
      * @return the fachnummer
@@ -155,11 +155,11 @@ public class Lagerfach {
     }
     
     /*
-     *  gibt Lagerfach zur lagerfachadresse aus
+     * gibt Lagerfach zur lagerfachadresse aus
      * @author ssinger
-    * @param String ort, x int, y int, z int
-    * @return Lagerfach
-    */
+     * @param String ort, x int, y int, z int
+     * @return Lagerfach
+     */
     public static Lagerfach getFach(Lager lager, int x, int y, int z) throws SQLException{
 
         Dao<Lagerfach, Integer> lagerfachDao = DatabaseManager.getInstance().getLagerfachDao();
@@ -196,14 +196,12 @@ public class Lagerfach {
     {
         return getLager().getLagerortCode()+" "+getX()+" "+getY()+" "+getZ();
     }
-	public enum Groesse {
-	
-		klein (),
-		mittel (),
-		gross (),
-		;	
-	
-	}
+    
+    public enum Groesse {
+        klein(),
+        mittel(),
+        gross(),;
+    }
 
     public int getX() {
         return x;
@@ -228,12 +226,6 @@ public class Lagerfach {
     public void setZ(int z) {
         this.z = z;
     }
-        
-    
-	
-	
-	
-	
-	
+
 }
 
