@@ -68,7 +68,7 @@ public class WarenbewegungCollection<Warenbewegung> extends ArrayList {
         if(resultA.size() > 0){
             for(int i = 0; i < resultA.size(); i++){
                 if(resultA.get(i).getHaltbarkeitsDatum().after(wfm.getHaltbarVon())
-                        || resultA.get(i).getHaltbarkeitsDatum().before(wfm.getBisHaltbarkeit())){
+                        && resultA.get(i).getHaltbarkeitsDatum().before(wfm.getBisHaltbarkeit())){
                     resultB.add(resultA.get(i));
                 }
             }
@@ -76,7 +76,7 @@ public class WarenbewegungCollection<Warenbewegung> extends ArrayList {
             
             for(int i = 0; i < resultB.size(); i++){
                 if(resultB.get(i).getDatum().after(wfm.getDatumVon())
-                        || resultB.get(i).getDatum().before(wfm.getDatumBis())){
+                        && resultB.get(i).getDatum().before(wfm.getDatumBis())){
                     resultA.add(resultB.get(i));
                 }
             }
@@ -118,7 +118,7 @@ public class WarenbewegungCollection<Warenbewegung> extends ArrayList {
                 fc = resultA.get(i).getArrZielPosition();
                 for (ZielPosition zp : fc) {
                     if (zp.getLagerfach().getLager().getLagerort().equals(wfm.getzLagerort())
-                            || (wfm.getqLagerort() == null)) {
+                            || (wfm.getzLagerort() == null)) {
                         resultB.add(resultA.get(i));
                     }
                 }
