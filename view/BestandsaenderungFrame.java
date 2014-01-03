@@ -8,6 +8,7 @@ import com.j256.ormlite.dao.Dao;
 import helper.DatabaseManager;
 import helper.LagerbestandHelper;
 import helper.Misc;
+import java.awt.Dimension;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.Format;
@@ -19,8 +20,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.table.TableColumn;
 import model.Lager;
 import model.Lager.Lagerort;
@@ -63,6 +68,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
      */
     int action;
     BestandsGUIHelper bestandsGuiHelper;
+    Lagerbestand selectedLagerbestand;
     
     /**
      * Creates new form BestandsaenderungFrame
@@ -94,10 +100,14 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         this.txfTeilID.setText("" + teilID);
         this.txfTeilID.setEditable(false);
         this.txfTeilID.setEnabled(false);
+        pnlDestination.setVisible(false);
+        pnlSplit.setVisible(false);
+        pnlSplit2.setVisible(false);
         Lagerbestand lb= Lagerbestand.getLagerbestand(Lagerbestand.getLagerbestandID(teilID, fachID));
+        this.selectedLagerbestand = lb;
         setGUI(action,lb);
         loadTeilIdUndGrund(lb);
-        
+       
         this.action=action;
         
         bestandsGuiHelper= new BestandsGUIHelper();
@@ -148,6 +158,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
     
     }
     
+    
     /**
      * @author smodlich
      * Erstellen der Einlagern Lagerbestand GUI und setzen der entsprechenden Elemente
@@ -158,10 +169,6 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
     {
             lblEinlagern.setText("Teile einlagern");
             einlagernButton.setText("Teile einlagern");
-            this.cbxFachTyp.setEnabled(false);
-            this.cbxFachX.setEnabled(false);
-            this.cbxFachY.setEnabled(false);
-            this.cbxFachZ.setEnabled(false);
             
             this.txaAnschaffungsgrund.setText(lb.getAnschaffungsgrund());
             this.setVisible(true);
@@ -177,19 +184,12 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
     {
             lblEinlagern.setText("Teile auslagern");
             einlagernButton.setText("Teile auslagern");
-            
-            
-            this.txaAnschaffungsgrund.setEditable(true);
-            this.txfHaltbarkeitsdatum.setVisible(false);
-            this.lblHaltbarkeitsdatum.setVisible(false);
-            
             loadQuellComboBoxen(lb);
-            
             this.txaAnschaffungsgrund.setText(lb.getAnschaffungsgrund()); 
-            
+            lblHaltbarkeitsdatum.setVisible(false);
+            txfHaltbarkeitsdatum.setVisible(false);
             this.lblHinweisDatum.setVisible(false);
             this.setVisible(true);
-    
     }
     /**
      * Erstellen der Umlagern GUI und setzen der entsprechenden Elemente
@@ -197,7 +197,15 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
      */
     private void setUmlagernGUI(Lagerbestand lb)
     {
-    
+        lblEinlagern.setText("Teile umlagern");
+        einlagernButton.setText("Teile umlagern");
+        loadQuellComboBoxen(lb);
+        this.txaAnschaffungsgrund.setText(lb.getAnschaffungsgrund()); 
+        lblHaltbarkeitsdatum.setVisible(false);
+        txfHaltbarkeitsdatum.setVisible(false);
+        this.lblHinweisDatum.setVisible(false);
+        pnlDestination.setVisible(true);
+        this.setVisible(true);
     
     }
     /**
@@ -208,9 +216,12 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
     {
         lblEinlagern.setText("Teile splitten");
         einlagernButton.setText("Teile splitten");
-        this.txfTeilID.setEditable(false);
-        this.txfHaltbarkeitsdatum.setVisible(false);
-        this.lblHaltbarkeitsdatum.setVisible(false);
+        lblHaltbarkeitsdatum.setVisible(false);
+        txfHaltbarkeitsdatum.setVisible(false);
+        this.lblHinweisDatum.setVisible(false);
+        pnlSplit.setVisible(true);
+        pnlSplit2.setVisible(true);
+        pnlQty.setVisible(false);
     
     }
     /**
@@ -274,20 +285,20 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         cbxFachY.removeAllItems();
 
         Lager hl = Lager.getLager(Lager.Lagerort.hochregal);
-        int x = hl.getHoehe();
-        int y = hl.getBreite();
-        int z = hl.getTiefe();
+        int x = hl.getBreite();
+        int y = hl.getTiefe();
+        int z = hl.getHoehe();
         
         for(int i = 1; i <= x; i++){
-            cbxFachZ.addItem(i);
+            cbxFachX.addItem(i);
         }
         
         for(int i = 1; i <= y; i++){
-            cbxFachX.addItem(i);
+            cbxFachY.addItem(i);
         }
                 
          for(int i = 1; i <= z; i++){
-            cbxFachY.addItem(i);
+            cbxFachZ.addItem(i);
         }
     }
 
@@ -301,20 +312,20 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         cbxFachY.removeAllItems();
 
         Lager fl = Lager.getLager(Lager.Lagerort.freilager);
-        int x = fl.getHoehe();
-        int y = fl.getBreite();
-        int z = fl.getTiefe();
+        int x = fl.getBreite();
+        int y = fl.getTiefe();
+        int z = fl.getHoehe();
 
         for (int i = 1; i <= x; i++) {
-            cbxFachZ.addItem(i);
-        }
-
-        for (int i = 1; i <= y; i++) {
             cbxFachX.addItem(i);
         }
 
-        for (int i = 1; i <= z; i++) {
+        for (int i = 1; i <= y; i++) {
             cbxFachY.addItem(i);
+        }
+
+        for (int i = 1; i <= z; i++) {
+            cbxFachZ.addItem(i);
         }
     }
     
@@ -328,50 +339,54 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         lblEinlagern = new javax.swing.JLabel();
-        lblFachAdresse = new javax.swing.JLabel();
-        lblHinweis = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
-        lblTeilID = new javax.swing.JLabel();
-        lblAnschaffungsgrund = new javax.swing.JLabel();
-        spnAnschaffungsgrund = new javax.swing.JScrollPane();
-        txaAnschaffungsgrund = new javax.swing.JTextArea();
-        lblMenge = new javax.swing.JLabel();
-        txfMenge = new javax.swing.JTextField();
-        einlagernButton = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        lblFachAdresse = new javax.swing.JLabel();
         cbxFachTyp = new javax.swing.JComboBox();
-        cbxFachZ = new javax.swing.JComboBox();
         cbxFachX = new javax.swing.JComboBox();
         cbxFachY = new javax.swing.JComboBox();
+        cbxFachZ = new javax.swing.JComboBox();
+        lblHinweis = new javax.swing.JLabel();
+        pnlSplit = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        txfSplitAmount = new javax.swing.JTextField();
+        btnAddSplitDest = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        lblTeilID = new javax.swing.JLabel();
         txfTeilID = new javax.swing.JTextField();
+        pnlQty = new javax.swing.JPanel();
+        lblMenge = new javax.swing.JLabel();
+        txfMenge = new javax.swing.JTextField();
+        jPanel5 = new javax.swing.JPanel();
         lblHaltbarkeitsdatum = new javax.swing.JLabel();
         txfHaltbarkeitsdatum = new javax.swing.JTextField();
         lblHinweisDatum = new javax.swing.JLabel();
+        jPanel6 = new javax.swing.JPanel();
+        lblAnschaffungsgrund = new javax.swing.JLabel();
+        spnAnschaffungsgrund = new javax.swing.JScrollPane();
+        txaAnschaffungsgrund = new javax.swing.JTextArea();
+        jPanel7 = new javax.swing.JPanel();
+        pnlDestination = new javax.swing.JPanel();
+        lblFachAdresse1 = new javax.swing.JLabel();
+        cbxFachZ1 = new javax.swing.JComboBox();
+        cbxFachX1 = new javax.swing.JComboBox();
+        cbxFachY1 = new javax.swing.JComboBox();
+        cbxFachTyp1 = new javax.swing.JComboBox();
+        jPanel3 = new javax.swing.JPanel();
+        einlagernButton = new javax.swing.JButton();
+        pnlSplit2 = new javax.swing.JScrollPane();
+        pnlDestinations = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         lblEinlagern.setText("Teile auslagern");
 
+        jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+
         lblFachAdresse.setText("Lagerfachadresse:");
-
-        lblHinweis.setText("Hinweis: [LagerID][x][y][z]");
-
-        lblTeilID.setText("Teil ID:");
-
-        lblAnschaffungsgrund.setText("Grund:");
-
-        txaAnschaffungsgrund.setColumns(20);
-        txaAnschaffungsgrund.setRows(5);
-        spnAnschaffungsgrund.setViewportView(txaAnschaffungsgrund);
-
-        lblMenge.setText("Menge:");
-
-        einlagernButton.setText("Teile auslagern");
-        einlagernButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                einlagernButtonActionPerformed(evt);
-            }
-        });
-
+        lblFachAdresse.setPreferredSize(new java.awt.Dimension(150, 20));
+        jPanel1.add(lblFachAdresse);
 
         cbxFachTyp.setModel(new javax.swing.DefaultComboBoxModel());
         cbxFachTyp.addActionListener(new java.awt.event.ActionListener() {
@@ -379,8 +394,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
                 cbxFachTypActionPerformed(evt);
             }
         });
-
-        cbxFachZ.setModel(new javax.swing.DefaultComboBoxModel());
+        jPanel1.add(cbxFachTyp);
 
         cbxFachX.setModel(new javax.swing.DefaultComboBoxModel());
         cbxFachX.addActionListener(new java.awt.event.ActionListener() {
@@ -388,24 +402,149 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
                 cbxFachXActionPerformed(evt);
             }
         });
+        jPanel1.add(cbxFachX);
 
         cbxFachY.setModel(new javax.swing.DefaultComboBoxModel());
+        jPanel1.add(cbxFachY);
 
+        cbxFachZ.setModel(new javax.swing.DefaultComboBoxModel());
+        jPanel1.add(cbxFachZ);
+
+        lblHinweis.setText("Hinweis: [LagerID][x][y][z]");
+        jPanel1.add(lblHinweis);
+
+        pnlSplit.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+
+        jLabel1.setText("Auf wieviele Felder wollen Sie splitten?");
+        jLabel1.setPreferredSize(new java.awt.Dimension(277, 30));
+        pnlSplit.add(jLabel1);
+
+        jLabel2.setText("Anzahl der Ziele:");
+        jLabel2.setPreferredSize(new java.awt.Dimension(150, 15));
+        pnlSplit.add(jLabel2);
+
+        txfSplitAmount.setPreferredSize(new java.awt.Dimension(40, 22));
+        txfSplitAmount.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txfSplitAmountKeyReleased(evt);
+            }
+        });
+        pnlSplit.add(txfSplitAmount);
+
+        btnAddSplitDest.setText("Hinzufügen");
+        btnAddSplitDest.setEnabled(false);
+        btnAddSplitDest.setPreferredSize(new java.awt.Dimension(115, 20));
+        btnAddSplitDest.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddSplitDestActionPerformed(evt);
+            }
+        });
+        pnlSplit.add(btnAddSplitDest);
+
+        jPanel2.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+
+        lblTeilID.setText("Teil ID:");
+        lblTeilID.setPreferredSize(new java.awt.Dimension(150, 20));
+        jPanel2.add(lblTeilID);
+
+        txfTeilID.setMinimumSize(new java.awt.Dimension(20, 40));
+        txfTeilID.setPreferredSize(new java.awt.Dimension(50, 22));
         txfTeilID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txfTeilIDActionPerformed(evt);
             }
         });
+        jPanel2.add(txfTeilID);
+
+        pnlQty.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+
+        lblMenge.setText("Menge:");
+        lblMenge.setPreferredSize(new java.awt.Dimension(150, 20));
+        pnlQty.add(lblMenge);
+
+        txfMenge.setPreferredSize(new java.awt.Dimension(40, 22));
+        pnlQty.add(txfMenge);
+
+        jPanel5.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
         lblHaltbarkeitsdatum.setText("Haltbarkeitsdatum");
+        lblHaltbarkeitsdatum.setPreferredSize(new java.awt.Dimension(150, 20));
+        jPanel5.add(lblHaltbarkeitsdatum);
 
+        txfHaltbarkeitsdatum.setMinimumSize(new java.awt.Dimension(50, 20));
+        txfHaltbarkeitsdatum.setPreferredSize(new java.awt.Dimension(70, 22));
         txfHaltbarkeitsdatum.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txfHaltbarkeitsdatumActionPerformed(evt);
             }
         });
+        jPanel5.add(txfHaltbarkeitsdatum);
 
         lblHinweisDatum.setText("Hinweis: dd.mm.yyyy");
+        jPanel5.add(lblHinweisDatum);
+
+        jPanel6.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+
+        lblAnschaffungsgrund.setText("Grund:");
+        lblAnschaffungsgrund.setPreferredSize(new java.awt.Dimension(150, 20));
+        jPanel6.add(lblAnschaffungsgrund);
+
+        txaAnschaffungsgrund.setColumns(30);
+        txaAnschaffungsgrund.setRows(5);
+        spnAnschaffungsgrund.setViewportView(txaAnschaffungsgrund);
+
+        jPanel6.add(spnAnschaffungsgrund);
+
+        jPanel7.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+
+        pnlDestination.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+
+        lblFachAdresse1.setText("Ziel-Lagerfach");
+        lblFachAdresse1.setPreferredSize(new java.awt.Dimension(150, 20));
+        pnlDestination.add(lblFachAdresse1);
+
+        cbxFachZ1.setModel(new javax.swing.DefaultComboBoxModel());
+        pnlDestination.add(cbxFachZ1);
+
+        cbxFachX1.setModel(new javax.swing.DefaultComboBoxModel());
+        cbxFachX1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxFachX1ActionPerformed(evt);
+            }
+        });
+        pnlDestination.add(cbxFachX1);
+
+        cbxFachY1.setModel(new javax.swing.DefaultComboBoxModel());
+        pnlDestination.add(cbxFachY1);
+
+        cbxFachTyp1.setModel(new javax.swing.DefaultComboBoxModel());
+        cbxFachTyp1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxFachTyp1ActionPerformed(evt);
+            }
+        });
+        pnlDestination.add(cbxFachTyp1);
+
+        einlagernButton.setText("Teile auslagern");
+        einlagernButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                einlagernButtonActionPerformed(evt);
+            }
+        });
+        jPanel3.add(einlagernButton);
+
+        javax.swing.GroupLayout pnlDestinationsLayout = new javax.swing.GroupLayout(pnlDestinations);
+        pnlDestinations.setLayout(pnlDestinationsLayout);
+        pnlDestinationsLayout.setHorizontalGroup(
+            pnlDestinationsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 539, Short.MAX_VALUE)
+        );
+        pnlDestinationsLayout.setVerticalGroup(
+            pnlDestinationsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 215, Short.MAX_VALUE)
+        );
+
+        pnlSplit2.setViewportView(pnlDestinations);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -414,36 +553,21 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 467, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblEinlagern, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(einlagernButton)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblFachAdresse)
-                            .addComponent(lblTeilID)
-                            .addComponent(lblAnschaffungsgrund)
-                            .addComponent(lblMenge)
-                            .addComponent(lblHaltbarkeitsdatum))
-                        .addGap(65, 65, 65)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(txfHaltbarkeitsdatum, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(lblHinweisDatum))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(cbxFachTyp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cbxFachX, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cbxFachY, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cbxFachZ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(lblHinweis))
-                            .addComponent(spnAnschaffungsgrund, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txfTeilID, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txfMenge, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(0, 35, Short.MAX_VALUE))
+                            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 467, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblEinlagern, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(pnlQty, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 581, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(pnlDestination, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(pnlSplit, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 497, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(pnlSplit2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -452,34 +576,27 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
                 .addComponent(lblEinlagern)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblFachAdresse)
-                    .addComponent(lblHinweis)
-                    .addComponent(cbxFachTyp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbxFachZ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbxFachX, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbxFachY, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblTeilID)
-                    .addComponent(txfTeilID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblAnschaffungsgrund)
-                    .addComponent(spnAnschaffungsgrund, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(22, 22, 22)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblMenge)
-                    .addComponent(txfMenge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblHaltbarkeitsdatum)
-                    .addComponent(txfHaltbarkeitsdatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblHinweisDatum))
-                .addGap(29, 29, 29)
-                .addComponent(einlagernButton)
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnlDestination, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(1, 1, 1)
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnlQty, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnlSplit, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnlSplit2, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -727,6 +844,92 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         // TODO add your handling action here:
     }//GEN-LAST:event_txfHaltbarkeitsdatumActionPerformed
 
+    private void cbxFachTyp1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxFachTyp1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbxFachTyp1ActionPerformed
+
+    private void cbxFachX1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxFachX1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbxFachX1ActionPerformed
+
+    private void txfSplitAmountKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfSplitAmountKeyReleased
+        if(txfSplitAmount.getText().length() > 0){
+            btnAddSplitDest.setEnabled(true);
+        }
+        else {
+            btnAddSplitDest.setEnabled(false);
+        }
+    }//GEN-LAST:event_txfSplitAmountKeyReleased
+
+    private void btnAddSplitDestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddSplitDestActionPerformed
+        int amount = Integer.parseInt(txfSplitAmount.getText());
+        JComboBox cbX[] = new JComboBox[amount];
+        JComboBox cbY[] = new JComboBox[amount];
+        JComboBox cbZ[] = new JComboBox[amount];
+        JComboBox cbLager[] = new JComboBox[amount];
+        JTextField qty[] = new JTextField[amount];
+
+        JPanel jp[] = new JPanel[amount];
+        pnlDestinations.removeAll();
+        for (int i = 0; i<amount; i++) {
+            jp[i] = new JPanel();
+            jp[i].setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+            JLabel preText = new JLabel("Ziel "+(i+1)+":");
+            preText.setPreferredSize(new Dimension(57,23));
+            
+            JLabel qtyText = new JLabel("Menge: ");
+            preText.setPreferredSize(new Dimension(57,23));
+            
+            cbLager[i] = new JComboBox();
+            cbLager[i].setPreferredSize(new Dimension(57,23));
+            cbLager[i].setSelectedItem(getSelectedLagerbestand().getLagerfach().getLager().getLagerortCode());
+            cbLager[i].addItem("HL");
+            cbLager[i].addItem("FL");
+            
+            cbX[i] = new JComboBox();
+            cbX[i].setPreferredSize(new Dimension(57,23));
+            
+            cbY[i] = new JComboBox();
+            cbY[i].setPreferredSize(new Dimension(57,23));    
+            
+            cbZ[i] = new JComboBox();
+            cbZ[i].setPreferredSize(new Dimension(57,23)); 
+            
+            qty[i] = new JTextField();
+            qty[i].setPreferredSize(new Dimension(57,23));
+            
+            for(int x = 1; x <= getSelectedLagerbestand().getLagerfach().getLager().getBreite(); x++){
+                cbX[i].addItem(x);
+            }
+
+            for(int y = 1; y <= getSelectedLagerbestand().getLagerfach().getLager().getTiefe(); y++){
+                cbY[i].addItem(y);
+            }
+
+            for(int z = 1; z <= getSelectedLagerbestand().getLagerfach().getLager().getHoehe(); z++){
+                cbZ[i].addItem(z);
+            }
+            
+            jp[i].add(preText);
+            jp[i].add(cbLager[i]);
+            jp[i].add(cbX[i]);
+            jp[i].add(cbY[i]);
+            jp[i].add(cbZ[i]);
+            jp[i].add(qtyText);
+            jp[i].add(qty[i]);
+            jp[i].setBounds(5, 5+i*30, 454, 30);
+
+            pnlDestinations.add(jp[i]);
+            if(i == amount-1){
+                break;
+            }
+        }
+        pnlDestinations.setPreferredSize(new Dimension(454, amount*40));
+        this.revalidate();
+        this.pack();
+        //setSplitData
+    }//GEN-LAST:event_btnAddSplitDestActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -761,25 +964,49 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
             }
         });
     }
+    
+    public Lagerbestand getSelectedLagerbestand(){
+        return this.selectedLagerbestand;
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAddSplitDest;
     private javax.swing.JComboBox cbxFachTyp;
+    private javax.swing.JComboBox cbxFachTyp1;
     private javax.swing.JComboBox cbxFachX;
+    private javax.swing.JComboBox cbxFachX1;
     private javax.swing.JComboBox cbxFachY;
+    private javax.swing.JComboBox cbxFachY1;
     private javax.swing.JComboBox cbxFachZ;
+    private javax.swing.JComboBox cbxFachZ1;
     private javax.swing.JButton einlagernButton;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lblAnschaffungsgrund;
     private javax.swing.JLabel lblEinlagern;
     private javax.swing.JLabel lblFachAdresse;
+    private javax.swing.JLabel lblFachAdresse1;
     private javax.swing.JLabel lblHaltbarkeitsdatum;
     private javax.swing.JLabel lblHinweis;
     private javax.swing.JLabel lblHinweisDatum;
     private javax.swing.JLabel lblMenge;
     private javax.swing.JLabel lblTeilID;
+    private javax.swing.JPanel pnlDestination;
+    private javax.swing.JPanel pnlDestinations;
+    private javax.swing.JPanel pnlQty;
+    private javax.swing.JPanel pnlSplit;
+    private javax.swing.JScrollPane pnlSplit2;
     private javax.swing.JScrollPane spnAnschaffungsgrund;
     private javax.swing.JTextArea txaAnschaffungsgrund;
     private javax.swing.JTextField txfHaltbarkeitsdatum;
     private javax.swing.JTextField txfMenge;
+    private javax.swing.JTextField txfSplitAmount;
     private javax.swing.JTextField txfTeilID;
     // End of variables declaration//GEN-END:variables
 

@@ -189,33 +189,31 @@ public class LagerbestandPanel extends javax.swing.JPanel {
 
     private void btnTeilUmlagernActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTeilUmlagernActionPerformed
         if (tabMaintable.getSelectedRow() >= 0) {
+
             int fachId = Integer.parseInt(tabMaintable.getValueAt(tabMaintable.getSelectedRow(), 0).toString());
             int teilId = Integer.parseInt(tabMaintable.getValueAt(tabMaintable.getSelectedRow(), 6).toString());
-            int lagerbestandId = 0;
-            Lagerbestand lb = new Lagerbestand();
+
             try {
-                lagerbestandId = Lagerbestand.getLagerbestandID(teilId, fachId);
-                lb = Lagerbestand.getLagerbestand(lagerbestandId);
+
+                BestandsaenderungFrame bestandsaenderungFrame = new BestandsaenderungFrame(
+                        BestandsaenderungFrame.UMLAGERN, teilId, fachId);
+
+                bestandsaenderungFrame.setTable(tabMaintable);
+                JTable teileTable = mainFrame.getPanMain().getTeilebestand().getTeileTable();
+                bestandsaenderungFrame.setTeileTable(teileTable);
             } catch (SQLException ex) {
                 Misc.printSQLException(mainFrame, ex);
             }
 
-            UmlagernFrame umlagernFrame = new UmlagernFrame(true, lb);
-            umlagernFrame.setVisible(true);
-            try {
-                umlagernFrame.initUmlagernObj(lagerbestandId);
-            } catch (SQLException ex) {
-                Misc.printSQLException(mainFrame, ex);
-            }
-            umlagernFrame.setTable(tabMaintable);
         } else {
-            Misc.createErrorDialog(mainFrame, "Es muss Teil ausgewählt werden");
+            Misc.createErrorDialog(mainFrame, "Es muss erst ein Teil zum Auslagern aus der "
+                    + "Liste gewählt werden!");
         }
         
     }//GEN-LAST:event_btnTeilUmlagernActionPerformed
     
     /**
-     * Formulaar Teile Auslager mit Daten()ID,Anschaffungsgrund und Haltbarkeitsdatum befüllenbefüllen
+     * Formular Teile Auslagern mit Daten()ID,Anschaffungsgrund und Haltbarkeitsdatum befüllen
     */
     private void btnTeilAuslagernActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTeilAuslagernActionPerformed
 
