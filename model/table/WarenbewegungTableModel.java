@@ -92,15 +92,16 @@ public class WarenbewegungTableModel extends AbstractTableModel{
             df.setLenient(false);
 
             int qGes = 0;
-            String strZiel = "<html>";
+            String strZiel = "";
             ForeignCollection<ZielPosition> al;
             al = wb.getArrZielPosition();
             int i = 1;
             for (ZielPosition z : al) {
-                strZiel += "Ziel "+i+": Menge "+z.getMenge()+" an "+z.getLagerfach()+"<br>";
+                strZiel += "Ziel "+i+": Menge "+z.getMenge()+" an "+z.getLagerfach()+"\n";
                 qGes += z.getMenge();
+                i++;
             }
-            strZiel += "</html>";
+            strZiel += "";
 
             if(warenRows.size()>0){
                 if(wb != null){

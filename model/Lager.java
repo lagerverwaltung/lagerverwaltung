@@ -109,9 +109,22 @@ public class Lager {
         return lagerort;
     }
     
+    /**
+     * Gibt den Lagerort zu einem LagerCode zurück
+     * @return lagerort
+     */
+    public static Lager.Lagerort getLagerort(String lagerCode) {
+        if(lagerCode == "FL"){
+            return Lager.Lagerort.freilager;
+        }
+        else {
+            return Lager.Lagerort.hochregal;
+        }
+    }
+    
     /*
      * @author unknown
-     * Gibt den Code des Lagortes zurück
+     * Gibt den Code des Lagerortes zurück
      * HL = Hochregallager
      * FL = Freilager
      */

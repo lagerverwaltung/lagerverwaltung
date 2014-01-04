@@ -2,6 +2,7 @@ package view;
 
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
+import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 import model.collection.WarenbewegungCollection;
 import model.table.WarenbewegungTableModel;
@@ -66,6 +67,8 @@ public class WarenbewegungPanel extends javax.swing.JPanel {
 
         panMain.setPreferredSize(new java.awt.Dimension(1020, 761));
 
+        TableCellRenderer ren = new TwoLinesCellRenderer();
+
         WarenbewegungTableModel tm = new WarenbewegungTableModel();
         tm.setData(WarenbewegungCollection.getInstance());
         tblMain.setAutoCreateRowSorter(true);
@@ -74,6 +77,7 @@ public class WarenbewegungPanel extends javax.swing.JPanel {
         setTableWidths(tblMain);
         tblMain.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
         tblMain.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        tblMain.getColumnModel().getColumn(4).setCellRenderer(ren);
         scpMain.setViewportView(tblMain);
 
         btnFilterzurücksetzen.setText("Filter zurücksetzen");
@@ -102,7 +106,7 @@ public class WarenbewegungPanel extends javax.swing.JPanel {
                         .addComponent(btnFilter)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnFilterzurücksetzen)))
-                .addContainerGap(129, Short.MAX_VALUE))
+                .addContainerGap(62, Short.MAX_VALUE))
         );
         panMainLayout.setVerticalGroup(
             panMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

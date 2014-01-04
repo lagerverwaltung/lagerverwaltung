@@ -6,14 +6,19 @@
 
 package view;
 
+import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import model.Lager;
 import model.Lager.Lagerort;
+import model.Lagerbestand;
 import model.Lagerfach;
+import model.Teilebestand;
+import model.ZielPosition;
 
 /**
  *
@@ -22,12 +27,16 @@ import model.Lagerfach;
 public class BestandsGUIHelper {
     
     int quellFachID;
-    int mengen[];
+    int menge;
     Date hbDatum;
 
    
     String grund;
     Lagerfach[] faecher;
+    ArrayList<HashMap> destinations;
+
+   
+    
     int teilID;
     
     int MENGE_NOT_INTEGER=1;
@@ -51,10 +60,22 @@ public class BestandsGUIHelper {
     int NO_GRUND=7;
     String NO_GRUND_TEXT="Es wurde kein Grund eingegeben!";
     
+    int QUELLMENGE_TOOLOW_ID = 9;
+    String QUELLMENGE_TOOLOW_TEXT ="Die Zielmenge überschreitet die Menge der im Quell-Fach vorhandenen Teile!";
     
-    public int[] getMengen()
+    int ZIELMENGE_TOOHIGH_ID = 10;
+    String ZIELMENGE_TOOHIGH_TEXT ="Die Zielmenge überschreitet den im Fach vorhandenen Platz! Fach: ";
+    
+    int AUSLAGERN_TOHIGH_ID = 11;
+    String AUSLAGERN_TOHIGH_TEXT ="Die existieren nicht ausreichend Teile in diesem Fach, um diese Menge auszulagern!";
+    
+    
+    
+    
+    
+    public int getMenge()
     {
-        return mengen;
+        return menge;
     }
     
     public void setTeilID(int teilID)
@@ -84,7 +105,7 @@ public class BestandsGUIHelper {
     
     public int getEineMenge()
     {
-        return mengen[0];
+        return menge;
     }
     
     public Lagerfach[] getFaecher()
@@ -97,7 +118,7 @@ public class BestandsGUIHelper {
         return grund;
     }
     
-    public Lagerfach generateFach(int x,int y,int z, String lo) throws Exception
+    public Lagerfach generateFach(int x,int y,int z, String lo) throws Exception 
     {
         Lagerort l;
         if (lo.equals("FL")) {
@@ -106,13 +127,18 @@ public class BestandsGUIHelper {
         } else {
             l=Lager.Lagerort.hochregal;
         }
-        return (Lagerfach.getFach(Lager.getLager(l),x ,y,z));
+        return Lagerfach.getFach(Lager.getLager(l),x ,y,z);
     }
     
     
     public void setFaecher (Lagerfach[] l)
     {
         faecher=l;
+    }
+    
+    public void validateDestinationData (String[] cbLager, String[]cbX, String[] cbY, String[]cbZ, String[] qty)
+    {
+        
     }
     
     public void setEinFach (Lagerfach l)
@@ -128,32 +154,69 @@ public class BestandsGUIHelper {
         this.hbDatum = hbDatum;
     }
     
-    public HashMap<Integer,String> validateLagerbestandData(int code,String mengenE[],String datumE, String grundE)
+    public ArrayList<HashMap> getDestinations() {
+        return destinations;
+    }
+
+    public void setDestinations(ArrayList<HashMap> destinations) {
+        this.destinations = destinations;
+    }
+    
+     
+    /**
+     * @author smodlich
+     * generischer Kapazitätstest für alle Bestandsaenderungen
+     * @param faecher Faecher Array ausgelesen aus BestandsGUIHelper Objekt
+     * @param teil Teilebestand
+     * @param mengen
+     * @param mengeOld
+     * @return
+     * @throws SQLException 
+     */
+    public HashMap<Integer,String> kapazitaetsTest(Lagerfach fach,Teilebestand teil,int menge,int mengeOld) throws SQLException
+    {
+        HashMap<Integer,String> errors = new HashMap<Integer,String>();
+        int groesse= teil.getVe();
+        
+        int errorIndex=0;
+        
+        int freeVE=fach.getFreeVe();
+
+        if((menge*groesse)>freeVE)
+        {
+            errorIndex++;
+            errors.put(errorIndex,"Die Kapazitaet im Fach X:"+ fach.getX()+" Y:"+fach.getY() +" Z:"+ 
+            fach.getZ()+ " ist nicht ausreichend. Es sind noch " + freeVE + " VE frei.Aber es werden " + 
+            menge*groesse+ " VE benötigt.");               
+        }
+        if((menge+mengeOld)<0)
+        {
+            errorIndex++;
+            errors.put(errorIndex, "Keine ausreichende Menge im Quellfach vorhanden!");
+        }
+    
+        return errors;
+    }
+    
+    public HashMap<Integer,String> validateLagerbestandData(int code,String mengenE,String datumE, String grundE, ArrayList<HashMap> destinations) throws SQLException
     {
         HashMap<Integer,String> errors=new HashMap<Integer,String>();
-        
-        mengen=new int[mengenE.length];
-        
-        try {
-            for (int i=0;i<mengenE.length;i++)
-            {
-                mengen[i]=Integer.parseInt(mengenE[i]);
+        setDestinations(destinations);
+        if(code != BestandsaenderungFrame.SPLITTEN){
+            try {
+                menge =Integer.parseInt(mengenE);
             }
-        
-        }
-        catch(NumberFormatException e)
-        {
-        errors.put(MENGE_NOT_INTEGER, MENGE_NOT_INTEGER_TEXT);
-        }
-        
-        for(int i=0;i<mengen.length;i++)
-        {
-        if(mengen[i]<1)
-            errors.put(MENGE_NOT_GREATER_ZERO,MENGE_NOT_GREATER_ZERO_TEXT);
+            catch(NumberFormatException e)
+            {
+                errors.put(MENGE_NOT_INTEGER, MENGE_NOT_INTEGER_TEXT);
+            }
+
+            if(menge<1){
+                errors.put(MENGE_NOT_GREATER_ZERO,MENGE_NOT_GREATER_ZERO_TEXT);
+            }
         }
         
-        
-        if(grundE!=null)
+        if(grundE!=null || grundE.length() > 0)
         {grund=grundE;}
         else
         {
@@ -182,7 +245,57 @@ public class BestandsGUIHelper {
             {
                 errors.put(NO_DATE, NO_DATE_TEXT);
             }
-        } 
+        }
+        Lagerbestand quellLb=null;
+        Teilebestand teil;
+        int oldMenge;
+        if(getTeilID() != 0 && getquellFachID() != 0){
+            quellLb= Lagerbestand.getLagerbestand(getTeilID(), getquellFachID());
+            teil = quellLb.getTeil();
+            oldMenge = quellLb.getMenge();
+        }
+        else {
+            teil = Teilebestand.loadTeil(getTeilID());
+            oldMenge = 0;
+        }
+        
+        int qtySum = 0;
+        for(int i = 0; i<destinations.size(); i++){
+            HashMap hm = destinations.get(i);
+            try{
+                int qty = Integer.parseInt((String)hm.get("qty"));  
+                qtySum += qty;
+                Lagerfach fach = Lagerfach.getFach(
+                        Lager.getLager(Lager.getLagerort((String)hm.get("fachCode"))), 
+                        (int)hm.get("x"), 
+                        (int)hm.get("y"), 
+                        (int)hm.get("z")
+                );
+                HashMap<Integer, String> kapError = kapazitaetsTest(fach, teil, qty, oldMenge);
+                for (int errorCode : kapError.keySet()){
+                    errors.put(errorCode, kapError.get(errorCode));
+                }
+                if(qty < 1){
+                    errors.put(MENGE_NOT_GREATER_ZERO, MENGE_NOT_GREATER_ZERO_TEXT);
+                }
+            }
+            catch(NumberFormatException e)
+            {
+                errors.put(MENGE_NOT_INTEGER, MENGE_NOT_INTEGER_TEXT);
+            }
+            
+        }
+        
+        if(code == BestandsaenderungFrame.AUSLAGERN && quellLb.getMenge() < menge){
+            errors.put(AUSLAGERN_TOHIGH_ID, AUSLAGERN_TOHIGH_TEXT);
+        }
+        
+        if((code == BestandsaenderungFrame.SPLITTEN || code == BestandsaenderungFrame.UMLAGERN) 
+                && quellLb.getMenge()< qtySum
+        ){
+                errors.put(QUELLMENGE_TOOLOW_ID, QUELLMENGE_TOOLOW_TEXT);
+        }
+        
         return errors;
     }
     

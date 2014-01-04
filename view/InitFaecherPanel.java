@@ -109,7 +109,6 @@ public class InitFaecherPanel extends javax.swing.JPanel {
                     cb[i].addItemListener(new ItemListener(){
                           public void itemStateChanged(ItemEvent e){
                             FachGroesse c = (FachGroesse)e.getItem();
-                            //System.out.println(c.lagerfach);
                             try {
                                 Lagerfach lf = Lagerfach.getLagerfach(c.lagerfach);
                                 lf.setGroesse(c.groesse);

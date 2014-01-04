@@ -66,7 +66,7 @@
                           <Component id="btnFilterzurücksetzen" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="129" max="32767" attributes="0"/>
+                  <EmptySpace pref="62" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -101,15 +101,15 @@
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                   <TableColumnModel selectionModel="0"/>
                 </Property>
-                <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                  <Color id="Standardcursor"/>
+                <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor" postCode="tblMain.getColumnModel().getColumn(4).setCellRenderer(ren);">
+                  <Color id="Default Cursor"/>
                 </Property>
                 <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                   <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                 </Property>
               </Properties>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="WarenbewegungTableModel tm = new WarenbewegungTableModel();&#xa;tm.setData(WarenbewegungCollection.getInstance());&#xa;tblMain.setAutoCreateRowSorter(true);&#xa;tblMain.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="TableCellRenderer ren = new TwoLinesCellRenderer();&#xa;&#xa;WarenbewegungTableModel tm = new WarenbewegungTableModel();&#xa;tm.setData(WarenbewegungCollection.getInstance());&#xa;tblMain.setAutoCreateRowSorter(true);&#xa;tblMain.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);"/>
               </AuxValues>
             </Component>
           </SubComponents>

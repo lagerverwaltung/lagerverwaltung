@@ -1,5 +1,6 @@
 package controller;
 
+import java.util.logging.Level;
 import view.MainFrame;
 
 
@@ -38,7 +39,6 @@ public class IndexController {
             NavigationController navigationController = new NavigationController(mainFrame.getStartPanel());
             mainFrame.addNaviController(navigationController);
             mainFrame.setVisible(true);
-            
         } catch(Exception e1){
             e1.printStackTrace();
         }

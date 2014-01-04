@@ -6,9 +6,10 @@ package view;
 
 import com.j256.ormlite.dao.Dao;
 import helper.DatabaseManager;
-import helper.LagerbestandHelper;
 import helper.Misc;
 import java.awt.Dimension;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.Format;
@@ -69,17 +70,29 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
     int action;
     BestandsGUIHelper bestandsGuiHelper;
     Lagerbestand selectedLagerbestand;
+    HashMap faecherCbs = new HashMap();
+    
+    /**
+     * Array für die Zielfaeche rund Mengen
+     */
+    JComboBox cbX[];
+    JComboBox cbY[];
+    JComboBox cbZ[];
+    JComboBox cbLager[];
+    JTextField qty[];
     
     /**
      * Creates new form BestandsaenderungFrame
      */
     private BestandsaenderungFrame(){
         initComponents();
+        registerFaecherCbs("quelle", cbxFachX, cbxFachY,cbxFachZ);
         setLocationRelativeTo(null);
         cbxFachTyp.addItem("HL");
         cbxFachTyp.addItem("FL");
         try {
-            loadHlCbx();
+           
+            loadLagerCbx("quelle","HL");
         } catch (SQLException ex) {
             Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, ex); 
         }
@@ -123,7 +136,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
      * @param action der Code entsprechend der Variablen im Kopf des Bestandsaenderungsframes auszuwählen
      */
     
-    private void setGUI(int action,Lagerbestand lb)
+    private void setGUI(int action,Lagerbestand lb) throws SQLException
     {
         switch (action)
         {
@@ -195,7 +208,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
      * Erstellen der Umlagern GUI und setzen der entsprechenden Elemente
      * 
      */
-    private void setUmlagernGUI(Lagerbestand lb)
+    private void setUmlagernGUI(Lagerbestand lb) throws SQLException
     {
         lblEinlagern.setText("Teile umlagern");
         einlagernButton.setText("Teile umlagern");
@@ -205,6 +218,10 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         txfHaltbarkeitsdatum.setVisible(false);
         this.lblHinweisDatum.setVisible(false);
         pnlDestination.setVisible(true);
+        registerFaecherCbs("dest", cbxFachX1, cbxFachY1,cbxFachZ1);
+        cbxFachTyp1.addItem("HL");
+        cbxFachTyp1.addItem("FL");
+        loadLagerCbx("dest", "HL");
         this.setVisible(true);
     
     }
@@ -216,13 +233,14 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
     {
         lblEinlagern.setText("Teile splitten");
         einlagernButton.setText("Teile splitten");
+         loadQuellComboBoxen(lb);
         lblHaltbarkeitsdatum.setVisible(false);
         txfHaltbarkeitsdatum.setVisible(false);
         this.lblHinweisDatum.setVisible(false);
         pnlSplit.setVisible(true);
         pnlSplit2.setVisible(true);
         pnlQty.setVisible(false);
-    
+        setSize(new Dimension(this.getWidth(), this.getHeight()+110));
     }
     /**
      * @author ssinger
@@ -274,58 +292,50 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
     public void setWarenBewegungTable(JTable t){
         warenBewegungTable = t;
     }
-     
     /*
-     * @author ssinger
-    * Läd Comboboxen für Hochlager
+     * @author spickert
+    * Regisrtiert zu aktualisierende Comboboxen
+    * @param String id enthält die ID für die Fachklasse die registriert werden soll 
+    * @param JComboBox cbX, cbY, cbZ enthält die Comboboxen die registriert werden
     */
-    private void loadHlCbx() throws SQLException{
-        cbxFachZ.removeAllItems();
-        cbxFachX.removeAllItems();
-        cbxFachY.removeAllItems();
-
-        Lager hl = Lager.getLager(Lager.Lagerort.hochregal);
-        int x = hl.getBreite();
-        int y = hl.getTiefe();
-        int z = hl.getHoehe();
+    public void registerFaecherCbs(String id, JComboBox cbX, JComboBox cbY, JComboBox cbZ){
+        HashMap hmFields = new HashMap();
+        hmFields.put("x", cbX);
+        hmFields.put("y", cbY);
+        hmFields.put("z", cbZ);
+        faecherCbs.put(id, hmFields);
+    }
+    /*
+     * @author spickert
+    * Aktualisiert Comboboxen für alle Lagertypen
+    * @param String destination enthält die ID für die Fachklasse die aktualisiert werden soll 
+    * @param String lagerCode enthält den Code für das ausgewählte Lager
+    */
+    private void loadLagerCbx(String destination, String lagerCode) throws SQLException{
+        HashMap hmFields = (HashMap) faecherCbs.get(destination);
+        Lager lager = Lager.getLager(Lager.getLagerort(lagerCode));
+        int x = lager.getBreite();
+        int y = lager.getTiefe();
+        int z = lager.getHoehe();
+       
+        JComboBox cbX = (JComboBox) hmFields.get("x");
+        JComboBox cbY = (JComboBox) hmFields.get("y");
+        JComboBox cbZ = (JComboBox) hmFields.get("z");
+        
+        cbX.removeAllItems();
+        cbY.removeAllItems();
+        cbZ.removeAllItems();
         
         for(int i = 1; i <= x; i++){
-            cbxFachX.addItem(i);
+            cbX.addItem(i);
         }
         
         for(int i = 1; i <= y; i++){
-            cbxFachY.addItem(i);
+            cbY.addItem(i);
         }
                 
          for(int i = 1; i <= z; i++){
-            cbxFachZ.addItem(i);
-        }
-    }
-
-    /**
-     * @author ssinger
-     * läd ComboBoxen für Freilagern
-     */
-    public void loadFlCbx() throws SQLException {
-        cbxFachZ.removeAllItems();
-        cbxFachX.removeAllItems();
-        cbxFachY.removeAllItems();
-
-        Lager fl = Lager.getLager(Lager.Lagerort.freilager);
-        int x = fl.getBreite();
-        int y = fl.getTiefe();
-        int z = fl.getHoehe();
-
-        for (int i = 1; i <= x; i++) {
-            cbxFachX.addItem(i);
-        }
-
-        for (int i = 1; i <= y; i++) {
-            cbxFachY.addItem(i);
-        }
-
-        for (int i = 1; i <= z; i++) {
-            cbxFachZ.addItem(i);
+            cbZ.addItem(i);
         }
     }
     
@@ -369,16 +379,17 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         jPanel7 = new javax.swing.JPanel();
         pnlDestination = new javax.swing.JPanel();
         lblFachAdresse1 = new javax.swing.JLabel();
-        cbxFachZ1 = new javax.swing.JComboBox();
+        cbxFachTyp1 = new javax.swing.JComboBox();
         cbxFachX1 = new javax.swing.JComboBox();
         cbxFachY1 = new javax.swing.JComboBox();
-        cbxFachTyp1 = new javax.swing.JComboBox();
+        cbxFachZ1 = new javax.swing.JComboBox();
         jPanel3 = new javax.swing.JPanel();
         einlagernButton = new javax.swing.JButton();
         pnlSplit2 = new javax.swing.JScrollPane();
         pnlDestinations = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(602, 474));
 
         lblEinlagern.setText("Teile auslagern");
 
@@ -416,7 +427,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         pnlSplit.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
         jLabel1.setText("Auf wieviele Felder wollen Sie splitten?");
-        jLabel1.setPreferredSize(new java.awt.Dimension(277, 30));
+        jLabel1.setPreferredSize(new java.awt.Dimension(277, 35));
         pnlSplit.add(jLabel1);
 
         jLabel2.setText("Anzahl der Ziele:");
@@ -462,7 +473,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         lblMenge.setPreferredSize(new java.awt.Dimension(150, 20));
         pnlQty.add(lblMenge);
 
-        txfMenge.setPreferredSize(new java.awt.Dimension(40, 22));
+        txfMenge.setPreferredSize(new java.awt.Dimension(50, 22));
         pnlQty.add(txfMenge);
 
         jPanel5.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
@@ -472,7 +483,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         jPanel5.add(lblHaltbarkeitsdatum);
 
         txfHaltbarkeitsdatum.setMinimumSize(new java.awt.Dimension(50, 20));
-        txfHaltbarkeitsdatum.setPreferredSize(new java.awt.Dimension(70, 22));
+        txfHaltbarkeitsdatum.setPreferredSize(new java.awt.Dimension(90, 22));
         txfHaltbarkeitsdatum.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txfHaltbarkeitsdatumActionPerformed(evt);
@@ -503,8 +514,13 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         lblFachAdresse1.setPreferredSize(new java.awt.Dimension(150, 20));
         pnlDestination.add(lblFachAdresse1);
 
-        cbxFachZ1.setModel(new javax.swing.DefaultComboBoxModel());
-        pnlDestination.add(cbxFachZ1);
+        cbxFachTyp1.setModel(new javax.swing.DefaultComboBoxModel());
+        cbxFachTyp1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxFachTyp1ActionPerformed(evt);
+            }
+        });
+        pnlDestination.add(cbxFachTyp1);
 
         cbxFachX1.setModel(new javax.swing.DefaultComboBoxModel());
         cbxFachX1.addActionListener(new java.awt.event.ActionListener() {
@@ -517,13 +533,8 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         cbxFachY1.setModel(new javax.swing.DefaultComboBoxModel());
         pnlDestination.add(cbxFachY1);
 
-        cbxFachTyp1.setModel(new javax.swing.DefaultComboBoxModel());
-        cbxFachTyp1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbxFachTyp1ActionPerformed(evt);
-            }
-        });
-        pnlDestination.add(cbxFachTyp1);
+        cbxFachZ1.setModel(new javax.swing.DefaultComboBoxModel());
+        pnlDestination.add(cbxFachZ1);
 
         einlagernButton.setText("Teile auslagern");
         einlagernButton.addActionListener(new java.awt.event.ActionListener() {
@@ -532,6 +543,8 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
             }
         });
         jPanel3.add(einlagernButton);
+
+        pnlSplit2.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
         javax.swing.GroupLayout pnlDestinationsLayout = new javax.swing.GroupLayout(pnlDestinations);
         pnlDestinations.setLayout(pnlDestinationsLayout);
@@ -567,7 +580,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
                             .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 497, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(pnlSplit2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGap(0, 9, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -578,21 +591,21 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(0, 0, 0)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(0, 0, 0)
                 .addComponent(pnlDestination, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(1, 1, 1)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(0, 0, 0)
                 .addComponent(pnlQty, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(0, 0, 0)
                 .addComponent(pnlSplit, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlSplit2, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(28, 28, 28)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -602,42 +615,68 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private  ArrayList<HashMap> getDestinations(){
+        ArrayList<HashMap> destList = new ArrayList();
+        HashMap hm = new HashMap();
+       
+        if (action == UMLAGERN){
+            hm.put("fachCode",cbxFachTyp1.getSelectedItem());
+            hm.put("x",cbxFachX1.getSelectedItem());
+            hm.put("y",cbxFachY1.getSelectedItem());
+            hm.put("z",cbxFachZ1.getSelectedItem());
+            hm.put("qty",txfMenge.getText());
+            destList.add(hm);
+        }
+       else if (action == EINLAGERN_LAGERBESTAND || action == EINLAGERN_TEILEBESTAND){
+            hm.put("fachCode",cbxFachTyp.getSelectedItem());
+            hm.put("x",cbxFachX.getSelectedItem());
+            hm.put("y",cbxFachY.getSelectedItem());
+            hm.put("z",cbxFachZ.getSelectedItem());
+            hm.put("qty",txfMenge.getText());
+            destList.add(hm);
+       }
+       else if (action == SPLITTEN){
+            for(int i = 0; i<cbLager.length; i++){
+                HashMap hm1 = new HashMap();
+                hm1.put("fachCode",cbLager[i].getSelectedItem());
+                hm1.put("x",cbX[i].getSelectedItem());
+                hm1.put("y",cbY[i].getSelectedItem());
+                hm1.put("z",cbZ[i].getSelectedItem());
+                hm1.put("qty",qty[i].getText());
+                destList.add(hm1);
+            }
+        }
+        return destList;
+    }
     private void einlagernButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_einlagernButtonActionPerformed
         try {
-            if (action != SPLITTEN) {
-                String[] menge = {txfMenge.getText()};
-                HashMap<Integer, String> errors = bestandsGuiHelper.validateLagerbestandData(action, menge, txfHaltbarkeitsdatum.getText(),
-                        txaAnschaffungsgrund.getText());
+            String menge = txfMenge.getText();
 
-                try {
-                    Lagerfach[] faecher = new Lagerfach[1];
-                    faecher[0] = bestandsGuiHelper.generateFach((int) cbxFachX.getSelectedItem(), (int) cbxFachY.getSelectedItem(), (int) cbxFachZ.getSelectedItem(), cbxFachTyp.getSelectedItem().toString());
-                    bestandsGuiHelper.setFaecher(faecher);
+            HashMap<Integer, String> errors = bestandsGuiHelper.validateLagerbestandData(action, menge, txfHaltbarkeitsdatum.getText(),
+                    txaAnschaffungsgrund.getText(), getDestinations()); 
 
-                    if (action == EINLAGERN_TEILEBESTAND) {
-                        bestandsGuiHelper.setQuellFachID(bestandsGuiHelper.getEinLagerfach().getFachnummer());
-                    }
-
-                } catch (Exception ex) {
-                    Misc.createErrorDialog(this, "Fehler bei der Fach Generierung");
-                    return;
-                }
-                if (errors.size() > 0) {
-                    Misc.createErrorDialog(this, errors);
-                    return;
-                }
-            } // Splitten ergänzen
-            else {
+            Lagerfach[] faecher = new Lagerfach[1];
+            try {
+                faecher[0] = bestandsGuiHelper.generateFach((int) cbxFachX.getSelectedItem(), (int) cbxFachY.getSelectedItem(), (int) cbxFachZ.getSelectedItem(), cbxFachTyp.getSelectedItem().toString());
+            } catch (Exception ex) {
+                Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            bestandsGuiHelper.setFaecher(faecher);
+            if (action == EINLAGERN_TEILEBESTAND) {
+                bestandsGuiHelper.setQuellFachID(bestandsGuiHelper.getEinLagerfach().getFachnummer());
             }
 
+            if (errors.size() > 0) {
+                Misc.createErrorDialog(this, errors);
+                return;
+            }
             bestandsAenderung(action, bestandsGuiHelper);
         } catch (SQLException ex) {
-            System.out.println("SQL Exception");
+            Misc.printSQLException(this, ex);
         }
 
         refreshLagerbestandTableModel();
-        /*refreshTeilebestandTableModel();
-         refreshWarenbestandTableModel();*/
+        refreshWarenbewegungTableModel();
     }//GEN-LAST:event_einlagernButtonActionPerformed
    
     /**
@@ -652,22 +691,13 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         Lagerbestand quellLb= Lagerbestand.getLagerbestand(help.getTeilID(), help.getquellFachID());
         ArrayList zielPositionen = new ArrayList();
         int mengeOld = 0;
+        int mengeAdd = help.getMenge();
 
         if (quellLb != null) {
             mengeOld = quellLb.getMenge();
         }
 
         Teilebestand teil = Teilebestand.loadTeil(help.getTeilID());
-        if (action == AUSLAGERN || action == UMLAGERN || action == SPLITTEN) {
-            help.getMengen()[0] = -help.getMengen()[0];
-        }
-
-        HashMap<Integer, String> errors = kapazitaetsTest(help.getFaecher(), teil, help.getMengen(), mengeOld);
-
-        if (errors.size() > 0) {
-            Misc.createErrorDialog(this, errors);
-            return;
-        }
 
         switch (action) {
             case EINLAGERN_TEILEBESTAND:
@@ -675,32 +705,32 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
                     quellLb = neuerLagerbestand(teil, help.getEinLagerfach(), help.getGrund(), help.getEineMenge());
 
                 } else {
-                    quellLb.setMenge(mengeOld + help.getMengen()[0]);
+                    quellLb.setMenge(mengeOld + mengeAdd);
                 }
                 ZielPosition zp = new ZielPosition();
-                zp.setMenge(help.getMengen()[0]);
+                zp.setMenge(mengeAdd);
                 zp.setLagerfach(help.getEinLagerfach());
                 zielPositionen.add(zp);
                 break;
 
             case EINLAGERN_LAGERBESTAND:
                 if (quellLb != null) {
-                    quellLb.setMenge(mengeOld + help.getEineMenge());
+                    quellLb.setMenge(mengeOld + mengeAdd);
                 }
                 ZielPosition zp1 = new ZielPosition();
-                zp1.setMenge(help.getMengen()[0]);
+                zp1.setMenge(mengeAdd);
                 zp1.setLagerfach(help.getEinLagerfach());
                 zielPositionen.add(zp1);
                 break;
 
             case AUSLAGERN:
-                quellLb.setMenge(mengeOld + help.getEineMenge());
+                quellLb.setMenge(mengeOld - mengeAdd);
                 ZielPosition zp2 = new ZielPosition();
-                zp2.setMenge(help.getMengen()[0]);
+                zp2.setMenge(mengeAdd);
                 zp2.setLagerfach(help.getEinLagerfach());
                 zielPositionen.add(zp2);
                 
-                if (quellLb.getMenge() == 0 && Lagerbestand.isLastTeil(quellLb, quellLb.getMenge())) {
+                if (quellLb.getMenge() == 0 && Lagerbestand.isLastTeil(quellLb)) {
                     int option = JOptionPane.showConfirmDialog(this, "Soll das zugehörige Teil aus dem Teilebestand gelöscht werden?", "Zugehöriges Teil löschen?", JOptionPane.YES_NO_OPTION);
 
                     if (option == JOptionPane.YES_OPTION) {
@@ -712,8 +742,34 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
                 }
                 break;
             case UMLAGERN:
-                break;
             case SPLITTEN:
+                int mengeSum = 0;
+                ArrayList<HashMap> destinations = help.getDestinations();
+                for(int i = 0; i<destinations.size(); i++){
+                    HashMap hm = destinations.get(i);
+                    int qty = Integer.parseInt((String)hm.get("qty"));  
+                    Lagerfach fach = Lagerfach.getFach(
+                            Lager.getLager(Lager.getLagerort((String)hm.get("fachCode"))), 
+                            (int)hm.get("x"), 
+                            (int)hm.get("y"), 
+                            (int)hm.get("z")
+                    );
+                    Lagerbestand zielLb;
+                    zielLb= Lagerbestand.getLagerbestand(help.getTeilID(), fach.getFachnummer());
+                    if(zielLb == null){
+                        zielLb = neuerLagerbestand(teil, fach, help.getGrund(), help.getEineMenge());
+                    }
+                    zielLb.setMenge(zielLb.getMenge()+qty);
+                    mengeSum += qty;
+                    zielLb.save();
+                    
+                    ZielPosition ziel = new ZielPosition();
+                    ziel.setLagerfach(fach);
+                    ziel.setMenge(qty);
+                    zielPositionen.add(ziel);
+                }
+                quellLb.setMenge(mengeOld-mengeSum);
+                
                 break;
         }
         
@@ -726,46 +782,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         //refreshWarenbestandTableModel();
         this.dispose();
     }
-    
-    /**
-     * @author smodlich
-     * generischer Kapazitätstest für alle Bestandsaenderungen
-     * @param faecher Faecher Array ausgelesen aus BestandsGUIHelper Objekt
-     * @param teil Teilebestand
-     * @param mengen
-     * @param mengeOld
-     * @return
-     * @throws SQLException 
-     */
-    public HashMap<Integer,String> kapazitaetsTest(Lagerfach[] faecher,Teilebestand teil,int[] mengen,int mengeOld) throws SQLException
-    {
-        HashMap<Integer,String> errors = new HashMap<Integer,String>();
-        int groesse= teil.getVe();
-        
-        int errorIndex=0;
-        
-        for(int i=0;i<faecher.length;i++)
-        {
-           int freeVE=faecher[i].getFreeVe();
-           
-           if((mengen[i]*groesse)>freeVE)
-           {
-               errorIndex++;
-               errors.put(errorIndex,"Die Kapazitaet im Fach X:"+ faecher[i].getX()+" Y:"+faecher[i].getY() +" Z:"+ 
-                       faecher[i].getZ()+ " ist nicht ausreichend. Es sind noch " + freeVE + " VE frei.Aber es werden " + 
-                       mengen[i]*groesse+ " VE benötigt.");               
-           }
-           
-        
-        }
-        if((mengen[0]+mengeOld)<0)
-        {
-            errorIndex++;
-            errors.put(errorIndex, "Keine ausreichende Menge im Quellfach vorhanden!");
-        }
-    
-        return errors;
-    }
+   
     
     /**
      * @author smodlich 
@@ -801,7 +818,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         teileBestandTable.setModel(tm);
     }
     
-    private void refreshWarenbestandTableModel(){
+    private void refreshWarenbewegungTableModel(){
         WarenbewegungCollection wc = WarenbewegungCollection.getInstance(true);
         WarenbewegungTableModel wm = new WarenbewegungTableModel();
         wm.setData(wc);
@@ -826,26 +843,30 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_txfTeilIDActionPerformed
 
     private void cbxFachTypActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxFachTypActionPerformed
-        if(cbxFachTyp.getSelectedItem().equals("HL")){
-            try {
-                loadHlCbx();
-            } catch (SQLException ex) {
-                Misc.printSQLException(this, ex);            }
-        }else{
-            try {
-                loadFlCbx();
-            } catch (SQLException ex) {
-                Misc.printSQLException(this, ex);
-            }
-        }
+        refreshXYZ("quelle",cbxFachTyp.getSelectedItem().toString());
     }//GEN-LAST:event_cbxFachTypActionPerformed
 
     private void txfHaltbarkeitsdatumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfHaltbarkeitsdatumActionPerformed
         // TODO add your handling action here:
     }//GEN-LAST:event_txfHaltbarkeitsdatumActionPerformed
-
+    
+    public  void refreshXYZ(String id, String selectedItem){
+        if(selectedItem.equals("HL")){
+            try {
+                loadLagerCbx(id,"HL");
+            } catch (SQLException ex) {
+                Misc.printSQLException(this, ex);            }
+        }else{
+            try {
+                loadLagerCbx(id,"FL");
+            } catch (SQLException ex) {
+                Misc.printSQLException(this, ex);
+            }
+        }
+    }
+    
     private void cbxFachTyp1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxFachTyp1ActionPerformed
-        // TODO add your handling code here:
+        refreshXYZ("dest",cbxFachTyp1.getSelectedItem().toString());
     }//GEN-LAST:event_cbxFachTyp1ActionPerformed
 
     private void cbxFachX1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxFachX1ActionPerformed
@@ -863,11 +884,11 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
 
     private void btnAddSplitDestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddSplitDestActionPerformed
         int amount = Integer.parseInt(txfSplitAmount.getText());
-        JComboBox cbX[] = new JComboBox[amount];
-        JComboBox cbY[] = new JComboBox[amount];
-        JComboBox cbZ[] = new JComboBox[amount];
-        JComboBox cbLager[] = new JComboBox[amount];
-        JTextField qty[] = new JTextField[amount];
+        this.cbX        = new JComboBox[amount];
+        this.cbY        = new JComboBox[amount];
+        this.cbZ        = new JComboBox[amount];
+        this.cbLager    = new JComboBox[amount];
+        this.qty        = new JTextField[amount];
 
         JPanel jp[] = new JPanel[amount];
         pnlDestinations.removeAll();
@@ -882,10 +903,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
             
             cbLager[i] = new JComboBox();
             cbLager[i].setPreferredSize(new Dimension(57,23));
-            cbLager[i].setSelectedItem(getSelectedLagerbestand().getLagerfach().getLager().getLagerortCode());
-            cbLager[i].addItem("HL");
-            cbLager[i].addItem("FL");
-            
+           
             cbX[i] = new JComboBox();
             cbX[i].setPreferredSize(new Dimension(57,23));
             
@@ -895,21 +913,20 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
             cbZ[i] = new JComboBox();
             cbZ[i].setPreferredSize(new Dimension(57,23)); 
             
+            cbLager[i].addItemListener(new lagerActionListener("ziel"+i,cbX[i],cbY[i],cbZ[i], this));
+            registerFaecherCbs("ziel"+i, cbX[i], cbY[i],cbZ[i]);
+            
+            cbLager[i].addItem("HL");
+            cbLager[i].addItem("FL");
+            try {
+                loadLagerCbx("ziel"+i,"HL");
+            } catch (SQLException ex) {
+                Misc.printSQLException(this, ex);
+            }
+            
             qty[i] = new JTextField();
             qty[i].setPreferredSize(new Dimension(57,23));
-            
-            for(int x = 1; x <= getSelectedLagerbestand().getLagerfach().getLager().getBreite(); x++){
-                cbX[i].addItem(x);
-            }
-
-            for(int y = 1; y <= getSelectedLagerbestand().getLagerfach().getLager().getTiefe(); y++){
-                cbY[i].addItem(y);
-            }
-
-            for(int z = 1; z <= getSelectedLagerbestand().getLagerfach().getLager().getHoehe(); z++){
-                cbZ[i].addItem(z);
-            }
-            
+           
             jp[i].add(preText);
             jp[i].add(cbLager[i]);
             jp[i].add(cbX[i]);
@@ -924,12 +941,10 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
                 break;
             }
         }
-        pnlDestinations.setPreferredSize(new Dimension(454, amount*40));
-        this.revalidate();
-        this.pack();
-        //setSplitData
+        pnlDestinations.setPreferredSize(new Dimension(454, amount*34));
     }//GEN-LAST:event_btnAddSplitDestActionPerformed
 
+    
     /**
      * @param args the command line arguments
      */
