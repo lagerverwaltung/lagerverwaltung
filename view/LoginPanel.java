@@ -22,8 +22,8 @@ public class LoginPanel extends javax.swing.JPanel {
     public String nameGast = "gast";
     public String passGast = "gast";
     
-    public String nameLagerverwalter = "l";
-    public String passLagerverwalter = "l";
+    public String nameLagerverwalter = "lagerverwalter";
+    public String passLagerverwalter = "lagerverwalter";
   /**
      * Creates new form LoginPanel
      */
