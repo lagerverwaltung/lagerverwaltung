@@ -49,6 +49,8 @@ public class LagerbestandPanel extends javax.swing.JPanel {
     {
         this.mainFrame = mainFrame;
     }
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -200,6 +202,10 @@ public class LagerbestandPanel extends javax.swing.JPanel {
                                BestandsaenderungFrame.EINLAGERN_LAGERBESTAND,teilId,fachId);
                bestandsaenderungFrame.setTable(tabMaintable);
                JTable warenbewegung = mainFrame.getPanMain().getWarenbewegung().gettabMain();
+               
+               JTable teileTable = mainFrame.getPanMain().getTeilebestand().getTeileTable();
+                bestandsaenderungFrame.setTeileTable(teileTable);
+                
                 bestandsaenderungFrame.setWarenBewegungTable(warenbewegung);
             } catch (SQLException ex) {
                 Misc.printSQLException(mainFrame, ex);
@@ -283,6 +289,9 @@ public class LagerbestandPanel extends javax.swing.JPanel {
                 bestandsaenderungFrame.setWarenBewegungTable(warenbewegung);
                 bestandsaenderungFrame.setVisible(true);
                 bestandsaenderungFrame.setTable(tabMaintable);
+                
+                JTable teileTable = mainFrame.getPanMain().getTeilebestand().getTeileTable();
+                bestandsaenderungFrame.setTeileTable(teileTable);
             } catch (SQLException e) {
                 Misc.printSQLException(mainFrame, e);
             }

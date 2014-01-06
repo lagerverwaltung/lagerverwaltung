@@ -47,7 +47,7 @@
             </Property>
             <Property name="text" type="java.lang.String" value="    Teilebestand"/>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Standardcursor"/>
+              <Color id="Default Cursor"/>
             </Property>
           </Properties>
           <Events>
@@ -64,7 +64,7 @@
             </Property>
             <Property name="text" type="java.lang.String" value="  Lagerbestand"/>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Standardcursor"/>
+              <Color id="Default Cursor"/>
             </Property>
           </Properties>
           <Events>
@@ -81,7 +81,7 @@
             </Property>
             <Property name="text" type="java.lang.String" value="  Warenbewegung"/>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Standardcursor"/>
+              <Color id="Default Cursor"/>
             </Property>
           </Properties>
           <Events>

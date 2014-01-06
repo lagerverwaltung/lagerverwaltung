@@ -672,7 +672,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Misc.printSQLException(this, ex);
         }
-
+        refreshTeilebestandTableModel();
         refreshLagerbestandTableModel();
         TableHelper.refreshWarenbewegungTableModel(warenBewegungTable);
     }//GEN-LAST:event_einlagernButtonActionPerformed
@@ -732,10 +732,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
                     int option = JOptionPane.showConfirmDialog(this, "Soll das zugehörige Teil aus dem Teilebestand gelöscht werden?", "Zugehöriges Teil löschen?", JOptionPane.YES_NO_OPTION);
 
                     if (option == JOptionPane.YES_OPTION) {
-
-                        Dao<Teilebestand, Integer> teilebestandDao = DatabaseManager.getInstance().getTeilebestandDao();
-                        teilebestandDao.deleteById(help.getTeilID());
-                        refreshTeilebestandTableModel();
+                        quellLb.getTeil().setDeleted(true);
                     }
                 }
                 break;
@@ -769,7 +766,6 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
                     zielPositionen.add(ziel);
                 }
                 quellLb.setMenge(mengeOld-mengeSum);
-                
                 break;
         }
         
@@ -779,7 +775,6 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
             wb.logWarenbewegung(quellLb, action, quellLb.getAnschaffungsgrund(),new Date(), help.getHbDatum(), "Lagerverwalter", 
                                 zielPositionen);
         }
-        //refreshWarenbestandTableModel();
         
         this.dispose();
         if(action == EINLAGERN_TEILEBESTAND){

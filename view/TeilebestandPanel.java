@@ -245,6 +245,7 @@ public class TeilebestandPanel extends javax.swing.JPanel {
                 JTable warenbewegung = mainFrame.getPanMain().getWarenbewegung().gettabMain();
 
                 bestandsaenderungFrame.setTable(lagerbestand);
+                bestandsaenderungFrame.setTeileTable(tblMain);
                 bestandsaenderungFrame.setWarenBewegungTable(warenbewegung);
             } catch (SQLException ex) {
                 Misc.printSQLException(mainFrame, ex);

@@ -189,7 +189,7 @@ public class Lagerbestand {
 
         if (lbList.size() > 0) {
             for (int i = 0; i < lbList.size(); i++) {
-                if (lbList.get(i).getTeil().getIdentnummer() == (teilId)) {
+                if (lbList.get(i).getTeil().getIdentnummer() == (teilId) && lbList.get(i).getMenge() > 0) {
                     count++;
                 }
             }

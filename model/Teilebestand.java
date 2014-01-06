@@ -37,6 +37,18 @@ public class Teilebestand {
     
     @DatabaseField()
     private int ve;
+    
+    @DatabaseField()
+    private boolean deleted;
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean isDeleted) throws SQLException {
+        this.deleted = isDeleted;
+        save();
+    }
 
     /**
      * @return the identnummer
