@@ -211,7 +211,7 @@ public class BestandsGUIHelper {
             }
         }
         
-        if(grundE!=null || grundE.length() > 0)
+        if(grundE!=null)
         {grund=grundE;}
         else
         {
@@ -226,6 +226,10 @@ public class BestandsGUIHelper {
         catch(ParseException ex)
         {
             errors.put(DATE_NOT_VALID, DATE_NOT_VALID_TEXT);
+        }
+        catch(NullPointerException e)
+        {
+            errors.put(NO_DATE, NO_DATE_TEXT);
         }
         Date today=new Date();
         
