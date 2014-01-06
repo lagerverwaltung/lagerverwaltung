@@ -13,8 +13,6 @@ import helper.DatabaseManager;
 import helper.Misc;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 @DatabaseTable(tableName = "lager")
 public class Lager {

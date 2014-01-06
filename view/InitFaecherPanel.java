@@ -4,6 +4,7 @@
  */
 package view;
 
+import helper.Misc;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -14,8 +15,6 @@ import java.awt.event.ItemListener;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -114,7 +113,7 @@ public class InitFaecherPanel extends javax.swing.JPanel {
                                 lf.setGroesse(c.groesse);
                                 lf.save();
                             } catch (SQLException ex) {
-                                Logger.getLogger(InitFaecherPanel.class.getName()).log(Level.SEVERE, null, ex);
+                                Misc.printSQLException(mainFrame, ex);
                             }
                         }
                     });
@@ -131,7 +130,7 @@ public class InitFaecherPanel extends javax.swing.JPanel {
             spFaecherPanel.setPreferredSize(new Dimension(307, amount*40+20));
         } 
         catch (SQLException ex) {
-            Logger.getLogger(InitFaecherPanel.class.getName()).log(Level.SEVERE, null, ex);
+            Misc.printSQLException(mainFrame, ex);
         }
     }
     

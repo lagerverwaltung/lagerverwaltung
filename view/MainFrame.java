@@ -3,8 +3,6 @@ package view;
 import controller.NavigationController;
 import helper.Misc;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JPanel;
 import model.Lager;
 
