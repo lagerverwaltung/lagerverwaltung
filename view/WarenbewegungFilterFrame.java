@@ -225,7 +225,7 @@ public class WarenbewegungFilterFrame extends javax.swing.JFrame {
             }
         });
 
-        cbxBewegungsTyp.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "" }));
+        cbxBewegungsTyp.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "", "einlagern", "auslagern", "umlagern", "splitten" }));
 
         lblBezeichnung.setText("Bezeichnung:");
 
@@ -402,10 +402,10 @@ public class WarenbewegungFilterFrame extends javax.swing.JFrame {
                cbxZielY.getSelectedItem().toString(),
                cbxZielZ.getSelectedItem().toString(),
                txfDatumVon.getText(),
-               txfDatumBis.getText());
+               txfDatumBis.getText(),
+               cbxBewegungsTyp.getSelectedItem().toString());
         
         try{
-           System.out.println("läuft");  
            refreshWarenbewegungTableModel(wfm);
           
         }catch (SQLException e){

@@ -329,7 +329,7 @@
         <Component class="javax.swing.JComboBox" name="cbxBewegungsTyp">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="new javax.swing.DefaultComboBoxModel(new String[] { &quot;&quot; })" type="code"/>
+              <Connection code="new javax.swing.DefaultComboBoxModel(new String[] { &quot;&quot;, &quot;einlagern&quot;, &quot;auslagern&quot;, &quot;umlagern&quot;, &quot;splitten&quot; })" type="code"/>
             </Property>
           </Properties>
         </Component>

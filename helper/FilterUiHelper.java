@@ -295,7 +295,7 @@ public class FilterUiHelper {
      * @param Alle Parameter der Gui werden als String übergeben
      * @return fertiges TeilebestandFilterModel-Objekt
      */
-    public static WarenbewegungFilterModel createWFM(String bezeichnung, String haltbarVon, String haltbarBis, String qLagertyp, String Bewegungstyp, String qx, String qy, String qz, String teiltyp, String zLagertyp, String zx, String zy, String zz, String datumVon, String datumBis) {
+    public static WarenbewegungFilterModel createWFM(String bezeichnung, String haltbarVon, String haltbarBis, String qLagertyp, String Bewegungstyp, String qx, String qy, String qz, String teiltyp, String zLagertyp, String zx, String zy, String zz, String datumVon, String datumBis, String bewegungsTyp) {
         WarenbewegungFilterModel wfm = new WarenbewegungFilterModel();
         DateFormat f = new SimpleDateFormat("dd.MM.YYYY");
         
@@ -341,6 +341,17 @@ public class FilterUiHelper {
             }
             if(haltbarBis.length() > 0){
                 wfm.setHaltbarBis(f.parse(haltbarBis));
+            }
+            if(bewegungsTyp.length() > 1){
+                switch(bewegungsTyp){
+                    case "einlagern" : wfm.setBewegungsTyp(1);
+                        break;
+                    case "auslagern" : wfm.setBewegungsTyp(3);
+                        break;
+                    case "umlagern" : wfm.setBewegungsTyp(4);
+                        break;
+                    case "splitten" : wfm.setBewegungsTyp(5);
+                }
             }
         } catch (ParseException e) {
             System.out.println("nothing to catch");
