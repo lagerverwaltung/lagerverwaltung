@@ -7,6 +7,7 @@ package view;
 import com.j256.ormlite.dao.Dao;
 import helper.DatabaseManager;
 import helper.Misc;
+import helper.TableHelper;
 import java.awt.Dimension;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
@@ -673,7 +674,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         }
 
         refreshLagerbestandTableModel();
-        refreshWarenbewegungTableModel();
+        TableHelper.refreshWarenbewegungTableModel(warenBewegungTable);
     }//GEN-LAST:event_einlagernButtonActionPerformed
    
     /**
@@ -756,7 +757,9 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
                     if(zielLb == null){
                         zielLb = neuerLagerbestand(teil, fach, help.getGrund(), help.getEineMenge());
                     }
-                    zielLb.setMenge(zielLb.getMenge()+qty);
+                    else {
+                        zielLb.setMenge(zielLb.getMenge()+qty);
+                    }
                     mengeSum += qty;
                     zielLb.save();
                     
@@ -813,22 +816,6 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         TeileTableModel tm = new TeileTableModel();
         tm.setData(tc);
         teileBestandTable.setModel(tm);
-    }
-    
-    private void refreshWarenbewegungTableModel(){
-        WarenbewegungCollection wc = WarenbewegungCollection.getInstance(true);
-        WarenbewegungTableModel wm = new WarenbewegungTableModel();
-        wm.setData(wc);
-        warenBewegungTable.setModel(wm);
-
-        int[] arrWidths = {15, 120, 70, 40, 170, 90, 65, 60,90};
-        TableColumn tc;
-        warenBewegungTable.setRowHeight(23);
-        int i = 0;
-        for (int width : arrWidths){
-            tc = warenBewegungTable.getColumnModel().getColumn(i++);
-            tc.setPreferredWidth(width);
-        }
     }
     
     private void cbxFachXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxFachXActionPerformed
@@ -939,6 +926,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
             }
         }
         pnlDestinations.setPreferredSize(new Dimension(454, amount*34));
+        this.repaint();
     }//GEN-LAST:event_btnAddSplitDestActionPerformed
 
     

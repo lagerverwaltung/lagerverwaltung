@@ -225,10 +225,11 @@ public class Lagerbestand {
     }
 
     //Speichern Lagerbestand
-   public void save() throws SQLException{
+   public void save() throws SQLException {
        Dao<Lagerbestand,Integer> LagerbestandDao = DatabaseManager.getInstance().getLagerbestandDao();
        LagerbestandDao.createOrUpdate(this);
-
-}
+    }
+   
+  
 
 }

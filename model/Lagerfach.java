@@ -226,6 +226,13 @@ public class Lagerfach {
     public void setZ(int z) {
         this.z = z;
     }
+    
+   public boolean equals(Lagerfach lf){
+       if(lf.getFachnummer() == this.getFachnummer()){
+           return true;
+       }
+       return false;
+   }
 
 }
 

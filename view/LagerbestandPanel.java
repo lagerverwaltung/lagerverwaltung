@@ -198,6 +198,8 @@ public class LagerbestandPanel extends javax.swing.JPanel {
                 BestandsaenderungFrame bestandsaenderungFrame = new BestandsaenderungFrame(
                         BestandsaenderungFrame.UMLAGERN, teilId, fachId);
 
+                JTable warenbewegung = mainFrame.getPanMain().getWarenbewegung().gettabMain();
+                bestandsaenderungFrame.setWarenBewegungTable(warenbewegung);
                 bestandsaenderungFrame.setTable(tabMaintable);
                 JTable teileTable = mainFrame.getPanMain().getTeilebestand().getTeileTable();
                 bestandsaenderungFrame.setTeileTable(teileTable);
@@ -249,6 +251,8 @@ public class LagerbestandPanel extends javax.swing.JPanel {
 
             try {
                 BestandsaenderungFrame bestandsaenderungFrame = new BestandsaenderungFrame(BestandsaenderungFrame.SPLITTEN, teilId, fachId);
+                JTable warenbewegung = mainFrame.getPanMain().getWarenbewegung().gettabMain();
+                bestandsaenderungFrame.setWarenBewegungTable(warenbewegung);
                 bestandsaenderungFrame.setVisible(true);
                 bestandsaenderungFrame.setTable(tabMaintable);
             } catch (SQLException e) {
