@@ -173,11 +173,21 @@ public class WarenbewegungCollection<Warenbewegung> extends ArrayList {
                 }
             }
             resultB.clear();
+            
+            for(int i = 0; i < resultA.size(); i++){
+                if(wfm.getBewegungsTyp() == 0
+                        || resultA.get(i).getActionCode() == wfm.getBewegungsTyp()
+                        || ( resultA.get(i).getActionCode() == 2
+                        && wfm.getBewegungsTyp() == 1)){
+                    resultB.add(resultA.get(i));
+                }
+            }
+            resultA.clear();
         }
         
         
         this.clear();
-        for(model.Warenbewegung wb1 : resultA){
+        for(model.Warenbewegung wb1 : resultB){
             add(wb1);
         }
         return this;

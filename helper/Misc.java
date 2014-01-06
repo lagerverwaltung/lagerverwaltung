@@ -102,8 +102,7 @@ public class Misc {
      * @return
      * @throws SQLException 
      */
-    public List<Lagerbestand> checkDateByExpire() throws SQLException{
-        
+    public static List<Lagerbestand> checkDateByExpire() throws SQLException{
         List<Lagerbestand> result = null;
         Date today = new Date();
         Dao<model.Warenbewegung, Integer> warenbewegungDao = DatabaseManager.getInstance().getWarenbewegungDao();
@@ -126,10 +125,10 @@ public class Misc {
      * @param f
      * @throws SQLException 
      */
-    public void printExpiredLagerbestand(Frame f) throws SQLException{
+    public static void printExpiredLagerbestand(Frame f) throws SQLException{
         List<Lagerbestand> expiredLb = checkDateByExpire();
         String s = "Folgende Teile sind abgelaufen: \n";
-        if(expiredLb.size() > 0){
+        if(expiredLb != null){
             for(int i = 0; i < expiredLb.size(); i++){
                 s += expiredLb.get(i).getTeil().getBezeichnung()
                         + " im Fach "

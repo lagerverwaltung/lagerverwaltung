@@ -30,6 +30,7 @@ public class WarenbewegungFilterModel {
     private int zY;
     private String bezeichnung;
     private Teilebestand.Typ typ;
+    private int bewegungsTyp;
     
     /**
      * erzeugt ein standard Filter Objekt mit maximalen Schranken
@@ -51,6 +52,7 @@ public class WarenbewegungFilterModel {
         zX = 0;
         zY = 0;
         bezeichnung = "";
+        bewegungsTyp = 0;
         
     }
 
@@ -276,5 +278,19 @@ public class WarenbewegungFilterModel {
      */
     public void setDatumBis(Date datumBis) {
         this.datumBis = datumBis;
+    }
+
+    /**
+     * @return the bewegungsTyp
+     */
+    public int getBewegungsTyp() {
+        return bewegungsTyp;
+    }
+
+    /**
+     * @param bewegungsTyp the bewegungsTyp to set
+     */
+    public void setBewegungsTyp(int bewegungsTyp) {
+        this.bewegungsTyp = bewegungsTyp;
     }
 }

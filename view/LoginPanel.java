@@ -1,5 +1,9 @@
 package view;
 
+import helper.Misc;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JPanel;
 
 /*
@@ -167,6 +171,11 @@ public class LoginPanel extends javax.swing.JPanel {
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         mainFrame.navigationController.showCard("main");   
         mainFrame.setSize( 1000 , 720 );
+        try {
+            Misc.printExpiredLagerbestand(mainFrame);
+        } catch (SQLException ex) {
+            Misc.printSQLException(mainFrame, ex);
+        }
     }//GEN-LAST:event_btnLoginActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

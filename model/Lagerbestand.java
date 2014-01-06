@@ -15,8 +15,6 @@ import helper.DatabaseManager;
 import helper.Misc;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 @DatabaseTable(tableName = "lagerbestand")
 
@@ -227,10 +225,11 @@ public class Lagerbestand {
     }
 
     //Speichern Lagerbestand
-   public void save() throws SQLException{
+   public void save() throws SQLException {
        Dao<Lagerbestand,Integer> LagerbestandDao = DatabaseManager.getInstance().getLagerbestandDao();
        LagerbestandDao.createOrUpdate(this);
-
-}
+    }
+   
+  
 
 }

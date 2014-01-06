@@ -30,12 +30,9 @@ public class BestandsGUIHelper {
     int menge;
     Date hbDatum;
 
-   
     String grund;
     Lagerfach[] faecher;
     ArrayList<HashMap> destinations;
-
-   
     
     int teilID;
     
@@ -67,11 +64,10 @@ public class BestandsGUIHelper {
     String ZIELMENGE_TOOHIGH_TEXT ="Die Zielmenge überschreitet den im Fach vorhandenen Platz! Fach: ";
     
     int AUSLAGERN_TOHIGH_ID = 11;
-    String AUSLAGERN_TOHIGH_TEXT ="Die existieren nicht ausreichend Teile in diesem Fach, um diese Menge auszulagern!";
+    String AUSLAGERN_TOHIGH_TEXT ="Es existieren nicht ausreichend Teile dieses Typs in diesem Fach, um diese Menge auszulagern!";
     
-    
-    
-    
+    int SOURCE_EQUAL_DESTINATION_ID = 12;
+    String SOURCE_EQUAL_DESTINATION_TEXT = "Das Quellfach darf nicht als Zielfach angegeben werden!";
     
     public int getMenge()
     {
@@ -129,7 +125,6 @@ public class BestandsGUIHelper {
         }
         return Lagerfach.getFach(Lager.getLager(l),x ,y,z);
     }
-    
     
     public void setFaecher (Lagerfach[] l)
     {
@@ -189,7 +184,7 @@ public class BestandsGUIHelper {
             fach.getZ()+ " ist nicht ausreichend. Es sind noch " + freeVE + " VE frei.Aber es werden " + 
             menge*groesse+ " VE benötigt.");               
         }
-        if((menge+mengeOld)<0)
+        if(menge > 0 && (menge+mengeOld)<0)
         {
             errorIndex++;
             errors.put(errorIndex, "Keine ausreichende Menge im Quellfach vorhanden!");
@@ -278,6 +273,9 @@ public class BestandsGUIHelper {
                 HashMap<Integer, String> kapError = kapazitaetsTest(fach, teil, qty, oldMenge);
                 for (int errorCode : kapError.keySet()){
                     errors.put(errorCode, kapError.get(errorCode));
+                }
+                if(quellLb != null && quellLb.getLagerfach().equals(fach)){
+                    errors.put(SOURCE_EQUAL_DESTINATION_ID, SOURCE_EQUAL_DESTINATION_TEXT);
                 }
                 if(qty < 1){
                     errors.put(MENGE_NOT_GREATER_ZERO, MENGE_NOT_GREATER_ZERO_TEXT);

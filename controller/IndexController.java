@@ -1,5 +1,6 @@
 package controller;
 
+import helper.Misc;
 import java.util.logging.Level;
 import view.MainFrame;
 
