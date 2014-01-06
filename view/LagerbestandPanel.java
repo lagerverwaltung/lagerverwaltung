@@ -142,13 +142,13 @@ public class LagerbestandPanel extends javax.swing.JPanel {
         pnlActionsLayout.setVerticalGroup(
             pnlActionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlActionsLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(0, 0, 0)
                 .addGroup(pnlActionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnteilEinlagern)
                     .addComponent(btnTeilAuslagern)
                     .addComponent(btnTeilUmlagern)
                     .addComponent(btnTeilSplitten))
-                .addContainerGap())
+                .addGap(0, 0, 0))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -199,6 +199,8 @@ public class LagerbestandPanel extends javax.swing.JPanel {
                        bestandsaenderungFrame = new BestandsaenderungFrame(
                                BestandsaenderungFrame.EINLAGERN_LAGERBESTAND,teilId,fachId);
                bestandsaenderungFrame.setTable(tabMaintable);
+               JTable warenbewegung = mainFrame.getPanMain().getWarenbewegung().gettabMain();
+                bestandsaenderungFrame.setWarenBewegungTable(warenbewegung);
             } catch (SQLException ex) {
                 Misc.printSQLException(mainFrame, ex);
             }
@@ -253,6 +255,9 @@ public class LagerbestandPanel extends javax.swing.JPanel {
                         BestandsaenderungFrame.AUSLAGERN, teilId, fachId);
 
                 bestandsaenderungFrame.setTable(tabMaintable);
+                JTable warenbewegung = mainFrame.getPanMain().getWarenbewegung().gettabMain();
+                bestandsaenderungFrame.setWarenBewegungTable(warenbewegung);
+                
                 JTable teileTable = mainFrame.getPanMain().getTeilebestand().getTeileTable();
                 bestandsaenderungFrame.setTeileTable(teileTable);
             } catch (SQLException ex) {

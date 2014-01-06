@@ -780,7 +780,11 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
                                 zielPositionen);
         }
         //refreshWarenbestandTableModel();
+        
         this.dispose();
+        if(action == EINLAGERN_TEILEBESTAND){
+            Misc.createErrorDialog(this, "Das Teil wurde erfolgreich eingelagert.");
+        }
     }
    
     

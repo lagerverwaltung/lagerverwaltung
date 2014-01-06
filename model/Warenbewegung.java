@@ -17,6 +17,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import view.BestandsaenderungFrame;
 
 /**
  *
@@ -121,6 +122,22 @@ public class Warenbewegung {
     
     public int getActionCode() {
         return actionCode;
+    }
+    
+    public String getActionName() {
+        switch(getActionCode()){
+            case BestandsaenderungFrame.EINLAGERN_TEILEBESTAND:
+                return "Einlagern";
+            case BestandsaenderungFrame.EINLAGERN_LAGERBESTAND:
+                return "Einlagern";
+            case BestandsaenderungFrame.AUSLAGERN:
+                return "Auslagern";
+            case BestandsaenderungFrame.UMLAGERN:
+                return "Umlagern";
+            case BestandsaenderungFrame.SPLITTEN:
+                return "Splitten";
+        }
+        return "n/a";
     }
 
     public void setActionCode(int actionCode) {

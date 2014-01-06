@@ -22,9 +22,9 @@ public class TableHelper {
         wm.setData(wc);
         t.setModel(wm);
         TableCellRenderer ren = new TwoLinesCellRenderer();
-        t.getColumnModel().getColumn(4).setCellRenderer(ren);
+        t.getColumnModel().getColumn(5).setCellRenderer(ren);
 
-        int[] arrWidths = {23, 120, 70, 40, 170, 90, 65, 65,90};
+        int[] arrWidths = {23,120,65, 70, 40, 170, 90, 65, 65,90};
         TableColumn tc;
         t.setRowHeight(23);
         int i = 0;

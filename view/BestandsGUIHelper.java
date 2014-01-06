@@ -51,8 +51,6 @@ public class BestandsGUIHelper {
     int DATE_BEFORE_TODAY=5;
     String DATE_BEFORE_TODAY_TEXT="Das eingegebene Datum liegt vor dem heutigen Datum";
     
-    int NO_DATE=6;
-    String NO_DATE_TEXT="Es wurde kein Datum eingegeben!";
     
     int NO_GRUND=7;
     String NO_GRUND_TEXT="Es wurde kein Grund eingegeben!";
@@ -129,11 +127,6 @@ public class BestandsGUIHelper {
     public void setFaecher (Lagerfach[] l)
     {
         faecher=l;
-    }
-    
-    public void validateDestinationData (String[] cbLager, String[]cbX, String[] cbY, String[]cbZ, String[] qty)
-    {
-        
     }
     
     public void setEinFach (Lagerfach l)
@@ -217,7 +210,7 @@ public class BestandsGUIHelper {
         {
            errors.put(NO_GRUND, NO_GRUND_TEXT);
         }
-        if (code==BestandsaenderungFrame.EINLAGERN_LAGERBESTAND || code==BestandsaenderungFrame.EINLAGERN_TEILEBESTAND)
+        if (datumE !=null && !datumE.equals("") && (code==BestandsaenderungFrame.EINLAGERN_LAGERBESTAND || code==BestandsaenderungFrame.EINLAGERN_TEILEBESTAND))
         {
         try{
             DateFormat d= new SimpleDateFormat("dd.MM.yyyy");
@@ -227,22 +220,14 @@ public class BestandsGUIHelper {
         {
             errors.put(DATE_NOT_VALID, DATE_NOT_VALID_TEXT);
         }
-        catch(NullPointerException e)
-        {
-            errors.put(NO_DATE, NO_DATE_TEXT);
-        }
         Date today=new Date();
         
         
-            if(hbDatum!=null)
+            if(hbDatum!=null )
             {
                 if(hbDatum.before(today))
                     errors.put(DATE_BEFORE_TODAY, DATE_BEFORE_TODAY_TEXT);
            
-            }
-            else
-            {
-                errors.put(NO_DATE, NO_DATE_TEXT);
             }
         }
         Lagerbestand quellLb=null;
@@ -274,7 +259,8 @@ public class BestandsGUIHelper {
                 for (int errorCode : kapError.keySet()){
                     errors.put(errorCode, kapError.get(errorCode));
                 }
-                if(quellLb != null && quellLb.getLagerfach().equals(fach)){
+                if(quellLb != null && quellLb.getLagerfach().equals(fach) 
+                        && (code == BestandsaenderungFrame.SPLITTEN || code == BestandsaenderungFrame.UMLAGERN)){
                     errors.put(SOURCE_EQUAL_DESTINATION_ID, SOURCE_EQUAL_DESTINATION_TEXT);
                 }
                 if(qty < 1){
