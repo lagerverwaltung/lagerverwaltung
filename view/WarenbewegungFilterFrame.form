@@ -23,15 +23,15 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <Component id="panMain" max="32767" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-          </Group>
+          <Component id="panMain" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="panMain" alignment="0" max="32767" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <Component id="panMain" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -41,70 +41,71 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
+              <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jSeparator1" alignment="0" max="32767" attributes="0"/>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="txfBezeichnung" alignment="0" max="32767" attributes="0"/>
-                              <Component id="cbxBewegungsTyp" alignment="0" max="32767" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="cbxTeiltyp" alignment="1" max="32767" attributes="0"/>
-                                      <Component id="lblTeiltyp" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="btnFilterAusführen" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="lblBewegungsTyp" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="lblFilter" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="cbxQuelleLagertyp" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="cbxQuelleX" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="cbxQuelleY" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="cbxQuelleZ" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="lblQuellfach" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblZielfachadresse" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                  <Component id="cbxBewegungsTyp" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="cbxTeiltyp" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="lblTeiltyp" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnFilterAusführen" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="lblBewegungsTyp" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblFilter" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="lblDatumVon" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblDatumBis" alignment="0" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                      <Component id="lblQuellfach" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="lblZielfachadresse" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="cbxZielLagertyp" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="cbxZielX" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="cbxZielY" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="cbxZielZ" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" alignment="1" attributes="0">
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="lblDatumVon" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="lblDatumBis" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace type="separate" max="32767" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                              <Component id="txfDatumVon" pref="80" max="32767" attributes="0"/>
-                                              <Component id="txfDatumBis" max="32767" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                      <Component id="lblBewegungsDatum" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="lblHaltbarkeitsdatum" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Group type="102" alignment="1" attributes="0">
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="lblhaltbarVon" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="lblHaltbarBis" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace type="separate" max="32767" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                              <Component id="txfHaltbarVon" pref="80" max="32767" attributes="0"/>
-                                              <Component id="txfHaltbarBis" max="32767" attributes="0"/>
-                                          </Group>
+                                      <EmptySpace type="separate" max="32767" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="txfDatumVon" pref="80" max="32767" attributes="0"/>
+                                          <Component id="txfDatumBis" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
-                                  <Component id="lblBezeichnung" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblBewegungsDatum" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblHaltbarkeitsdatum" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="lblhaltbarVon" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblHaltbarBis" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace type="separate" max="32767" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="txfHaltbarVon" pref="80" max="32767" attributes="0"/>
+                                          <Component id="txfHaltbarBis" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="lblBezeichnung" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="txfBezeichnung" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="cbxQuelleLagertyp" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="cbxQuelleX" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="cbxQuelleY" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="cbxQuelleZ" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="cbxZielLagertyp" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="cbxZielX" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="cbxZielY" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="cbxZielZ" min="-2" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
                           </Group>
-                          <EmptySpace min="0" pref="14" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="12" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -118,9 +119,10 @@
                   <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Component id="jSeparator1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="lblBezeichnung" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="txfBezeichnung" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="lblBezeichnung" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txfBezeichnung" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
                   <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
                   <Component id="lblHaltbarkeitsdatum" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
@@ -133,7 +135,7 @@
                       <Component id="lblHaltbarBis" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="txfHaltbarBis" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="12" max="32767" attributes="0"/>
+                  <EmptySpace pref="21" max="32767" attributes="0"/>
                   <Component id="lblBewegungsDatum" min="-2" pref="14" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -147,16 +149,16 @@
                   </Group>
                   <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Component id="lblQuellfach" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="cbxQuelleLagertyp" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="cbxQuelleX" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="cbxQuelleY" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="cbxQuelleZ" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="lblZielfachadresse" min="-2" pref="23" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
+                  <Component id="lblZielfachadresse" min="-2" pref="23" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="cbxZielLagertyp" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="cbxZielZ" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -165,13 +167,13 @@
                   </Group>
                   <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
                   <Component id="lblBewegungsTyp" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="32767" attributes="0"/>
+                  <EmptySpace type="unrelated" pref="23" max="32767" attributes="0"/>
                   <Component id="cbxBewegungsTyp" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="lblTeiltyp" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="cbxTeiltyp" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="btnFilterAusführen" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="0" pref="11" max="32767" attributes="0"/>
               </Group>
