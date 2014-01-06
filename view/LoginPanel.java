@@ -2,9 +2,6 @@ package view;
 
 import helper.Misc;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JPanel;
 
 /*
  * To change this template, choose Tools | Templates
@@ -25,8 +22,8 @@ public class LoginPanel extends javax.swing.JPanel {
     public String nameGast = "gast";
     public String passGast = "gast";
     
-    public String nameLagerverwalter = "lagerverwalter";
-    public String passLagerverwalter = "lagerverwalter";
+    public String nameLagerverwalter = "l";
+    public String passLagerverwalter = "l";
   /**
      * Creates new form LoginPanel
      */

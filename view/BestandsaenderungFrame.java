@@ -4,31 +4,20 @@
  */
 package view;
 
-import com.j256.ormlite.dao.Dao;
-import helper.DatabaseManager;
 import helper.Misc;
 import helper.TableHelper;
 import java.awt.Dimension;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.sql.SQLException;
-import java.text.DateFormat;
-import java.text.Format;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.table.TableColumn;
 import model.Lager;
-import model.Lager.Lagerort;
 import model.Lagerbestand;
 import model.Lagerfach;
 import model.Teilebestand;
@@ -36,10 +25,8 @@ import model.Warenbewegung;
 import model.ZielPosition;
 import model.collection.LagerbestandCollection;
 import model.collection.TeilebestandCollection;
-import model.collection.WarenbewegungCollection;
 import model.table.LagerbestandTableModel;
 import model.table.TeileTableModel;
-import model.table.WarenbewegungTableModel;
 
 /**
  *
