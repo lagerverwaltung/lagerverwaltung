@@ -45,9 +45,20 @@ public class MainFrame extends javax.swing.JFrame {
         return panInitFaecher;
     }
     public MainPanel getPanMain()
-            {
-                return panMain;
-            }
+    {
+        return panMain;
+    }
+    
+    public TeilebestandPanel getTeilebestandFrame()
+    {
+        return panMain.getTeilebestand();
+    }
+    
+    public LagerbestandPanel getLagerbestandFrame()
+    {
+        return panMain.getLagerbestand();
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
