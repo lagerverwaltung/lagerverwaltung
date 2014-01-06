@@ -12,6 +12,7 @@ import com.j256.ormlite.stmt.PreparedQuery;
 import com.j256.ormlite.stmt.QueryBuilder;
 import com.j256.ormlite.table.DatabaseTable;
 import helper.DatabaseManager;
+import helper.Misc;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
@@ -107,6 +108,12 @@ public class Lagerbestand {
     }
     
 
+    /**
+     * ?
+     * @param id
+     * @return
+     * @throws SQLException 
+     */
     public static Lagerbestand loadLagerObjekt(int id) throws SQLException {
         Dao<Lagerbestand, Integer> lagerbestandDao = DatabaseManager.getInstance().getLagerbestandDao();
         try {
@@ -115,13 +122,18 @@ public class Lagerbestand {
                 return lb.get(0);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(Lagerbestand.class.getName()).log(Level.SEVERE, null, ex);
+            Misc.printSQLException(null, ex);
         }
         return null;
     }
         
         
-        
+    /**
+     * Gibt den zur id gehörenden Lagerbestand zurück
+     * @param id
+     * @return
+     * @throws SQLException 
+     */    
     public static Lagerbestand getLagerbestand(int id) throws SQLException {
         Dao<Lagerbestand, Integer> LagerbestandDao = DatabaseManager.getInstance().getLagerbestandDao();
         List<Lagerbestand> lb = LagerbestandDao.queryForEq("lagerbestandID", id);
@@ -131,6 +143,14 @@ public class Lagerbestand {
         return null;
     }
     
+    /**
+     * Gibt den Lagerbestand zurück, der mit Teil- und FachId identifiziert werden
+     * kann
+     * @param teilid
+     * @param fachid
+     * @return
+     * @throws SQLException 
+     */
     public static Lagerbestand getLagerbestand(int teilid,int fachid) throws SQLException{
        int quellLbID = Lagerbestand.getLagerbestandID(teilid, fachid);
        return Lagerbestand.getLagerbestand(quellLbID);

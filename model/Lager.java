@@ -10,6 +10,7 @@ import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 import helper.DatabaseManager;
+import helper.Misc;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
@@ -56,7 +57,7 @@ public class Lager {
             }
         } 
         catch (SQLException ex) {
-                Logger.getLogger(Lager.class.getName()).log(Level.SEVERE, null, ex);
+            Misc.printSQLException(null, ex);
         }
         return null;
     }
@@ -114,7 +115,7 @@ public class Lager {
      * @return lagerort
      */
     public static Lager.Lagerort getLagerort(String lagerCode) {
-        if(lagerCode == "FL"){
+        if(lagerCode.equals("FL")){
             return Lager.Lagerort.freilager;
         }
         else {
