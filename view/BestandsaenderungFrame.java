@@ -94,7 +94,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
            
             loadLagerCbx("quelle","HL");
         } catch (SQLException ex) {
-            Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, ex); 
+            Misc.printSQLException(this, ex); 
         }
     }
     
@@ -180,13 +180,11 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
     
     private void setEinlagernLagerbestandGUI(Lagerbestand lb)
     {
-            lblEinlagern.setText("Teile einlagern");
-            einlagernButton.setText("Teile einlagern");
-            
-            this.txaAnschaffungsgrund.setText(lb.getAnschaffungsgrund());
-            this.setVisible(true);
-            loadQuellComboBoxen(lb);
-    
+        lblEinlagern.setText("Teile einlagern");
+        einlagernButton.setText("Teile einlagern");        
+        this.txaAnschaffungsgrund.setText(lb.getAnschaffungsgrund());
+        this.setVisible(true);
+        loadQuellComboBoxen(lb);
     }
     /**
      * @author smodlich
@@ -195,14 +193,14 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
      */
     private void setAuslagernGUI(Lagerbestand lb)
     {
-            lblEinlagern.setText("Teile auslagern");
-            einlagernButton.setText("Teile auslagern");
-            loadQuellComboBoxen(lb);
-            this.txaAnschaffungsgrund.setText(lb.getAnschaffungsgrund()); 
-            lblHaltbarkeitsdatum.setVisible(false);
-            txfHaltbarkeitsdatum.setVisible(false);
-            this.lblHinweisDatum.setVisible(false);
-            this.setVisible(true);
+        lblEinlagern.setText("Teile auslagern");
+        einlagernButton.setText("Teile auslagern");
+        loadQuellComboBoxen(lb);
+        this.txaAnschaffungsgrund.setText(lb.getAnschaffungsgrund()); 
+        lblHaltbarkeitsdatum.setVisible(false);
+        txfHaltbarkeitsdatum.setVisible(false);
+        this.lblHinweisDatum.setVisible(false);
+        this.setVisible(true);
     }
     /**
      * Erstellen der Umlagern GUI und setzen der entsprechenden Elemente
@@ -249,6 +247,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
      * Editable(false) und Diabled es
      */
     private void loadTeilIdUndGrund(Lagerbestand lagerbestand){
+        
         if(lagerbestand!=null)
         {
         this.txaAnschaffungsgrund.setText(lagerbestand.getAnschaffungsgrund());
@@ -658,8 +657,8 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
             Lagerfach[] faecher = new Lagerfach[1];
             try {
                 faecher[0] = bestandsGuiHelper.generateFach((int) cbxFachX.getSelectedItem(), (int) cbxFachY.getSelectedItem(), (int) cbxFachZ.getSelectedItem(), cbxFachTyp.getSelectedItem().toString());
-            } catch (Exception ex) {
-                Logger.getLogger(BestandsaenderungFrame.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Misc.printSQLException(this, ex);
             }
             bestandsGuiHelper.setFaecher(faecher);
             if (action == EINLAGERN_TEILEBESTAND) {
@@ -688,7 +687,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
      */
     public void bestandsAenderung(int action,BestandsGUIHelper help) throws SQLException
     {
-        Lagerbestand quellLb= Lagerbestand.getLagerbestand(help.getTeilID(), help.getquellFachID());
+        Lagerbestand quellLb= Lagerbestand.getLagerbestand(help.getTeilID(), help.getQuellFachID());
         ArrayList zielPositionen = new ArrayList();
         int mengeOld = 0;
         int mengeAdd = help.getMenge();

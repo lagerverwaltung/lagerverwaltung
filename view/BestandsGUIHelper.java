@@ -93,7 +93,7 @@ public class BestandsGUIHelper {
       this.quellFachID=quellFachId;
     }
     
-    public int getquellFachID()
+    public int getQuellFachID()
     {
       return quellFachID;
     }
@@ -118,7 +118,7 @@ public class BestandsGUIHelper {
         return grund;
     }
     
-    public Lagerfach generateFach(int x,int y,int z, String lo) throws Exception 
+    public Lagerfach generateFach(int x,int y,int z, String lo) throws SQLException 
     {
         Lagerort l;
         if (lo.equals("FL")) {
@@ -249,8 +249,8 @@ public class BestandsGUIHelper {
         Lagerbestand quellLb=null;
         Teilebestand teil;
         int oldMenge;
-        if(getTeilID() != 0 && getquellFachID() != 0){
-            quellLb= Lagerbestand.getLagerbestand(getTeilID(), getquellFachID());
+        if(Lagerbestand.getLagerbestand(getTeilID(), getQuellFachID())!=null){
+            quellLb= Lagerbestand.getLagerbestand(getTeilID(), getQuellFachID());
             teil = quellLb.getTeil();
             oldMenge = quellLb.getMenge();
         }

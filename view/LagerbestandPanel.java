@@ -177,7 +177,7 @@ public class LagerbestandPanel extends javax.swing.JPanel {
                                BestandsaenderungFrame.EINLAGERN_LAGERBESTAND,teilId,fachId);
                bestandsaenderungFrame.setTable(tabMaintable);
             } catch (SQLException ex) {
-                Misc.createErrorDialog(mainFrame, "DB Fehler");
+                Misc.printSQLException(mainFrame, ex);
             }
             
             
