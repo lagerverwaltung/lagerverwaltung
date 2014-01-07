@@ -146,7 +146,7 @@ public class BestandsGUIHelper {
         faecher[0]=l;
     }
     
-     public Date getHbDatum() {
+     public Date getHbDatum(){
         return hbDatum;
     }
 

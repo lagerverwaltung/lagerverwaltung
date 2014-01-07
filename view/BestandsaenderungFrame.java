@@ -766,6 +766,8 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
                     ziel.setLagerfach(fach);
                     ziel.setMenge(qty);
                     zielPositionen.add(ziel);
+                    
+                    
                 }
                 quellLb.setMenge(mengeOld-mengeSum);
                 
