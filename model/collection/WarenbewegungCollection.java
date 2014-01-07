@@ -66,10 +66,20 @@ public class WarenbewegungCollection<Warenbewegung> extends ArrayList {
         ForeignCollection<ZielPosition> fc;
         
         if(resultA.size() > 0){
-            for(int i = 0; i < resultA.size(); i++){
-                if(resultA.get(i).getHaltbarkeitsDatum().after(wfm.getHaltbarVon())
-                        && resultA.get(i).getHaltbarkeitsDatum().before(wfm.getBisHaltbarkeit())){
-                    resultB.add(resultA.get(i));
+            for (int i = 0; i < resultA.size(); i++) {
+                if (wfm.getExpireID() > 0) {
+                    if ((resultA.get(i).getHaltbarkeitsDatum() == null)
+                            || (resultA.get(i).getHaltbarkeitsDatum().after(wfm.getHaltbarVon())
+                            && resultA.get(i).getHaltbarkeitsDatum().before(wfm.getBisHaltbarkeit()))) {
+                        resultB.add(resultA.get(i));
+
+
+                    } else {
+
+                        resultB.add(resultA.get(i));
+
+
+                    }
                 }
             }
             resultA.clear();
@@ -173,11 +183,21 @@ public class WarenbewegungCollection<Warenbewegung> extends ArrayList {
                 }
             }
             resultB.clear();
+            
+            for(int i = 0; i < resultA.size(); i++){
+                if(wfm.getBewegungsTyp() == 0
+                        || resultA.get(i).getActionCode() == wfm.getBewegungsTyp()
+                        || ( resultA.get(i).getActionCode() == 2
+                        && wfm.getBewegungsTyp() == 1)){
+                    resultB.add(resultA.get(i));
+                }
+            }
+            resultA.clear();
         }
         
         
         this.clear();
-        for(model.Warenbewegung wb1 : resultA){
+        for(model.Warenbewegung wb1 : resultB){
             add(wb1);
         }
         return this;

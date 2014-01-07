@@ -1,5 +1,6 @@
 package view;
 
+import helper.TableHelper;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.TableCellRenderer;
@@ -29,18 +30,6 @@ public class WarenbewegungPanel extends javax.swing.JPanel {
         return tblMain;
     }
 
-     public void setTableWidths(JTable table)
-    {
-        int[] arrWidths = {15, 120, 70, 40, 170, 90, 65, 60,90};
-        TableColumn tc;
-        table.setRowHeight(23);
-        int i = 0;
-        for (int width : arrWidths){
-            tc = table.getColumnModel().getColumn(i++);
-            tc.setPreferredWidth(width);
-        }
-    }
-     
     public void setMainFrame(MainFrame mainFrame)
     {
         this.mainFrame = mainFrame;
@@ -67,17 +56,14 @@ public class WarenbewegungPanel extends javax.swing.JPanel {
 
         panMain.setPreferredSize(new java.awt.Dimension(1020, 761));
 
-        TableCellRenderer ren = new TwoLinesCellRenderer();
-
         WarenbewegungTableModel tm = new WarenbewegungTableModel();
         tm.setData(WarenbewegungCollection.getInstance());
         tblMain.setAutoCreateRowSorter(true);
         tblMain.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         tblMain.setModel(tm);
-        setTableWidths(tblMain);
+        TableHelper.refreshWarenbewegungTableModel(tblMain);
         tblMain.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
         tblMain.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        tblMain.getColumnModel().getColumn(4).setCellRenderer(ren);
         scpMain.setViewportView(tblMain);
 
         btnFilterzurücksetzen.setText("Filter zurücksetzen");
@@ -146,18 +132,9 @@ public class WarenbewegungPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnFilterActionPerformed
 
     private void btnFilterzurücksetzenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFilterzurücksetzenActionPerformed
-        refreshWarenbewegungTableModel();
+        TableHelper.refreshWarenbewegungTableModel(tblMain);
     }//GEN-LAST:event_btnFilterzurücksetzenActionPerformed
 
-    /**
-     * läd die Warenbewegungstablle nach
-     */
-    private void refreshWarenbewegungTableModel(){
-           WarenbewegungCollection wc = WarenbewegungCollection.getInstance(true);
-           WarenbewegungTableModel wm = new WarenbewegungTableModel();
-           wm.setData(wc);
-           tblMain.setModel(wm);
-    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnFilter;

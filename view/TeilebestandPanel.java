@@ -24,6 +24,12 @@ public class TeilebestandPanel extends javax.swing.JPanel {
      */
     public TeilebestandPanel() {
         initComponents();
+        
+    }
+    
+    public void setGuest()
+    {
+        this.pnlActions.setVisible(false);
     }
     
     public void setMainFrame(MainFrame mainFrame)
@@ -60,13 +66,14 @@ public class TeilebestandPanel extends javax.swing.JPanel {
         lblTeilebestand = new javax.swing.JLabel();
         scpMain = new javax.swing.JScrollPane();
         tblMain = new javax.swing.JTable();
-        btnNeuesTeil = new javax.swing.JButton();
-        btnTeilAendern = new javax.swing.JButton();
-        lblAktionSelektiert = new javax.swing.JLabel();
-        btnTeilLoschen = new javax.swing.JButton();
         btnFilterZurücksetzen = new javax.swing.JButton();
         btnFiltern = new javax.swing.JButton();
+        pnlActions = new javax.swing.JPanel();
+        lblAktionSelektiert = new javax.swing.JLabel();
         btnteilEinlagern = new javax.swing.JButton();
+        btnNeuesTeil = new javax.swing.JButton();
+        btnTeilAendern = new javax.swing.JButton();
+        btnTeilLoschen = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(1020, 761));
 
@@ -83,29 +90,6 @@ public class TeilebestandPanel extends javax.swing.JPanel {
         tblMain.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         scpMain.setViewportView(tblMain);
 
-        btnNeuesTeil.setText("Neues Teil anlegen");
-        btnNeuesTeil.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNeuesTeilActionPerformed(evt);
-            }
-        });
-
-        btnTeilAendern.setText("Teil bearbeiten");
-        btnTeilAendern.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTeilAendernActionPerformed(evt);
-            }
-        });
-
-        lblAktionSelektiert.setText("Aktionen selektiert:");
-
-        btnTeilLoschen.setText("Teil löschen");
-        btnTeilLoschen.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTeilLoschenActionPerformed(evt);
-            }
-        });
-
         btnFilterZurücksetzen.setText("Filter zurücksetzen");
         btnFilterZurücksetzen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -120,12 +104,65 @@ public class TeilebestandPanel extends javax.swing.JPanel {
             }
         });
 
+        lblAktionSelektiert.setText("Aktionen selektiert:");
+
         btnteilEinlagern.setText("Teil einlagern");
         btnteilEinlagern.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnteilEinlagernActionPerformed(evt);
             }
         });
+
+        btnNeuesTeil.setText("Neues Teil anlegen");
+        btnNeuesTeil.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNeuesTeilActionPerformed(evt);
+            }
+        });
+
+        btnTeilAendern.setText("Teil bearbeiten");
+        btnTeilAendern.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTeilAendernActionPerformed(evt);
+            }
+        });
+
+        btnTeilLoschen.setText("Teil löschen");
+        btnTeilLoschen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTeilLoschenActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnlActionsLayout = new javax.swing.GroupLayout(pnlActions);
+        pnlActions.setLayout(pnlActionsLayout);
+        pnlActionsLayout.setHorizontalGroup(
+            pnlActionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlActionsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblAktionSelektiert)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnTeilAendern, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnTeilLoschen, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnteilEinlagern, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
+                .addComponent(btnNeuesTeil, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        pnlActionsLayout.setVerticalGroup(
+            pnlActionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlActionsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlActionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblAktionSelektiert)
+                    .addComponent(btnTeilLoschen)
+                    .addComponent(btnTeilAendern)
+                    .addComponent(btnteilEinlagern)
+                    .addComponent(btnNeuesTeil))
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -134,29 +171,17 @@ public class TeilebestandPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(scpMain)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(695, 695, 695)
                                 .addComponent(btnFiltern)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(btnFilterZurücksetzen))
-                            .addComponent(lblTeilebestand, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(100, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblAktionSelektiert)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnTeilAendern, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnTeilLoschen, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnteilEinlagern, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnNeuesTeil, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(scpMain))
-                        .addGap(34, 34, 34))))
+                            .addComponent(lblTeilebestand, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(pnlActions, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -170,12 +195,7 @@ public class TeilebestandPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(scpMain, javax.swing.GroupLayout.PREFERRED_SIZE, 470, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblAktionSelektiert)
-                    .addComponent(btnTeilLoschen)
-                    .addComponent(btnTeilAendern)
-                    .addComponent(btnteilEinlagern)
-                    .addComponent(btnNeuesTeil))
+                .addComponent(pnlActions, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(359, 359, 359))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -219,12 +239,13 @@ public class TeilebestandPanel extends javax.swing.JPanel {
         selectedId = Integer.parseInt(tblMain.getValueAt(tblMain.getSelectedRow(), 0).toString());
             try {
                 BestandsaenderungFrame bestandsaenderungFrame = new BestandsaenderungFrame(
-                        BestandsaenderungFrame.EINLAGERN_TEILEBESTAND, selectedId, 0);
+                BestandsaenderungFrame.EINLAGERN_TEILEBESTAND, selectedId, 0);
                 bestandsaenderungFrame.setVisible(true);
                 JTable lagerbestand = mainFrame.getPanMain().getLagerbestand().gettabMain();
                 JTable warenbewegung = mainFrame.getPanMain().getWarenbewegung().gettabMain();
 
                 bestandsaenderungFrame.setTable(lagerbestand);
+                bestandsaenderungFrame.setTeileTable(tblMain);
                 bestandsaenderungFrame.setWarenBewegungTable(warenbewegung);
             } catch (SQLException ex) {
                 Misc.printSQLException(mainFrame, ex);
@@ -260,6 +281,7 @@ public class TeilebestandPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnteilEinlagern;
     private javax.swing.JLabel lblAktionSelektiert;
     private javax.swing.JLabel lblTeilebestand;
+    private javax.swing.JPanel pnlActions;
     private javax.swing.JScrollPane scpMain;
     private javax.swing.JTable tblMain;
     // End of variables declaration//GEN-END:variables

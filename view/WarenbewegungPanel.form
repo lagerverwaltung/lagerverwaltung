@@ -95,13 +95,13 @@
           <SubComponents>
             <Component class="javax.swing.JTable" name="tblMain">
               <Properties>
-                <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor" postCode="setTableWidths(tblMain);&#xa;tblMain.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);">
+                <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor" postCode="TableHelper.refreshWarenbewegungTableModel(tblMain);&#xa;tblMain.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);">
                   <Connection code="tm" type="code"/>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                   <TableColumnModel selectionModel="0"/>
                 </Property>
-                <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor" postCode="tblMain.getColumnModel().getColumn(4).setCellRenderer(ren);">
+                <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                   <Color id="Default Cursor"/>
                 </Property>
                 <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
@@ -109,7 +109,7 @@
                 </Property>
               </Properties>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="TableCellRenderer ren = new TwoLinesCellRenderer();&#xa;&#xa;WarenbewegungTableModel tm = new WarenbewegungTableModel();&#xa;tm.setData(WarenbewegungCollection.getInstance());&#xa;tblMain.setAutoCreateRowSorter(true);&#xa;tblMain.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="WarenbewegungTableModel tm = new WarenbewegungTableModel();&#xa;tm.setData(WarenbewegungCollection.getInstance());&#xa;tblMain.setAutoCreateRowSorter(true);&#xa;tblMain.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);"/>
               </AuxValues>
             </Component>
           </SubComponents>

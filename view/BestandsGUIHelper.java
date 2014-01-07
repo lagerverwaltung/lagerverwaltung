@@ -30,12 +30,9 @@ public class BestandsGUIHelper {
     int menge;
     Date hbDatum;
 
-   
     String grund;
     Lagerfach[] faecher;
     ArrayList<HashMap> destinations;
-
-   
     
     int teilID;
     
@@ -54,8 +51,6 @@ public class BestandsGUIHelper {
     int DATE_BEFORE_TODAY=5;
     String DATE_BEFORE_TODAY_TEXT="Das eingegebene Datum liegt vor dem heutigen Datum";
     
-    int NO_DATE=6;
-    String NO_DATE_TEXT="Es wurde kein Datum eingegeben!";
     
     int NO_GRUND=7;
     String NO_GRUND_TEXT="Es wurde kein Grund eingegeben!";
@@ -67,11 +62,10 @@ public class BestandsGUIHelper {
     String ZIELMENGE_TOOHIGH_TEXT ="Die Zielmenge überschreitet den im Fach vorhandenen Platz! Fach: ";
     
     int AUSLAGERN_TOHIGH_ID = 11;
-    String AUSLAGERN_TOHIGH_TEXT ="Die existieren nicht ausreichend Teile in diesem Fach, um diese Menge auszulagern!";
+    String AUSLAGERN_TOHIGH_TEXT ="Es existieren nicht ausreichend Teile dieses Typs in diesem Fach, um diese Menge auszulagern!";
     
-    
-    
-    
+    int SOURCE_EQUAL_DESTINATION_ID = 12;
+    String SOURCE_EQUAL_DESTINATION_TEXT = "Das Quellfach darf nicht als Zielfach angegeben werden!";
     
     public int getMenge()
     {
@@ -130,15 +124,9 @@ public class BestandsGUIHelper {
         return Lagerfach.getFach(Lager.getLager(l),x ,y,z);
     }
     
-    
     public void setFaecher (Lagerfach[] l)
     {
         faecher=l;
-    }
-    
-    public void validateDestinationData (String[] cbLager, String[]cbX, String[] cbY, String[]cbZ, String[] qty)
-    {
-        
     }
     
     public void setEinFach (Lagerfach l)
@@ -189,7 +177,7 @@ public class BestandsGUIHelper {
             fach.getZ()+ " ist nicht ausreichend. Es sind noch " + freeVE + " VE frei.Aber es werden " + 
             menge*groesse+ " VE benötigt.");               
         }
-        if((menge+mengeOld)<0)
+        if(menge > 0 && (menge+mengeOld)<0)
         {
             errorIndex++;
             errors.put(errorIndex, "Keine ausreichende Menge im Quellfach vorhanden!");
@@ -216,13 +204,13 @@ public class BestandsGUIHelper {
             }
         }
         
-        if(grundE!=null || grundE.length() > 0)
+        if(grundE!=null)
         {grund=grundE;}
         else
         {
            errors.put(NO_GRUND, NO_GRUND_TEXT);
         }
-        if (code==BestandsaenderungFrame.EINLAGERN_LAGERBESTAND || code==BestandsaenderungFrame.EINLAGERN_TEILEBESTAND)
+        if (datumE !=null && !datumE.equals("") && (code==BestandsaenderungFrame.EINLAGERN_LAGERBESTAND || code==BestandsaenderungFrame.EINLAGERN_TEILEBESTAND))
         {
         try{
             DateFormat d= new SimpleDateFormat("dd.MM.yyyy");
@@ -235,15 +223,11 @@ public class BestandsGUIHelper {
         Date today=new Date();
         
         
-            if(hbDatum!=null)
+            if(hbDatum!=null )
             {
                 if(hbDatum.before(today))
                     errors.put(DATE_BEFORE_TODAY, DATE_BEFORE_TODAY_TEXT);
            
-            }
-            else
-            {
-                errors.put(NO_DATE, NO_DATE_TEXT);
             }
         }
         Lagerbestand quellLb=null;
@@ -274,6 +258,10 @@ public class BestandsGUIHelper {
                 HashMap<Integer, String> kapError = kapazitaetsTest(fach, teil, qty, oldMenge);
                 for (int errorCode : kapError.keySet()){
                     errors.put(errorCode, kapError.get(errorCode));
+                }
+                if(quellLb != null && quellLb.getLagerfach().equals(fach) 
+                        && (code == BestandsaenderungFrame.SPLITTEN || code == BestandsaenderungFrame.UMLAGERN)){
+                    errors.put(SOURCE_EQUAL_DESTINATION_ID, SOURCE_EQUAL_DESTINATION_TEXT);
                 }
                 if(qty < 1){
                     errors.put(MENGE_NOT_GREATER_ZERO, MENGE_NOT_GREATER_ZERO_TEXT);

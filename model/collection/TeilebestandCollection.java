@@ -44,7 +44,12 @@ public class TeilebestandCollection<Teilebestand> extends ArrayList {
     { 
         try {
             Dao<model.Teilebestand, Integer> teilebestandDao = DatabaseManager.getInstance().getTeilebestandDao();
-            List<Teilebestand> list =  (List<Teilebestand>) teilebestandDao.queryForAll();
+            
+            QueryBuilder<model.Teilebestand, Integer> queryBuilder = teilebestandDao.queryBuilder();
+            queryBuilder.where().eq("deleted", false);
+                   
+            PreparedQuery<model.Teilebestand> preparedQuery = queryBuilder.prepare();
+            List<Teilebestand> list = (List<Teilebestand>) teilebestandDao.query(preparedQuery);
             clear();
             for (Teilebestand tb1 : list) {
                 add(tb1);

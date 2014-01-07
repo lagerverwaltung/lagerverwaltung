@@ -76,33 +76,4 @@ public class ZielPosition {
        Dao<ZielPosition,Integer> zielPositionsDao = DatabaseManager.getInstance().getZielpositionDao();
        zielPositionsDao.createOrUpdate(this);
    }
-    /**
-     * Erzeugt eine Liste mit ZielPositionen aus rohen Positionsdaten-Matrix
-     * @param String[] fachCode Enthält die Spalte mit der Lager Adresse 
-     * @param int[] x Enthält die Spalte mit x Koordinaten
-     * @param int[] y Enthält die Spalte mit y Koordinaten
-     * @param int[] z Enthält die Spalte mit z Koordinaten
-     * @param int[] qty  Enthält die Menge des Zieles
-     * @return ArrayList<ZielPosition> ein Array mit ZielPosition Objekten
-    * 
-    */
-    public static ArrayList<ZielPosition> createZielPositionen (String[] fachCode, 
-                                                         int[] x,
-                                                         int[] y,
-                                                         int[] z,
-                                                         int[] qty) throws SQLException{
-        ArrayList<ZielPosition> ziele = new ArrayList();
-        Lagerfach fach;
-        Lager lager;
-        ZielPosition ziel;
-        for(int i = 0; i< fachCode.length;i++){
-            lager = Lager.getLager(Lager.getLagerort(fachCode[i]));
-            fach = Lagerfach.getFach(lager, x[i], y[i],z[i]);
-            ziel = new ZielPosition();
-            ziel.setLagerfach(fach);
-            ziel.setMenge(qty[i]);
-            ziele.add(ziel);
-        }
-        return ziele;
-    }
 }

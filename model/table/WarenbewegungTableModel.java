@@ -32,7 +32,7 @@ public class WarenbewegungTableModel extends AbstractTableModel{
     
     @Override
     public int getColumnCount() {
-        return 9;
+        return 10;
     }
     
     @Override
@@ -52,24 +52,27 @@ public class WarenbewegungTableModel extends AbstractTableModel{
                 name = "Teil";
                 break;
             case 2:
-                name = "Quellfach";
+                name = "Aktion";
                 break;
             case 3:
-                name = "Menge";
+                name = "Quellfach";
                 break;
             case 4:
-                name = "Zielfach/fächer";
+                name = "Menge";
                 break;
             case 5:
-                name = "Verantwortlicher";
+                name = "Zielfach/fächer";
                 break;
             case 6:
-                name = "Datum";
+                name = "Verantwortlicher";
                 break;
             case 7:
-                name = "Haltbar bis";
+                name = "Datum";
                 break;
             case 8:
+                name = "Haltbar bis";
+                break;
+            case 9:
                 name = "Typ";
                 break;
         }
@@ -113,32 +116,34 @@ public class WarenbewegungTableModel extends AbstractTableModel{
                                 return tl.getBezeichnung();
                             }
                         case 2:
+                            return wb.getActionName();
+                        case 3:
                             if(lf != null && lf.getFachnummer()!= 0){
                                 return lf;
                             }
-                        case 3:
+                        case 4:
                             if(qGes != 0){
                                 return qGes;
                             }
-                        case 4:
-                            return strZiel;
                         case 5:
+                            return strZiel;
+                        case 6:
                         if(wb.getVerantwortlicher() != null){
                             return wb.getVerantwortlicher();
                         }
-                        case 6:
+                        case 7:
                             if(wb.getDatum() != null){
                                 return wb.getDatum();
                             }else{
                                 return "";
                             }
-                        case 7:
+                        case 8:
                             if(wb.getHaltbarkeitsDatum() != null){
                                 return df.format(wb.getHaltbarkeitsDatum());
                             }else{
                                 return "";
                             }
-                        case 8:
+                        case 9:
                              if(tl != null && tl.getTyp()!= null){
                                 return tl.getTyp();
                             }

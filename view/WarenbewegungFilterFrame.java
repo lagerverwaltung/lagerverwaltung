@@ -10,6 +10,8 @@ import java.awt.Component;
 import java.sql.SQLException;
 import java.util.HashMap;
 import javax.swing.JTable;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
 import model.Lager;
 import model.collection.WarenbewegungCollection;
 import model.filter.WarenbewegungFilterModel;
@@ -225,7 +227,7 @@ public class WarenbewegungFilterFrame extends javax.swing.JFrame {
             }
         });
 
-        cbxBewegungsTyp.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "" }));
+        cbxBewegungsTyp.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "", "einlagern", "auslagern", "umlagern", "splitten" }));
 
         lblBezeichnung.setText("Bezeichnung:");
 
@@ -402,10 +404,10 @@ public class WarenbewegungFilterFrame extends javax.swing.JFrame {
                cbxZielY.getSelectedItem().toString(),
                cbxZielZ.getSelectedItem().toString(),
                txfDatumVon.getText(),
-               txfDatumBis.getText());
+               txfDatumBis.getText(),
+               cbxBewegungsTyp.getSelectedItem().toString());
         
         try{
-           System.out.println("läuft");  
            refreshWarenbewegungTableModel(wfm);
           
         }catch (SQLException e){
@@ -425,6 +427,17 @@ public class WarenbewegungFilterFrame extends javax.swing.JFrame {
         WarenbewegungTableModel wm = new WarenbewegungTableModel();
         wm.setData(wc);
         warenbewegungTable.setModel(wm);
+        TableCellRenderer ren = new TwoLinesCellRenderer();
+        warenbewegungTable.getColumnModel().getColumn(5).setCellRenderer(ren);
+
+        int[] arrWidths = {23, 120, 65, 70, 40, 170, 90, 65, 65, 90};
+        TableColumn tc;
+        warenbewegungTable.setRowHeight(23);
+        int i = 0;
+        for (int width : arrWidths) {
+            tc = warenbewegungTable.getColumnModel().getColumn(i++);
+            tc.setPreferredWidth(width);
+        }
     }
     
     private void txfHaltbarVonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfHaltbarVonActionPerformed

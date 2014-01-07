@@ -4,32 +4,20 @@
  */
 package view;
 
-import com.j256.ormlite.dao.Dao;
-import helper.DatabaseManager;
 import helper.Misc;
+import helper.TableHelper;
 import java.awt.Dimension;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.sql.SQLException;
-import java.text.DateFormat;
-import java.text.Format;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.table.TableColumn;
 import model.Lager;
-import model.Lager.Lagerort;
 import model.Lagerbestand;
 import model.Lagerfach;
 import model.Teilebestand;
@@ -37,10 +25,8 @@ import model.Warenbewegung;
 import model.ZielPosition;
 import model.collection.LagerbestandCollection;
 import model.collection.TeilebestandCollection;
-import model.collection.WarenbewegungCollection;
 import model.table.LagerbestandTableModel;
 import model.table.TeileTableModel;
-import model.table.WarenbewegungTableModel;
 
 /**
  *
@@ -673,9 +659,9 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Misc.printSQLException(this, ex);
         }
-
+        refreshTeilebestandTableModel();
         refreshLagerbestandTableModel();
-        refreshWarenbewegungTableModel();
+        TableHelper.refreshWarenbewegungTableModel(warenBewegungTable);
     }//GEN-LAST:event_einlagernButtonActionPerformed
    
     /**
@@ -733,10 +719,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
                     int option = JOptionPane.showConfirmDialog(this, "Soll das zugehörige Teil aus dem Teilebestand gelöscht werden?", "Zugehöriges Teil löschen?", JOptionPane.YES_NO_OPTION);
 
                     if (option == JOptionPane.YES_OPTION) {
-
-                        Dao<Teilebestand, Integer> teilebestandDao = DatabaseManager.getInstance().getTeilebestandDao();
-                        teilebestandDao.deleteById(help.getTeilID());
-                        refreshTeilebestandTableModel();
+                        quellLb.getTeil().setDeleted(true);
                     }
                 }
                 break;
@@ -758,7 +741,9 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
                     if(zielLb == null){
                         zielLb = neuerLagerbestand(teil, fach, help.getGrund(), help.getEineMenge());
                     }
-                    zielLb.setMenge(zielLb.getMenge()+qty);
+                    else {
+                        zielLb.setMenge(zielLb.getMenge()+qty);
+                    }
                     mengeSum += qty;
                     zielLb.save();
                     
@@ -770,7 +755,6 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
                     
                 }
                 quellLb.setMenge(mengeOld-mengeSum);
-                
                 break;
         }
         
@@ -780,8 +764,11 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
             wb.logWarenbewegung(quellLb, action, quellLb.getAnschaffungsgrund(),new Date(), help.getHbDatum(), "Lagerverwalter", 
                                 zielPositionen);
         }
-        //refreshWarenbestandTableModel();
+        
         this.dispose();
+        if(action == EINLAGERN_TEILEBESTAND){
+            Misc.createErrorDialog(this, "Das Teil wurde erfolgreich eingelagert.");
+        }
     }
    
     
@@ -817,22 +804,6 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         TeileTableModel tm = new TeileTableModel();
         tm.setData(tc);
         teileBestandTable.setModel(tm);
-    }
-    
-    private void refreshWarenbewegungTableModel(){
-        WarenbewegungCollection wc = WarenbewegungCollection.getInstance(true);
-        WarenbewegungTableModel wm = new WarenbewegungTableModel();
-        wm.setData(wc);
-        warenBewegungTable.setModel(wm);
-
-        int[] arrWidths = {15, 120, 70, 40, 170, 90, 65, 60,90};
-        TableColumn tc;
-        warenBewegungTable.setRowHeight(23);
-        int i = 0;
-        for (int width : arrWidths){
-            tc = warenBewegungTable.getColumnModel().getColumn(i++);
-            tc.setPreferredWidth(width);
-        }
     }
     
     private void cbxFachXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxFachXActionPerformed
@@ -943,6 +914,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
             }
         }
         pnlDestinations.setPreferredSize(new Dimension(454, amount*34));
+        this.repaint();
     }//GEN-LAST:event_btnAddSplitDestActionPerformed
 
     

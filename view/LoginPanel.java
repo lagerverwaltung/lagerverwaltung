@@ -1,6 +1,7 @@
 package view;
 
-import javax.swing.JPanel;
+import helper.Misc;
+import java.sql.SQLException;
 
 /*
  * To change this template, choose Tools | Templates
@@ -14,6 +15,15 @@ import javax.swing.JPanel;
  */
 public class LoginPanel extends javax.swing.JPanel {
     MainFrame mainFrame;
+    public static int USER_ROLE;
+    public static int LAGERVERWALTER_ROLE = 1;
+    public static int GAST_ROLE = 2;
+    
+    public String nameGast = "gast";
+    public String passGast = "gast";
+    
+    public String nameLagerverwalter = "lagerverwalter";
+    public String passLagerverwalter = "lagerverwalter";
   /**
      * Creates new form LoginPanel
      */
@@ -165,8 +175,42 @@ public class LoginPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_txfBenutzernameActionPerformed
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        mainFrame.navigationController.showCard("main");   
+        if(txfBenutzername.getText().isEmpty() || pwfPasswort.getText().isEmpty()){
+            Misc.createErrorDialog(mainFrame, "Junge! Es muss schon ein Benutzername und Passwort eingegeben werden!");
+            return;
+        }
+        else if (txfBenutzername.getText().equals(this.nameLagerverwalter))
+        {
+            if (!pwfPasswort.getText().equals(this.passLagerverwalter)){
+                Misc.createErrorDialog(mainFrame, "Das Passwort ist nicht korrekt. Knacke die Nuss.");
+                return;
+            }
+            LoginPanel.USER_ROLE = LoginPanel.LAGERVERWALTER_ROLE;
+        }
+        else if (txfBenutzername.getText().equals(this.nameGast)){
+            if (!pwfPasswort.getText().equals(this.passGast)){
+                Misc.createErrorDialog(mainFrame, "Das Passwort ist nicht korrekt. Errinere dich an die Lösung !");
+                return;
+            }
+            LoginPanel.USER_ROLE = LoginPanel.GAST_ROLE;
+            System.out.println("set role"+LoginPanel.USER_ROLE);
+        }
+        else {
+            Misc.createErrorDialog(mainFrame, "Dieser Benutzername existiert nicht !");
+                return;
+        }
+        mainFrame.navigationController.showCard("main"); System.out.println("user role"+LoginPanel.USER_ROLE);
+        if(LoginPanel.USER_ROLE == LoginPanel.GAST_ROLE){
+            mainFrame.getTeilebestandFrame().setGuest();
+            mainFrame.getLagerbestandFrame().setGuest();
+        }
+        
         mainFrame.setSize( 1000 , 720 );
+        try {
+            Misc.printExpiredLagerbestand(mainFrame);
+        } catch (SQLException ex) {
+            Misc.printSQLException(mainFrame, ex);
+        }
     }//GEN-LAST:event_btnLoginActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -24,7 +24,8 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
+                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                      <Component id="scpMain" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <EmptySpace min="-2" pref="695" max="-2" attributes="0"/>
@@ -34,26 +35,10 @@
                           </Group>
                           <Component id="lblTeilebestand" min="-2" pref="151" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="100" max="32767" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="lblAktionSelektiert" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="btnTeilAendern" min="-2" pref="151" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="btnTeilLoschen" min="-2" pref="151" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="btnteilEinlagern" min="-2" pref="169" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="btnNeuesTeil" min="-2" pref="180" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="scpMain" max="32767" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="pnlActions" min="-2" max="-2" attributes="0"/>
               </Group>
+              <EmptySpace pref="33" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -70,13 +55,7 @@
               <EmptySpace max="32767" attributes="0"/>
               <Component id="scpMain" min="-2" pref="470" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lblAktionSelektiert" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnTeilLoschen" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnTeilAendern" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnteilEinlagern" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnNeuesTeil" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
+              <Component id="pnlActions" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="359" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -106,7 +85,7 @@
             </Property>
             <Property name="autoResizeMode" type="int" value="4"/>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Standardcursor"/>
+              <Color id="Default Cursor"/>
             </Property>
             <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
               <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
@@ -118,35 +97,6 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="btnNeuesTeil">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Neues Teil anlegen"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNeuesTeilActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="btnTeilAendern">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Teil bearbeiten"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTeilAendernActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblAktionSelektiert">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Aktionen selektiert:"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JButton" name="btnTeilLoschen">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Teil l&#xf6;schen"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTeilLoschenActionPerformed"/>
-      </Events>
-    </Component>
     <Component class="javax.swing.JButton" name="btnFilterZur&#xfc;cksetzen">
       <Properties>
         <Property name="text" type="java.lang.String" value="Filter zur&#xfc;cksetzen"/>
@@ -163,13 +113,81 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnFilternActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btnteilEinlagern">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Teil einlagern"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnteilEinlagernActionPerformed"/>
-      </Events>
-    </Component>
+    <Container class="javax.swing.JPanel" name="pnlActions">
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="lblAktionSelektiert" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="btnTeilAendern" min="-2" pref="151" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="btnTeilLoschen" min="-2" pref="151" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="btnteilEinlagern" min="-2" pref="169" max="-2" attributes="0"/>
+                  <EmptySpace pref="83" max="32767" attributes="0"/>
+                  <Component id="btnNeuesTeil" min="-2" pref="180" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="lblAktionSelektiert" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnTeilLoschen" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnTeilAendern" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnteilEinlagern" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnNeuesTeil" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JLabel" name="lblAktionSelektiert">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Aktionen selektiert:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnteilEinlagern">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Teil einlagern"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnteilEinlagernActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnNeuesTeil">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Neues Teil anlegen"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNeuesTeilActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnTeilAendern">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Teil bearbeiten"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTeilAendernActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnTeilLoschen">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Teil l&#xf6;schen"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTeilLoschenActionPerformed"/>
+          </Events>
+        </Component>
+      </SubComponents>
+    </Container>
   </SubComponents>
 </Form>

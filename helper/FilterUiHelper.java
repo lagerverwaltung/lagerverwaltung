@@ -34,8 +34,11 @@ public class FilterUiHelper {
     int PREIS_NOT_FLOAT_ID = 4;
     String PREIS_NOT_FLOAT_TEXT = "Der Preis muss eine reelle Zahl sein.";
     
-    int DATE_NOT_VALID = 5;
+    int DATE_NOT_VALID_ID = 5;
     String DATE_NOT_VALID_TEXT = "Bitte valides Datumsformat tt.mm.yyyy eingeben!";
+    
+    int VON_GT_BIS_ID = 6;
+    String VON_GT_BIS_TEXT = "von > bis";
 
 
     private static FilterUiHelper singleton;
@@ -56,11 +59,8 @@ public class FilterUiHelper {
      */
     public HashMap<Integer, String> validateTeileFilter(String preisVon, String preisBis, String veVon, String veBis){
         HashMap<Integer, String> errors = new HashMap();
-        float preisVonS, preisBisS;
-        int vonVeS, bisVeS;
-
-        preisVonS = preisBisS = 0;
-        vonVeS = bisVeS = 0;
+        float preisVonS = 0, preisBisS = Float.MAX_VALUE;
+        int vonVeS = 0, bisVeS = Integer.MAX_VALUE;
 
         if (preisVon.length() > 0) {
             try {
@@ -82,6 +82,10 @@ public class FilterUiHelper {
             if (preisBisS < 0) {
                 errors.put(PREIS_LT_ZERO_ID, PREIS_LT_ZERO_TEXT);
             }
+        }
+        
+        if(preisVonS > preisBisS){
+            errors.put(VON_GT_BIS_ID, VON_GT_BIS_TEXT);
         }
 
         if (veVon.length() > 0) {
@@ -105,6 +109,10 @@ public class FilterUiHelper {
                 errors.put(MENGE_LT_ZERO_ID, MENGE_LT_ZERO_TEXT);
             }
         }
+        
+        if(vonVeS > bisVeS){
+            errors.put(VON_GT_BIS_ID, VON_GT_BIS_TEXT);
+        }
         return errors;
     }
     
@@ -116,8 +124,7 @@ public class FilterUiHelper {
      * Fehlernachricht
      */
     public HashMap<Integer, String> validateLagerFilter(String mengeVon, String mengeBis) {
-        int mVon, mBis;
-        mVon = mBis = 0;
+        int mVon = 0, mBis = Integer.MAX_VALUE;
         
         HashMap<Integer, String> errors = new HashMap();
         if (mengeVon.length() > 0) {
@@ -140,6 +147,10 @@ public class FilterUiHelper {
                 errors.put(MENGE_LT_ZERO_ID, MENGE_LT_ZERO_TEXT);
             }
         }
+        
+        if(mVon > mBis){
+            errors.put(VON_GT_BIS_ID, VON_GT_BIS_TEXT);
+        }
 
         return errors;
     }
@@ -153,11 +164,21 @@ public class FilterUiHelper {
      * Fehlernachricht
      */
     public HashMap<Integer, String> validateWarenbewegungFilter(String datumVon, String datumBis, String haltbarVon, String haltbarBis){
+        DateFormat d = new SimpleDateFormat("dd.MM.yyyy");
+        
         Date datumVonS = new Date();
         Date datumBisS = new Date();
         Date haltbarBisS = new Date();
         Date haltbarVonS = new Date();
-        DateFormat d = new SimpleDateFormat("dd.MM.yyyy");
+                
+        try{
+             datumVonS = d.parse("01.01.1969");
+             datumBisS = d.parse("01.01.2542");
+             haltbarBisS = d.parse("01.01.2542");
+             haltbarVonS = d.parse("01.01.1969");
+        }catch(ParseException e){
+            System.out.println("nothing to catch");
+        }
 
         HashMap<Integer, String> errors = new HashMap();
         
@@ -165,7 +186,7 @@ public class FilterUiHelper {
             try {
                 datumVonS = d.parse(datumVon);
             } catch (ParseException ex) {
-                errors.put(DATE_NOT_VALID, DATE_NOT_VALID_TEXT);
+                errors.put(DATE_NOT_VALID_ID, DATE_NOT_VALID_TEXT);
             } 
         }
       
@@ -173,15 +194,19 @@ public class FilterUiHelper {
             try {
                 datumBisS = d.parse(datumBis);
             } catch (ParseException ex) {
-                errors.put(DATE_NOT_VALID, DATE_NOT_VALID_TEXT);
+                errors.put(DATE_NOT_VALID_ID, DATE_NOT_VALID_TEXT);
             }  
         }
 
+        if(datumVonS.after(datumBisS)){
+            errors.put(VON_GT_BIS_ID, VON_GT_BIS_TEXT);
+        }
+        
         if(haltbarVon.length() > 0 ){
             try {
                 haltbarVonS = d.parse(haltbarVon);
             } catch (ParseException ex) {
-                errors.put(DATE_NOT_VALID, DATE_NOT_VALID_TEXT);
+                errors.put(DATE_NOT_VALID_ID, DATE_NOT_VALID_TEXT);
             }
 
         }
@@ -190,10 +215,13 @@ public class FilterUiHelper {
             try {
                 haltbarBisS = d.parse(haltbarBis);
             } catch (ParseException ex) {
-                errors.put(DATE_NOT_VALID, DATE_NOT_VALID_TEXT);
+                errors.put(DATE_NOT_VALID_ID, DATE_NOT_VALID_TEXT);
             }
         }
      
+        if(haltbarVonS.after(haltbarBisS)){
+            errors.put(VON_GT_BIS_ID, VON_GT_BIS_TEXT);
+        }
         return errors;
     }
     
@@ -215,7 +243,7 @@ public class FilterUiHelper {
     }
     
     /**
-     * Erzeugt ein gültiges LagerbestandFilterobjekt
+     * Erzeugt ein gültiges LagerbestandFilterobjekt mit maximalen Grenzen
      * @author ssinger
      * @param lagertyp
      * @param Alle Parameter der Gui werden als String übergeben
@@ -237,9 +265,13 @@ public class FilterUiHelper {
         }
         if (mengeVon.length() > 0) {
             lfm.setVonMenge(Integer.parseInt(mengeVon));
+        }else{
+            lfm.setVonMenge(0);
         }
         if (mengeBis.length() > 0) {
             lfm.setBisMenge(Integer.parseInt(mengeBis));
+        }else{
+            lfm.setBisMenge(Integer.MAX_VALUE);
         }
         if (grund.length() > 0) {
             lfm.setGrund(grund);
@@ -252,7 +284,7 @@ public class FilterUiHelper {
     }
     
     /**
-     * Erzeugt ein gültiges TeileFilterObjekt
+     * Erzeugt ein gültiges TeileFilterObjekt mit maximalen Grenzen
      * @author ssinger
      * @param Alle Parameter der Gui werden als String übergeben
      * @return fertiges TeilebestandFilterModel-Objekt
@@ -274,31 +306,46 @@ public class FilterUiHelper {
         }
         if (preisVon.length() > 0) {
             tfm.setVonPreis(helper.Misc.parseToCurrency(preisVon));
+        }else{
+            tfm.setVonPreis(0);
         }
         if (preisBis.length() > 0) {
             tfm.setBisPreis(helper.Misc.parseToCurrency(preisBis));
+        }else{
+            tfm.setBisPreis(Float.MAX_VALUE);
         }
         if (veVon.length() > 0) {
             tfm.setVonVe(Integer.parseInt(veVon));
+        }else{
+            tfm.setVonVe(0);
         }
         if (veBis.length() > 0) {
             tfm.setBisVe(Integer.parseInt(veBis));
+        }else{
+            tfm.setBisVe(Integer.MAX_VALUE);
         }
         
         return tfm;
     }
     
     /**
-     * Erzeugt ein gültiges WarenbewegungFilterModel-Objekt
-     *
+     * Erzeugt ein gültiges WarenbewegungFilterModel-Objekt mit maximalen Grenzen
      * @author ssinger
      * @param Alle Parameter der Gui werden als String übergeben
      * @return fertiges TeilebestandFilterModel-Objekt
      */
-    public static WarenbewegungFilterModel createWFM(String bezeichnung, String haltbarVon, String haltbarBis, String qLagertyp, String Bewegungstyp, String qx, String qy, String qz, String teiltyp, String zLagertyp, String zx, String zy, String zz, String datumVon, String datumBis) {
+    public static WarenbewegungFilterModel createWFM(String bezeichnung, String haltbarVon, String haltbarBis, String qLagertyp, String Bewegungstyp, String qx, String qy, String qz, String teiltyp, String zLagertyp, String zx, String zy, String zz, String datumVon, String datumBis, String bewegungsTyp) {
         WarenbewegungFilterModel wfm = new WarenbewegungFilterModel();
         DateFormat f = new SimpleDateFormat("dd.MM.YYYY");
-        
+        Date minDate = new Date(), maxDate = new Date();
+        int expireID = 0;
+        try {
+            minDate = f.parse("01.01.1969");
+            maxDate = f.parse("01.01.2542");
+        } catch (ParseException ex) {
+            System.out.println("nothing to catch");
+        }
+     
         if(bezeichnung.length() > 0){
             wfm.setBezeichnung(bezeichnung);
         }
@@ -332,16 +379,40 @@ public class FilterUiHelper {
         try {
             if (datumVon.length() > 0) {
                 wfm.setDatumVon(f.parse(datumVon));
+            }else{
+                wfm.setDatumVon(minDate);
             }
             if (datumBis.length() > 0) {
                 wfm.setDatumBis(f.parse(datumBis));
+            }else{
+                wfm.setDatumBis(maxDate);
             }
             if (haltbarVon.length() > 0) {
                 wfm.setHaltbarVon(f.parse(haltbarVon));
+                
+            }else{
+                wfm.setHaltbarVon(minDate);
+                expireID++;
             }
             if(haltbarBis.length() > 0){
                 wfm.setHaltbarBis(f.parse(haltbarBis));
+                
+            }else{
+                wfm.setHaltbarBis(maxDate);
+                expireID++;
             }
+            if(bewegungsTyp.length() > 1){
+                switch(bewegungsTyp){
+                    case "einlagern" : wfm.setBewegungsTyp(1);
+                        break;
+                    case "auslagern" : wfm.setBewegungsTyp(3);
+                        break;
+                    case "umlagern" : wfm.setBewegungsTyp(4);
+                        break;
+                    case "splitten" : wfm.setBewegungsTyp(5);
+                }
+            }
+            wfm.setExpireID(expireID);
         } catch (ParseException e) {
             System.out.println("nothing to catch");
         }
