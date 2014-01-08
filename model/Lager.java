@@ -14,37 +14,58 @@ import helper.Misc;
 import java.sql.SQLException;
 import java.util.List;
 
+/**
+ * Model für das Lager
+ * @author simon
+ */
 @DatabaseTable(tableName = "lager")
 public class Lager {
     
+     /* ID des Lagerbestands  */
     @DatabaseField(generatedId = true)
     private int lagerID;
     
+     /* Höhe des Lagers  */
     @DatabaseField(columnName = "hoehe", canBeNull = false)
     private int hoehe;
     
+     /* Breite des Lagers  */
     @DatabaseField(columnName = "breite", canBeNull = false)
     private int breite;
     
+     /* Tiefe des Lagers */
     @DatabaseField(columnName = "tiefe", canBeNull = false)
     private int tiefe;
-    
+
+    /* Lagerort des Lagers*/
     @DatabaseField(columnName = "lagerort", canBeNull = false)
     private Lager.Lagerort lagerort;
     
+     /* Größe des kleinen Faches  */
     @DatabaseField(columnName = "kleinVE", canBeNull = false)
     private int kleinVE;
     
+     /* Größe des mittleren Faches  */
     @DatabaseField(columnName = "mittelVE", canBeNull = false)
     private int mittelVE;
     
+     /* Größe des großen Faches  */
     @DatabaseField(columnName = "grossVE", canBeNull = false)
     private int grossVE;
 
+    /**
+     * Konstruktor
+     */
     public Lager () {
     
     }
     
+    /**
+     * Holt das jeweilige Lager anhand des Lagerortes
+     * @param ort
+     * @return
+     * @throws SQLException
+     */
     public static Lager getLager (Lagerort ort) throws SQLException  {
         Dao<Lager,Integer> lagerDao = DatabaseManager.getInstance().getLagerDao();
         List<Lager> list;
@@ -110,6 +131,7 @@ public class Lager {
     
     /**
      * Gibt den Lagerort zu einem LagerCode zurück
+     * @param lagerCode 
      * @return lagerort
      */
     public static Lager.Lagerort getLagerort(String lagerCode) {
@@ -122,10 +144,14 @@ public class Lager {
     }
     
     /*
-     * @author unknown
      * Gibt den Code des Lagerortes zurück
+     * 
      * HL = Hochregallager
      * FL = Freilager
+     */
+    /**
+     *
+     * @return
      */
     public String getLagerortCode() {
         String code = "";
@@ -201,12 +227,28 @@ public class Lager {
         this.grossVE = grossVE;
     }
 	
+    /**
+     *
+     */
     public enum Lagerort {
-            freilager (),
-            hochregal (),
+            /**
+         *
+         */
+        freilager (),
+            /**
+         *
+         */
+        hochregal (),
             ;	
     }
     
+    /**
+     * Erzeugt die Fächer für ein Lager anhand der Größen
+     * @param breite
+     * @param tiefe
+     * @param hoehe
+     * @throws SQLException
+     */
     public void createFaecher(int breite, int tiefe, int hoehe) throws SQLException
     {
         for(int i = 1; i <= breite; i++){
@@ -226,6 +268,7 @@ public class Lager {
     /**
      * Speichert das initialisierte Lager und initialisiert den Fächerbestand
      * 
+     * @throws SQLException 
      */
     public void save() throws SQLException
     {
@@ -235,6 +278,11 @@ public class Lager {
         createFaecher(breite, tiefe, hoehe);
     }
     
+    /**
+     * Hol alle Fächer des Lagers
+     * @return alle Fächer des Lager als Liste
+     * @throws SQLException
+     */
     public List<Lagerfach> getFaecher() throws SQLException
     {
         Dao<Lagerfach,Integer> lagerfachDao = DatabaseManager.getInstance().getLagerfachDao();

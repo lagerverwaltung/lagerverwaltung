@@ -17,11 +17,10 @@ import model.filter.TeilebestandFilterModel;
 import model.filter.WarenbewegungFilterModel;
    
 /**
- *
+ * Klasse mit Untersützungsfunktionen rund um Filtering
  * @author ssinger
  */
 public class FilterUiHelper {
-
 
     int MENGE_NOT_INTEGER_ID = 1;
     String MENGE_NOT_INTEGER_TEXT = "Die Menge muss ganzzahlig sein";
@@ -429,7 +428,5 @@ public class FilterUiHelper {
         }
         return null;
     }
-    
-    
 }
 

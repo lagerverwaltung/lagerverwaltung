@@ -13,18 +13,26 @@ import helper.DatabaseManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+/**
+ * Model für eine ZielPosition
+ * @author simon
+ */
 @DatabaseTable(tableName = "zielposition")
 public class ZielPosition {
 
+    /* ID der Zielposition  */
     @DatabaseField(generatedId = true)
     private int zielPositionID;
     
+    /* Menge die an das Ziel übermittelt wird  */
     @DatabaseField()
     private int menge;
     
+    /* die zugehörige Warenbewegung  */
     @DatabaseField(columnName = "warenbID", foreign = true, foreignAutoRefresh=true)
     private Warenbewegung warenbewegung;
     
+    /* Das zugehörige Fach */
     @DatabaseField(columnName = "fachID", foreign = true,foreignAutoRefresh=true)
     private Lagerfach lagerfach;
 
@@ -42,18 +50,34 @@ public class ZielPosition {
         this.menge = menge;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getZielPositionID() {
         return zielPositionID;
     }
 
+    /**
+     *
+     * @param zielPositionID
+     */
     public void setZielPositionID(int zielPositionID) {
         this.zielPositionID = zielPositionID;
     }
 
+    /**
+     *
+     * @return
+     */
     public Warenbewegung getWarenbewegung() {
         return warenbewegung;
     }
 
+    /**
+     *
+     * @param warenbewegung
+     */
     public void setWarenbewegung(Warenbewegung warenbewegung) {
         this.warenbewegung = warenbewegung;
     }
@@ -72,6 +96,10 @@ public class ZielPosition {
         this.lagerfach = lagerfach;
     }
 
+    /**
+     * Speichert eine ZielPosition
+     * @throws SQLException
+     */
     public void save() throws SQLException{
        Dao<ZielPosition,Integer> zielPositionsDao = DatabaseManager.getInstance().getZielpositionDao();
        zielPositionsDao.createOrUpdate(this);

@@ -6,7 +6,6 @@
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
-    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
   </SyntheticProperties>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
@@ -239,9 +238,6 @@
               <Connection code="new javax.swing.DefaultComboBoxModel()" type="code"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbxQuelleXActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lblBewegungsTyp">
           <Properties>
@@ -281,9 +277,6 @@
               <Connection code="new javax.swing.DefaultComboBoxModel()" type="code"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbxZielXActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lblDatumVon">
           <Properties>
@@ -320,9 +313,6 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txfHaltbarVon">
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txfHaltbarVonActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txfHaltbarBis">
         </Component>

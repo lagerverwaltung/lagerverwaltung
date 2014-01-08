@@ -15,13 +15,19 @@ import java.util.List;
 import model.filter.LagerbestandFilterModel;
 
 /**
- *
+ * Enthält die Daten für den Lagerbestand und hält Filterfunktionen bereit
+ * Ist eine ArrayList welche Lagerbestandsobjekte enthält
+ * @param <Lagerbestand> 
  * @author simon
  */
 public class LagerbestandCollection<Lagerbestand> extends ArrayList {
     
     private static LagerbestandCollection singleton;
     
+    /**
+     * Liefert die Instanz der LagerbestandCollection
+     * @return
+     */
     public static LagerbestandCollection getInstance()
     {
         if (LagerbestandCollection.singleton == null){
@@ -30,15 +36,28 @@ public class LagerbestandCollection<Lagerbestand> extends ArrayList {
         return singleton;
     }
     
+    /**
+     * Liefert die Instanz der LagerbestandCollection und läd diese neu
+     * @param refresh Gibt ob die Collection nur geholt oder neu geladen werde soll
+     * @return
+     */
     public static LagerbestandCollection getInstance(boolean refresh) {
         singleton = LagerbestandCollection.getInstance();
         return singleton.loadCollection();
     }
     
+    /**
+     * Konstruktor
+     */
     public LagerbestandCollection() {
         loadCollection();
     }
     
+    /**
+     * Läd die LagerbestandCollection neu
+     * 
+     * @return Liste mit Lagerbeständen
+     */
     public LagerbestandCollection<Lagerbestand> loadCollection()
     {
        try {

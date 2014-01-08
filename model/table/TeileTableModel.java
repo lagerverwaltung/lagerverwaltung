@@ -9,12 +9,16 @@ import model.Teilebestand;
 import model.collection.TeilebestandCollection;
 
 /**
- *
+ * Table Model für die Teilebestandtabelle
  * @author simon
  */
 public class TeileTableModel extends AbstractTableModel {
     TeilebestandCollection<Teilebestand> teileRows = new TeilebestandCollection();
     
+    /**
+     * Setzt die Daten für das Table Model
+     * @param arr Liste mit Teilebestandsobjekten
+     */
     public void setData(TeilebestandCollection<Teilebestand> arr)
     {
         this.teileRows = arr;

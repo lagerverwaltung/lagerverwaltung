@@ -11,7 +11,7 @@ import model.collection.TeilebestandCollection;
 import model.table.TeileTableModel;
 
 /**
- *
+ * Validierungs- und Hilfsklasse für den Teilebestand
  * @author simon
  */
 public class TeilebestandHelper {

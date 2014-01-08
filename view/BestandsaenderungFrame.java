@@ -33,7 +33,6 @@ import model.table.TeileTableModel;
  *
  * @author simon
  */
-//ändern
 public class BestandsaenderungFrame extends javax.swing.JFrame {
 
 
@@ -42,12 +41,28 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
     JTable warenBewegungTable;
     
     /**
-     * Konstanten für die verschiendenen Frames
+     * Modus zum Einlagern aus dem Telebestand
      */
     public final static int EINLAGERN_TEILEBESTAND = 1;
+    
+    /**
+     * Modus zum Einlagern aus dem Lagerbestand
+     */
     public final static int EINLAGERN_LAGERBESTAND = 2;
+    
+    /**
+     * Modus zum Auslagern 
+     */
     public final static int AUSLAGERN = 3;
+    
+    /**
+     * Modus zum Umlagern
+     */
     public final static int UMLAGERN = 4;
+    
+    /**
+     * Modus zum Splitten
+     */
     public final static int SPLITTEN = 5;
     
     /**
@@ -93,6 +108,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
      * @param teilID die TeilID muss aus der Tabelle ausgelesen werden 
      * @param fachID die FachID muss für die Generierung des Lagerbestandes und die Anzeige des korrekten Faches übergeben werden
      * falls nötig muss sie konstruiert werden
+     * @throws SQLException  
      */
     public BestandsaenderungFrame(int action, int teilID, int fachID) throws SQLException
     {   
@@ -122,7 +138,6 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
      * Methode die entscheidet welche GUI erzeugt wird
      * @param action der Code entsprechend der Variablen im Kopf des Bestandsaenderungsframes auszuwählen
      */
-    
     private void setGUI(int action,Lagerbestand lb) throws SQLException
     {
         switch (action)
@@ -150,7 +165,6 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
      * Erstellen der Einlagern Teilebstand GUI und setzen der entsprechenden Elemente
      * 
      */
-    
     private void setEinlagernTeilebestandGUI()
     {
         lblEinlagern.setText("Teile einlagern");
@@ -158,13 +172,11 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
     
     }
     
-    
     /**
      * @author smodlich
      * Erstellen der Einlagern Lagerbestand GUI und setzen der entsprechenden Elemente
      * 
      */
-    
     private void setEinlagernLagerbestandGUI(Lagerbestand lb)
     {
         lblEinlagern.setText("Teile einlagern");
@@ -173,6 +185,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         this.setVisible(true);
         loadQuellComboBoxen(lb);
     }
+    
     /**
      * @author smodlich
      * Erstellen der Auslagern GUI und setzen der entsprechenden Elemente
@@ -189,6 +202,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         this.lblHinweisDatum.setVisible(false);
         this.setVisible(true);
     }
+    
     /**
      * Erstellen der Umlagern GUI und setzen der entsprechenden Elemente
      * 
@@ -210,6 +224,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         this.setVisible(true);
     
     }
+    
     /**
      * Erstellen der Splitten GUI und setzen der entsprechenden Elemente
      * 
@@ -227,8 +242,10 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         pnlQty.setVisible(false);
         setSize(new Dimension(this.getWidth(), this.getHeight()+110));
     }
+    
     /**
      * @author ssinger
+     * @author spickert
      * @param lagerbestand 
      * setzt Anschaffungsgrund und TeilID, setzt Textfeld TeilID
      * Editable(false) und Diabled es
@@ -247,6 +264,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
     
     /**
      * @author ssinger
+     * @author spickert
      * @param lagerbestand 
      * läd die oberste Reihe der ComboBOxen mit den Daten des
      * übergebenen Lagerbstandes und setzt Enabled(false)
@@ -264,26 +282,41 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         this.cbxFachTyp.setEnabled(false);
     }
     
-    //Table setzen
+    /**
+     *
+     * @param t
+     */
     public void setTable(JTable t)
     {
         lagerBestandTable = t;
     }
     
+    /**
+     *
+     * @param t
+     */
     public void setTeileTable(JTable t)
     {
         teileBestandTable = t;
     }
     
+    /**
+     *
+     * @param t
+     */
     public void setWarenBewegungTable(JTable t){
         warenBewegungTable = t;
     }
-    /*
-     * @author spickert
-    * Regisrtiert zu aktualisierende Comboboxen
-    * @param String id enthält die ID für die Fachklasse die registriert werden soll 
-    * @param JComboBox cbX, cbY, cbZ enthält die Comboboxen die registriert werden
-    */
+    
+     /**
+     * Regisrtiert zu aktualisierende Comboboxen
+     * @param String id enthält die ID für die Fachklasse die registriert werden soll 
+     * @param JComboBox cbX, cbY, cbZ enthält die Comboboxen die registriert werden
+     * @param id
+     * @param cbX
+     * @param cbY
+     * @param cbZ
+     */
     public void registerFaecherCbs(String id, JComboBox cbX, JComboBox cbY, JComboBox cbZ){
         HashMap hmFields = new HashMap();
         hmFields.put("x", cbX);
@@ -291,8 +324,8 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         hmFields.put("z", cbZ);
         faecherCbs.put(id, hmFields);
     }
-    /*
-     * @author spickert
+    
+    /**
     * Aktualisiert Comboboxen für alle Lagertypen
     * @param String destination enthält die ID für die Fachklasse die aktualisiert werden soll 
     * @param String lagerCode enthält den Code für das ausgewählte Lager
@@ -300,6 +333,8 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
     private void loadLagerCbx(String destination, String lagerCode) throws SQLException{
         HashMap hmFields = (HashMap) faecherCbs.get(destination);
         Lager lager = Lager.getLager(Lager.getLagerort(lagerCode));
+        if(lager!=null)
+        {
         int x = lager.getBreite();
         int y = lager.getTiefe();
         int z = lager.getHoehe();
@@ -323,13 +358,9 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
          for(int i = 1; i <= z; i++){
             cbZ.addItem(i);
         }
+        }
     }
     
-    /**
-     * This method is called from within the constructor to initialize the form.
-     * WARNING: Do NOT modify this action. The content of this method is always
-     * regenerated by the Form Editor.
-     */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -394,11 +425,6 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         jPanel1.add(cbxFachTyp);
 
         cbxFachX.setModel(new javax.swing.DefaultComboBoxModel());
-        cbxFachX.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbxFachXActionPerformed(evt);
-            }
-        });
         jPanel1.add(cbxFachX);
 
         cbxFachY.setModel(new javax.swing.DefaultComboBoxModel());
@@ -446,11 +472,6 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
 
         txfTeilID.setMinimumSize(new java.awt.Dimension(20, 40));
         txfTeilID.setPreferredSize(new java.awt.Dimension(50, 22));
-        txfTeilID.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txfTeilIDActionPerformed(evt);
-            }
-        });
         jPanel2.add(txfTeilID);
 
         pnlQty.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
@@ -470,11 +491,6 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
 
         txfHaltbarkeitsdatum.setMinimumSize(new java.awt.Dimension(50, 20));
         txfHaltbarkeitsdatum.setPreferredSize(new java.awt.Dimension(90, 22));
-        txfHaltbarkeitsdatum.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txfHaltbarkeitsdatumActionPerformed(evt);
-            }
-        });
         jPanel5.add(txfHaltbarkeitsdatum);
 
         lblHinweisDatum.setText("Hinweis: dd.mm.yyyy");
@@ -509,11 +525,6 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         pnlDestination.add(cbxFachTyp1);
 
         cbxFachX1.setModel(new javax.swing.DefaultComboBoxModel());
-        cbxFachX1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbxFachX1ActionPerformed(evt);
-            }
-        });
         pnlDestination.add(cbxFachX1);
 
         cbxFachY1.setModel(new javax.swing.DefaultComboBoxModel());
@@ -600,7 +611,13 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+  
+    /**
+    * Erzeugt anhand der Eingabe im Fenster eine Liste mit HashMaps, welche die 
+    * eingegebenen Ziele und Mengen enthält
+    * 
+    * @return  ArrayList<HashMap> Ziele und Mengen 
+    */
     private  ArrayList<HashMap> getDestinations(){
         ArrayList<HashMap> destList = new ArrayList();
         HashMap hm = new HashMap();
@@ -634,6 +651,12 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         }
         return destList;
     }
+    
+    /**
+    * Methode zum Behandeln einer Bestandsänderung bei einem Klick auf den Button
+    * 
+    * @return  ArrayList<HashMap> Ziele und Mengen 
+    */
     private void einlagernButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_einlagernButtonActionPerformed
         try {
             String menge = txfMenge.getText();
@@ -668,6 +691,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
     /**
      * Methode zur Bestandsänderung
      * @author smodlich
+     * @author spickert
      * @param action Der entsprechende Code (nach den Konstanten in dieser Klasse)
      * @param help das BestandsGUIHelper Objekt das die ausgelesenen Variablen enthält
      * @throws SQLException 
@@ -784,6 +808,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
      * @param lf Lagerfach
      * @param grund Grund für den neuen bestand
      * @param menge die Menge die der neue Bestand enthalten soll
+     * @return 
      * @throws SQLException 
      */
     public Lagerbestand neuerLagerbestand(Teilebestand tb,Lagerfach lf,String grund, int menge) throws SQLException
@@ -796,7 +821,10 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         lb.save();
         return lb;
     }
-   
+    
+    /**
+     * Aktualisiert die Lagerbestand Tabelle
+     */
     private void refreshLagerbestandTableModel(){
         LagerbestandCollection lc = LagerbestandCollection.getInstance(true);
         LagerbestandTableModel lm = new LagerbestandTableModel();
@@ -804,6 +832,9 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         lagerBestandTable.setModel(lm);
     }
     
+     /**
+     * Aktualisiert die Teilebestand Tabelle
+     */
     private void refreshTeilebestandTableModel(){
         TeilebestandCollection tc = TeilebestandCollection.getInstance(true);
         TeileTableModel tm = new TeileTableModel();
@@ -811,22 +842,15 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         teileBestandTable.setModel(tm);
     }
     
-    private void cbxFachXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxFachXActionPerformed
-        // TODO add your handling action here:
-    }//GEN-LAST:event_cbxFachXActionPerformed
-
-    private void txfTeilIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfTeilIDActionPerformed
-        // TODO add your handling action here:
-    }//GEN-LAST:event_txfTeilIDActionPerformed
-
     private void cbxFachTypActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxFachTypActionPerformed
         refreshXYZ("quelle",cbxFachTyp.getSelectedItem().toString());
     }//GEN-LAST:event_cbxFachTypActionPerformed
-
-    private void txfHaltbarkeitsdatumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfHaltbarkeitsdatumActionPerformed
-        // TODO add your handling action here:
-    }//GEN-LAST:event_txfHaltbarkeitsdatumActionPerformed
     
+    /**
+     *
+     * @param id
+     * @param selectedItem
+     */
     public  void refreshXYZ(String id, String selectedItem){
         if(selectedItem.equals("HL")){
             try {
@@ -845,10 +869,6 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
     private void cbxFachTyp1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxFachTyp1ActionPerformed
         refreshXYZ("dest",cbxFachTyp1.getSelectedItem().toString());
     }//GEN-LAST:event_cbxFachTyp1ActionPerformed
-
-    private void cbxFachX1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxFachX1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbxFachX1ActionPerformed
 
     private void txfSplitAmountKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfSplitAmountKeyReleased
         if(txfSplitAmount.getText().length() > 0){
@@ -922,42 +942,10 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         this.repaint();
     }//GEN-LAST:event_btnAddSplitDestActionPerformed
 
-    
     /**
-     * @param args the command line arguments
+     *
+     * @return
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting action (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(BestandsaenderungFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(BestandsaenderungFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(BestandsaenderungFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(BestandsaenderungFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new BestandsaenderungFrame().setVisible(true);
-            }
-        });
-    }
-    
     public Lagerbestand getSelectedLagerbestand(){
         return this.selectedLagerbestand;
     }

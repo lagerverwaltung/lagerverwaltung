@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package helper;
 
 import java.sql.SQLException;
@@ -23,7 +17,7 @@ import model.ZielPosition;
 import view.BestandsaenderungFrame;
 
 /**
- *
+ * BestandsaenderungsGUI Helper in dem die Speicherung und Validierung aller Bestandsaenderungen durchgeführt wird
  * @author smodlich
  */
 public class BestandsGUIHelper {
@@ -73,7 +67,10 @@ public class BestandsGUIHelper {
     {
         return menge;
     }
-    
+    public void setMenge(int menge)
+    {
+        this.menge=menge;
+    }
     public void setTeilID(int teilID)
     {
         this.teilID=teilID;
@@ -187,6 +184,16 @@ public class BestandsGUIHelper {
     
         return errors;
     }
+    /**
+     * Generische Validierungsfunktion für alle Bestandsaenderungen
+     * @param code Action die ausgeführt wird (siehe BestandsaenderungFrame
+     * @param mengenE Menge die verwendet wird
+     * @param datumE Datum
+     * @param grundE Grund
+     * @param destinations Ziele generiert im Bestandsaenderungframe
+     * @return
+     * @throws SQLException 
+     */
     
     public HashMap<Integer,String> validateLagerbestandData(int code,String mengenE,String datumE, String grundE, ArrayList<HashMap> destinations) throws SQLException
     {

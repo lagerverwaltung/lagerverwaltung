@@ -15,14 +15,19 @@ import model.ZielPosition;
 import model.filter.WarenbewegungFilterModel;
 
 
-/**
- * @param <Warenbewegung>
+/** Enthält die Daten für den Warenbewegung und hält Filterfunktionen bereit
+ * Ist eine ArrayList welche Warenbewegungsobjekte enthält
+ * @param <Warenbewegung> Warenbewegung Objekt
  * @author simon
  */
 public class WarenbewegungCollection<Warenbewegung> extends ArrayList {
     
     private static WarenbewegungCollection singleton;
     
+    /**
+     * Liefert die Collection Instanz
+     * @return
+     */
     public static WarenbewegungCollection getInstance()
     {
         if (WarenbewegungCollection.singleton == null){
@@ -31,15 +36,27 @@ public class WarenbewegungCollection<Warenbewegung> extends ArrayList {
         return singleton;
     }
     
+    /**
+     * Liefert die Collection Instanz und läd diese neu
+     * @param refresh
+     * @return
+     */
     public static WarenbewegungCollection getInstance(boolean refresh) {
         singleton = WarenbewegungCollection.getInstance();
         return singleton.loadCollection();
     }
    
+    /**
+     * Konstruktor
+     */
     public WarenbewegungCollection() {
         loadCollection();
     }
     
+    /**
+     * Läd die Warenbewegung Collection
+     * @return Liste mit Warenbewegungen
+     */
     public WarenbewegungCollection<Warenbewegung> loadCollection()
     {
         try {

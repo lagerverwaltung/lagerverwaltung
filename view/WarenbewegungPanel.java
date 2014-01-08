@@ -8,13 +8,9 @@ import javax.swing.table.TableColumn;
 import model.collection.WarenbewegungCollection;
 import model.table.WarenbewegungTableModel;
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
- *
+ * Klasse für den Panel Warenbewegung
+ * 
  * @author simon
  */
 public class WarenbewegungPanel extends javax.swing.JPanel {
@@ -26,10 +22,18 @@ public class WarenbewegungPanel extends javax.swing.JPanel {
         initComponents();
     }
     
+    /**
+     * Liefert die Warenbewegungstabelle
+     * @return JTable Warenbewegungstabelle
+     */
     public JTable gettabMain() {
         return tblMain;
     }
 
+    /**
+     *
+     * @param mainFrame Das Hauptfenster
+     */
     public void setMainFrame(MainFrame mainFrame)
     {
         this.mainFrame = mainFrame;
@@ -127,10 +131,18 @@ public class WarenbewegungPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+    * Ruft das Filtermenü auf
+    * 
+    */
     private void btnFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFilterActionPerformed
        WarenbewegungFilterFrame.getInstance(mainFrame, tblMain);
     }//GEN-LAST:event_btnFilterActionPerformed
 
+    /**
+    * Setzt alle Filter zurück
+    * 
+    */
     private void btnFilterzurücksetzenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFilterzurücksetzenActionPerformed
         TableHelper.refreshWarenbewegungTableModel(tblMain);
     }//GEN-LAST:event_btnFilterzurücksetzenActionPerformed

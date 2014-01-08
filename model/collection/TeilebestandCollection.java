@@ -14,13 +14,18 @@ import java.util.ArrayList;
 import java.util.List;
 import model.filter.TeilebestandFilterModel;
 
-/**
- * @param <Teilebestand>
+/** Enthält die Daten für den Teilbestand und hält Filterfunktionen bereit
+ * Ist eine ArrayList welche Teilebestandsobjekte enthält
+ * @param <Teilebestand> Teilebestand Objekt
  * @author simon
  */
 public class TeilebestandCollection<Teilebestand> extends ArrayList {
     private static TeilebestandCollection singleton;
     
+    /**
+     * Liefert eine Collection Instanz (Singleton)
+     * @return
+     */
     public static TeilebestandCollection getInstance()
     {
         if (TeilebestandCollection.singleton == null){
@@ -29,10 +34,18 @@ public class TeilebestandCollection<Teilebestand> extends ArrayList {
         return singleton;
     }
     
+    /**
+     * Konstruktor
+     */
     public TeilebestandCollection() {
         loadCollection();
     }
     
+    /**
+     * Liefert eine Instanz und erneuert die Daten
+     * @param refresh
+     * @return
+     */
     public static TeilebestandCollection getInstance(boolean refresh)
     {
          singleton = TeilebestandCollection.getInstance();
@@ -40,6 +53,10 @@ public class TeilebestandCollection<Teilebestand> extends ArrayList {
     }
     
    
+    /**
+     * Läd die Daten neu
+     * @return TeilebestandCollection<Teilebestand> Eine Liste mit Teilen
+     */
     public TeilebestandCollection<Teilebestand> loadCollection()
     { 
         try {
@@ -84,6 +101,8 @@ public class TeilebestandCollection<Teilebestand> extends ArrayList {
                 .and()
                 .between("ve", tfm.getVonVe(), tfm.getBisVe())
                 .and()
+                .eq("deleted", false)
+                .and()
                 .like("bezeichnung", tfm.getBezeichnung());
 
         if (tfm.getTyp() != null) {
@@ -99,11 +118,4 @@ public class TeilebestandCollection<Teilebestand> extends ArrayList {
         }
         return this;
     }
- 
-    public void resetFilters()
-    {
-        
-    }
-
-    
 }

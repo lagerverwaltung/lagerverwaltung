@@ -26,7 +26,8 @@ import model.Lager.Lagerort;
 import model.Lagerfach;
 
 /**
- *
+ * GUI Panel Klasse zum Initaliseren des Lagers
+ * 
  * @author simon
  */
 public class InitFaecherPanel extends javax.swing.JPanel {
@@ -46,16 +47,25 @@ public class InitFaecherPanel extends javax.swing.JPanel {
     
     /**
      * Creates new form InitFaecherPanel
+     * 
      */
     public InitFaecherPanel() {
         initComponents(); 
     }
     
+    /**
+     * Set the mainFrame
+     * 
+     */
     public void setMainFrame(MainFrame mainFrame)
     {
         this.mainFrame = mainFrame;
     }
     
+    /**
+     * Erzeugt die GUI für die Größenauswahl
+     * 
+     */
     public void createFaecherPanel() {
         Lagerort lo;
         spFaecherPanel.removeAll();
@@ -77,14 +87,12 @@ public class InitFaecherPanel extends javax.swing.JPanel {
             JComboBox cb[] = new JComboBox[amount];
             JPanel jp[] = new JPanel[amount];
             HashMap m[] = new HashMap[amount];
-           // FachGroesse fg[] = new FachGroesse[amount];
             
             if(t != null){
                 List<Lagerfach> list;
                 list = t.getFaecher();
                 int i = 0;
                 for (Lagerfach f : list) {
-                    //System.out.println("x"+f.getX()+" y:"+f.getY()+" z:"+f.getZ());
                     jp[i] = new JPanel();
                     jp[i].setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
                     labelX[i] = new JLabel();
@@ -124,7 +132,6 @@ public class InitFaecherPanel extends javax.swing.JPanel {
                         break;
                     }
                     i++;
-                    //System.out.println("i"+i+" amount"+amount);
                 }
             }
             spFaecherPanel.setPreferredSize(new Dimension(307, amount*40+20));
@@ -134,6 +141,10 @@ public class InitFaecherPanel extends javax.swing.JPanel {
         }
     }
     
+    /**
+     * Bereitet den Panel für die  Freilager Initalisierung vor
+     * 
+     */
     public void prepareFreilager()
     {
         freilager = true;
@@ -276,6 +287,10 @@ public class InitFaecherPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Eventbehandlung bei einem Klick auf weiter
+     * 
+     */
     private void btnWeiterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnWeiterActionPerformed
        if(freilager){
             mainFrame.navigationController.showCard("login");

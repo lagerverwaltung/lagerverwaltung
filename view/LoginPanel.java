@@ -10,7 +10,7 @@ import java.sql.SQLException;
 
 
 /**
- *
+ * Panel Klasse für das Loginfenster 
  * @author simon
  */
 public class LoginPanel extends javax.swing.JPanel {
@@ -31,6 +31,10 @@ public class LoginPanel extends javax.swing.JPanel {
         initComponents();
     }
     
+    /**
+     * Übergibt das Hauptfenster
+     * 
+     */
     public void setMainFrame(MainFrame mainFrame)
     {
         this.mainFrame = mainFrame;
@@ -88,12 +92,6 @@ public class LoginPanel extends javax.swing.JPanel {
 
         lblBitte.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         lblBitte.setText("Bitte melden Sie sich an:");
-
-        txfBenutzername.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txfBenutzernameActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout panLoginLayout = new javax.swing.GroupLayout(panLogin);
         panLogin.setLayout(panLoginLayout);
@@ -175,10 +173,10 @@ public class LoginPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txfBenutzernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfBenutzernameActionPerformed
-
-    }//GEN-LAST:event_txfBenutzernameActionPerformed
-
+    /**
+     * Behandelt den Klick auf den Button anmelden und führ die Anmeldung aus
+     * 
+     */
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         if(txfBenutzername.getText().isEmpty() || pwfPasswort.getText().isEmpty()){
             Misc.createErrorDialog(mainFrame, " Es muss  ein Benutzername und Passwort eingegeben werden!");
@@ -208,6 +206,10 @@ public class LoginPanel extends javax.swing.JPanel {
         
     }//GEN-LAST:event_btnLoginActionPerformed
     
+    /**
+     * Loggt den User ein und setzt die entsprechenden Berechtigungen
+     * 
+     */
     private void loginUser()
     {
         mainFrame.navigationController.showCard("main"); System.out.println("user role"+LoginPanel.USER_ROLE);
@@ -223,6 +225,11 @@ public class LoginPanel extends javax.swing.JPanel {
             Misc.printSQLException(mainFrame, ex);
         }
     }
+    
+    /**
+     *  Loggt den User bei einem Klick auf das geheime Lagericon ein
+     * 
+     */
     private void lblIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblIconMouseClicked
         loginUser();
     }//GEN-LAST:event_lblIconMouseClicked

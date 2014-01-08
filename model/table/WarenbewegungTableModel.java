@@ -18,7 +18,7 @@ import model.ZielPosition;
 import model.collection.WarenbewegungCollection;
 
 /**
- *
+ * Table Model für die Warenbewegungstabelle
  * @author simon
  */
 public class WarenbewegungTableModel extends AbstractTableModel{
@@ -26,6 +26,10 @@ public class WarenbewegungTableModel extends AbstractTableModel{
     WarenbewegungCollection<Warenbewegung> warenRows = new WarenbewegungCollection();
     ArrayList<Object[]> warenRowsArr = new ArrayList();
     
+    /**
+     * Setzt die Daten für die Warenbewegung
+     * @param arr
+     */
     public void setData(WarenbewegungCollection<Warenbewegung> arr)
     {
         this.warenRows = arr;
@@ -143,7 +147,7 @@ public class WarenbewegungTableModel extends AbstractTableModel{
                             if(wb.getHaltbarkeitsDatum() != null){
                                 return df.format(wb.getHaltbarkeitsDatum());
                             }else{
-                                return "";
+                                return "kA";
                             }
                         default:
                             return "empty";
