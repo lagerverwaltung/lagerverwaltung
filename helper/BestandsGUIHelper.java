@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package helper;
 
 import java.sql.SQLException;
@@ -22,7 +16,7 @@ import model.ZielPosition;
 import view.BestandsaenderungFrame;
 
 /**
- *
+ * 
  * @author smodlich
  */
 public class BestandsGUIHelper {

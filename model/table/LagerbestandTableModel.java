@@ -13,12 +13,17 @@ import model.collection.LagerbestandCollection;
 
 
 /**
- *
- * @author artjom,simon?
+ * Table Model für die Lagerbestand Tabelle
+ * @author artjom
+ * @athor Simon
  */
 public class LagerbestandTableModel extends AbstractTableModel {
     LagerbestandCollection<Lagerbestand> lagerbestandRows = new LagerbestandCollection();
     
+    /**
+     * Setzt die Daten für die Lagerbestandtabelle
+     * @param arr
+     */
     public void setData(LagerbestandCollection<Lagerbestand> arr)
     {
         this.lagerbestandRows = arr;

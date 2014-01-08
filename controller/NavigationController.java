@@ -1,14 +1,10 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package controller;
 
 import java.awt.CardLayout;
 import java.awt.Container;
 
 /**
- *
+ * Steuert die Navigation und Umschaltung von Panels
  * @author simon
  */
 public class NavigationController {
