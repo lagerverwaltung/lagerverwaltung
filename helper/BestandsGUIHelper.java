@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package view;
+package helper;
 
 import java.sql.SQLException;
 import java.text.DateFormat;
@@ -19,6 +19,7 @@ import model.Lagerbestand;
 import model.Lagerfach;
 import model.Teilebestand;
 import model.ZielPosition;
+import view.BestandsaenderungFrame;
 
 /**
  *

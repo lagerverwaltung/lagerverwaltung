@@ -197,7 +197,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="lblTeiltyp">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Lagertyp:"/>
+            <Property name="text" type="java.lang.String" value="Typ:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lblDatumBis">
