@@ -119,9 +119,6 @@
               <Connection code="new javax.swing.DefaultComboBoxModel()" type="code"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbxFachXActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JComboBox" name="cbxFachY">
           <Properties>
@@ -213,9 +210,6 @@
               <Dimension value="[50, 22]"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txfTeilIDActionPerformed"/>
-          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -265,9 +259,6 @@
               <Dimension value="[90, 22]"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txfHaltbarkeitsdatumActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lblHinweisDatum">
           <Properties>
@@ -343,9 +334,6 @@
               <Connection code="new javax.swing.DefaultComboBoxModel()" type="code"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbxFachX1ActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JComboBox" name="cbxFachY1">
           <Properties>

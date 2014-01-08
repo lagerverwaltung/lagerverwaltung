@@ -16,13 +16,19 @@ import model.filter.LagerbestandFilterModel;
 import model.table.LagerbestandTableModel;
 
 /**
- *
+ * Filter Fenster für den Lagerbestand
  * @author simon
  */
 public class LagerbestandFilterFrame extends javax.swing.JFrame {
     private static LagerbestandFilterFrame singleton;
     JTable lagerBestandTable;
     
+    /** 
+     * Methode zum holen einer Filter Instanz
+     * @param mainFrame Hauptfenster 
+     * @param jtable Lagerbestand Tabelle
+     * @return
+     */
     public static LagerbestandFilterFrame getInstance(Component mainFrame, JTable jtable)
     {
         if (LagerbestandFilterFrame.singleton == null){
@@ -44,12 +50,21 @@ public class LagerbestandFilterFrame extends javax.swing.JFrame {
         }
     }
     
+    /**
+     * Konstruktor 
+     * @param c Hauptfenster
+     * @param jtable Lagerbestand Tabelle
+      */
     public LagerbestandFilterFrame(Component c, JTable jtable) {
         this();
         alignFilterMenu(c);
         lagerBestandTable = jtable;
     }
     
+    /**
+     * Richtet den Filter rechtsbündig zum Hauptfenster aus
+     * @param main
+     */
     public void alignFilterMenu(Component main)
     {
         int x = main.getX();
@@ -140,11 +155,6 @@ public class LagerbestandFilterFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         cbxLagertyp.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "", "HL", "FL" }));
-        cbxLagertyp.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbxLagertypActionPerformed(evt);
-            }
-        });
 
         lblFachadresse.setText("Fachadresse:");
 
@@ -157,11 +167,6 @@ public class LagerbestandFilterFrame extends javax.swing.JFrame {
         cbxZ.setModel(new javax.swing.DefaultComboBoxModel());
 
         cbxX.setModel(new javax.swing.DefaultComboBoxModel());
-        cbxX.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbxXActionPerformed(evt);
-            }
-        });
 
         cbxY.setModel(new javax.swing.DefaultComboBoxModel());
 
@@ -175,12 +180,6 @@ public class LagerbestandFilterFrame extends javax.swing.JFrame {
         lblMengeBis.setText("Menge bis:");
 
         lblBezeichnung.setText("Bezeichnung:");
-
-        txfBezeichnung.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txfBezeichnungActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout panMainLayout = new javax.swing.GroupLayout(panMain);
         panMain.setLayout(panMainLayout);
@@ -200,7 +199,7 @@ public class LagerbestandFilterFrame extends javax.swing.JFrame {
                         .addComponent(txfMengeVon, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(executeFilterButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panMainLayout.createSequentialGroup()
-                        .addGap(0, 33, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(cbxLagertyp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(58, 58, 58)
                         .addComponent(cbxX, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -276,14 +275,6 @@ public class LagerbestandFilterFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void cbxXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxXActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbxXActionPerformed
-
-    private void cbxLagertypActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxLagertypActionPerformed
-
-    }//GEN-LAST:event_cbxLagertypActionPerformed
     /**
      * Validiert die Eingabe, erzeugt ein neues LagerbestandFilterModel und
      * refreshed die Lagerbestandstabelle
@@ -318,10 +309,6 @@ public class LagerbestandFilterFrame extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_executeFilterButtonActionPerformed
 
-    private void txfBezeichnungActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfBezeichnungActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txfBezeichnungActionPerformed
-
     /**
      * Läd die Lagerbestandstabelle mit den übergenenen Filtereinstellungen
      * nach
@@ -333,40 +320,6 @@ public class LagerbestandFilterFrame extends javax.swing.JFrame {
         lagerBestandTable.setModel(lm);
     }
     
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(LagerbestandFilterFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(LagerbestandFilterFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(LagerbestandFilterFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(LagerbestandFilterFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new LagerbestandFilterFrame().setVisible(true);
-            }
-        });
-    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox cbxLagertyp;
     private javax.swing.JComboBox cbxX;

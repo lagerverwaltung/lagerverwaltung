@@ -11,7 +11,7 @@ import model.collection.LagerbestandCollection;
 
 
 /**
- *
+ * Panelklasse für den Lagerbestand
  * @author simon
  */
 public class LagerbestandPanel extends javax.swing.JPanel {
@@ -23,16 +23,27 @@ public class LagerbestandPanel extends javax.swing.JPanel {
         initComponents();
     }
     
+    /**
+     * Setzt die Elemente unsichtbar für den Gastzugang
+     */
     public void setGuest()
     {
         this.pnlActions.setVisible(false);
     }
     
+    /**
+     *
+     * @return
+     */
     public JTable gettabMain()
     { 
         return tabMaintable;
     }
     
+    /** 
+     * Setzt die Spaltenbreiten 
+     * @param table
+     */
     public void setTableWidths(JTable table)
     {
         int[] arrWidths = {50, 110, 10, 10, 10, 110,70, 50, 150};
@@ -45,6 +56,10 @@ public class LagerbestandPanel extends javax.swing.JPanel {
         }
     }
     
+    /**
+     *
+     * @param mainFrame
+     */
     public void setMainFrame(MainFrame mainFrame)
     {
         this.mainFrame = mainFrame;
@@ -187,7 +202,11 @@ public class LagerbestandPanel extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
+   
+    /**
+     * Öffnet ein Fenster zum Teile einlagern und bereitet das Fenster vor
+     * 
+     */
     private void btnteilEinlagernActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnteilEinlagernActionPerformed
         int selectedId;
         String selectedAnschGr;
@@ -218,6 +237,10 @@ public class LagerbestandPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnteilEinlagernActionPerformed
 
+    /**
+     * Öffnet ein Fenster zum Teile umlagern und bereitet das Fenster vor
+     * 
+     */
     private void btnTeilUmlagernActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTeilUmlagernActionPerformed
         if (tabMaintable.getSelectedRow() >= 0) {
 
@@ -277,6 +300,10 @@ public class LagerbestandPanel extends javax.swing.JPanel {
                  
     }//GEN-LAST:event_btnTeilAuslagernActionPerformed
 
+    /**
+     * Öffnet ein Fenster zum Teile splitten und bereitet das Fenster vor
+     * 
+     */
     private void btnTeilSplittenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTeilSplittenActionPerformed
 
         if (tabMaintable.getSelectedRow() >= 0) {
@@ -302,10 +329,18 @@ public class LagerbestandPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnTeilSplittenActionPerformed
 
+    /**
+     * Öffnet das Filtermenü
+     * 
+     */
     private void btnFilternActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFilternActionPerformed
         LagerbestandFilterFrame.getInstance(mainFrame, tabMaintable);
     }//GEN-LAST:event_btnFilternActionPerformed
 
+    /**
+     * Setzt den Filter zurück
+     * 
+     */
     private void btnFilterZuruecksetzenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFilterZuruecksetzenActionPerformed
         refreshLagerbestandTableModel();
     }//GEN-LAST:event_btnFilterZuruecksetzenActionPerformed

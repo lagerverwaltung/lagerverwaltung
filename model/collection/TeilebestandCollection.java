@@ -84,6 +84,8 @@ public class TeilebestandCollection<Teilebestand> extends ArrayList {
                 .and()
                 .between("ve", tfm.getVonVe(), tfm.getBisVe())
                 .and()
+                .eq("deleted", false)
+                .and()
                 .like("bezeichnung", tfm.getBezeichnung());
 
         if (tfm.getTyp() != null) {

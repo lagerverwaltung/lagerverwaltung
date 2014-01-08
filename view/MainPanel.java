@@ -3,13 +3,9 @@ package view;
 import controller.NavigationController;
 import java.awt.Color;
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
- *
+ * Die Klasse des Hauptpanel
+ * 
  * @author simon
  */
 public class MainPanel extends javax.swing.JPanel {
@@ -24,6 +20,10 @@ public class MainPanel extends javax.swing.JPanel {
         navigationController = new NavigationController(panCard);
     }
     
+    /**
+    * Übergibt den MainFrame
+    * 
+    */
     public void setMainFrame(MainFrame mainFrame)
     {
         this.mainFrame = mainFrame;
@@ -32,14 +32,28 @@ public class MainPanel extends javax.swing.JPanel {
         panWarenbewegung.setMainFrame(mainFrame);
     }
     
+    /**
+    * Gibt LagerbestandPanel zurück
+    * 
+    */
     public LagerbestandPanel getLagerbestand()
     {
         return panLagerbestand;
     }
+    
+    /**
+    * Gibt TeilebestandPanel zurück
+    * 
+    */
     public TeilebestandPanel getTeilebestand()
     {
         return panTeilebestand;
     }
+    
+    /**
+    * Gibt WarenbewegungPanel zurück
+    * 
+    */
     public WarenbewegungPanel getWarenbewegung()
     {
         return panWarenbewegung;
@@ -113,21 +127,37 @@ public class MainPanel extends javax.swing.JPanel {
         add(panCard, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+    * Schaltet das Fenster auf Lagerbestand um
+    * 
+    */
     private void btnLagerbestandActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLagerbestandActionPerformed
        navigationController.showCard("lagerbestand");
        highlightButton("lagerbestand");
     }//GEN-LAST:event_btnLagerbestandActionPerformed
 
+    /**
+    * Schaltet das Fenster auf Teilebestand um
+    * 
+    */
     private void btnTeilebestandActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTeilebestandActionPerformed
        navigationController.showCard("teilebestand");
        highlightButton("teilebestand");
     }//GEN-LAST:event_btnTeilebestandActionPerformed
 
+    /**
+    * Schaltet das Fenster auf Warenbewegung um
+    * 
+    */
     private void btnWarenbewegungActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnWarenbewegungActionPerformed
        navigationController.showCard("warenbewegung");
        highlightButton("warenbewegung");
     }//GEN-LAST:event_btnWarenbewegungActionPerformed
     
+    /**
+    * Bringt das ausgewählte Menüelement zum Leuchten
+    * 
+    */
     private void highlightButton(String name){
         btnLagerbestand.setBackground(Color.white);
         btnTeilebestand.setBackground(Color.white);
@@ -144,8 +174,6 @@ public class MainPanel extends javax.swing.JPanel {
                 btnWarenbewegung.setBackground(color);
                 break;
         }
-        
-        
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLagerbestand;

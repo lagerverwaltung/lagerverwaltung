@@ -10,11 +10,15 @@ import javax.swing.JTextArea;
 import javax.swing.table.TableCellRenderer;
 
 /**
- *
+ * Eigener TableCellRenderer für die Anzahl mehrere Zielzeilen pro Zelle
  * @author simon
  */
-    public class TwoLinesCellRenderer extends JTextArea implements TableCellRenderer
+    public class DestinationLinesCellRenderer extends JTextArea implements TableCellRenderer
     {
+        /**
+        * Methode zum Verändern der Zielfächerspalte auf die entsprechende Höhe
+        * @author simon
+        */
         @Override public Component getTableCellRendererComponent(
         JTable table, Object value,
         boolean isSelected, boolean hasFocus, int row, int column )
@@ -31,5 +35,4 @@ import javax.swing.table.TableCellRenderer;
           setText( value.toString() );
           return this;
         }
-        
     }
