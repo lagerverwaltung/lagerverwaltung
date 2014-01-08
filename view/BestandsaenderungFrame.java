@@ -4,6 +4,7 @@
  */
 package view;
 
+import helper.BestandsGUIHelper;
 import helper.Misc;
 import helper.TableHelper;
 import java.awt.Dimension;
