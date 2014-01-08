@@ -10,10 +10,14 @@ import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.ForeignCollection;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.field.ForeignCollectionField;
+import com.j256.ormlite.stmt.PreparedQuery;
+import com.j256.ormlite.stmt.QueryBuilder;
 import com.j256.ormlite.table.DatabaseTable;
 import helper.DatabaseManager;
 import helper.Misc;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -199,6 +203,37 @@ public class Warenbewegung {
             z.setWarenbewegung(this);
             z.save();
         }
+    }
+    
+    public static Date getLastHaltbarkeitsdatum(Lagerbestand lb) throws SQLException{
+        List<Lagerbestand> result = new ArrayList();
+        Date today = new Date();
+        Date hbDate = null;
+        Dao<Warenbewegung,Integer> warenbewegungDao = DatabaseManager.getInstance().getWarenbewegungDao();
+        QueryBuilder<Warenbewegung, Integer> warenbQb = warenbewegungDao.queryBuilder();
+        
+         Dao<Lagerbestand, Integer> lagerbestandDao = DatabaseManager.getInstance().getLagerbestandDao();
+        QueryBuilder<Lagerbestand, Integer> lagerbestandQb = lagerbestandDao.queryBuilder();
+        
+        lagerbestandQb.where().eq("teilID", lb.getTeil())
+                .and().eq("fachID", lb.getLagerfach());
+         
+        warenbQb.join(lagerbestandQb);
+        warenbQb.orderBy("warenbID", false);
+        //warenbQb.orderBy("lagerbestandID", false);
+                
+        PreparedQuery<Warenbewegung> preparedQuery = warenbQb.prepare();
+        List<Warenbewegung> wbResult = warenbewegungDao.query(preparedQuery);
+        
+        if (wbResult.size() > 0) {
+            for (int i = 0; i < wbResult.size(); i++) {
+                if(wbResult.get(i).getHaltbarkeitsDatum() != null){
+                    hbDate = wbResult.get(i).getHaltbarkeitsDatum();
+                    break;
+                }
+            }
+        }
+        return hbDate;
     }
     
 }

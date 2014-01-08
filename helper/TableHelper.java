@@ -24,7 +24,7 @@ public class TableHelper {
         TableCellRenderer ren = new TwoLinesCellRenderer();
         t.getColumnModel().getColumn(5).setCellRenderer(ren);
 
-        int[] arrWidths = {20,120,65, 60, 17, 180, 120, 65, 65,90};
+        int[] arrWidths = {20,120,65, 60, 17, 180, 120, 90, 80};
         TableColumn tc;
         t.setRowHeight(23);
         int i = 0;

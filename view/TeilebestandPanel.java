@@ -2,9 +2,13 @@ package view;
 
 import helper.Misc;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.TableColumn;
+import model.Teilebestand;
 import model.collection.TeilebestandCollection;
 import model.table.TeileTableModel;
 
@@ -226,7 +230,26 @@ public class TeilebestandPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnTeilAendernActionPerformed
 
     private void btnTeilLoschenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTeilLoschenActionPerformed
-        // TODO add your handling code here:
+        int selectedId;
+        if(tblMain.getSelectedRow() >=0){
+            selectedId = Integer.parseInt(tblMain.getValueAt(tblMain.getSelectedRow(), 0).toString());
+            Teilebestand teil;
+            int option = JOptionPane.showConfirmDialog(this, "Soll das Teil wirklich aus dem Teilebestand gelöscht werden?", " Teil löschen?", JOptionPane.YES_NO_OPTION);
+
+            if (option == JOptionPane.YES_OPTION) {
+                try {
+                    teil = Teilebestand.loadTeil(selectedId);
+                    teil.setDeleted(true);
+                } catch (SQLException ex) {
+                    Misc.printSQLException(mainFrame, ex);
+                }
+            refreshTeilebestandTableModel();       
+            }
+        }
+        else{
+            Misc.createErrorDialog(mainFrame, "Es muss erst ein Teil zum Löschen aus der "
+                    + "Liste gewählt werden!");
+        }
     }//GEN-LAST:event_btnTeilLoschenActionPerformed
 
     private void btnFilternActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFilternActionPerformed

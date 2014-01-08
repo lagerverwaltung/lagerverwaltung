@@ -761,7 +761,11 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         if (quellLb != null) {
             quellLb.save();
             Warenbewegung wb = new Warenbewegung();
-            wb.logWarenbewegung(quellLb, action, quellLb.getAnschaffungsgrund(),new Date(), help.getHbDatum(), "Lagerverwalter", 
+            Date hbDate = help.getHbDatum();
+            if( action == UMLAGERN || action == SPLITTEN){
+                hbDate = Warenbewegung.getLastHaltbarkeitsdatum(quellLb);
+            }
+            wb.logWarenbewegung(quellLb, action, quellLb.getAnschaffungsgrund(),new Date(), hbDate, "Lagerverwalter", 
                                 zielPositionen);
         }
         
