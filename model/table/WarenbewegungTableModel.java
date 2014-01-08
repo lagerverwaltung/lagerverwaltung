@@ -143,7 +143,7 @@ public class WarenbewegungTableModel extends AbstractTableModel{
                             if(wb.getHaltbarkeitsDatum() != null){
                                 return df.format(wb.getHaltbarkeitsDatum());
                             }else{
-                                return "";
+                                return "kA";
                             }
                         default:
                             return "empty";
