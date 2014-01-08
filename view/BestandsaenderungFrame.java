@@ -716,7 +716,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
                 zp2.setLagerfach(help.getEinLagerfach());
                 zielPositionen.add(zp2);
                 
-                if (quellLb.getMenge() == 0 && Lagerbestand.isLastTeil(quellLb)) {
+                if (quellLb.getMenge() == 0 && Lagerbestand.isLastTeil(quellLb.getTeil())) {
                     int option = JOptionPane.showConfirmDialog(this, "Soll das zugehörige Teil aus dem Teilebestand gelöscht werden?", "Zugehöriges Teil löschen?", JOptionPane.YES_NO_OPTION);
 
                     if (option == JOptionPane.YES_OPTION) {
