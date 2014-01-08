@@ -739,7 +739,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
                     Lagerbestand zielLb;
                     zielLb= Lagerbestand.getLagerbestand(help.getTeilID(), fach.getFachnummer());
                     if(zielLb == null){
-                        zielLb = neuerLagerbestand(teil, fach, help.getGrund(), help.getEineMenge());
+                        zielLb = neuerLagerbestand(teil, fach, help.getGrund(), qty);
                     }
                     else {
                         zielLb.setMenge(zielLb.getMenge()+qty);
