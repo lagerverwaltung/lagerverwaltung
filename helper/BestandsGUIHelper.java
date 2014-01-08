@@ -13,6 +13,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.TimeZone;
 import model.Lager;
 import model.Lager.Lagerort;
 import model.Lagerbestand;
@@ -215,6 +216,8 @@ public class BestandsGUIHelper {
         {
         try{
             DateFormat d= new SimpleDateFormat("dd.MM.yyyy");
+            d.setTimeZone(TimeZone.getTimeZone("CET"));
+            d.setLenient(false);
             hbDatum=d.parse(datumE);
         }
         catch(ParseException ex)

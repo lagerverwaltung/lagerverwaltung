@@ -16,8 +16,6 @@ import com.j256.ormlite.table.DatabaseTable;
 import helper.DatabaseManager;
 import helper.Misc;
 import java.sql.SQLException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;

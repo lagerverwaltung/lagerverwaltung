@@ -388,7 +388,7 @@ public class WarenbewegungFilterFrame extends javax.swing.JFrame {
         if (Misc.createErrorDialog(this, errors) == true) {
             return;
         }
-        
+
         WarenbewegungFilterModel wfm = FilterUiHelper.createWFM(
                txfBezeichnung.getText(),
                txfHaltbarVon.getText(),
@@ -430,7 +430,7 @@ public class WarenbewegungFilterFrame extends javax.swing.JFrame {
         TableCellRenderer ren = new TwoLinesCellRenderer();
         warenbewegungTable.getColumnModel().getColumn(5).setCellRenderer(ren);
 
-        int[] arrWidths = {23, 120, 65, 70, 40, 170, 90, 65, 65, 90};
+        int[] arrWidths = {20, 120, 65, 60, 17, 180, 120, 90, 80};
         TableColumn tc;
         warenbewegungTable.setRowHeight(23);
         int i = 0;

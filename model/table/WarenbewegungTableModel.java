@@ -8,6 +8,7 @@ import com.j256.ormlite.dao.ForeignCollection;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.TimeZone;
 import javax.swing.table.AbstractTableModel;
 import model.Lagerbestand;
 import model.Lagerfach;
@@ -89,6 +90,7 @@ public class WarenbewegungTableModel extends AbstractTableModel{
                 tl = lb.getTeil();
             }
             DateFormat df = new SimpleDateFormat("dd.MM.yyyy");
+            df.setTimeZone(TimeZone.getTimeZone("CET"));
             df.setLenient(false);
 
             int qGes = 0;
@@ -131,6 +133,8 @@ public class WarenbewegungTableModel extends AbstractTableModel{
                         case 7:
                             if(wb.getDatum() != null){
                                 DateFormat formatter = new SimpleDateFormat("dd.MM.yy H:mm");
+                                formatter.setTimeZone(TimeZone.getTimeZone("CET"));
+                                formatter.setLenient(false);
                                 return formatter.format( wb.getDatum() );
                             }else{
                                 return "";

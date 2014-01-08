@@ -8,6 +8,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.TimeZone;
 import model.Lager;
 import model.Teilebestand;
 
@@ -39,6 +40,8 @@ public class WarenbewegungFilterModel {
     public WarenbewegungFilterModel(){
         try {
             DateFormat f = new SimpleDateFormat("dd.MM.YYYY");
+            f.setTimeZone(TimeZone.getTimeZone("CET"));
+            f.setLenient(false);
             haltbarVon = f.parse("01.01.1969");
             haltbarBis = f.parse("01.01.2542");
             datumVon = haltbarVon;
@@ -54,35 +57,8 @@ public class WarenbewegungFilterModel {
         zY = 0;
         bezeichnung = "";
         bewegungsTyp = 0;
+        expireID = 0;
         
-    }
-
-    /**
-     * @return the vonHaltbarkeit
-     */
-    public Date getVonHaltbarkeit() {
-        return getHaltbarVon();
-    }
-
-    /**
-     * @param vonHaltbarkeit the vonHaltbarkeit to set
-     */
-    public void setVonHaltbarkeit(Date vonHaltbarkeit) {
-        this.setHaltbarVon(vonHaltbarkeit);
-    }
-
-    /**
-     * @return the bisHaltbarkeit
-     */
-    public Date getBisHaltbarkeit() {
-        return getHaltbarBis();
-    }
-
-    /**
-     * @param bisHaltbarkeit the bisHaltbarkeit to set
-     */
-    public void setBisHaltbarkeit(Date bisHaltbarkeit) {
-        this.setHaltbarBis(bisHaltbarkeit);
     }
 
     /**
