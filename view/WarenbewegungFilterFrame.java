@@ -168,7 +168,7 @@ public class WarenbewegungFilterFrame extends javax.swing.JFrame {
 
         lblQuellfach.setText("Quellfachadresse:");
 
-        lblTeiltyp.setText("Lagertyp:");
+        lblTeiltyp.setText("Typ:");
 
         lblDatumBis.setText(" bis:");
 
