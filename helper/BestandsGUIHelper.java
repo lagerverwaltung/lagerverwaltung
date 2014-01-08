@@ -72,7 +72,10 @@ public class BestandsGUIHelper {
     {
         return menge;
     }
-    
+    public void setMenge(int menge)
+    {
+        this.menge=menge;
+    }
     public void setTeilID(int teilID)
     {
         this.teilID=teilID;

@@ -33,7 +33,6 @@ import model.table.TeileTableModel;
  *
  * @author simon
  */
-//ändern
 public class BestandsaenderungFrame extends javax.swing.JFrame {
 
 
@@ -334,6 +333,8 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
     private void loadLagerCbx(String destination, String lagerCode) throws SQLException{
         HashMap hmFields = (HashMap) faecherCbs.get(destination);
         Lager lager = Lager.getLager(Lager.getLagerort(lagerCode));
+        if(lager!=null)
+        {
         int x = lager.getBreite();
         int y = lager.getTiefe();
         int z = lager.getHoehe();
@@ -356,6 +357,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
                 
          for(int i = 1; i <= z; i++){
             cbZ.addItem(i);
+        }
         }
     }
     
