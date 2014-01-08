@@ -6,7 +6,6 @@
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
-    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
   </SyntheticProperties>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
@@ -23,42 +22,34 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="1" attributes="0">
-              <Group type="103" groupAlignment="1" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jSeparator1" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="btnanlegen" min="-2" pref="182" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jSeparator1" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="lblZeichnungsnummer" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="lblMaterialGruppe" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="lblTyp" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="lblBezeichnung" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="lblPreisInEuro" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="lblGrößeVE" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace min="-2" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="txfBezeichnung" min="-2" pref="229" max="-2" attributes="0"/>
-                                          <Component id="cbxTyp" min="-2" pref="213" max="-2" attributes="0"/>
-                                          <Component id="txfMaterial" min="-2" pref="164" max="-2" attributes="0"/>
-                                          <Component id="txfZeichnungsnummer" min="-2" pref="165" max="-2" attributes="0"/>
-                                          <Component id="txfGroesseVE" alignment="0" min="-2" pref="88" max="-2" attributes="0"/>
-                                          <Component id="txfPreisInEuro" alignment="0" min="-2" pref="88" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                                  <Component id="lblNeuesTeilAnlegen" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblZeichnungsnummer" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblMaterialGruppe" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblTyp" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblBezeichnung" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblPreisInEuro" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="txfBezeichnung" min="-2" pref="229" max="-2" attributes="0"/>
+                                  <Component id="cbxTyp" min="-2" pref="213" max="-2" attributes="0"/>
+                                  <Component id="txfMaterial" min="-2" pref="164" max="-2" attributes="0"/>
+                                  <Component id="txfZeichnungsnummer" min="-2" pref="165" max="-2" attributes="0"/>
+                                  <Component id="txfPreisInEuro" alignment="0" min="-2" pref="88" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
+                          <Component id="lblNeuesTeilAnlegen" min="-2" max="-2" attributes="0"/>
+                          <Component id="pnlVol" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnanlegen" alignment="0" min="-2" pref="182" max="-2" attributes="0"/>
                       </Group>
+                      <EmptySpace min="0" pref="9" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
@@ -98,13 +89,10 @@
                   <Component id="lblPreisInEuro" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lblGrößeVE" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txfGroesseVE" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="67" max="-2" attributes="0"/>
+              <Component id="pnlVol" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
               <Component id="btnanlegen" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -181,12 +169,45 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnanlegenActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="lblGr&#xf6;&#xdf;eVE">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Gr&#xf6;&#xdf;e in Volumeneinheiten:"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="txfGroesseVE">
-    </Component>
+    <Container class="javax.swing.JPanel" name="pnlVol">
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" attributes="0">
+                  <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
+                  <Component id="lblGrößeVE" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                  <Component id="txfGroesseVE" min="-2" pref="88" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" attributes="0">
+                  <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="lblGrößeVE" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txfGroesseVE" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JLabel" name="lblGr&#xf6;&#xdf;eVE">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Gr&#xf6;&#xdf;e in Volumeneinheiten:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txfGroesseVE">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txfGroesseVEActionPerformed"/>
+          </Events>
+        </Component>
+      </SubComponents>
+    </Container>
   </SubComponents>
 </Form>

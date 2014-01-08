@@ -32,7 +32,7 @@ public class WarenbewegungTableModel extends AbstractTableModel{
     
     @Override
     public int getColumnCount() {
-        return 10;
+        return 9;
     }
     
     @Override
@@ -71,9 +71,6 @@ public class WarenbewegungTableModel extends AbstractTableModel{
                 break;
             case 8:
                 name = "Haltbar bis";
-                break;
-            case 9:
-                name = "Typ";
                 break;
         }
         return name;
@@ -143,10 +140,6 @@ public class WarenbewegungTableModel extends AbstractTableModel{
                                 return df.format(wb.getHaltbarkeitsDatum());
                             }else{
                                 return "";
-                            }
-                        case 9:
-                             if(tl != null && tl.getTyp()!= null){
-                                return tl.getTyp();
                             }
                         default:
                             return "empty";

@@ -187,7 +187,26 @@ public class Teilebestand {
             return text;
         }
 	}
-	
-	
+    
+   /*
+    * Ermittelt ob es eingelagerte Teile von diesem Typ gibt
+    * @author Simon
+    * @param Teilebestand teil Das Teil das geprueft wird
+    * @return int wieviele Lagerbestaende es gibt
+    */
+    public static int countLagerbestand(Teilebestand teil) throws SQLException {
+        Dao<Lagerbestand, Integer> lagerbestandDao = DatabaseManager.getInstance().getLagerbestandDao();
+        List<Lagerbestand> lbList = lagerbestandDao.queryForAll();
+        int teilId = teil.getIdentnummer();
+        int count = 0;
 
+        if (lbList.size() > 0) {
+            for (int i = 0; i < lbList.size(); i++) {
+                if (lbList.get(i).getTeil().getIdentnummer() == (teilId) && lbList.get(i).getMenge() > 0) {
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
 }

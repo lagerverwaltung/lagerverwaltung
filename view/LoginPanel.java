@@ -181,20 +181,20 @@ public class LoginPanel extends javax.swing.JPanel {
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         if(txfBenutzername.getText().isEmpty() || pwfPasswort.getText().isEmpty()){
-            Misc.createErrorDialog(mainFrame, "Junge! Es muss schon ein Benutzername und Passwort eingegeben werden!");
+            Misc.createErrorDialog(mainFrame, " Es muss  ein Benutzername und Passwort eingegeben werden!");
             return;
         }
         else if (txfBenutzername.getText().equals(this.nameLagerverwalter))
         {
             if (!pwfPasswort.getText().equals(this.passLagerverwalter)){
-                Misc.createErrorDialog(mainFrame, "Das Passwort ist nicht korrekt. Knacke die Nuss.");
+                Misc.createErrorDialog(mainFrame, "Das eingegebene Passwort ist nicht korrekt. ");
                 return;
             }
             LoginPanel.USER_ROLE = LoginPanel.LAGERVERWALTER_ROLE;
         }
         else if (txfBenutzername.getText().equals(this.nameGast)){
             if (!pwfPasswort.getText().equals(this.passGast)){
-                Misc.createErrorDialog(mainFrame, "Das Passwort ist nicht korrekt. Errinere dich an die Lösung !");
+                Misc.createErrorDialog(mainFrame, "Das eingegebene Passwort ist nicht korrekt.");
                 return;
             }
             LoginPanel.USER_ROLE = LoginPanel.GAST_ROLE;

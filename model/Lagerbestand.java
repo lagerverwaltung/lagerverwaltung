@@ -181,19 +181,8 @@ public class Lagerbestand {
     * @param MEnge
     * true, wenn im Lagerbestand nurnoch 1 Teil vorhanden ist
     */
-    public static boolean isLastTeil(Lagerbestand lb) throws SQLException {
-        Dao<Lagerbestand, Integer> lagerbestandDao = DatabaseManager.getInstance().getLagerbestandDao();
-        List<Lagerbestand> lbList = lagerbestandDao.queryForAll();
-        int teilId = lb.getTeil().getIdentnummer();
-        int count = 0;
-
-        if (lbList.size() > 0) {
-            for (int i = 0; i < lbList.size(); i++) {
-                if (lbList.get(i).getTeil().getIdentnummer() == (teilId) && lbList.get(i).getMenge() > 0) {
-                    count++;
-                }
-            }
-        }
+    public static boolean isLastTeil(Teilebestand teil) throws SQLException {
+        int count = Teilebestand.countLagerbestand(teil);
         if (count == 1) {
             return true;
         } else {

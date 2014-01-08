@@ -718,7 +718,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
                 zp2.setLagerfach(help.getEinLagerfach());
                 zielPositionen.add(zp2);
                 
-                if (quellLb.getMenge() == 0 && Lagerbestand.isLastTeil(quellLb)) {
+                if (quellLb.getMenge() == 0 && Lagerbestand.isLastTeil(quellLb.getTeil())) {
                     int option = JOptionPane.showConfirmDialog(this, "Soll das zugehörige Teil aus dem Teilebestand gelöscht werden?", "Zugehöriges Teil löschen?", JOptionPane.YES_NO_OPTION);
 
                     if (option == JOptionPane.YES_OPTION) {
@@ -764,7 +764,11 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         if (quellLb != null) {
             quellLb.save();
             Warenbewegung wb = new Warenbewegung();
-            wb.logWarenbewegung(quellLb, action, quellLb.getAnschaffungsgrund(),new Date(), help.getHbDatum(), "Lagerverwalter", 
+            Date hbDate = help.getHbDatum();
+            if( action == UMLAGERN || action == SPLITTEN){
+                hbDate = Warenbewegung.getLastHaltbarkeitsdatum(quellLb);
+            }
+            wb.logWarenbewegung(quellLb, action, quellLb.getAnschaffungsgrund(),new Date(), hbDate, "Lagerverwalter", 
                                 zielPositionen);
         }
         

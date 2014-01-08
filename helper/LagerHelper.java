@@ -49,6 +49,10 @@ public class LagerHelper {
     int ALL_ZERO_FORBIDDEN_ID = 12;
     String ALL_ZERO_FORBIDDEN_TEXT = "Der Wert 0 ist nicht zugelassen."; 
     
+    int WRONG_SIZE_ASSIGNMENT_ID = 13;
+    String WRONG_SIZE_ASSIGNMENT_TEXT = "Unzulässige Fachgrößenzuordnung. Es muss folgende Bedingung gelten: Fach klein <= Fach mittel <= Fach groß !";
+    
+    
     /**
      * Singleton Getter
      * 
@@ -138,6 +142,10 @@ public class LagerHelper {
             if(breiteS == 0 || hoeheS == 0 || tiefeS == 0 || fachKleinS == 0 || fachMittelS == 0 || fachGrossS == 0){
                  errors.put(ALL_ZERO_FORBIDDEN_ID, ALL_ZERO_FORBIDDEN_TEXT);
             }
+        }
+        if (!(fachKleinS <= fachMittelS && fachMittelS <= fachGrossS))
+        {
+            errors.put(WRONG_SIZE_ASSIGNMENT_ID, WRONG_SIZE_ASSIGNMENT_TEXT);
         }
         return errors;
     }

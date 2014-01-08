@@ -9,6 +9,7 @@ import helper.TeilebestandHelper;
 import java.sql.SQLException;
 import java.util.HashMap;
 import javax.swing.JTable;
+import model.Lagerbestand;
 import model.Teilebestand;
 import model.Teilebestand.Typ;
 
@@ -62,6 +63,10 @@ public class TeilFrame extends javax.swing.JFrame {
             if(t.getVe() > 0){
                 txfGroesseVE.setText(String.valueOf(t.getVe()));
             }
+            
+            if (Teilebestand.countLagerbestand(t) > 0){
+                pnlVol.setVisible(false);
+            }
         }
     }
    /**
@@ -86,6 +91,7 @@ public class TeilFrame extends javax.swing.JFrame {
         lblPreisInEuro = new javax.swing.JLabel();
         txfPreisInEuro = new javax.swing.JTextField();
         btnanlegen = new javax.swing.JButton();
+        pnlVol = new javax.swing.JPanel();
         lblGrößeVE = new javax.swing.JLabel();
         txfGroesseVE = new javax.swing.JTextField();
 
@@ -143,39 +149,61 @@ public class TeilFrame extends javax.swing.JFrame {
 
         lblGrößeVE.setText("Größe in Volumeneinheiten:");
 
+        txfGroesseVE.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txfGroesseVEActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnlVolLayout = new javax.swing.GroupLayout(pnlVol);
+        pnlVol.setLayout(pnlVolLayout);
+        pnlVolLayout.setHorizontalGroup(
+            pnlVolLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlVolLayout.createSequentialGroup()
+                .addGap(0, 0, 0)
+                .addComponent(lblGrößeVE)
+                .addGap(20, 20, 20)
+                .addComponent(txfGroesseVE, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        pnlVolLayout.setVerticalGroup(
+            pnlVolLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlVolLayout.createSequentialGroup()
+                .addGap(0, 0, 0)
+                .addGroup(pnlVolLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblGrößeVE)
+                    .addComponent(txfGroesseVE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(2, 2, 2))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSeparator1)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnanlegen, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jSeparator1)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(lblZeichnungsnummer)
-                                            .addComponent(lblMaterialGruppe)
-                                            .addComponent(lblTyp)
-                                            .addComponent(lblBezeichnung)
-                                            .addComponent(lblPreisInEuro)
-                                            .addComponent(lblGrößeVE))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(txfBezeichnung, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(cbxTyp, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txfMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txfZeichnungsnummer, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txfGroesseVE, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txfPreisInEuro, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addComponent(lblNeuesTeilAnlegen))
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                                    .addComponent(lblZeichnungsnummer)
+                                    .addComponent(lblMaterialGruppe)
+                                    .addComponent(lblTyp)
+                                    .addComponent(lblBezeichnung)
+                                    .addComponent(lblPreisInEuro))
+                                .addGap(65, 65, 65)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txfBezeichnung, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cbxTyp, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txfMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txfZeichnungsnummer, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txfPreisInEuro, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(lblNeuesTeilAnlegen)
+                            .addComponent(pnlVol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnanlegen, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 9, Short.MAX_VALUE)))
                 .addGap(31, 31, 31))
         );
         layout.setVerticalGroup(
@@ -206,12 +234,10 @@ public class TeilFrame extends javax.swing.JFrame {
                     .addComponent(txfPreisInEuro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblPreisInEuro))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblGrößeVE)
-                    .addComponent(txfGroesseVE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(67, 67, 67)
+                .addComponent(pnlVol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31)
                 .addComponent(btnanlegen)
-                .addGap(35, 35, 35))
+                .addGap(37, 37, 37))
         );
 
         pack();
@@ -289,6 +315,10 @@ public class TeilFrame extends javax.swing.JFrame {
         TeilebestandHelper.refreshTeileTableModel(teileBestandTable);
         this.dispose();
     }//GEN-LAST:event_btnanlegenActionPerformed
+
+    private void txfGroesseVEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfGroesseVEActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txfGroesseVEActionPerformed
     
    
     /**
@@ -336,6 +366,7 @@ public class TeilFrame extends javax.swing.JFrame {
     private javax.swing.JLabel lblPreisInEuro;
     private javax.swing.JLabel lblTyp;
     private javax.swing.JLabel lblZeichnungsnummer;
+    private javax.swing.JPanel pnlVol;
     private javax.swing.JTextField txfBezeichnung;
     private javax.swing.JTextField txfGroesseVE;
     private javax.swing.JTextField txfMaterial;
