@@ -102,6 +102,9 @@
           <Image iconType="3" name="/view/images/lagIcon.png"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblIconMouseClicked"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lblWillkommen">
       <Properties>
@@ -180,9 +183,6 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txfBenutzername">
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txfBenutzernameActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JPasswordField" name="pwfPasswort">
         </Component>

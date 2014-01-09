@@ -2,9 +2,13 @@ package view;
 
 import helper.Misc;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.TableColumn;
+import model.Teilebestand;
 import model.collection.TeilebestandCollection;
 import model.table.TeileTableModel;
 
@@ -24,24 +28,39 @@ public class TeilebestandPanel extends javax.swing.JPanel {
      */
     public TeilebestandPanel() {
         initComponents();
-        
     }
     
+    /**
+     * Bereitet das Fenster für den Gastzugang vor
+     */
     public void setGuest()
     {
         this.pnlActions.setVisible(false);
     }
     
+    /**
+     *
+     * @param mainFrame
+     */
     public void setMainFrame(MainFrame mainFrame)
     {
         this.mainFrame = mainFrame;
     }
     
+    /**
+     *
+     * @return
+     */
     public JTable getTeileTable()
     {
     return tblMain;
     }
     
+    /**
+     * Setzt die Spaltenbreiten für die Tabelle
+     *
+     * @param table
+     */
     public void setTableWidths(JTable table)
     {
         int[] arrWidths = {35, 130, 130, 130, 50, 120,50};
@@ -200,12 +219,20 @@ public class TeilebestandPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+    * Action bei einem Klick auf "Neues Teil"
+    * 
+    */
     private void btnNeuesTeilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNeuesTeilActionPerformed
         TeilFrame teilframe = new TeilFrame();
         teilframe.setVisible(true);
         teilframe.setTable(tblMain);
     }//GEN-LAST:event_btnNeuesTeilActionPerformed
 
+    /**
+    * Action bei Klick auf Teil ändern
+    * 
+    */
     private void btnTeilAendernActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTeilAendernActionPerformed
          int selectedId;
         if(tblMain.getSelectedRow() >=0){
@@ -224,15 +251,46 @@ public class TeilebestandPanel extends javax.swing.JPanel {
                     + "Liste gewählt werden!");
         }
     }//GEN-LAST:event_btnTeilAendernActionPerformed
-
+    
+    /**
+    * Action bei Klick auf Teil löschen
+    * 
+    */
     private void btnTeilLoschenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTeilLoschenActionPerformed
-        // TODO add your handling code here:
+        int selectedId;
+        if(tblMain.getSelectedRow() >=0){
+            selectedId = Integer.parseInt(tblMain.getValueAt(tblMain.getSelectedRow(), 0).toString());
+            Teilebestand teil;
+            int option = JOptionPane.showConfirmDialog(this, "Soll das Teil wirklich aus dem Teilebestand gelöscht werden?", " Teil löschen?", JOptionPane.YES_NO_OPTION);
+
+            if (option == JOptionPane.YES_OPTION) {
+                try {
+                    teil = Teilebestand.loadTeil(selectedId);
+                    teil.setDeleted(true);
+                } catch (SQLException ex) {
+                    Misc.printSQLException(mainFrame, ex);
+                }
+            refreshTeilebestandTableModel();       
+            }
+        }
+        else{
+            Misc.createErrorDialog(mainFrame, "Es muss erst ein Teil zum Löschen aus der "
+                    + "Liste gewählt werden!");
+        }
     }//GEN-LAST:event_btnTeilLoschenActionPerformed
 
+    /**
+    * Ruft den Filter auf
+    * 
+    */
     private void btnFilternActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFilternActionPerformed
        TeileFilterFrame.getInstance(mainFrame, tblMain);
     }//GEN-LAST:event_btnFilternActionPerformed
 
+    /**
+    * Ruft den den Bestands-Änderungs-Frame für das einlagern auf
+    * 
+    */
     private void btnteilEinlagernActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnteilEinlagernActionPerformed
         int selectedId;
         if(tblMain.getSelectedRow() >=0){
@@ -257,6 +315,10 @@ public class TeilebestandPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnteilEinlagernActionPerformed
 
+    /**
+    *  Setzt den Filter zurück
+    * 
+    */
     private void btnFilterZurücksetzenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFilterZurücksetzenActionPerformed
         refreshTeilebestandTableModel();
     }//GEN-LAST:event_btnFilterZurücksetzenActionPerformed
@@ -271,7 +333,6 @@ public class TeilebestandPanel extends javax.swing.JPanel {
         tblMain.setModel(tm);
     }
 
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnFilterZurücksetzen;
     private javax.swing.JButton btnFiltern;

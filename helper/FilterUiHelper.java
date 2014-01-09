@@ -9,6 +9,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.TimeZone;
 import model.Lager;
 import model.Teilebestand;
 import model.filter.LagerbestandFilterModel;
@@ -16,11 +17,10 @@ import model.filter.TeilebestandFilterModel;
 import model.filter.WarenbewegungFilterModel;
    
 /**
- *
+ * Klasse mit Untersützungsfunktionen rund um Filtering
  * @author ssinger
  */
 public class FilterUiHelper {
-
 
     int MENGE_NOT_INTEGER_ID = 1;
     String MENGE_NOT_INTEGER_TEXT = "Die Menge muss ganzzahlig sein";
@@ -165,6 +165,8 @@ public class FilterUiHelper {
      */
     public HashMap<Integer, String> validateWarenbewegungFilter(String datumVon, String datumBis, String haltbarVon, String haltbarBis){
         DateFormat d = new SimpleDateFormat("dd.MM.yyyy");
+        d.setTimeZone(TimeZone.getTimeZone("CET"));
+        d.setLenient(false);
         
         Date datumVonS = new Date();
         Date datumBisS = new Date();
@@ -336,16 +338,10 @@ public class FilterUiHelper {
      */
     public static WarenbewegungFilterModel createWFM(String bezeichnung, String haltbarVon, String haltbarBis, String qLagertyp, String Bewegungstyp, String qx, String qy, String qz, String teiltyp, String zLagertyp, String zx, String zy, String zz, String datumVon, String datumBis, String bewegungsTyp) {
         WarenbewegungFilterModel wfm = new WarenbewegungFilterModel();
-        DateFormat f = new SimpleDateFormat("dd.MM.YYYY");
-        Date minDate = new Date(), maxDate = new Date();
+        DateFormat f = new SimpleDateFormat("dd.MM.yyyy");
+        f.setTimeZone(TimeZone.getTimeZone("CET"));
+        f.setLenient(false);
         int expireID = 0;
-        try {
-            minDate = f.parse("01.01.1969");
-            maxDate = f.parse("01.01.2542");
-        } catch (ParseException ex) {
-            System.out.println("nothing to catch");
-        }
-     
         if(bezeichnung.length() > 0){
             wfm.setBezeichnung(bezeichnung);
         }
@@ -379,28 +375,19 @@ public class FilterUiHelper {
         try {
             if (datumVon.length() > 0) {
                 wfm.setDatumVon(f.parse(datumVon));
-            }else{
-                wfm.setDatumVon(minDate);
             }
             if (datumBis.length() > 0) {
                 wfm.setDatumBis(f.parse(datumBis));
-            }else{
-                wfm.setDatumBis(maxDate);
             }
             if (haltbarVon.length() > 0) {
                 wfm.setHaltbarVon(f.parse(haltbarVon));
-                
-            }else{
-                wfm.setHaltbarVon(minDate);
                 expireID++;
             }
             if(haltbarBis.length() > 0){
                 wfm.setHaltbarBis(f.parse(haltbarBis));
-                
-            }else{
-                wfm.setHaltbarBis(maxDate);
                 expireID++;
             }
+            
             if(bewegungsTyp.length() > 1){
                 switch(bewegungsTyp){
                     case "einlagern" : wfm.setBewegungsTyp(1);
@@ -441,7 +428,5 @@ public class FilterUiHelper {
         }
         return null;
     }
-    
-    
 }
 

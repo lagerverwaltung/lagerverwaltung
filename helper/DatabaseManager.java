@@ -112,83 +112,6 @@ public class DatabaseManager {
             zielpositionDao = DaoManager.createDao(connectionSource, ZielPosition.class);
             warenbewegungDao = DaoManager.createDao(connectionSource, Warenbewegung.class);
             
-            /*
-            Lager t = new Lager();
-            t.setLagerID(33);
-            t.setBreite(1);
-            t.setHoehe(1);
-            t.setTiefe(1);
-            t.setKleinVE(1);
-            t.setMittelVE(10);
-            t.setGrossVE(100);
-            t.setLagerort(Lager.Lagerort.freilager);
-            lagerDao.createOrUpdate(t);//Methode zum Speichern
-            
-            Lager t1 = new Lager();
-            t1.setLagerID(34);
-            t1.setBreite(1);
-            t1.setHoehe(1);
-            t1.setTiefe(1);
-            t1.setKleinVE(1);
-            t1.setMittelVE(10);
-            t1.setGrossVE(100);
-            t1.setLagerort(Lager.Lagerort.hochregal);
-            lagerDao.createOrUpdate(t1);
-            
-            Lagerfach lf = new Lagerfach();
-            lf.setFachnummer(1);
-            lf.setBemerkung("fddfdfdf");
-            lf.setLager(t);
-            lagerfachDao.createOrUpdate(lf);
-            
-            Lagerfach lf1 = new Lagerfach();
-            lf1.setFachnummer(2);
-            lf1.setBemerkung("fddfdfdf");
-            lf1.setLager(t1);
-            lagerfachDao.createOrUpdate(lf1);
-            
-            Teilebestand tb = new Teilebestand();
-            tb.setBezeichnung("Schraube M5");
-            tb.setMaterialgruppe("Materialgruppe");
-            tb.setZeichnungsnummer("1212f");
-            tb.setPreis((float)180.12);
-            tb.setVe(1);
-            teilebestandDao.createOrUpdate(tb);
-            
-            Lagerbestand lb = new Lagerbestand();
-            lb.setTeil(tb);
-            lb.setLagerfach(lf1);
-            lb.setMenge(15);
-            lb.setAnschaffungsgrund("Brauchen wir");
-            lagerbestandDao.createOrUpdate(lb);
-            
-            Warenbewegung wb = new Warenbewegung();
-            wb.setVerantwortlicher("Simon");
-            wb.setLagerbestand(lb);
-            warenbewegungDao.create(wb);
-            int  w = warenbewegungDao.extractId(wb);
-            
-            //Wie man Zielposition verwendet:
-            ZielPosition z1 = new ZielPosition();
-            z1.setLagerfach(lf1);
-            z1.setMenge(10);
-            z1.setWarenbewegung(wb);
-            zielpositionDao.createOrUpdate(z1);
-            
-            ZielPosition z2 = new ZielPosition();
-            z2.setLagerfach(lf);
-            z2.setMenge(10);
-            z2.setWarenbewegung(wb);
-            zielpositionDao.createOrUpdate(z2);
-            
-            List l = warenbewegungDao.queryForEq("warenbID", w);
-            Warenbewegung wb2 = (Warenbewegung) l.get(0);
-            ForeignCollection<ZielPosition> al;
-            al = wb2.getArrZielPosition();
-            for (ZielPosition z : al) {
-                System.out.println("ZielPosNr"+z.getZielPositionID());
-            }
-            */
     }
 
     public Dao<Lager, Integer> getLagerDao() {
@@ -219,7 +142,4 @@ public class DatabaseManager {
     {
         test=teste;
     }
-   
-    
-    
 }

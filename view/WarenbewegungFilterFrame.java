@@ -18,13 +18,19 @@ import model.filter.WarenbewegungFilterModel;
 import model.table.WarenbewegungTableModel;
 
 /**
- *
+ * Das Fenster für die Filterfunktionen der Warenbewegung
  * @author simon
  */
 public class WarenbewegungFilterFrame extends javax.swing.JFrame {
     private static WarenbewegungFilterFrame singleton;
     JTable warenbewegungTable;
     
+    /**
+     * Singelton Methode
+     * @param mainFrame das Hauptfenster
+     * @param jtable Warenbewegungstabelle
+     * @return
+     */
     public static WarenbewegungFilterFrame getInstance(Component mainFrame, JTable jtable)
     {
         if (WarenbewegungFilterFrame.singleton == null){
@@ -46,12 +52,21 @@ public class WarenbewegungFilterFrame extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Konstruktor 
+     * @param c Das Hauptfenster an dem zentriert wird
+     * @param jtable Die Warenbewegungstabelle
+     */
     public WarenbewegungFilterFrame(Component c, JTable jtable) {
         this();
         alignFilterMenu(c);
         warenbewegungTable = jtable;
     }
     
+    /**
+     * Richtet das Filterfenster am Hauptfenster aus
+     * @param main
+     */
     public void alignFilterMenu(Component main)
     {
         int x = main.getX();
@@ -168,7 +183,7 @@ public class WarenbewegungFilterFrame extends javax.swing.JFrame {
 
         lblQuellfach.setText("Quellfachadresse:");
 
-        lblTeiltyp.setText("Lagertyp:");
+        lblTeiltyp.setText("Typ des Teils:");
 
         lblDatumBis.setText(" bis:");
 
@@ -181,11 +196,6 @@ public class WarenbewegungFilterFrame extends javax.swing.JFrame {
         cbxZielZ.setModel(new javax.swing.DefaultComboBoxModel());
 
         cbxQuelleX.setModel(new javax.swing.DefaultComboBoxModel());
-        cbxQuelleX.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbxQuelleXActionPerformed(evt);
-            }
-        });
 
         lblBewegungsTyp.setText("Bewegungs-Typ:");
 
@@ -203,11 +213,6 @@ public class WarenbewegungFilterFrame extends javax.swing.JFrame {
         });
 
         cbxZielX.setModel(new javax.swing.DefaultComboBoxModel());
-        cbxZielX.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbxZielXActionPerformed(evt);
-            }
-        });
 
         lblDatumVon.setText("von:");
 
@@ -220,12 +225,6 @@ public class WarenbewegungFilterFrame extends javax.swing.JFrame {
         lblhaltbarVon.setText("von:");
 
         lblHaltbarBis.setText("bis:");
-
-        txfHaltbarVon.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txfHaltbarVonActionPerformed(evt);
-            }
-        });
 
         cbxBewegungsTyp.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "", "einlagern", "auslagern", "umlagern", "splitten" }));
 
@@ -288,7 +287,7 @@ public class WarenbewegungFilterFrame extends javax.swing.JFrame {
                                     .addComponent(cbxZielY, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(cbxZielZ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 12, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         panMainLayout.setVerticalGroup(
@@ -311,7 +310,7 @@ public class WarenbewegungFilterFrame extends javax.swing.JFrame {
                 .addGroup(panMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblHaltbarBis)
                     .addComponent(txfHaltbarBis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblBewegungsDatum, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -339,7 +338,7 @@ public class WarenbewegungFilterFrame extends javax.swing.JFrame {
                     .addComponent(cbxZielY, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblBewegungsTyp)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 23, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(cbxBewegungsTyp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblTeiltyp)
@@ -366,14 +365,6 @@ public class WarenbewegungFilterFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cbxQuelleXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxQuelleXActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbxQuelleXActionPerformed
-
-    private void cbxZielXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxZielXActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbxZielXActionPerformed
-
     /**
      * Validiert die Eingabe, erzeugt ein neues LagerbestandFilterModel und
      * refreshed die Lagerbestandstabelle 
@@ -388,7 +379,7 @@ public class WarenbewegungFilterFrame extends javax.swing.JFrame {
         if (Misc.createErrorDialog(this, errors) == true) {
             return;
         }
-        
+
         WarenbewegungFilterModel wfm = FilterUiHelper.createWFM(
                txfBezeichnung.getText(),
                txfHaltbarVon.getText(),
@@ -427,10 +418,10 @@ public class WarenbewegungFilterFrame extends javax.swing.JFrame {
         WarenbewegungTableModel wm = new WarenbewegungTableModel();
         wm.setData(wc);
         warenbewegungTable.setModel(wm);
-        TableCellRenderer ren = new TwoLinesCellRenderer();
+        TableCellRenderer ren = new DestinationLinesCellRenderer();
         warenbewegungTable.getColumnModel().getColumn(5).setCellRenderer(ren);
 
-        int[] arrWidths = {23, 120, 65, 70, 40, 170, 90, 65, 65, 90};
+        int[] arrWidths = {20, 120, 65, 60, 17, 180, 120, 90, 80};
         TableColumn tc;
         warenbewegungTable.setRowHeight(23);
         int i = 0;
@@ -440,44 +431,7 @@ public class WarenbewegungFilterFrame extends javax.swing.JFrame {
         }
     }
     
-    private void txfHaltbarVonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfHaltbarVonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txfHaltbarVonActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(WarenbewegungFilterFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(WarenbewegungFilterFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(WarenbewegungFilterFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(WarenbewegungFilterFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new WarenbewegungFilterFrame().setVisible(true);
-            }
-        });
-    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnFilterAusführen;
     private javax.swing.JComboBox cbxBewegungsTyp;

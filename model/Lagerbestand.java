@@ -16,22 +16,31 @@ import helper.Misc;
 import java.sql.SQLException;
 import java.util.List;
 
+/**
+ * Model für den Lagerbestand 
+ * @author simon
+ */
 @DatabaseTable(tableName = "lagerbestand")
 
 public class Lagerbestand {
-
+    
+    /* ID des Lagerbestands  */
     @DatabaseField(columnName = "lagerbestandID", generatedId = true)
     private int lagerbestandsnummer;
     
+    /* verknüpftes Teile Model */
     @DatabaseField(columnName = "teilID", foreign = true, foreignAutoRefresh=true)
     private Teilebestand teil;
     
+    /* verknüpftes Lagerfach Model */
     @DatabaseField(columnName = "fachID", foreign = true, foreignAutoRefresh=true)
     private Lagerfach lagerfach;
     
+    /* Anzahl der eingelagerten Teile */
     @DatabaseField()
     private int anzahl;
     
+    /* Text mit dem Anschaffungsgrund */
     @DatabaseField(columnName = "anschaffg")
     private String anschaffungsgrund;
 
@@ -105,27 +114,6 @@ public class Lagerbestand {
         this.anschaffungsgrund = anschaffungsgrund;
     }
     
-
-    /**
-     * ?
-     * @param id
-     * @return
-     * @throws SQLException 
-     */
-    public static Lagerbestand loadLagerObjekt(int id) throws SQLException {
-        Dao<Lagerbestand, Integer> lagerbestandDao = DatabaseManager.getInstance().getLagerbestandDao();
-        try {
-            List<Lagerbestand> lb = lagerbestandDao.queryForEq("lagerbestandID", id);
-            if (lb.size() > 0) {
-                return lb.get(0);
-            }
-        } catch (SQLException ex) {
-            Misc.printSQLException(null, ex);
-        }
-        return null;
-    }
-        
-        
     /**
      * Gibt den zur id gehörenden Lagerbestand zurück
      * @param id
@@ -154,8 +142,12 @@ public class Lagerbestand {
        return Lagerbestand.getLagerbestand(quellLbID);
     }
     
-    /*
-     * @param teilID, fachID
+    /**
+     *
+     * @param teilid
+     * @param fachid
+     * @return
+     * @throws SQLException
      */
     public static int getLagerbestandID(int teilid, int fachid) throws SQLException {
 
@@ -176,24 +168,17 @@ public class Lagerbestand {
 
     }
 
-   /*
+   /**
     * @param Lagerbestand
     * @param MEnge
     * true, wenn im Lagerbestand nurnoch 1 Teil vorhanden ist
-    */
-    public static boolean isLastTeil(Lagerbestand lb) throws SQLException {
-        Dao<Lagerbestand, Integer> lagerbestandDao = DatabaseManager.getInstance().getLagerbestandDao();
-        List<Lagerbestand> lbList = lagerbestandDao.queryForAll();
-        int teilId = lb.getTeil().getIdentnummer();
-        int count = 0;
-
-        if (lbList.size() > 0) {
-            for (int i = 0; i < lbList.size(); i++) {
-                if (lbList.get(i).getTeil().getIdentnummer() == (teilId) && lbList.get(i).getMenge() > 0) {
-                    count++;
-                }
-            }
-        }
+     *
+     * @param teil
+     * @return
+     * @throws SQLException
+     */
+    public static boolean isLastTeil(Teilebestand teil) throws SQLException {
+        int count = Teilebestand.countLagerbestand(teil);
         if (count == 1) {
             return true;
         } else {
@@ -214,6 +199,11 @@ public class Lagerbestand {
         return false;
     }
     
+    /**
+     *
+     * @return
+     * @throws SQLException
+     */
     public Warenbewegung getWarenbewegung() throws SQLException{
         Dao<model.Warenbewegung, Integer> warenbewegungDao = DatabaseManager.getInstance().getWarenbewegungDao();
         List<model.Warenbewegung> wbList = warenbewegungDao.queryForEq("lagerbestandID", this.getLagerbestandsnummer());
@@ -224,8 +214,11 @@ public class Lagerbestand {
         return null;
     }
 
-    //Speichern Lagerbestand
-   public void save() throws SQLException {
+    /**
+     * Speichert einen Lagerbestand
+     * @throws SQLException
+     */
+    public void save() throws SQLException {
        Dao<Lagerbestand,Integer> LagerbestandDao = DatabaseManager.getInstance().getLagerbestandDao();
        LagerbestandDao.createOrUpdate(this);
     }

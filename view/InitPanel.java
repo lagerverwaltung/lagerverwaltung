@@ -30,6 +30,10 @@ public class InitPanel extends javax.swing.JPanel {
         initComponents();
     }
     
+    /**
+     * Bereitet den Panel für die Freilagerinitialisierung vor
+     * 
+     */
     public void prepareFreilager()
     {
         freilager = true;
@@ -43,6 +47,10 @@ public class InitPanel extends javax.swing.JPanel {
         txfGross.setText("");
     }
     
+    /**
+     * Setzt den mainFrame
+     * 
+     */
     public void setMainFrame(MainFrame mainFrame)
     {
         this.mainFrame = mainFrame;
@@ -182,19 +190,7 @@ public class InitPanel extends javax.swing.JPanel {
 
         lblFachanzahlHöhe.setText("Fachanzahl Höhe:");
 
-        txfFachanzahlBreite.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txfFachanzahlBreiteActionPerformed(evt);
-            }
-        });
-
         lblFachanzahlTiefe.setText("Fachanzahl Tiefe:");
-
-        txfFachanzahlHoehe.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txfFachanzahlHoeheActionPerformed(evt);
-            }
-        });
 
         lblFachanzahlBreite.setText("Fachanzahl Breite:");
 
@@ -289,10 +285,6 @@ public class InitPanel extends javax.swing.JPanel {
                 .addGap(76, 76, 76))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txfFachanzahlBreiteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfFachanzahlBreiteActionPerformed
-        
-    }//GEN-LAST:event_txfFachanzahlBreiteActionPerformed
     /**
      * Behandelt den Klick auf den "Weiter-Button" durch einen Nutzer.
      * Dabei werden die Eingaben validiert und gespeichert und das nächste Fenster vorbereitet
@@ -350,10 +342,6 @@ public class InitPanel extends javax.swing.JPanel {
         initFaecherPanel.createFaecherPanel();
         mainFrame.navigationController.showCard("init2");
     }//GEN-LAST:event_weiterButtonActionPerformed
-
-    private void txfFachanzahlHoeheActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfFachanzahlHoeheActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txfFachanzahlHoeheActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Pan1;

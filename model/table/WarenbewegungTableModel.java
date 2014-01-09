@@ -8,6 +8,7 @@ import com.j256.ormlite.dao.ForeignCollection;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.TimeZone;
 import javax.swing.table.AbstractTableModel;
 import model.Lagerbestand;
 import model.Lagerfach;
@@ -17,7 +18,7 @@ import model.ZielPosition;
 import model.collection.WarenbewegungCollection;
 
 /**
- *
+ * Table Model für die Warenbewegungstabelle
  * @author simon
  */
 public class WarenbewegungTableModel extends AbstractTableModel{
@@ -25,6 +26,10 @@ public class WarenbewegungTableModel extends AbstractTableModel{
     WarenbewegungCollection<Warenbewegung> warenRows = new WarenbewegungCollection();
     ArrayList<Object[]> warenRowsArr = new ArrayList();
     
+    /**
+     * Setzt die Daten für die Warenbewegung
+     * @param arr
+     */
     public void setData(WarenbewegungCollection<Warenbewegung> arr)
     {
         this.warenRows = arr;
@@ -32,7 +37,7 @@ public class WarenbewegungTableModel extends AbstractTableModel{
     
     @Override
     public int getColumnCount() {
-        return 10;
+        return 9;
     }
     
     @Override
@@ -46,7 +51,7 @@ public class WarenbewegungTableModel extends AbstractTableModel{
         switch (col)
         {
             case 0:
-                name = "WbID";
+                name = "WID";
                 break;
             case 1:
                 name = "Teil";
@@ -58,10 +63,10 @@ public class WarenbewegungTableModel extends AbstractTableModel{
                 name = "Quellfach";
                 break;
             case 4:
-                name = "Menge";
+                name = "Mng";
                 break;
             case 5:
-                name = "Zielfach/fächer";
+                name = "Zielfächer";
                 break;
             case 6:
                 name = "Verantwortlicher";
@@ -71,9 +76,6 @@ public class WarenbewegungTableModel extends AbstractTableModel{
                 break;
             case 8:
                 name = "Haltbar bis";
-                break;
-            case 9:
-                name = "Typ";
                 break;
         }
         return name;
@@ -92,6 +94,7 @@ public class WarenbewegungTableModel extends AbstractTableModel{
                 tl = lb.getTeil();
             }
             DateFormat df = new SimpleDateFormat("dd.MM.yyyy");
+            df.setTimeZone(TimeZone.getTimeZone("CET"));
             df.setLenient(false);
 
             int qGes = 0;
@@ -133,7 +136,10 @@ public class WarenbewegungTableModel extends AbstractTableModel{
                         }
                         case 7:
                             if(wb.getDatum() != null){
-                                return wb.getDatum();
+                                DateFormat formatter = new SimpleDateFormat("dd.MM.yy H:mm");
+                                formatter.setTimeZone(TimeZone.getTimeZone("CET"));
+                                formatter.setLenient(false);
+                                return formatter.format( wb.getDatum() );
                             }else{
                                 return "";
                             }
@@ -141,11 +147,7 @@ public class WarenbewegungTableModel extends AbstractTableModel{
                             if(wb.getHaltbarkeitsDatum() != null){
                                 return df.format(wb.getHaltbarkeitsDatum());
                             }else{
-                                return "";
-                            }
-                        case 9:
-                             if(tl != null && tl.getTyp()!= null){
-                                return tl.getTyp();
+                                return "kA";
                             }
                         default:
                             return "empty";

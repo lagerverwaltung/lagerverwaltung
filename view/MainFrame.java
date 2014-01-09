@@ -6,12 +6,9 @@ import java.sql.SQLException;
 import javax.swing.JPanel;
 import model.Lager;
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 
 /**
+ * Die Klasse für den Haupt Frame
  *
  * @author simon
  */
@@ -27,33 +24,62 @@ public class MainFrame extends javax.swing.JFrame {
         this.setSize( 800 , 600 );
     }
     
+    /**
+     * Gibt den Startpanel zurück
+     * 
+     */
     public JPanel getStartPanel() {
         return this.startPanel;
     }
     
+     /**
+     *  Fügt den NavigationsControkker hinzu
+     * 
+     */
     public void addNaviController(NavigationController navigationController) {
         this.navigationController = navigationController;
     }
     
+    /**
+     *  Gibt den InitPanel zurück
+     * 
+     */
     public JPanel getInitPanel()
     {
         return panInit;
     }
     
+    /**
+     *  Gibt den InitFaecherPanel zurück
+     * 
+     */
     public JPanel getInitFaecherPanel()
     {
         return panInitFaecher;
     }
-    public MainPanel getPanMain()
+    
+    /**
+     *  Gibt den MainPanel zurück
+     * 
+     */
+        public MainPanel getPanMain()
     {
         return panMain;
     }
     
+    /**
+     *  Gibt den TeilebestandPanel zurück
+     * 
+     */
     public TeilebestandPanel getTeilebestandFrame()
     {
         return panMain.getTeilebestand();
     }
     
+    /**
+     *  Gibt den LagerbestandPanel zurück
+     * 
+     */
     public LagerbestandPanel getLagerbestandFrame()
     {
         return panMain.getLagerbestand();

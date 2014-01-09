@@ -15,7 +15,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.swing.JOptionPane;
-import model.Lager;
 import model.Lagerbestand;
 import model.Warenbewegung;
 
@@ -103,7 +102,7 @@ public class Misc {
      * @throws SQLException 
      */
     public static List<Lagerbestand> checkDateByExpire() throws SQLException{
-        List<Lagerbestand> result = null;
+        List<Lagerbestand> result = new ArrayList();
         Date today = new Date();
         Dao<model.Warenbewegung, Integer> warenbewegungDao = DatabaseManager.getInstance().getWarenbewegungDao();
         QueryBuilder<Warenbewegung, Integer> warenbQb = warenbewegungDao.queryBuilder();
@@ -112,8 +111,10 @@ public class Misc {
         PreparedQuery<Warenbewegung> preparedQuery = warenbQb.prepare();
         List<Warenbewegung> wbResult = warenbewegungDao.query(preparedQuery);
         
-        for(int i = 0; i < wbResult.size(); i++){
-            result.add(wbResult.get(i).getLagerbestand());
+        if (wbResult.size() > 0) {
+            for (int i = 0; i < wbResult.size(); i++) {
+                result.add(wbResult.get(i).getLagerbestand());
+            }
         }
                 
         return result;
@@ -128,11 +129,14 @@ public class Misc {
     public static void printExpiredLagerbestand(Frame f) throws SQLException{
         List<Lagerbestand> expiredLb = checkDateByExpire();
         String s = "Folgende Teile sind abgelaufen: \n";
-        if(expiredLb != null){
+        if(expiredLb.size() != 0){
             for(int i = 0; i < expiredLb.size(); i++){
-                s += expiredLb.get(i).getTeil().getBezeichnung()
+                s +=    "\""+expiredLb.get(i).getTeil().getBezeichnung()+"\""
+                        + "; ID "
+                        + expiredLb.get(i).getTeil().getIdentnummer()
                         + " im Fach "
-                        + expiredLb.get(i).getLagerfach().toString() + "\n"; 
+                        + expiredLb.get(i).getLagerfach().toString() 
+                        + "\n"; 
             }
             Misc.createErrorDialog(f, s);
         }

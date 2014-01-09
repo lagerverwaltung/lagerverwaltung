@@ -105,7 +105,7 @@
                                   </Group>
                               </Group>
                           </Group>
-                          <EmptySpace min="0" pref="12" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -135,7 +135,7 @@
                       <Component id="lblHaltbarBis" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="txfHaltbarBis" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="21" max="32767" attributes="0"/>
+                  <EmptySpace type="unrelated" max="32767" attributes="0"/>
                   <Component id="lblBewegungsDatum" min="-2" pref="14" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -167,7 +167,7 @@
                   </Group>
                   <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
                   <Component id="lblBewegungsTyp" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" pref="23" max="32767" attributes="0"/>
+                  <EmptySpace type="unrelated" max="32767" attributes="0"/>
                   <Component id="cbxBewegungsTyp" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="lblTeiltyp" min="-2" max="-2" attributes="0"/>
@@ -197,7 +197,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="lblTeiltyp">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Lagertyp:"/>
+            <Property name="text" type="java.lang.String" value="Typ des Teils:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lblDatumBis">
@@ -239,9 +239,6 @@
               <Connection code="new javax.swing.DefaultComboBoxModel()" type="code"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbxQuelleXActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lblBewegungsTyp">
           <Properties>
@@ -281,9 +278,6 @@
               <Connection code="new javax.swing.DefaultComboBoxModel()" type="code"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbxZielXActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lblDatumVon">
           <Properties>
@@ -320,9 +314,6 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txfHaltbarVon">
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txfHaltbarVonActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txfHaltbarBis">
         </Component>

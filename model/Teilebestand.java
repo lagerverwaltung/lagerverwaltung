@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 package model;
 
@@ -14,37 +9,58 @@ import helper.Misc;
 import java.sql.SQLException;
 import java.util.List;
 
+/**
+ * Model für den Teilebestand
+ * @author simon
+ */
 @DatabaseTable(tableName = "teilebestand")
 public class Teilebestand {
 
+     /* Teile ID  */
     @DatabaseField(columnName = "teilID", generatedId = true)
     private int identnummer;
     
+    /* Bezeichnung des Teils  */
     @DatabaseField()
     private String bezeichnung;
     
+    /* Materialgruppe des Teils */
     @DatabaseField()
     private String materialgruppe;
     
+    /* Zeichnungsnummer des Teils */
     @DatabaseField()
     private String zeichnungsnummer;
     
+    /* Preis des Teils */
     @DatabaseField()
     private float preis;
     
+    /* Teiltyp */
     @DatabaseField()
     private Typ typ;
     
+    /* VE die das Teile einnimmt  */
     @DatabaseField()
     private int ve;
     
+    /* Löschstatus des Teils  */
     @DatabaseField()
     private boolean deleted;
 
+    /**
+     * 
+     * @return
+     */
     public boolean isDeleted() {
         return deleted;
     }
 
+    /**
+     *
+     * @param isDeleted
+     * @throws SQLException
+     */
     public void setDeleted(boolean isDeleted) throws SQLException {
         this.deleted = isDeleted;
         save();
@@ -149,7 +165,12 @@ public class Teilebestand {
     }
     
 
-    // ab hier relevant für uns,zum Auslesen von Teilebestand
+    /**
+     * Läd ein Teil anhand seiner ID
+     * @param id
+     * @return Teilebestand - gibt ein Teil zurück
+     * @throws SQLException
+     */
     public static Teilebestand loadTeil(int id) throws SQLException
     {
         Dao<Teilebestand,Integer> teilebestandDao = DatabaseManager.getInstance().getTeilebestandDao();
@@ -163,18 +184,40 @@ public class Teilebestand {
         }
         return null;
     }
-    //Speichern
+    /**
+     * Speichert das Teil
+     * 
+     * @throws SQLException
+     */
     public void save() throws SQLException{
        Dao<Teilebestand,Integer> teilebestandDao = DatabaseManager.getInstance().getTeilebestandDao();
        teilebestandDao.createOrUpdate(this);
     }
         
-	public enum Typ {
+	/**
+     * Enumeration für den Teiltyp
+     */
+    public enum Typ {
+        /**
+         *
+         */
         kaufteile ("Kaufteile"),
-		werkzeuge ("Werkzeuge"),
-		unfertigeBaugruppen ("unfertige Baugruppen"),
-		vorratsteile ("Vorratsteile"),
-		vorrichtungen ("Vorrichtungen"),
+		/**
+         *
+         */
+        werkzeuge ("Werkzeuge"),
+		/**
+         *
+         */
+        unfertigeBaugruppen ("unfertige Baugruppen"),
+		/**
+         *
+         */
+        vorratsteile ("Vorratsteile"),
+		/**
+         *
+         */
+        vorrichtungen ("Vorrichtungen"),
 		;
         private final String text;
         private Typ(final String text)
@@ -187,7 +230,30 @@ public class Teilebestand {
             return text;
         }
 	}
-	
-	
+    
+   /**
+    * Ermittelt ob es eingelagerte Teile von diesem Typ gibt
+    * 
+    * @param Teilebestand teil Das Teil das geprueft wird
+    * @return int wieviele Lagerbestaende es gibt
+     *
+     * @param teil
+     * @return
+     * @throws SQLException
+     */
+    public static int countLagerbestand(Teilebestand teil) throws SQLException {
+        Dao<Lagerbestand, Integer> lagerbestandDao = DatabaseManager.getInstance().getLagerbestandDao();
+        List<Lagerbestand> lbList = lagerbestandDao.queryForAll();
+        int teilId = teil.getIdentnummer();
+        int count = 0;
 
+        if (lbList.size() > 0) {
+            for (int i = 0; i < lbList.size(); i++) {
+                if (lbList.get(i).getTeil().getIdentnummer() == (teilId) && lbList.get(i).getMenge() > 0) {
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
 }

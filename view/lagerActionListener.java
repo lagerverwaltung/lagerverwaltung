@@ -9,7 +9,7 @@ import java.awt.event.ItemListener;
 import javax.swing.JComboBox;
 
 /**
- *
+ * ActionListener für geänderte Adressen der Splitziele
  * @author simon
  */
 class lagerActionListener implements ItemListener {

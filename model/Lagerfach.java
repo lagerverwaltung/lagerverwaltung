@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package model;
 
 import com.j256.ormlite.dao.Dao;
@@ -15,26 +9,38 @@ import java.sql.SQLException;
 import java.util.List;
 
 
+/**
+ * Model für ein Lagerfach
+ * @author simon
+ */
 @DatabaseTable(tableName = "lagerfach")
 public class Lagerfach {
+    
+     /* Fach ID  */
     @DatabaseField(columnName = "fachID", generatedId = true)
     private int fachnummer;
 
+     /* Bemerkung zum Fach */
     @DatabaseField()
     private String bemerkung;
     
+     /* x Koordinate des Faches  */
     @DatabaseField(columnName = "x")
     private int x;
     
+    /* y Koordinate des Faches  */
     @DatabaseField(columnName = "y")
     private int y;
     
+    /* z Koordinate des Faches  */
     @DatabaseField(columnName = "z")
     private int z;
     
+    /* Groesse des Faches  */
     @DatabaseField()
     private Groesse groesse;
     
+    /* verknuepftes Lager  */
     @DatabaseField(columnName = "lagerID", canBeNull = false, foreign = true, foreignAutoRefresh=true)
     private Lager lager;
     /**
@@ -86,10 +92,13 @@ public class Lagerfach {
         return lager;
     }
 
-    /*
-    * @author ssinger
-    * gibt den belegten Platzbedarf des Fachs in VE zurück
-    */
+    /**
+     * Gibt den belegten Platzbedarf des Fachs in VE zurück
+     * @author ssinger
+     * 
+     * @return Anzahl der verbrauchten VE
+     * @throws SQLException
+     */
     public int getUsedVe() throws SQLException{
         int usedVe = 0;
         Dao<Teilebestand, Integer> teilebestandDao = DatabaseManager.getInstance().getTeilebestandDao();
@@ -108,15 +117,16 @@ public class Lagerfach {
                     }
                 }
             }
-
         }
-        
         return usedVe;
     }
     
-    /*
+   /**
      * @author ssinger
+     * 
      * Gibt die Kapazität des Fachs in VE 
+     *
+     * @return Maximale Fachgröße
      */
     public int getMaxVe(){
         if(groesse.equals(Groesse.klein)){
@@ -131,10 +141,13 @@ public class Lagerfach {
         return 0;
     }
     
-    /*
-    * @author ssinger
-    * gibt die Anzahl der nicht belegten VE's zurück
-    */
+     /**
+     * @author ssinger
+     * gibt die Anzahl der nicht belegten VE's zurück
+     *
+     * @return
+     * @throws SQLException
+     */
     public int getFreeVe() throws SQLException {
         int maxVe = Lagerfach.getLagerfach(fachnummer).getMaxVe();
         int usedVe = Lagerfach.getLagerfach(fachnummer).getUsedVe();
@@ -142,9 +155,13 @@ public class Lagerfach {
         return maxVe - usedVe;
     }
     
-    /*
-    * Gibt das Lagerfach mit angegebener id zurück
-    */
+    /**
+     * Gibt das Lagerfach mit angegebener id zurück
+     *
+     * @param id
+     * @return
+     * @throws SQLException
+     */
     public static Lagerfach getLagerfach(int id) throws SQLException{
         Dao<Lagerfach,Integer> lagerfachDao = DatabaseManager.getInstance().getLagerfachDao();
         List<Lagerfach> l = lagerfachDao.queryForEq("fachID", id);
@@ -154,11 +171,18 @@ public class Lagerfach {
         return null;
     }
     
-    /*
-     * gibt Lagerfach zur lagerfachadresse aus
+    /**
+     * Gibt Lagerfach zur lagerfachadresse aus
      * @author ssinger
      * @param String ort, x int, y int, z int
      * @return Lagerfach
+     *
+     * @param lager
+     * @param x
+     * @param y
+     * @param z
+     * @return
+     * @throws SQLException
      */
     public static Lagerfach getFach(Lager lager, int x, int y, int z) throws SQLException{
 
@@ -178,13 +202,16 @@ public class Lagerfach {
         }
         return null;
 }
-    /*
-    * speichert das Lagerfach
-    */
+    /**
+     * speichert das Lagerfach
+     *
+     * @throws SQLException
+     */
     public void save() throws SQLException {
         Dao<Lagerfach, Integer> lagerfachDao = DatabaseManager.getInstance().getLagerfachDao();
         lagerfachDao.createOrUpdate(this);
     }
+    
     /**
      * @param lager the lager to set
      */
@@ -197,37 +224,69 @@ public class Lagerfach {
         return getLager().getLagerortCode()+" "+getX()+" "+getY()+" "+getZ();
     }
     
+    /**
+     * Enum Klasse für die Fachgröße
+     */
     public enum Groesse {
         klein(),
         mittel(),
         gross(),;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getX() {
         return x;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getY() {
         return y;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getZ() {
         return z;
     }
 
+    /**
+     *
+     * @param x
+     */
     public void setX(int x) {
         this.x = x;
     }
 
+    /**
+     *
+     * @param y
+     */
     public void setY(int y) {
         this.y = y;
     }
 
+    /**
+     *
+     * @param z
+     */
     public void setZ(int z) {
         this.z = z;
     }
     
-   public boolean equals(Lagerfach lf){
+    /**
+     *
+     * @param lf
+     * @return
+     */
+    public boolean equals(Lagerfach lf){
        if(lf.getFachnummer() == this.getFachnummer()){
            return true;
        }

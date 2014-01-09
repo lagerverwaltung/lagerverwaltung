@@ -1,10 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-package view;
+package helper;
 
 import java.sql.SQLException;
 import java.text.DateFormat;
@@ -13,15 +7,17 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.TimeZone;
 import model.Lager;
 import model.Lager.Lagerort;
 import model.Lagerbestand;
 import model.Lagerfach;
 import model.Teilebestand;
 import model.ZielPosition;
+import view.BestandsaenderungFrame;
 
 /**
- *
+ * BestandsaenderungsGUI Helper in dem die Speicherung und Validierung aller Bestandsaenderungen durchgeführt wird
  * @author smodlich
  */
 public class BestandsGUIHelper {
@@ -71,7 +67,10 @@ public class BestandsGUIHelper {
     {
         return menge;
     }
-    
+    public void setMenge(int menge)
+    {
+        this.menge=menge;
+    }
     public void setTeilID(int teilID)
     {
         this.teilID=teilID;
@@ -185,6 +184,16 @@ public class BestandsGUIHelper {
     
         return errors;
     }
+    /**
+     * Generische Validierungsfunktion für alle Bestandsaenderungen
+     * @param code Action die ausgeführt wird (siehe BestandsaenderungFrame
+     * @param mengenE Menge die verwendet wird
+     * @param datumE Datum
+     * @param grundE Grund
+     * @param destinations Ziele generiert im Bestandsaenderungframe
+     * @return
+     * @throws SQLException 
+     */
     
     public HashMap<Integer,String> validateLagerbestandData(int code,String mengenE,String datumE, String grundE, ArrayList<HashMap> destinations) throws SQLException
     {
@@ -214,6 +223,8 @@ public class BestandsGUIHelper {
         {
         try{
             DateFormat d= new SimpleDateFormat("dd.MM.yyyy");
+            d.setTimeZone(TimeZone.getTimeZone("CET"));
+            d.setLenient(false);
             hbDatum=d.parse(datumE);
         }
         catch(ParseException ex)

@@ -15,13 +15,20 @@ import model.filter.TeilebestandFilterModel;
 import model.table.TeileTableModel;
 
 /**
- *
+ * Klasse für GUI zum Filtern von Teilen 
  * @author simon
  */
 public class TeileFilterFrame extends javax.swing.JFrame {
     private static TeileFilterFrame singleton;
     JTable teileBestandTable;
     
+    /**
+     * Singleton Methode zum Instanz holen 
+     * 
+     * @param mainFrame Hauptfenster
+     * @param jtable Teilebestandstabelle
+     * @return Liefert den Frame zurück
+     */
     public static TeileFilterFrame getInstance(Component mainFrame, JTable jtable)
     {
         if (TeileFilterFrame.singleton == null){
@@ -39,12 +46,21 @@ public class TeileFilterFrame extends javax.swing.JFrame {
         initComponents();
     }
     
+    /** 
+     * Erzeugt das Fenster und richtet es mittig am Hauptfenster aus
+     * @param c Hauptfenster 
+     * @param jtable Teilebestandstabelle 
+     */
     public TeileFilterFrame(Component c, JTable jtable) {
         this();
         alignFilterMenu(c);
         teileBestandTable = jtable;
     }
     
+    /**
+     * Zentriert das Filter Fenster
+     * @param main Hauptfenster
+     */
     public void alignFilterMenu(Component main)
     {
         int x = main.getX();
@@ -107,12 +123,6 @@ public class TeileFilterFrame extends javax.swing.JFrame {
 
         lblVEbis.setText("bis:");
 
-        txfVeBis.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txfVeBisActionPerformed(evt);
-            }
-        });
-
         lblPreisVon.setText("Preis von:");
 
         lblZeichnungsnummer.setText("Zeichnungsnummer:");
@@ -120,12 +130,6 @@ public class TeileFilterFrame extends javax.swing.JFrame {
         lblPreisBis.setText("Preis bis:");
 
         lblBezeichnung.setText("Bezeichnung:");
-
-        txfBezeichnung.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txfBezeichnungActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout panMainLayout = new javax.swing.GroupLayout(panMain);
         panMain.setLayout(panMainLayout);
@@ -145,7 +149,7 @@ public class TeileFilterFrame extends javax.swing.JFrame {
                             .addComponent(lblZeichnungsnummer)
                             .addComponent(lblVolumeneinheiten)
                             .addComponent(lblBezeichnung))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(0, 7, Short.MAX_VALUE))
                     .addGroup(panMainLayout.createSequentialGroup()
                         .addGroup(panMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(txfBezeichnung, javax.swing.GroupLayout.Alignment.LEADING)
@@ -235,10 +239,6 @@ public class TeileFilterFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txfVeBisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfVeBisActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txfVeBisActionPerformed
-
     /**
      * Validiert die Eingabe, erzeugt ein neues TeilebestandFilterModel und
      * refresched die Teilebestandstabelle
@@ -274,10 +274,6 @@ public class TeileFilterFrame extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnExecuteFilterActionPerformed
 
-    private void txfBezeichnungActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfBezeichnungActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txfBezeichnungActionPerformed
-
     /**
      * läd die Teilebestandtabelle mit Filtereinstellungen neu
      * @author ssinger
@@ -291,40 +287,6 @@ public class TeileFilterFrame extends javax.swing.JFrame {
         teileBestandTable.setModel(tm);
     }
     
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TeileFilterFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TeileFilterFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TeileFilterFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TeileFilterFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new TeileFilterFrame().setVisible(true);
-            }
-        });
-    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnExecuteFilter;
     private javax.swing.JComboBox cbxTeiltyp;
