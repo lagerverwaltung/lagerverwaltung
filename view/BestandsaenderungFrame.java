@@ -677,13 +677,15 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         ArrayList zielPositionen = new ArrayList();
         int mengeOld = 0;
         int mengeAdd = help.getMenge();
+        //ich
+        Warenbewegung wb = new Warenbewegung();
 
         if (quellLb != null) {
             mengeOld = quellLb.getMenge();
         }
 
         Teilebestand teil = Teilebestand.loadTeil(help.getTeilID());
-
+        
         switch (action) {
             case EINLAGERN_TEILEBESTAND:
                 if (quellLb == null) {
