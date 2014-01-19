@@ -787,7 +787,7 @@ public class BestandsaenderungFrame extends javax.swing.JFrame {
         
         if (quellLb != null) {
             quellLb.save();
-            Warenbewegung wb = new Warenbewegung();
+            //Warenbewegung wb = new Warenbewegung();
             Date hbDate = help.getHbDatum();
             if( action == UMLAGERN || action == SPLITTEN){
                 hbDate = Warenbewegung.getLastHaltbarkeitsdatum(quellLb);
