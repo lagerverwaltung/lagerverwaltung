@@ -46,7 +46,7 @@ public class WarenbewegungTableModel extends AbstractTableModel{
         switch (col)
         {
             case 0:
-                name = "WbID";
+                name = "WID";
                 break;
             case 1:
                 name = "Teil";
@@ -58,10 +58,10 @@ public class WarenbewegungTableModel extends AbstractTableModel{
                 name = "Quellfach";
                 break;
             case 4:
-                name = "Menge";
+                name = "Mng";
                 break;
             case 5:
-                name = "Zielfach/fächer";
+                name = "Zielfächer";
                 break;
             case 6:
                 name = "Verantwortlicher";
@@ -133,7 +133,8 @@ public class WarenbewegungTableModel extends AbstractTableModel{
                         }
                         case 7:
                             if(wb.getDatum() != null){
-                                return wb.getDatum();
+                                DateFormat formatter = new SimpleDateFormat("dd.MM.yy H:mm");
+                                return formatter.format( wb.getDatum() );
                             }else{
                                 return "";
                             }

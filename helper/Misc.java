@@ -132,7 +132,7 @@ public class Misc {
     public static void printExpiredLagerbestand(Frame f) throws SQLException{
         List<Lagerbestand> expiredLb = checkDateByExpire();
         String s = "Folgende Teile sind abgelaufen: \n";
-        if(expiredLb != null){
+        if(expiredLb.size() != 0){
             for(int i = 0; i < expiredLb.size(); i++){
                 s +=    "\""+expiredLb.get(i).getTeil().getBezeichnung()+"\""
                         + "; ID "

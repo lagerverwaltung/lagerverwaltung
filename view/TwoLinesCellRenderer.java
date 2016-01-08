@@ -19,7 +19,7 @@ import javax.swing.table.TableCellRenderer;
         JTable table, Object value,
         boolean isSelected, boolean hasFocus, int row, int column )
         {
-            if(column == 4){
+            if(column == 5){
                 this.setWrapStyleWord(true);
                 this.setLineWrap(true);
                 int length = value.toString().length();

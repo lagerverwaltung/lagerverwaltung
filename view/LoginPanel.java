@@ -71,6 +71,11 @@ public class LoginPanel extends javax.swing.JPanel {
         });
 
         lblIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/lagIcon.png"))); // NOI18N
+        lblIcon.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblIconMouseClicked(evt);
+            }
+        });
 
         lblWillkommen.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         lblWillkommen.setText("Herzlich willkommen zur Lagerverwaltung 2000 ");
@@ -199,6 +204,12 @@ public class LoginPanel extends javax.swing.JPanel {
             Misc.createErrorDialog(mainFrame, "Dieser Benutzername existiert nicht !");
                 return;
         }
+        loginUser();
+        
+    }//GEN-LAST:event_btnLoginActionPerformed
+    
+    private void loginUser()
+    {
         mainFrame.navigationController.showCard("main"); System.out.println("user role"+LoginPanel.USER_ROLE);
         if(LoginPanel.USER_ROLE == LoginPanel.GAST_ROLE){
             mainFrame.getTeilebestandFrame().setGuest();
@@ -211,7 +222,10 @@ public class LoginPanel extends javax.swing.JPanel {
         } catch (SQLException ex) {
             Misc.printSQLException(mainFrame, ex);
         }
-    }//GEN-LAST:event_btnLoginActionPerformed
+    }
+    private void lblIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblIconMouseClicked
+        loginUser();
+    }//GEN-LAST:event_lblIconMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLogin;
